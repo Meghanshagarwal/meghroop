@@ -61,23 +61,24 @@ export const projects = [
   },
 ]
 
+// Spring-based slide — feels natural on both desktop and mobile touch
 const slideVariants = {
   enter: (dir: number) => ({
-    x: dir > 0 ? '60%' : '-60%',
+    x: dir > 0 ? '100%' : '-100%',
     opacity: 0,
-    scale: 0.92,
   }),
   center: {
     x: 0,
     opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: 'easeOut' as const },
+    transition: {
+      x: { type: 'spring' as const, stiffness: 280, damping: 30 },
+      opacity: { duration: 0.2 },
+    },
   },
   exit: (dir: number) => ({
-    x: dir > 0 ? '-60%' : '60%',
+    x: dir > 0 ? '-40%' : '40%',
     opacity: 0,
-    scale: 0.92,
-    transition: { duration: 0.4, ease: 'easeIn' as const },
+    transition: { duration: 0.25, ease: 'easeIn' as const },
   }),
 }
 
@@ -99,39 +100,40 @@ export default function Projects() {
     setCurrent((c) => (c - 1 + total) % total)
   }, [total])
 
-  // Auto-slide every 4.5 s, pauses on hover or drag
+  // Auto-slide every 4.5 s — pauses on hover or drag
   useEffect(() => {
     if (paused) return
     const id = setInterval(next, 4500)
     return () => clearInterval(id)
   }, [paused, next])
 
-  const handleDragEnd = (_: unknown, info: { offset: { x: number } }) => {
+  const handleDragEnd = (_: unknown, info: { offset: { x: number }; velocity: { x: number } }) => {
     setDragging(false)
     setPaused(false)
-    if (info.offset.x < -60) next()
-    else if (info.offset.x > 60) prev()
+    // Trigger on swipe distance OR velocity for a snappy feel on mobile
+    if (info.offset.x < -50 || info.velocity.x < -300) next()
+    else if (info.offset.x > 50 || info.velocity.x > 300) prev()
   }
 
   const project = projects[current]
 
   return (
     <section id="projects" className="section-padding overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12"
         >
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-4 sm:mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               Featured Work
             </div>
-            <h2 className="font-heading font-bold text-4xl md:text-5xl text-white">
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white">
               Projects we&apos;re{' '}
               <span className="gradient-text">proud of</span>
             </h2>
@@ -163,10 +165,9 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* Carousel */}
+        {/* Carousel wrapper — overflow hidden clips the sliding cards */}
         <div
           className="relative overflow-hidden rounded-2xl"
-          style={{ minHeight: 460 }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -180,51 +181,57 @@ export default function Projects() {
               exit="exit"
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.08}
+              dragElastic={0.06}
+              dragDirectionLock
               onDragStart={() => { setDragging(true); setPaused(true) }}
               onDragEnd={handleDragEnd}
-              className={`grid md:grid-cols-5 gap-0 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] ${dragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+              style={{ touchAction: 'pan-y' }}
+              className={`grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none ${dragging ? 'cursor-grabbing' : 'cursor-grab md:cursor-grab'}`}
             >
-              {/* Left — visual */}
-              <div className={`md:col-span-3 relative h-64 md:h-auto bg-gradient-to-br ${project.gradient} overflow-hidden`}>
+              {/* Visual panel */}
+              <div className={`md:col-span-3 relative h-52 sm:h-64 md:h-auto bg-gradient-to-br ${project.gradient} overflow-hidden`}>
                 <div className="absolute inset-0 bg-black/20" />
+
                 {/* Browser mockup */}
-                <div className="absolute inset-0 flex items-center justify-center p-8">
+                <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8">
                   <div className="w-full h-full rounded-xl bg-black/30 backdrop-blur-sm border border-white/10 flex flex-col overflow-hidden">
                     {/* Browser bar */}
-                    <div className="flex items-center gap-1.5 px-3 py-2.5 border-b border-white/10 bg-black/20">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
-                      <div className="flex-1 mx-3 h-4 rounded bg-white/10 flex items-center px-2">
-                        <span className="text-[9px] text-white/30">meghroop.com/{project.mockup.toLowerCase()}</span>
+                    <div className="flex items-center gap-1.5 px-3 py-2 sm:py-2.5 border-b border-white/10 bg-black/20 flex-shrink-0">
+                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-400/60" />
+                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-400/60" />
+                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-400/60" />
+                      <div className="flex-1 mx-2 sm:mx-3 h-3 sm:h-4 rounded bg-white/10 flex items-center px-2">
+                        <span className="text-[8px] sm:text-[9px] text-white/30 truncate">
+                          meghroop.com/{project.mockup.toLowerCase()}
+                        </span>
                       </div>
                     </div>
                     {/* Browser body */}
-                    <div className="flex-1 p-4 flex flex-col gap-2">
-                      <div className="h-3 w-2/3 rounded bg-white/10" />
-                      <div className="h-2 w-full rounded bg-white/[0.06]" />
-                      <div className="h-2 w-4/5 rounded bg-white/[0.06]" />
-                      <div className="mt-2 grid grid-cols-3 gap-2 flex-1">
+                    <div className="flex-1 p-3 sm:p-4 flex flex-col gap-1.5 sm:gap-2 min-h-0">
+                      <div className="h-2.5 sm:h-3 w-2/3 rounded bg-white/10 flex-shrink-0" />
+                      <div className="h-1.5 sm:h-2 w-full rounded bg-white/[0.06] flex-shrink-0" />
+                      <div className="h-1.5 sm:h-2 w-4/5 rounded bg-white/[0.06] flex-shrink-0" />
+                      <div className="mt-1 grid grid-cols-3 gap-2 flex-1 min-h-0">
                         <div className="rounded-lg bg-white/[0.08] col-span-2" />
                         <div className="rounded-lg bg-white/[0.05]" />
                       </div>
                     </div>
                   </div>
                 </div>
+
                 {/* Category badge */}
-                <div className="absolute top-4 left-4">
+                <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
                   <span className="text-xs px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 text-white/70">
                     {project.category}
                   </span>
                 </div>
               </div>
 
-              {/* Right — info */}
-              <div className="md:col-span-2 p-7 md:p-8 flex flex-col justify-between gap-6">
+              {/* Info panel */}
+              <div className="md:col-span-2 p-5 sm:p-7 md:p-8 flex flex-col justify-between gap-5 sm:gap-6">
                 <div>
-                  <div className="text-xs text-gray-600 font-heading mb-3">{project.year}</div>
-                  <h3 className="font-heading font-bold text-xl text-white mb-3 leading-snug">
+                  <div className="text-xs text-gray-600 font-heading mb-2 sm:mb-3">{project.year}</div>
+                  <h3 className="font-heading font-bold text-lg sm:text-xl text-white mb-2 sm:mb-3 leading-snug">
                     {project.title}
                   </h3>
                   <p className="text-sm text-gray-400 leading-relaxed">
@@ -233,7 +240,7 @@ export default function Projects() {
                 </div>
 
                 <div>
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
@@ -244,7 +251,7 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-3">
                     <a
                       href={project.liveUrl}
                       target="_blank"
@@ -272,10 +279,10 @@ export default function Projects() {
           </AnimatePresence>
         </div>
 
-        {/* Progress dots + hint */}
-        <div className="flex items-center justify-between mt-6">
+        {/* Progress dots + status */}
+        <div className="flex items-center justify-between mt-5 sm:mt-6">
           <p className="text-xs text-gray-600">
-            {paused ? 'Paused' : 'Auto-playing'} · drag to explore
+            {paused ? 'Paused' : 'Auto-playing'} · swipe to explore
           </p>
           <div className="flex items-center gap-2">
             {projects.map((_, i) => (
@@ -287,9 +294,7 @@ export default function Projects() {
                 }}
                 aria-label={`Go to project ${i + 1}`}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === current
-                    ? 'w-6 bg-white'
-                    : 'w-1.5 bg-white/20 hover:bg-white/40'
+                  i === current ? 'w-6 bg-white' : 'w-1.5 bg-white/20 hover:bg-white/40'
                 }`}
               />
             ))}

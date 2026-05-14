@@ -69,7 +69,7 @@ export default function Contact() {
             <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
             Get in Touch
           </div>
-          <h2 className="font-heading font-bold text-4xl md:text-5xl text-white mb-4">
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
             Let&apos;s build something{' '}
             <span className="gradient-text">great together</span>
           </h2>

@@ -33,7 +33,7 @@ const item: Variants = {
 export default function TechStack() {
   return (
     <section id="tech" className="section-padding overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -46,7 +46,7 @@ export default function TechStack() {
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
             Tech Stack
           </div>
-          <h2 className="font-heading font-bold text-4xl md:text-5xl text-white mb-4">
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
             Tools we{' '}
             <span className="gradient-text">master</span>
           </h2>
@@ -61,7 +61,7 @@ export default function TechStack() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="hidden md:grid grid-cols-4 lg:grid-cols-6 gap-3 mb-6"
+          className="hidden sm:grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-6"
         >
           {techs.map((tech) => (
             <motion.div
@@ -84,16 +84,16 @@ export default function TechStack() {
           ))}
         </motion.div>
 
-        {/* Marquee — shown on mobile */}
-        <div className="md:hidden relative">
+        {/* Marquee — shown on mobile only */}
+        <div className="sm:hidden relative overflow-hidden">
           <div className="flex gap-3 animate-marquee w-max">
             {marqueeItems.map((tech, i) => (
               <div
                 key={`${tech.name}-${i}`}
-                className={`flex-shrink-0 rounded-xl border ${tech.border} ${tech.bg} px-4 py-3 flex items-center gap-2`}
+                className={`flex-shrink-0 rounded-xl border ${tech.border} ${tech.bg} px-3 py-2.5 flex items-center gap-2`}
               >
                 <span className={`font-heading font-bold text-sm ${tech.color}`}>{tech.icon}</span>
-                <span className="text-sm text-gray-400 whitespace-nowrap">{tech.name}</span>
+                <span className="text-xs text-gray-400 whitespace-nowrap">{tech.name}</span>
               </div>
             ))}
           </div>

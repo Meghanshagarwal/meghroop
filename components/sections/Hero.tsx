@@ -28,24 +28,26 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         {/* Studio badge */}
-        <motion.div {...fadeUp(0)} className="flex justify-center mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-gray-300">
-            <Sparkles size={14} className="text-purple-400" />
+        <motion.div {...fadeUp(0)} className="flex justify-center mb-6 sm:mb-8">
+          <div className="inline-flex flex-wrap justify-center items-center gap-x-2 gap-y-1 px-3 sm:px-4 py-2 rounded-full glass text-xs sm:text-sm text-gray-300">
+            <Sparkles size={13} className="text-purple-400 flex-shrink-0" />
             <span>Creative Development Studio</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-emerald-400 text-xs">Available for projects</span>
+            <span className="hidden xs:inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-emerald-400 text-xs">Available for projects</span>
+            </span>
           </div>
         </motion.div>
 
         {/* Studio name */}
-        <motion.p {...fadeUp(0.1)} className="font-heading font-bold text-base text-gray-500 uppercase tracking-[0.3em] mb-4">
+        <motion.p {...fadeUp(0.1)} className="font-heading font-bold text-sm sm:text-base text-gray-500 uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4">
           MeghRoop
         </motion.p>
 
         {/* Main headline */}
         <motion.h1
           {...fadeUp(0.2)}
-          className="font-heading font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6"
+          className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-5 sm:mb-6"
         >
           Building{' '}
           <span className="gradient-text">Modern</span>

@@ -109,7 +109,7 @@ const item: Variants = {
 export default function Services() {
   return (
     <section id="services" className="section-padding">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -122,7 +122,7 @@ export default function Services() {
             <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
             What We Do
           </div>
-          <h2 className="font-heading font-bold text-4xl md:text-5xl text-white mb-4">
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
             Services that{' '}
             <span className="gradient-text">scale with you</span>
           </h2>
