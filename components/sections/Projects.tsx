@@ -196,7 +196,7 @@ export default function Projects() {
               className={`grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none ${dragging ? 'cursor-grabbing' : 'cursor-grab md:cursor-grab'}`}
             >
               {/* Visual panel */}
-              <div className="md:col-span-3 relative h-52 sm:h-64 md:h-auto overflow-hidden min-h-[240px]">
+              <div className="md:col-span-3 relative h-56 sm:h-72 md:h-auto overflow-hidden min-h-[260px]">
                 {/* Base photo */}
                 <Image
                   src={project.image}
@@ -206,36 +206,10 @@ export default function Projects() {
                   sizes="(max-width: 768px) 100vw, 60vw"
                   priority={projects.indexOf(project) === 0}
                 />
-                {/* Colored tint overlay — keeps each card visually distinct */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-65`} />
-                <div className="absolute inset-0 bg-black/20" />
-
-                {/* Browser mockup */}
-                <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8">
-                  <div className="w-full h-full rounded-xl bg-black/30 backdrop-blur-sm border border-white/10 flex flex-col overflow-hidden">
-                    {/* Browser bar */}
-                    <div className="flex items-center gap-1.5 px-3 py-2 sm:py-2.5 border-b border-white/10 bg-black/20 flex-shrink-0">
-                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-400/60" />
-                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-400/60" />
-                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-400/60" />
-                      <div className="flex-1 mx-2 sm:mx-3 h-3 sm:h-4 rounded bg-white/10 flex items-center px-2">
-                        <span className="text-[8px] sm:text-[9px] text-white/30 truncate">
-                          meghroop.com/{project.mockup.toLowerCase()}
-                        </span>
-                      </div>
-                    </div>
-                    {/* Browser body */}
-                    <div className="flex-1 p-3 sm:p-4 flex flex-col gap-1.5 sm:gap-2 min-h-0">
-                      <div className="h-2.5 sm:h-3 w-2/3 rounded bg-white/10 flex-shrink-0" />
-                      <div className="h-1.5 sm:h-2 w-full rounded bg-white/[0.06] flex-shrink-0" />
-                      <div className="h-1.5 sm:h-2 w-4/5 rounded bg-white/[0.06] flex-shrink-0" />
-                      <div className="mt-1 grid grid-cols-3 gap-2 flex-1 min-h-0">
-                        <div className="rounded-lg bg-white/[0.08] col-span-2" />
-                        <div className="rounded-lg bg-white/[0.05]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {/* Light color wash — keeps each card distinct without killing the photo */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-40`} />
+                {/* Bottom fade so the card edge blends cleanly */}
+                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/40 to-transparent" />
 
                 {/* Category badge */}
                 <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
@@ -243,12 +217,18 @@ export default function Projects() {
                     {project.category}
                   </span>
                 </div>
+
+                {/* Year badge */}
+                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4">
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 text-white/50 font-heading">
+                    {project.year}
+                  </span>
+                </div>
               </div>
 
               {/* Info panel */}
               <div className="md:col-span-2 p-5 sm:p-7 md:p-8 flex flex-col justify-between gap-5 sm:gap-6">
                 <div>
-                  <div className="text-xs text-gray-600 font-heading mb-2 sm:mb-3">{project.year}</div>
                   <h3 className="font-heading font-bold text-lg sm:text-xl text-white mb-2 sm:mb-3 leading-snug">
                     {project.title}
                   </h3>
