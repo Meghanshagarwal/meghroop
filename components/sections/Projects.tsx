@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
@@ -10,12 +11,15 @@ const GithubIcon = () => (
   </svg>
 )
 
+const PROJECT_IMAGE = 'https://images.pexels.com/photos/16323434/pexels-photo-16323434.jpeg'
+
 export const projects = [
   {
     title: 'Corporate Business Website',
     description:
       'A premium corporate website with sophisticated design, smooth animations, and strong SEO foundation built for a B2B company that needed to convert enterprise clients.',
     gradient: 'from-purple-600 via-violet-600 to-blue-600',
+    image: PROJECT_IMAGE,
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     liveUrl: '#',
     githubUrl: '#',
@@ -28,6 +32,7 @@ export const projects = [
     description:
       'Full-stack booking platform with real-time availability, Stripe payment integration, and a complete admin dashboard for managing sports facility bookings and memberships.',
     gradient: 'from-blue-600 via-cyan-600 to-teal-600',
+    image: PROJECT_IMAGE,
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     liveUrl: '#',
     githubUrl: '#',
@@ -40,6 +45,7 @@ export const projects = [
     description:
       'Elegant brand-focused website for a premium coffee shop featuring an animated menu, location finder, online ordering, and loyalty program integration that increased foot traffic.',
     gradient: 'from-amber-600 via-orange-600 to-red-600',
+    image: PROJECT_IMAGE,
     tags: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'CMS'],
     liveUrl: '#',
     githubUrl: '#',
@@ -52,6 +58,7 @@ export const projects = [
     description:
       'Conversion-optimized business website with interactive UI components, HubSpot CRM integration, and comprehensive analytics tracking that doubled lead generation within 3 months.',
     gradient: 'from-emerald-600 via-green-600 to-teal-600',
+    image: PROJECT_IMAGE,
     tags: ['React', 'TypeScript', 'GSAP', 'HubSpot'],
     liveUrl: '#',
     githubUrl: '#',
@@ -189,7 +196,18 @@ export default function Projects() {
               className={`grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none ${dragging ? 'cursor-grabbing' : 'cursor-grab md:cursor-grab'}`}
             >
               {/* Visual panel */}
-              <div className={`md:col-span-3 relative h-52 sm:h-64 md:h-auto bg-gradient-to-br ${project.gradient} overflow-hidden`}>
+              <div className="md:col-span-3 relative h-52 sm:h-64 md:h-auto overflow-hidden min-h-[240px]">
+                {/* Base photo */}
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 60vw"
+                  priority={projects.indexOf(project) === 0}
+                />
+                {/* Colored tint overlay — keeps each card visually distinct */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-65`} />
                 <div className="absolute inset-0 bg-black/20" />
 
                 {/* Browser mockup */}
