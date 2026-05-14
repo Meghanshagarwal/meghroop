@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
+import type { Project } from '@/lib/supabase'
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
@@ -13,58 +14,42 @@ const GithubIcon = () => (
 
 const PROJECT_IMAGE = 'https://images.pexels.com/photos/16323434/pexels-photo-16323434.jpeg'
 
-export const projects = [
+const defaultProjects: import('@/lib/supabase').Project[] = [
   {
+    id: '1', created_at: '', display_order: 0,
     title: 'Corporate Business Website',
-    description:
-      'A premium corporate website with sophisticated design, smooth animations, and strong SEO foundation built for a B2B company that needed to convert enterprise clients.',
+    description: 'A premium corporate website with sophisticated design, smooth animations, and strong SEO foundation built for a B2B company that needed to convert enterprise clients.',
     gradient: 'from-purple-600 via-violet-600 to-blue-600',
     image: PROJECT_IMAGE,
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-    liveUrl: '#',
-    githubUrl: '#',
-    mockup: 'CORP',
-    year: '2024',
-    category: 'Corporate',
+    live_url: '#', github_url: '#', year: '2024', category: 'Corporate',
   },
   {
+    id: '2', created_at: '', display_order: 1,
     title: 'Sports Court Booking Platform',
-    description:
-      'Full-stack booking platform with real-time availability, Stripe payment integration, and a complete admin dashboard for managing sports facility bookings and memberships.',
+    description: 'Full-stack booking platform with real-time availability, Stripe payment integration, and a complete admin dashboard for managing sports facility bookings and memberships.',
     gradient: 'from-blue-600 via-cyan-600 to-teal-600',
     image: PROJECT_IMAGE,
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    liveUrl: '#',
-    githubUrl: '#',
-    mockup: 'BOOK',
-    year: '2024',
-    category: 'Platform',
+    live_url: '#', github_url: '#', year: '2024', category: 'Platform',
   },
   {
+    id: '3', created_at: '', display_order: 2,
     title: 'Coffee Shop Website',
-    description:
-      'Elegant brand-focused website for a premium coffee shop featuring an animated menu, location finder, online ordering, and loyalty program integration that increased foot traffic.',
+    description: 'Elegant brand-focused website for a premium coffee shop featuring an animated menu, location finder, online ordering, and loyalty program integration that increased foot traffic.',
     gradient: 'from-amber-600 via-orange-600 to-red-600',
     image: PROJECT_IMAGE,
     tags: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'CMS'],
-    liveUrl: '#',
-    githubUrl: '#',
-    mockup: 'CAFÉ',
-    year: '2023',
-    category: 'E-commerce',
+    live_url: '#', github_url: '#', year: '2023', category: 'E-commerce',
   },
   {
+    id: '4', created_at: '', display_order: 3,
     title: 'Modern Business Website',
-    description:
-      'Conversion-optimized business website with interactive UI components, HubSpot CRM integration, and comprehensive analytics tracking that doubled lead generation within 3 months.',
+    description: 'Conversion-optimized business website with interactive UI components, HubSpot CRM integration, and comprehensive analytics tracking that doubled lead generation within 3 months.',
     gradient: 'from-emerald-600 via-green-600 to-teal-600',
     image: PROJECT_IMAGE,
     tags: ['React', 'TypeScript', 'GSAP', 'HubSpot'],
-    liveUrl: '#',
-    githubUrl: '#',
-    mockup: 'BIZ',
-    year: '2023',
-    category: 'Business',
+    live_url: '#', github_url: '#', year: '2023', category: 'Business',
   },
 ]
 
@@ -89,13 +74,16 @@ const slideVariants = {
   }),
 }
 
-export default function Projects() {
+export default function Projects({ projects: propProjects }: { projects?: Project[] }) {
+  const projects = propProjects && propProjects.length > 0 ? propProjects : defaultProjects
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(0)
   const [dragging, setDragging] = useState(false)
   const [paused, setPaused] = useState(false)
 
   const total = projects.length
+  // Reset to first slide when project list changes
+  useEffect(() => { setCurrent(0) }, [total])
 
   const next = useCallback(() => {
     setDirection(1)
@@ -204,7 +192,7 @@ export default function Projects() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 60vw"
-                  priority={projects.indexOf(project) === 0}
+                  priority={current === 0}
                 />
                 {/* Light color wash — keeps each card distinct without killing the photo */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-40`} />
@@ -251,7 +239,7 @@ export default function Projects() {
 
                   <div className="flex flex-wrap gap-3">
                     <a
-                      href={project.liveUrl}
+                      href={project.live_url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-semibold hover:bg-gray-100 transition-colors"
@@ -261,7 +249,7 @@ export default function Projects() {
                       Live Preview
                     </a>
                     <a
-                      href={project.githubUrl}
+                      href={project.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/[0.1] text-white text-xs font-semibold hover:bg-white/[0.06] transition-colors"

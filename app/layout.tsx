@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
+import { getSupabase } from '@/lib/supabase'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -47,14 +48,31 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+async function getAnalyticsIds() {
+  try {
+    const db = getSupabase()
+    const { data } = await db.from('settings').select('key, value')
+    const map = Object.fromEntries((data ?? []).map((s: { key: string; value: string }) => [s.key, s.value]))
+    return {
+      gaId: map['ga_id'] || process.env.NEXT_PUBLIC_GA_ID || '',
+      pixelId: map['meta_pixel_id'] || process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
+      clarityId: map['clarity_id'] || process.env.NEXT_PUBLIC_CLARITY_ID || '',
+    }
+  } catch {
+    return {
+      gaId: process.env.NEXT_PUBLIC_GA_ID || '',
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
+      clarityId: process.env.NEXT_PUBLIC_CLARITY_ID || '',
+    }
+  }
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID
-  const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
+  const { gaId, pixelId, clarityId } = await getAnalyticsIds()
 
   return (
     <html lang="en" className="dark">

@@ -8,8 +8,23 @@ import TechStack from '@/components/sections/TechStack'
 import Testimonials from '@/components/sections/Testimonials'
 import Contact from '@/components/sections/Contact'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
+import { getSupabase, type Project } from '@/lib/supabase'
 
-export default function Home() {
+export const revalidate = 60
+
+async function getProjects(): Promise<Project[]> {
+  try {
+    const db = getSupabase()
+    const { data } = await db.from('projects').select('*').order('display_order', { ascending: true })
+    return data ?? []
+  } catch {
+    return []
+  }
+}
+
+export default async function Home() {
+  const projects = await getProjects()
+
   return (
     <>
       <Navbar />
@@ -17,7 +32,7 @@ export default function Home() {
         <Hero />
         <About />
         <Services />
-        <Projects />
+        <Projects projects={projects} />
         <TechStack />
         <Testimonials />
         <Contact />
