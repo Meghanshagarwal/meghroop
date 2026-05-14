@@ -5,6 +5,11 @@ import {
   Code2, Layers, Globe, Palette, Zap, Plug, Smartphone, Sparkles,
 } from 'lucide-react'
 
+// Layout fills 3 columns per row with no gaps:
+// Row 1: Full Stack (2) | React (1)          = 3
+// Row 2: WordPress (1) | UI/UX (1) | API (1) = 3
+// Row 3: Website Opt (2) | Responsive (1)    = 3
+// Row 4: Modern Web (3 — full width)         = 3
 const services = [
   {
     icon: Code2,
@@ -48,6 +53,16 @@ const services = [
     span: 'md:col-span-1',
   },
   {
+    icon: Plug,
+    title: 'API Integration',
+    description:
+      'Connect your app to any third-party service — payment gateways, CRMs, and more.',
+    gradient: 'from-violet-600/30 to-purple-600/30',
+    iconColor: 'text-violet-400',
+    borderHover: 'hover:border-violet-500/40',
+    span: 'md:col-span-1',
+  },
+  {
     icon: Zap,
     title: 'Website Optimization',
     description:
@@ -57,16 +72,6 @@ const services = [
     borderHover: 'hover:border-amber-500/40',
     span: 'md:col-span-2',
     tag: 'Performance',
-  },
-  {
-    icon: Plug,
-    title: 'API Integration',
-    description:
-      'Connect your app to any third-party service — payment gateways, CRMs, and more.',
-    gradient: 'from-violet-600/30 to-purple-600/30',
-    iconColor: 'text-violet-400',
-    borderHover: 'hover:border-violet-500/40',
-    span: 'md:col-span-1',
   },
   {
     icon: Smartphone,
@@ -82,11 +87,11 @@ const services = [
     icon: Sparkles,
     title: 'Modern Web Experiences',
     description:
-      'Interactive animations, micro-interactions, and immersive motion design that captivate users.',
+      'Interactive animations, micro-interactions, and immersive motion design that captivate users and keep them coming back — scroll-triggered reveals, parallax, and fluid transitions.',
     gradient: 'from-indigo-600/30 to-violet-600/30',
     iconColor: 'text-indigo-400',
     borderHover: 'hover:border-indigo-500/40',
-    span: 'md:col-span-2',
+    span: 'md:col-span-3',
     tag: 'New',
   },
 ]
