@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { trackEvent } from '@/lib/analytics'
 
 export default function WhatsAppButton() {
   const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210'
@@ -13,6 +14,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
+      onClick={() => trackEvent('whatsapp_click', 'Contact', { method: 'whatsapp' })}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 2, duration: 0.4, type: 'spring', stiffness: 200 }}

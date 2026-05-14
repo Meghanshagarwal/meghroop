@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Send, Mail, MessageSquare, CheckCircle2, Loader2 } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
 
 const projectTypes = [
   'Full Stack Development',
@@ -17,10 +18,15 @@ const projectTypes = [
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', projectType: '', message: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const formStartedRef = useRef(false)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
+    if (!formStartedRef.current) {
+      formStartedRef.current = true
+      trackEvent('contact_form_start', undefined, { field: e.target.name })
+    }
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
@@ -37,8 +43,11 @@ export default function Contact() {
       if (res.ok) {
         setStatus('success')
         setForm({ name: '', email: '', projectType: '', message: '' })
+        formStartedRef.current = false
+        trackEvent('contact_form_submit', 'Lead', { project_type: form.projectType })
       } else {
         setStatus('error')
+        trackEvent('contact_form_error', undefined)
       }
     } catch {
       setStatus('error')

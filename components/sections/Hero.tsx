@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
+import { trackEvent } from '@/lib/analytics'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -68,6 +69,7 @@ export default function Hero() {
         <motion.div {...fadeUp(0.45)} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="#projects"
+            onClick={() => trackEvent('cta_click', 'ViewContent', { label: 'view_projects', location: 'hero' })}
             className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
           >
             View Projects
@@ -75,6 +77,7 @@ export default function Hero() {
           </Link>
           <Link
             href="#contact"
+            onClick={() => trackEvent('cta_click', 'Contact', { label: 'start_project', location: 'hero' })}
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
           >
             Start a Project
