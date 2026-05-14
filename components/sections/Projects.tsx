@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -85,19 +85,30 @@ export default function Projects() {
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(0)
   const [dragging, setDragging] = useState(false)
+  const [paused, setPaused] = useState(false)
 
   const total = projects.length
 
-  const go = (idx: number) => {
-    setDirection(idx > current ? 1 : -1)
-    setCurrent((idx + total) % total)
-  }
+  const next = useCallback(() => {
+    setDirection(1)
+    setCurrent((c) => (c + 1) % total)
+  }, [total])
 
-  const next = () => go(current + 1)
-  const prev = () => go(current - 1)
+  const prev = useCallback(() => {
+    setDirection(-1)
+    setCurrent((c) => (c - 1 + total) % total)
+  }, [total])
+
+  // Auto-slide every 4.5 s, pauses on hover or drag
+  useEffect(() => {
+    if (paused) return
+    const id = setInterval(next, 4500)
+    return () => clearInterval(id)
+  }, [paused, next])
 
   const handleDragEnd = (_: unknown, info: { offset: { x: number } }) => {
     setDragging(false)
+    setPaused(false)
     if (info.offset.x < -60) next()
     else if (info.offset.x > 60) prev()
   }
@@ -153,7 +164,12 @@ export default function Projects() {
         </motion.div>
 
         {/* Carousel */}
-        <div className="relative overflow-hidden rounded-2xl" style={{ minHeight: 460 }}>
+        <div
+          className="relative overflow-hidden rounded-2xl"
+          style={{ minHeight: 460 }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           <AnimatePresence custom={direction} mode="popLayout">
             <motion.div
               key={current}
@@ -165,7 +181,7 @@ export default function Projects() {
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.08}
-              onDragStart={() => setDragging(true)}
+              onDragStart={() => { setDragging(true); setPaused(true) }}
               onDragEnd={handleDragEnd}
               className={`grid md:grid-cols-5 gap-0 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] ${dragging ? 'cursor-grabbing' : 'cursor-grab'}`}
             >
@@ -256,14 +272,19 @@ export default function Projects() {
           </AnimatePresence>
         </div>
 
-        {/* Progress dots + drag hint */}
+        {/* Progress dots + hint */}
         <div className="flex items-center justify-between mt-6">
-          <p className="text-xs text-gray-600">Drag to explore</p>
+          <p className="text-xs text-gray-600">
+            {paused ? 'Paused' : 'Auto-playing'} · drag to explore
+          </p>
           <div className="flex items-center gap-2">
             {projects.map((_, i) => (
               <button
                 key={i}
-                onClick={() => go(i)}
+                onClick={() => {
+                  setDirection(i > current ? 1 : -1)
+                  setCurrent(i)
+                }}
                 aria-label={`Go to project ${i + 1}`}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   i === current

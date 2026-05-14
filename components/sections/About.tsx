@@ -57,6 +57,7 @@ export default function About() {
             sub="Shipping quality since 2022"
             gradient="from-purple-500/20 to-blue-500/20"
             iconColor="text-purple-400"
+            bullets={['2022 — Studio founded', '2023 — 15+ projects', '2024 — 30+ projects']}
           />
 
           {/* Stat — Projects */}
@@ -67,6 +68,7 @@ export default function About() {
             sub="Startups to enterprises"
             gradient="from-blue-500/20 to-cyan-500/20"
             iconColor="text-blue-400"
+            bullets={['Corporate websites', 'SaaS & web apps', 'E-commerce & booking']}
           />
 
           {/* Wide card — Team (col-span-2) */}
@@ -80,8 +82,7 @@ export default function About() {
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
 
-            <div className="relative z-10 p-6 h-full flex flex-col justify-between gap-5">
-              {/* Top row */}
+            <div className="relative z-10 p-6 h-full flex flex-col justify-between gap-4">
               <div className="flex items-start justify-between">
                 <div>
                   <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-4">
@@ -97,7 +98,7 @@ export default function About() {
                   ].map(({ initial, gradient }) => (
                     <div
                       key={initial}
-                      className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center font-heading font-bold text-white text-sm shadow-lg`}
+                      className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center font-heading font-bold text-white text-sm`}
                     >
                       {initial}
                     </div>
@@ -105,36 +106,18 @@ export default function About() {
                 </div>
               </div>
 
-              {/* Member profiles */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-xl bg-white/[0.04] border border-white/[0.06] p-3">
-                  <div className="text-xs font-semibold text-purple-400 mb-1">Meghansh</div>
-                  <div className="text-xs text-gray-500 leading-relaxed">
-                    Full stack developer &amp; UI architect. Obsessed with performance, clean code, and pixel-perfect interfaces.
-                  </div>
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {['React', 'Next.js', 'UI/UX'].map(t => (
-                      <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className="rounded-xl bg-white/[0.04] border border-white/[0.06] p-3">
-                  <div className="text-xs font-semibold text-cyan-400 mb-1">Roop</div>
-                  <div className="text-xs text-gray-500 leading-relaxed">
-                    Backend engineer &amp; systems thinker. Builds robust APIs, databases, and scalable architectures that just work.
-                  </div>
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {['Node.js', 'MongoDB', 'APIs'].map(t => (
-                      <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">{t}</span>
-                    ))}
-                  </div>
+              <div>
+                <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                  We&apos;re Meghansh &amp; Roop — two developers with a shared obsession for building beautiful, fast, and functional web experiences. No project managers, no handoffs. Just direct collaboration from idea to launch.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Design', 'Frontend', 'Backend', 'Deployment'].map((tag) => (
+                    <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.06] text-gray-400">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
-
-              {/* Bottom */}
-              <p className="text-xs text-gray-500 leading-relaxed">
-                No middlemen, no account managers. When you work with MeghRoop, you talk directly to the people building your product — from the first brief to the final deploy.
-              </p>
             </div>
           </motion.div>
 
@@ -219,6 +202,7 @@ export default function About() {
             sub="Zero unhappy clients, ever"
             gradient="from-amber-500/20 to-orange-500/20"
             iconColor="text-amber-400"
+            bullets={['5★ rated on every project', 'Long-term client relationships', 'Repeat business rate: high']}
           />
 
           {/* Stat — Support */}
@@ -229,6 +213,7 @@ export default function About() {
             sub="We reply fast, always"
             gradient="from-rose-500/20 to-pink-500/20"
             iconColor="text-rose-400"
+            bullets={['Mon – Sat, 9AM – 9PM IST', 'WhatsApp & email support', 'Post-launch maintenance']}
           />
         </motion.div>
       </div>
@@ -243,6 +228,7 @@ function StatCard({
   sub,
   gradient,
   iconColor,
+  bullets,
 }: {
   icon: React.ElementType
   value: string
@@ -250,6 +236,7 @@ function StatCard({
   sub: string
   gradient: string
   iconColor: string
+  bullets?: string[]
 }) {
   return (
     <motion.div
@@ -265,15 +252,26 @@ function StatCard({
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
       <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
 
-      <div className="relative z-10 p-6 flex flex-col gap-3">
-        <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center">
-          <Icon size={20} className={iconColor} />
-        </div>
+      <div className="relative z-10 p-6 flex flex-col justify-between h-full gap-4">
         <div>
+          <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-4">
+            <Icon size={20} className={iconColor} />
+          </div>
           <div className="font-heading font-bold text-4xl text-white">{value}</div>
           <div className="text-sm font-semibold text-white/70 mt-0.5">{label}</div>
           <div className="text-xs text-gray-500 mt-1">{sub}</div>
         </div>
+
+        {bullets && (
+          <ul className="space-y-1.5">
+            {bullets.map((b) => (
+              <li key={b} className="flex items-start gap-2">
+                <span className={`mt-0.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${iconColor.replace('text-', 'bg-')} opacity-70`} />
+                <span className="text-xs text-gray-500 leading-relaxed">{b}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </motion.div>
   )
