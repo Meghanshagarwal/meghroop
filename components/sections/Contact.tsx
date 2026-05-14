@@ -171,8 +171,9 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs text-gray-500 mb-1.5 block">Your Name *</label>
+                      <label htmlFor="name" className="text-xs text-gray-400 mb-1.5 block">Your Name *</label>
                       <input
+                        id="name"
                         type="text"
                         name="name"
                         value={form.name}
@@ -183,8 +184,9 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-gray-500 mb-1.5 block">Email Address *</label>
+                      <label htmlFor="email" className="text-xs text-gray-400 mb-1.5 block">Email Address *</label>
                       <input
+                        id="email"
                         type="email"
                         name="email"
                         value={form.email}
@@ -197,8 +199,9 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-xs text-gray-500 mb-1.5 block">Project Type</label>
+                    <label htmlFor="projectType" className="text-xs text-gray-400 mb-1.5 block">Project Type</label>
                     <select
+                      id="projectType"
                       name="projectType"
                       value={form.projectType}
                       onChange={handleChange}
@@ -212,8 +215,9 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-xs text-gray-500 mb-1.5 block">Message *</label>
+                    <label htmlFor="message" className="text-xs text-gray-400 mb-1.5 block">Message *</label>
                     <textarea
+                      id="message"
                       name="message"
                       value={form.message}
                       onChange={handleChange}

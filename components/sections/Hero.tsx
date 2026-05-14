@@ -47,7 +47,9 @@ export default function Hero() {
 
         {/* Main headline */}
         <motion.h1
-          {...fadeUp(0.2)}
+          initial={{ opacity: 1, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
           className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-5 sm:mb-6"
         >
           Building{' '}

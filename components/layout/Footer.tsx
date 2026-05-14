@@ -34,7 +34,7 @@ export default function Footer() {
               </div>
               <span className="font-heading font-bold text-lg text-white">MeghRoop</span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
               A two-person creative web development studio crafting premium digital experiences for startups and businesses worldwide.
             </p>
             <div className="flex items-center gap-3 mt-6">
@@ -50,7 +50,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg border border-white/[0.08] flex items-center justify-center text-gray-500 hover:text-white hover:border-white/20 hover:bg-white/[0.06] transition-all duration-200"
+                  className="w-9 h-9 rounded-lg border border-white/[0.08] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.06] transition-all duration-200"
                 >
                   <Icon size={16} />
                 </a>
@@ -66,7 +66,7 @@ export default function Footer() {
                 <li key={item}>
                   <Link
                     href={`#${item.toLowerCase()}`}
-                    className="text-sm text-gray-500 hover:text-white transition-colors duration-200"
+                    className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {item}
                   </Link>
@@ -87,7 +87,7 @@ export default function Footer() {
                 'API Integration',
               ].map((service) => (
                 <li key={service}>
-                  <span className="text-sm text-gray-500">{service}</span>
+                  <span className="text-sm text-gray-400">{service}</span>
                 </li>
               ))}
             </ul>
@@ -95,10 +95,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-400">
             © {new Date().getFullYear()} MeghRoop Studio. All rights reserved.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-400">
             Crafted with{' '}
             <span className="gradient-text-purple font-medium">Next.js & Framer Motion</span>
           </p>

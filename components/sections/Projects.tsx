@@ -267,10 +267,10 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
 
         {/* Progress dots + status */}
         <div className="flex items-center justify-between mt-5 sm:mt-6">
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-gray-400">
             {paused ? 'Paused' : 'Auto-playing'} · swipe to explore
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             {projects.map((_, i) => (
               <button
                 key={i}
@@ -279,10 +279,12 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
                   setCurrent(i)
                 }}
                 aria-label={`Go to project ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
+                className="p-3 flex items-center justify-center"
+              >
+                <span className={`block h-1.5 rounded-full transition-all duration-300 ${
                   i === current ? 'w-6 bg-white' : 'w-1.5 bg-white/20 hover:bg-white/40'
-                }`}
-              />
+                }`} />
+              </button>
             ))}
           </div>
         </div>

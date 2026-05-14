@@ -77,6 +77,8 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <link rel="preconnect" href="https://images.pexels.com" />
+        <link rel="dns-prefetch" href="https://images.pexels.com" />
         {/* Google Analytics 4 */}
         {gaId && (
           <>

@@ -166,7 +166,7 @@ export default function Services() {
                   <h3 className="font-heading font-bold text-lg text-white mb-2 group-hover:gradient-text transition-all duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
+                  <p className="text-sm text-gray-400 leading-relaxed">{service.description}</p>
                 </div>
 
                 {/* Corner accent */}
