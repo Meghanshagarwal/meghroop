@@ -3,68 +3,9 @@
 import { motion, type Variants } from 'framer-motion'
 import { Users, Rocket, Clock, Star, Code2, Zap } from 'lucide-react'
 
-const stats = [
-  {
-    icon: Clock,
-    value: '2+',
-    label: 'Years of Experience',
-    description: 'Crafting digital experiences since 2022',
-    gradient: 'from-purple-500/20 to-blue-500/20',
-    iconColor: 'text-purple-400',
-    span: 'col-span-1',
-  },
-  {
-    icon: Rocket,
-    value: '30+',
-    label: 'Projects Completed',
-    description: 'From startups to established businesses',
-    gradient: 'from-blue-500/20 to-cyan-500/20',
-    iconColor: 'text-blue-400',
-    span: 'col-span-1',
-  },
-  {
-    icon: Users,
-    value: '2',
-    label: 'Core Team Members',
-    description: 'Focused, dedicated, and passionate duo bringing your vision to life with precision and creativity',
-    gradient: 'from-cyan-500/20 to-purple-500/20',
-    iconColor: 'text-cyan-400',
-    span: 'md:col-span-2',
-    large: true,
-  },
-  {
-    icon: Code2,
-    value: '15+',
-    label: 'Technologies',
-    description: 'Modern stack, modern solutions',
-    gradient: 'from-emerald-500/20 to-blue-500/20',
-    iconColor: 'text-emerald-400',
-    span: 'md:col-span-2',
-    large: true,
-  },
-  {
-    icon: Star,
-    value: '100%',
-    label: 'Client Satisfaction',
-    description: 'Every client leaves happy',
-    gradient: 'from-amber-500/20 to-orange-500/20',
-    iconColor: 'text-amber-400',
-    span: 'col-span-1',
-  },
-  {
-    icon: Zap,
-    value: '24/7',
-    label: 'Support',
-    description: 'Always available when you need us',
-    gradient: 'from-rose-500/20 to-pink-500/20',
-    iconColor: 'text-rose-400',
-    span: 'col-span-1',
-  },
-]
-
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.08 } },
 }
 
 const item: Variants = {
@@ -97,7 +38,10 @@ export default function About() {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
+        {/* Bento Grid — 4 columns on desktop
+            Row 1: [stat] [stat] [Team — wide (2)]
+            Row 2: [Technologies — wide (2)] [stat] [stat]
+        */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -105,46 +49,172 @@ export default function About() {
           viewport={{ once: true }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4"
         >
-          {stats.map((stat) => {
-            const Icon = stat.icon
-            return (
-              <motion.div
-                key={stat.label}
-                variants={item}
-                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                className={`${stat.span} relative rounded-2xl card-border overflow-hidden group cursor-default`}
-              >
-                {/* Gradient bg */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                <div className="absolute inset-0 bg-[#0a0a0a] group-hover:bg-[#0d0d0d] transition-colors duration-300" />
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-30`} />
+          {/* Stat — Years */}
+          <StatCard
+            icon={Clock}
+            value="2+"
+            label="Years Experience"
+            sub="Since 2022"
+            gradient="from-purple-500/20 to-blue-500/20"
+            iconColor="text-purple-400"
+          />
 
-                <div className={`relative z-10 p-6 ${stat.large ? 'flex items-center gap-6' : ''}`}>
-                  <div className={`${stat.large ? 'flex-shrink-0' : 'mb-4'}`}>
-                    <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-4">
-                      <Icon size={20} className={stat.iconColor} />
-                    </div>
-                    <div className="font-heading font-bold text-4xl text-white mb-1">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm font-semibold text-white/80">{stat.label}</div>
+          {/* Stat — Projects */}
+          <StatCard
+            icon={Rocket}
+            value="30+"
+            label="Projects Delivered"
+            sub="Across industries"
+            gradient="from-blue-500/20 to-cyan-500/20"
+            iconColor="text-blue-400"
+          />
+
+          {/* Wide card — Team (col-span-2) */}
+          <motion.div
+            variants={item}
+            whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
+            className="md:col-span-2 relative rounded-2xl overflow-hidden group cursor-default"
+          >
+            <div className="absolute inset-0 bg-[#0a0a0a]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/15 to-purple-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
+
+            <div className="relative z-10 p-6 h-full flex flex-col justify-between gap-4">
+              <div className="flex items-start justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-4">
+                    <Users size={20} className="text-cyan-400" />
                   </div>
-                  {stat.description && (
-                    <p className="text-sm text-gray-500 leading-relaxed mt-2">
-                      {stat.description}
-                    </p>
-                  )}
+                  <div className="font-heading font-bold text-5xl text-white mb-1">2</div>
+                  <div className="text-sm font-semibold text-white/70">Core Team Members</div>
                 </div>
+                <div className="flex gap-2 mt-1">
+                  {['M', 'R'].map((initial) => (
+                    <div
+                      key={initial}
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center font-heading font-bold text-white text-sm"
+                    >
+                      {initial}
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-                {/* Hover border glow */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ boxShadow: 'inset 0 0 0 1px rgba(139, 92, 246, 0.3)' }}
-                />
-              </motion.div>
-            )
-          })}
+              <div>
+                <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                  We&apos;re Megh &amp; Roop — two developers with a shared obsession for building beautiful, fast, and functional web experiences. No project managers, no handoffs, just direct collaboration from idea to launch.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['Design', 'Frontend', 'Backend', 'Deployment'].map((tag) => (
+                    <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.06] text-gray-400">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Wide card — Technologies (col-span-2) */}
+          <motion.div
+            variants={item}
+            whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
+            className="md:col-span-2 relative rounded-2xl overflow-hidden group cursor-default"
+          >
+            <div className="absolute inset-0 bg-[#0a0a0a]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/15 to-blue-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
+
+            <div className="relative z-10 p-6 h-full flex flex-col justify-between gap-4">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-4">
+                  <Code2 size={20} className="text-emerald-400" />
+                </div>
+                <div className="font-heading font-bold text-5xl text-white mb-1">15+</div>
+                <div className="text-sm font-semibold text-white/70">Technologies in our stack</div>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                  From pixel-perfect frontends to scalable backends — we work across the full modern web stack, choosing the right tool for every layer of your product.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['React', 'Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'Tailwind', 'WordPress', 'Framer Motion'].map((tech) => (
+                    <span key={tech} className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Stat — Satisfaction */}
+          <StatCard
+            icon={Star}
+            value="100%"
+            label="Client Satisfaction"
+            sub="Every project, every time"
+            gradient="from-amber-500/20 to-orange-500/20"
+            iconColor="text-amber-400"
+          />
+
+          {/* Stat — Support */}
+          <StatCard
+            icon={Zap}
+            value="24/7"
+            label="Support"
+            sub="Mon – Sat, always on"
+            gradient="from-rose-500/20 to-pink-500/20"
+            iconColor="text-rose-400"
+          />
         </motion.div>
       </div>
     </section>
+  )
+}
+
+function StatCard({
+  icon: Icon,
+  value,
+  label,
+  sub,
+  gradient,
+  iconColor,
+}: {
+  icon: React.ElementType
+  value: string
+  label: string
+  sub: string
+  gradient: string
+  iconColor: string
+}) {
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 24 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+      }}
+      whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+      className="relative rounded-2xl overflow-hidden group cursor-default"
+    >
+      <div className="absolute inset-0 bg-[#0a0a0a]" />
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-40`} />
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+      <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
+
+      <div className="relative z-10 p-6 flex flex-col gap-3">
+        <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center">
+          <Icon size={20} className={iconColor} />
+        </div>
+        <div>
+          <div className="font-heading font-bold text-4xl text-white">{value}</div>
+          <div className="text-sm font-semibold text-white/70 mt-0.5">{label}</div>
+          <div className="text-xs text-gray-500 mt-1">{sub}</div>
+        </div>
+      </div>
+    </motion.div>
   )
 }
