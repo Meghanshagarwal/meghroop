@@ -62,7 +62,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -99,7 +99,7 @@ export default function Testimonials() {
               {/* Hover glow */}
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative z-10 p-7">
+              <div className="relative z-10 p-5 sm:p-7">
                 {/* Quote icon */}
                 <div className="w-9 h-9 rounded-xl bg-white/[0.06] flex items-center justify-center mb-5">
                   <Quote size={16} className="text-purple-400" />

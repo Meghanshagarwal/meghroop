@@ -74,7 +74,7 @@ export default function AIWorkflows() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -84,7 +84,7 @@ export default function AIWorkflows() {
             Automation workflows for{' '}
             <span className="gradient-text">every operation</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
             We build AI-powered pipelines that connect your tools, process your data, and run your business operations automatically.
           </p>
         </motion.div>
@@ -143,7 +143,7 @@ export default function AIWorkflows() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-10 relative rounded-2xl border border-white/[0.08] overflow-hidden p-8 text-center"
+          className="mt-10 relative rounded-2xl border border-white/[0.08] overflow-hidden p-5 sm:p-8 text-center"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-transparent to-blue-600/10" />
           <div className="relative z-10">

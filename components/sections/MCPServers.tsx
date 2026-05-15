@@ -83,7 +83,7 @@ export default function MCPServers() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
@@ -93,7 +93,7 @@ export default function MCPServers() {
             AI infrastructure that{' '}
             <span className="gradient-text">connects everything</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
             We build Model Context Protocol servers and AI orchestration layers that make your systems truly intelligent and interoperable.
           </p>
         </motion.div>
@@ -149,10 +149,10 @@ export default function MCPServers() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-8 flex justify-center"
         >
-          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full border border-cyan-500/20 bg-cyan-500/[0.04] text-sm text-gray-400">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          <div className="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 rounded-2xl sm:rounded-full border border-cyan-500/20 bg-cyan-500/[0.04] text-xs sm:text-sm text-gray-400 text-center">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
             MCP — the open standard for connecting AI to the real world
-            <ArrowRight size={14} className="text-cyan-400" />
+            <ArrowRight size={14} className="text-cyan-400 flex-shrink-0" />
           </div>
         </motion.div>
       </div>

@@ -39,7 +39,7 @@ export default function About() {
         </motion.div>
 
         {/* Bento Grid
-            Mobile  (2-col): all items go full width or half
+            Mobile  (1-col xs, 2-col sm): stats half-width, wide cards full-width
             Desktop (4-col): Row1: [stat][stat][Team ×2]  Row2: [Tech ×2][stat][stat]
         */}
         <motion.div
@@ -47,7 +47,7 @@ export default function About() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
         >
           {/* Stat — Years */}
           <StatCard

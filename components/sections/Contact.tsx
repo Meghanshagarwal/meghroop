@@ -56,14 +56,14 @@ export default function Contact() {
         <div className="absolute top-0 right-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-[100px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
@@ -73,12 +73,12 @@ export default function Contact() {
             Let&apos;s build something{' '}
             <span className="gradient-text">great together</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
             Have a project in mind? We&apos;d love to hear about it. Drop us a message and we&apos;ll get back to you within 24 hours.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 sm:gap-8 max-w-5xl mx-auto">
           {/* Left info */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -141,7 +141,7 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-3"
           >
-            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7">
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 sm:p-7">
               {status === 'success' ? (
                 <div className="flex flex-col items-center justify-center py-12 gap-4">
                   <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">

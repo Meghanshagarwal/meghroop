@@ -36,7 +36,7 @@ export default function Hero() {
           <div className="inline-flex flex-wrap justify-center items-center gap-x-2 gap-y-1 px-3 sm:px-4 py-2 rounded-full glass text-xs sm:text-sm text-gray-300">
             <Bot size={13} className="text-purple-400 flex-shrink-0" />
             <span>AI Engineering & Automation Studio</span>
-            <span className="hidden xs:inline-flex items-center gap-1.5">
+            <span className="hidden sm:inline-flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-emerald-400 text-xs">Available for projects</span>
             </span>
@@ -83,11 +83,11 @@ export default function Hero() {
         </motion.div>
 
         {/* CTA Buttons */}
-        <motion.div {...fadeUp(0.5)} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <motion.div {...fadeUp(0.5)} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           <Link
             href="#agentic-ai"
             onClick={() => trackEvent('cta_click', 'ViewContent', { label: 'explore_ai', location: 'hero' })}
-            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
+            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
           >
             Explore AI Services
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
@@ -95,7 +95,7 @@ export default function Hero() {
           <Link
             href="#contact"
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'start_project', location: 'hero' })}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
           >
             Start a Project
           </Link>
@@ -104,7 +104,7 @@ export default function Hero() {
         {/* Social proof bar */}
         <motion.div
           {...fadeUp(0.6)}
-          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10"
+          className="mt-10 sm:mt-16 flex flex-row items-center justify-center gap-8 sm:gap-10"
         >
           {[
             { value: '30+', label: 'Projects Delivered' },

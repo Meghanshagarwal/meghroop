@@ -111,7 +111,7 @@ export default function AgenticAI() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
@@ -121,7 +121,7 @@ export default function AgenticAI() {
             Intelligent systems that{' '}
             <span className="gradient-text">act autonomously</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
             We build AI systems capable of autonomous reasoning, task execution, workflow coordination, and business automation.
           </p>
         </motion.div>

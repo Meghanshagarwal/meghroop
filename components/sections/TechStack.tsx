@@ -68,7 +68,7 @@ export default function TechStack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
@@ -78,13 +78,13 @@ export default function TechStack() {
             Tools we{' '}
             <span className="gradient-text">master</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
             From AI frameworks to modern web infrastructure — we use the best tools for every layer of your system.
           </p>
         </motion.div>
 
         {/* AI Stack label */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="hidden sm:flex items-center gap-3 mb-4">
           <span className="text-xs font-semibold text-purple-400 uppercase tracking-widest">AI & Automation</span>
           <div className="flex-1 h-px bg-purple-500/20" />
         </div>
@@ -103,7 +103,7 @@ export default function TechStack() {
         </motion.div>
 
         {/* Web Stack label */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="hidden sm:flex items-center gap-3 mb-4">
           <span className="text-xs font-semibold text-cyan-400 uppercase tracking-widest">Web Development</span>
           <div className="flex-1 h-px bg-cyan-500/20" />
         </div>
@@ -122,17 +122,34 @@ export default function TechStack() {
         </motion.div>
 
         {/* Marquee — mobile only */}
-        <div className="sm:hidden relative overflow-hidden">
-          <div className="flex gap-3 animate-marquee w-max">
-            {allMarquee.map((tech, i) => (
-              <div
-                key={`${tech.name}-${i}`}
-                className={`flex-shrink-0 rounded-xl border ${tech.border} ${tech.bg} px-3 py-2.5 flex items-center gap-2`}
-              >
-                <span className={`font-heading font-bold text-sm ${tech.color}`}>{tech.icon}</span>
-                <span className="text-xs text-gray-400 whitespace-nowrap">{tech.name}</span>
-              </div>
-            ))}
+        <div className="sm:hidden space-y-3">
+          {/* AI row */}
+          <div className="relative overflow-hidden">
+            <div className="flex gap-3 animate-marquee w-max">
+              {[...aiTechs, ...aiTechs].map((tech, i) => (
+                <div
+                  key={`${tech.name}-${i}`}
+                  className={`flex-shrink-0 rounded-xl border ${tech.border} ${tech.bg} px-3 py-2.5 flex items-center gap-2`}
+                >
+                  <span className={`font-heading font-bold text-sm ${tech.color}`}>{tech.icon}</span>
+                  <span className="text-xs text-gray-400 whitespace-nowrap">{tech.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Web row */}
+          <div className="relative overflow-hidden">
+            <div className="flex gap-3 animate-marquee w-max" style={{ animationDirection: 'reverse' }}>
+              {[...webTechs, ...webTechs].map((tech, i) => (
+                <div
+                  key={`${tech.name}-${i}`}
+                  className={`flex-shrink-0 rounded-xl border ${tech.border} ${tech.bg} px-3 py-2.5 flex items-center gap-2`}
+                >
+                  <span className={`font-heading font-bold text-sm ${tech.color}`}>{tech.icon}</span>
+                  <span className="text-xs text-gray-400 whitespace-nowrap">{tech.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

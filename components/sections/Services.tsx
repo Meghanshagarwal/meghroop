@@ -122,7 +122,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
@@ -132,7 +132,7 @@ export default function Services() {
             Services that{' '}
             <span className="gradient-text">scale with you</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
             From concept to deployment — modern web development, AI-optimized content, and digital experiences built for the future.
           </p>
         </motion.div>
