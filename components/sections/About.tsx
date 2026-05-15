@@ -27,14 +27,14 @@ export default function About() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-            About Us
+            Wait — who are we?
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            A studio built for{' '}
-            <span className="gradient-text">results</span>
+            Small team.{' '}
+            <span className="gradient-text">Sharp work.</span>
           </h2>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            Meet Meghansh &amp; Roop — a tight-knit two-person team that moves fast, communicates clearly, and ships quality digital products.
+            Meghansh and Roop. Two engineers with one shared obsession — building things that actually hold up. No account managers. No bloat. Just the two people doing the work, talking to you directly.
           </p>
         </motion.div>
 
@@ -53,22 +53,22 @@ export default function About() {
           <StatCard
             icon={Clock}
             value="2+"
-            label="Years Experience"
-            sub="Shipping quality since 2022"
+            label="Years In"
+            sub="Started in 2022. Not slowing down."
             gradient="from-purple-500/20 to-blue-500/20"
             iconColor="text-purple-400"
-            bullets={['2022 — Studio founded', '2023 — 15+ projects', '2024 — 30+ projects']}
+            bullets={['2022 — One laptop, zero clients, full conviction', '2023 — 15 projects shipped, 0 refunds', '2024 — 30+ and genuinely enjoying it']}
           />
 
           {/* Stat — Projects */}
           <StatCard
             icon={Rocket}
             value="30+"
-            label="Projects Delivered"
-            sub="Startups to enterprises"
+            label="Projects Shipped"
+            sub="A few we almost broke building."
             gradient="from-blue-500/20 to-cyan-500/20"
             iconColor="text-blue-400"
-            bullets={['Corporate websites', 'SaaS & web apps', 'E-commerce & booking']}
+            bullets={['Brands that needed presence', 'Products that needed a brain', 'Startups that needed both — yesterday']}
           />
 
           {/* Wide card — Team (full width on mobile, 2-col on desktop) */}
@@ -89,7 +89,7 @@ export default function About() {
                     <Users size={20} className="text-cyan-400" />
                   </div>
                   <div className="font-heading font-bold text-4xl sm:text-5xl text-white mb-1">2</div>
-                  <div className="text-sm font-semibold text-white/70">Core Team Members</div>
+                  <div className="text-sm font-semibold text-white/70">People. All of it.</div>
                 </div>
                 <div className="flex gap-2 mt-1">
                   {[
@@ -108,10 +108,10 @@ export default function About() {
 
               <div>
                 <p className="text-sm text-gray-400 leading-relaxed mb-3">
-                  We&apos;re Meghansh &amp; Roop — two developers with a shared obsession for building beautiful, fast, and functional web experiences. No project managers, no handoffs. Just direct collaboration from idea to launch.
+                  We write the code, design the systems, and ship the whole thing. No middlemen, no handoffs, no &ldquo;let me check with the team.&rdquo; You talk directly to the people actually building.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {['Design', 'Frontend', 'Backend', 'Deployment'].map((tag) => (
+                  {['Design', 'Frontend', 'Backend', 'AI Engineering'].map((tag) => (
                     <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.06] text-gray-400">
                       {tag}
                     </span>
@@ -140,7 +140,7 @@ export default function About() {
                     <Code2 size={20} className="text-emerald-400" />
                   </div>
                   <div className="font-heading font-bold text-4xl sm:text-5xl text-white mb-1">15+</div>
-                  <div className="text-sm font-semibold text-white/70">Technologies mastered</div>
+                  <div className="text-sm font-semibold text-white/70">Tools we actually know</div>
                 </div>
                 <div className="flex flex-col gap-1 items-end mt-1">
                   {['Frontend', 'Backend', 'Tools'].map((cat) => (
@@ -189,7 +189,7 @@ export default function About() {
               </div>
 
               <p className="text-xs text-gray-500 leading-relaxed">
-                We pick the right tool for every job — not the trendiest one. Our stack is chosen for performance, reliability, and developer experience.
+                No cargo-culting. Every tool here earned its place — fast, battle-tested, and boring in exactly the right way.
               </p>
             </div>
           </motion.div>
@@ -198,22 +198,22 @@ export default function About() {
           <StatCard
             icon={Star}
             value="100%"
-            label="Client Satisfaction"
-            sub="Zero unhappy clients, ever"
+            label="Happy Clients"
+            sub="Zero. Our proudest number."
             gradient="from-amber-500/20 to-orange-500/20"
             iconColor="text-amber-400"
-            bullets={['5★ rated on every project', 'Long-term relationships', 'Repeat business rate: high']}
+            bullets={['5★ on every engagement', 'Most clients come back for more', 'A few became genuinely good friends']}
           />
 
           {/* Stat — Support */}
           <StatCard
             icon={Zap}
             value="24h"
-            label="Avg. Response Time"
-            sub="We reply fast, always"
+            label="Response Time"
+            sub="Sometimes in 20 minutes. Seriously."
             gradient="from-rose-500/20 to-pink-500/20"
             iconColor="text-rose-400"
-            bullets={['Mon – Sat, 9AM – 9PM IST', 'WhatsApp & email support', 'Post-launch maintenance']}
+            bullets={['Mon–Sat, 9AM–9PM IST', 'WhatsApp preferred — we actually read it', 'Post-launch support, no extra invoice']}
           />
         </motion.div>
       </div>

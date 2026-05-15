@@ -78,14 +78,14 @@ export default function AIWorkflows() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            AI Automation
+            But here&apos;s the thing —
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Automation workflows for{' '}
-            <span className="gradient-text">every operation</span>
+            Your operations,{' '}
+            <span className="gradient-text">running themselves.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            We build AI-powered pipelines that connect your tools, process your data, and run your business operations automatically.
+            We wire n8n, LangChain, and custom agents into the work that shouldn&apos;t need a human. Leads, emails, data, support — handled, logged, done.
           </p>
         </motion.div>
 
@@ -147,12 +147,12 @@ export default function AIWorkflows() {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-transparent to-blue-600/10" />
           <div className="relative z-10">
-            <p className="text-sm text-gray-400 mb-2">Built with n8n · LangChain · OpenAI · Claude AI · Zapier · Make</p>
+            <p className="text-sm text-gray-400 mb-2">Built on n8n · LangChain · OpenAI · Claude · Zapier · Make</p>
             <h3 className="font-heading font-bold text-xl sm:text-2xl text-white mb-3">
-              Have a workflow in mind?
+              Got a process that needs a brain?
             </h3>
             <p className="text-gray-400 text-sm max-w-lg mx-auto">
-              Tell us your current process and we&apos;ll design an AI-powered version that runs itself.
+              Walk us through how it works today. We&apos;ll build the version that runs without you.
             </p>
           </div>
         </motion.div>

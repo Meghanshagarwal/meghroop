@@ -67,14 +67,14 @@ export default function Contact() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
-            Get in Touch
+            Let&apos;s make something.
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Let&apos;s build something{' '}
-            <span className="gradient-text">great together</span>
+            Got an idea?{' '}
+            <span className="gradient-text">We&apos;re already curious.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Have a project in mind? We&apos;d love to hear about it. Drop us a message and we&apos;ll get back to you within 24 hours.
+            Tell us what you&apos;re building, what&apos;s broken, or just what you&apos;re thinking. We read every message — even the unnecessarily detailed ones.
           </p>
         </motion.div>
 
@@ -99,7 +99,7 @@ export default function Contact() {
               {
                 icon: MessageSquare,
                 label: 'WhatsApp',
-                value: 'Chat with us directly',
+                value: 'Sometimes faster than email',
                 href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210'}`,
                 color: 'text-emerald-400',
                 bg: 'bg-emerald-500/10 border-emerald-500/20',
@@ -126,10 +126,10 @@ export default function Contact() {
             <div className="p-5 rounded-2xl border border-white/[0.06] bg-white/[0.02] mt-auto">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-xs text-emerald-400 font-medium">Typically replies within</span>
+                <span className="text-xs text-emerald-400 font-medium">Usually back within</span>
               </div>
               <div className="font-heading font-bold text-2xl text-white">24 hours</div>
-              <div className="text-xs text-gray-500 mt-1">Mon–Sat, 9AM–9PM IST</div>
+              <div className="text-xs text-gray-500 mt-1">Mon–Sat, 9AM–9PM IST — often much faster</div>
             </div>
           </motion.div>
 
@@ -148,8 +148,8 @@ export default function Contact() {
                     <CheckCircle2 size={32} className="text-emerald-400" />
                   </div>
                   <div className="text-center">
-                    <div className="font-heading font-bold text-xl text-white mb-2">Message Sent!</div>
-                    <div className="text-sm text-gray-500">We&apos;ll get back to you within 24 hours.</div>
+                    <div className="font-heading font-bold text-xl text-white mb-2">It&apos;s in our inbox.</div>
+                    <div className="text-sm text-gray-500">We&apos;ll be in touch — usually faster than you expect.</div>
                   </div>
                   <button
                     onClick={() => setStatus('idle')}
@@ -219,7 +219,7 @@ export default function Contact() {
                       name="message"
                       value={form.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your project, goals, and timeline..."
+                      placeholder="Tell us what you're building, what's broken, or where you're stuck. No template required."
                       required
                       rows={5}
                       className={`${inputClass} resize-none`}
@@ -243,7 +243,7 @@ export default function Contact() {
                     ) : (
                       <>
                         <Send size={16} />
-                        Send Message
+                        Send It
                       </>
                     )}
                   </button>

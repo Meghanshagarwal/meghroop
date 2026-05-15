@@ -10,7 +10,7 @@ const agentCards = [
   {
     icon: Bot,
     title: 'AI Agent Development',
-    description: 'Custom intelligent agents that reason, plan, and execute tasks autonomously — connected to your tools and data.',
+    description: 'Custom agents that reason, plan, and execute end-to-end — wired into your tools, your data, your actual workflow. Not a demo. A system.',
     gradient: 'from-purple-600/30 to-violet-600/30',
     iconColor: 'text-purple-400',
     borderHover: 'hover:border-purple-500/40',
@@ -21,7 +21,7 @@ const agentCards = [
   {
     icon: Network,
     title: 'Multi-Agent Systems',
-    description: 'Orchestrate networks of specialized AI agents that collaborate, delegate, and solve complex workflows end-to-end.',
+    description: 'Specialized agents that delegate to each other, share context, and solve problems no single model can handle alone.',
     gradient: 'from-blue-600/30 to-cyan-600/30',
     iconColor: 'text-blue-400',
     borderHover: 'hover:border-blue-500/40',
@@ -31,7 +31,7 @@ const agentCards = [
   {
     icon: Zap,
     title: 'Autonomous AI Workflows',
-    description: 'End-to-end automation pipelines that run without human intervention — triggered, reasoned, and executed by AI.',
+    description: 'Pipelines that trigger themselves, reason through the steps, and finish the job — no human in the loop unless you want one.',
     gradient: 'from-amber-600/30 to-orange-600/30',
     iconColor: 'text-amber-400',
     borderHover: 'hover:border-amber-500/40',
@@ -41,7 +41,7 @@ const agentCards = [
   {
     icon: Settings2,
     title: 'AI Operations Automation',
-    description: 'Automate repetitive business operations — from data entry and reporting to scheduling and internal workflows.',
+    description: 'The tasks your team does on repeat, every single day — we hand those to AI. Data entry, reporting, scheduling, internal ops. Gone.',
     gradient: 'from-emerald-600/30 to-teal-600/30',
     iconColor: 'text-emerald-400',
     borderHover: 'hover:border-emerald-500/40',
@@ -51,7 +51,7 @@ const agentCards = [
   {
     icon: MessageSquare,
     title: 'AI Customer Support Agents',
-    description: 'Intelligent support agents that understand context, resolve queries, escalate intelligently, and never sleep.',
+    description: 'Support agents that actually read the ticket, look up the right answer, and resolve — or escalate with full context. No scripted menus. No frustration.',
     gradient: 'from-cyan-600/30 to-blue-600/30',
     iconColor: 'text-cyan-400',
     borderHover: 'hover:border-cyan-500/40',
@@ -61,7 +61,7 @@ const agentCards = [
   {
     icon: TrendingUp,
     title: 'AI Sales & Lead Agents',
-    description: 'Agents that qualify leads, personalise outreach, follow up autonomously, and feed warm prospects into your CRM.',
+    description: 'Agents that qualify prospects, write personalised outreach, follow up on their own schedule, and land warm leads in your CRM — while you focus on closing.',
     gradient: 'from-rose-600/30 to-pink-600/30',
     iconColor: 'text-rose-400',
     borderHover: 'hover:border-rose-500/40',
@@ -71,7 +71,7 @@ const agentCards = [
   {
     icon: Search,
     title: 'AI Research Agents',
-    description: 'Agents that browse the web, extract structured insights, summarise documents, and deliver ready-to-use intelligence.',
+    description: 'Agents that browse, extract, read, and synthesise — turning raw web and document chaos into clean, structured intelligence you can actually act on.',
     gradient: 'from-indigo-600/30 to-violet-600/30',
     iconColor: 'text-indigo-400',
     borderHover: 'hover:border-indigo-500/40',
@@ -81,7 +81,7 @@ const agentCards = [
   {
     icon: Brain,
     title: 'AI Task Automation',
-    description: 'Memory-enabled AI that learns your processes, retains context across sessions, and handles tasks with human-level judgement.',
+    description: 'Memory-enabled AI that learns your processes, remembers decisions across sessions, and handles complex tasks with the kind of judgement that makes you forget it\'s not a person. Almost.',
     gradient: 'from-violet-600/30 to-purple-600/30',
     iconColor: 'text-violet-400',
     borderHover: 'hover:border-violet-500/40',
@@ -115,14 +115,14 @@ export default function AgenticAI() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-            Agentic AI
+            Now the fun part.
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Intelligent systems that{' '}
-            <span className="gradient-text">act autonomously</span>
+            AI that doesn&apos;t just answer.{' '}
+            <span className="gradient-text">It gets things done.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            We build AI systems capable of autonomous reasoning, task execution, workflow coordination, and business automation.
+            Agents that reason, plan, and execute — connected to your tools, your data, your workflows. Not chatbots. Not wrappers. Actual autonomous systems.
           </p>
         </motion.div>
 
@@ -189,9 +189,9 @@ export default function AgenticAI() {
           className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4"
         >
           {[
-            { icon: Cpu, label: 'LLM-Powered Reasoning', desc: 'GPT-4, Claude, Gemini — best model for every task' },
-            { icon: Database, label: 'Memory & Context', desc: 'Long-term memory with vector databases and RAG' },
-            { icon: GitMerge, label: 'Tool Use & APIs', desc: 'Agents that call APIs, search the web, and use your tools' },
+            { icon: Cpu, label: 'LLM-Powered Reasoning', desc: 'GPT-4o, Claude, Gemini — right model, right task, every time' },
+            { icon: Database, label: 'Memory & Persistence', desc: 'Long-term memory via vector DBs, RAG, and structured recall' },
+            { icon: GitMerge, label: 'Tool Use & Real-World APIs', desc: 'Agents that call your APIs, search the web, and use your actual tools' },
           ].map(({ icon: Icon, label, desc }) => (
             <div key={label} className="flex items-center gap-4 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02]">
               <div className="w-9 h-9 rounded-lg bg-white/[0.06] flex items-center justify-center flex-shrink-0">

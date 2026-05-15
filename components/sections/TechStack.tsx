@@ -111,11 +111,11 @@ export default function TechStack() {
             Tech Stack
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Tools we{' '}
-            <span className="gradient-text">master</span>
+            Things we&apos;re{' '}
+            <span className="gradient-text">genuinely good at.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            From AI frameworks to modern web infrastructure — we use the best tools for every layer of your system.
+            No cargo-culting. Every tool in this list earned its place — chosen for how it performs in production, not how it looks in a pitch.
           </p>
         </motion.div>
 
