@@ -168,7 +168,36 @@ export default function Footer() {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.06] bg-white/[0.02] group hover:border-white/[0.12] hover:bg-white/[0.04] transition-all duration-300"
           >
-            <span className="w-1 h-1 rounded-full bg-orange-400/60 group-hover:bg-orange-400 transition-colors duration-300" />
+            {/* India flag SVG */}
+            <svg
+              width="20"
+              height="14"
+              viewBox="0 0 20 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="rounded-[2px] flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+              aria-label="India flag"
+            >
+              {/* Saffron */}
+              <rect width="20" height="4.67" y="0" fill="#FF9933" />
+              {/* White */}
+              <rect width="20" height="4.67" y="4.67" fill="#FFFFFF" />
+              {/* Green */}
+              <rect width="20" height="4.67" y="9.33" fill="#138808" />
+              {/* Ashoka Chakra */}
+              <circle cx="10" cy="7" r="1.8" stroke="#000080" strokeWidth="0.5" fill="none" />
+              <circle cx="10" cy="7" r="0.3" fill="#000080" />
+              {/* 24 spokes */}
+              {Array.from({ length: 24 }).map((_, i) => {
+                const angle = (i * 360) / 24
+                const rad = (angle * Math.PI) / 180
+                const x1 = 10 + 0.3 * Math.cos(rad)
+                const y1 = 7 + 0.3 * Math.sin(rad)
+                const x2 = 10 + 1.8 * Math.cos(rad)
+                const y2 = 7 + 1.8 * Math.sin(rad)
+                return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#000080" strokeWidth="0.3" />
+              })}
+            </svg>
             <span className="font-heading text-[11px] tracking-[0.18em] uppercase text-gray-600 group-hover:text-gray-400 transition-colors duration-300 select-none">
               Crafted in India
             </span>
@@ -176,7 +205,6 @@ export default function Footer() {
             <span className="font-heading text-[11px] tracking-[0.18em] uppercase text-gray-600 group-hover:text-gray-400 transition-colors duration-300 select-none">
               Built for the World
             </span>
-            <span className="text-base leading-none">🇮🇳</span>
           </motion.div>
         </div>
 
