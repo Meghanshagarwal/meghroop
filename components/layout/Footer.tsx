@@ -159,6 +159,27 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* India badge */}
+        <div className="flex justify-center mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.06] bg-white/[0.02] group hover:border-white/[0.12] hover:bg-white/[0.04] transition-all duration-300"
+          >
+            <span className="w-1 h-1 rounded-full bg-orange-400/60 group-hover:bg-orange-400 transition-colors duration-300" />
+            <span className="font-heading text-[11px] tracking-[0.18em] uppercase text-gray-600 group-hover:text-gray-400 transition-colors duration-300 select-none">
+              Crafted in India
+            </span>
+            <span className="text-white/20 text-[10px] group-hover:text-white/30 transition-colors duration-300">•</span>
+            <span className="font-heading text-[11px] tracking-[0.18em] uppercase text-gray-600 group-hover:text-gray-400 transition-colors duration-300 select-none">
+              Built for the World
+            </span>
+            <span className="text-base leading-none">🇮🇳</span>
+          </motion.div>
+        </div>
+
         <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-400">
             © {new Date().getFullYear()} MeghRoop Studio. All rights reserved.
