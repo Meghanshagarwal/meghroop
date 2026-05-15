@@ -5,26 +5,6 @@ import { motion } from 'framer-motion'
 import { Send, Mail, MessageSquare, CheckCircle2, Loader2 } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 
-const projectTypes = [
-  // AI Services
-  'Agentic AI Development',
-  'AI Agent Development',
-  'AI Workflow Automation',
-  'n8n Automation',
-  'MCP Server Development',
-  'Multi-Agent System',
-  'AI Customer Support System',
-  'AI Sales & Lead Automation',
-  'AI Integration',
-  // Web Services
-  'Full Stack Development',
-  'React / Next.js App',
-  'WordPress Website',
-  'UI/UX Implementation',
-  'Website Optimization',
-  'GEO & AI Search Optimization',
-  'Other',
-]
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', projectType: '', message: '' })
