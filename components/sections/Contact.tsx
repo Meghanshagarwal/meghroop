@@ -6,12 +6,23 @@ import { Send, Mail, MessageSquare, CheckCircle2, Loader2 } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 
 const projectTypes = [
+  // AI Services
+  'Agentic AI Development',
+  'AI Agent Development',
+  'AI Workflow Automation',
+  'n8n Automation',
+  'MCP Server Development',
+  'Multi-Agent System',
+  'AI Customer Support System',
+  'AI Sales & Lead Automation',
+  'AI Integration',
+  // Web Services
   'Full Stack Development',
   'React / Next.js App',
   'WordPress Website',
   'UI/UX Implementation',
   'Website Optimization',
-  'API Integration',
+  'GEO & AI Search Optimization',
   'Other',
 ]
 
@@ -208,9 +219,16 @@ export default function Contact() {
                       className={`${inputClass} cursor-pointer`}
                     >
                       <option value="" className="bg-gray-900">Select project type...</option>
-                      {projectTypes.map((type) => (
-                        <option key={type} value={type} className="bg-gray-900">{type}</option>
-                      ))}
+                      <optgroup label="── AI Services" className="bg-gray-900 text-gray-400">
+                        {['Agentic AI Development','AI Agent Development','AI Workflow Automation','n8n Automation','MCP Server Development','Multi-Agent System','AI Customer Support System','AI Sales & Lead Automation','AI Integration'].map((type) => (
+                          <option key={type} value={type} className="bg-gray-900">{type}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="── Web Services" className="bg-gray-900 text-gray-400">
+                        {['Full Stack Development','React / Next.js App','WordPress Website','UI/UX Implementation','Website Optimization','GEO & AI Search Optimization','Other'].map((type) => (
+                          <option key={type} value={type} className="bg-gray-900">{type}</option>
+                        ))}
+                      </optgroup>
                     </select>
                   </div>
 
