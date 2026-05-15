@@ -3,7 +3,7 @@
 import { motion, type Variants } from 'framer-motion'
 import {
   Bot, Brain, Network, Zap, Search, MessageSquare, TrendingUp, Settings2,
-  Cpu, GitMerge, Database, Sparkles,
+  Cpu, GitMerge, Database,
 } from 'lucide-react'
 
 const agentCards = [

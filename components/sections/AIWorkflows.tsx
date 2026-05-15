@@ -152,7 +152,7 @@ export default function AIWorkflows() {
               Have a workflow in mind?
             </h3>
             <p className="text-gray-400 text-sm max-w-lg mx-auto">
-              Tell us your current process and we'll design an AI-powered version that runs itself.
+              Tell us your current process and we&apos;ll design an AI-powered version that runs itself.
             </p>
           </div>
         </motion.div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Bot, Sparkles } from 'lucide-react'
+import { ArrowRight, Bot } from 'lucide-react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/analytics'
 
