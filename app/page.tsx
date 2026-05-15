@@ -2,6 +2,9 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
+import AgenticAI from '@/components/sections/AgenticAI'
+import MCPServers from '@/components/sections/MCPServers'
+import AIWorkflows from '@/components/sections/AIWorkflows'
 import Services from '@/components/sections/Services'
 import Projects from '@/components/sections/Projects'
 import TechStack from '@/components/sections/TechStack'
@@ -31,6 +34,9 @@ export default async function Home() {
       <main>
         <Hero />
         <About />
+        <AgenticAI />
+        <MCPServers />
+        <AIWorkflows />
         <Services />
         <Projects projects={projects} />
         <TechStack />

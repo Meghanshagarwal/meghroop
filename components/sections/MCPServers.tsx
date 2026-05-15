@@ -1,0 +1,161 @@
+'use client'
+
+import { motion, type Variants } from 'framer-motion'
+import { Server, Plug, GitBranch, LayoutGrid, Layers, ArrowRight } from 'lucide-react'
+
+const cards = [
+  {
+    icon: Server,
+    title: 'MCP Server Development',
+    description: 'Custom Model Context Protocol servers that expose your data, tools, and APIs to AI models with structured, secure context.',
+    gradient: 'from-cyan-600/30 to-blue-600/30',
+    iconColor: 'text-cyan-400',
+    border: 'border-cyan-500/20',
+    hover: 'hover:border-cyan-500/40',
+    glow: 'rgba(6, 182, 212, 0.12)',
+    tag: 'Infrastructure',
+    span: 'md:col-span-2',
+  },
+  {
+    icon: Plug,
+    title: 'AI Tool Connectivity',
+    description: 'Connect any external tool — databases, CRMs, APIs — as callable functions your AI agents can use in real time.',
+    gradient: 'from-violet-600/30 to-purple-600/30',
+    iconColor: 'text-violet-400',
+    border: 'border-violet-500/20',
+    hover: 'hover:border-violet-500/40',
+    glow: 'rgba(124, 58, 237, 0.12)',
+    span: 'md:col-span-1',
+  },
+  {
+    icon: LayoutGrid,
+    title: 'AI Context Management',
+    description: 'Structured context pipelines that feed the right information to your AI at the right time — reducing hallucinations and improving accuracy.',
+    gradient: 'from-emerald-600/30 to-teal-600/30',
+    iconColor: 'text-emerald-400',
+    border: 'border-emerald-500/20',
+    hover: 'hover:border-emerald-500/40',
+    glow: 'rgba(16, 185, 129, 0.12)',
+    span: 'md:col-span-1',
+  },
+  {
+    icon: GitBranch,
+    title: 'AI System Orchestration',
+    description: 'Design and deploy orchestration layers that route tasks between AI models, agents, and tools in a coordinated, reliable pipeline.',
+    gradient: 'from-blue-600/30 to-indigo-600/30',
+    iconColor: 'text-blue-400',
+    border: 'border-blue-500/20',
+    hover: 'hover:border-blue-500/40',
+    glow: 'rgba(59, 130, 246, 0.12)',
+    span: 'md:col-span-1',
+  },
+  {
+    icon: Layers,
+    title: 'AI Workflow Infrastructure',
+    description: 'Scalable backend infrastructure for AI-powered workflows — queues, retries, state management, logging, and observability built in.',
+    gradient: 'from-amber-600/30 to-orange-600/30',
+    iconColor: 'text-amber-400',
+    border: 'border-amber-500/20',
+    hover: 'hover:border-amber-500/40',
+    glow: 'rgba(245, 158, 11, 0.12)',
+    span: 'md:col-span-2',
+    tag: 'Scalable',
+  },
+]
+
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+}
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+}
+
+export default function MCPServers() {
+  return (
+    <section id="mcp" className="section-padding">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+            MCP Servers
+          </div>
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
+            AI infrastructure that{' '}
+            <span className="gradient-text">connects everything</span>
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            We build Model Context Protocol servers and AI orchestration layers that make your systems truly intelligent and interoperable.
+          </p>
+        </motion.div>
+
+        {/* Cards Grid */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+        >
+          {cards.map((card) => {
+            const Icon = card.icon
+            return (
+              <motion.div
+                key={card.title}
+                variants={item}
+                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                className={`${card.span} relative rounded-2xl border ${card.border} ${card.hover} overflow-hidden group cursor-default transition-all duration-300`}
+              >
+                <div className="absolute inset-0 bg-[#0a0a0a]" />
+                <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ boxShadow: `inset 0 0 60px ${card.glow}` }}
+                />
+                <div className="relative z-10 p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-11 h-11 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center group-hover:bg-white/[0.1] transition-colors duration-300">
+                      <Icon size={22} className={card.iconColor} />
+                    </div>
+                    {card.tag && (
+                      <span className="text-xs px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.08] text-gray-400">
+                        {card.tag}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="font-heading font-bold text-lg text-white mb-2">{card.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{card.description}</p>
+                </div>
+                <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-white/[0.02] to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </motion.div>
+            )
+          })}
+        </motion.div>
+
+        {/* Protocol badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-8 flex justify-center"
+        >
+          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full border border-cyan-500/20 bg-cyan-500/[0.04] text-sm text-gray-400">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            MCP — the open standard for connecting AI to the real world
+            <ArrowRight size={14} className="text-cyan-400" />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}

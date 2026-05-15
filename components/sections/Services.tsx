@@ -2,14 +2,9 @@
 
 import { motion, type Variants } from 'framer-motion'
 import {
-  Code2, Layers, Globe, Palette, Zap, Plug, Smartphone, Sparkles,
+  Code2, Layers, Globe, Palette, Zap, Plug, Smartphone, Sparkles, Search,
 } from 'lucide-react'
 
-// Layout fills 3 columns per row with no gaps:
-// Row 1: Full Stack (2) | React (1)          = 3
-// Row 2: WordPress (1) | UI/UX (1) | API (1) = 3
-// Row 3: Website Opt (2) | Responsive (1)    = 3
-// Row 4: Modern Web (3 — full width)         = 3
 const services = [
   {
     icon: Code2,
@@ -56,7 +51,7 @@ const services = [
     icon: Plug,
     title: 'API Integration',
     description:
-      'Connect your app to any third-party service — payment gateways, CRMs, and more.',
+      'Connect your app to any third-party service — payment gateways, CRMs, AI APIs, and more.',
     gradient: 'from-violet-600/30 to-purple-600/30',
     iconColor: 'text-violet-400',
     borderHover: 'hover:border-violet-500/40',
@@ -84,15 +79,26 @@ const services = [
     span: 'md:col-span-1',
   },
   {
+    icon: Search,
+    title: 'GEO & AI Search Optimization',
+    description:
+      'We optimize your business not just for Google — but for AI-generated results, LLM-powered discovery, and generative search platforms. Semantic content, structured data, and AI discoverability built in.',
+    gradient: 'from-rose-600/30 to-pink-600/30',
+    iconColor: 'text-rose-400',
+    borderHover: 'hover:border-rose-500/40',
+    span: 'md:col-span-2',
+    tag: 'AI-First',
+  },
+  {
     icon: Sparkles,
     title: 'Modern Web Experiences',
     description:
-      'Interactive animations, micro-interactions, and immersive motion design that captivate users and keep them coming back — scroll-triggered reveals, parallax, and fluid transitions.',
+      'Interactive animations, micro-interactions, and immersive motion design that captivate users — scroll-triggered reveals, parallax, and fluid transitions.',
     gradient: 'from-indigo-600/30 to-violet-600/30',
     iconColor: 'text-indigo-400',
     borderHover: 'hover:border-indigo-500/40',
-    span: 'md:col-span-3',
-    tag: 'New',
+    span: 'md:col-span-1',
+    tag: 'Premium',
   },
 ]
 
@@ -120,14 +126,14 @@ export default function Services() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-            What We Do
+            Web & Digital Services
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
             Services that{' '}
             <span className="gradient-text">scale with you</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            From concept to deployment, we handle every layer of your digital product.
+            From concept to deployment — modern web development, AI-optimized content, and digital experiences built for the future.
           </p>
         </motion.div>
 
@@ -148,10 +154,8 @@ export default function Services() {
                 whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                 className={`${service.span} relative rounded-2xl border border-white/[0.08] ${service.borderHover} overflow-hidden group cursor-default transition-all duration-300`}
               >
-                {/* Background */}
                 <div className="absolute inset-0 bg-[#0a0a0a]" />
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-
                 <div className="relative z-10 p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-11 h-11 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center group-hover:bg-white/[0.1] transition-colors duration-300">
@@ -163,13 +167,11 @@ export default function Services() {
                       </span>
                     )}
                   </div>
-                  <h3 className="font-heading font-bold text-lg text-white mb-2 group-hover:gradient-text transition-all duration-300">
+                  <h3 className="font-heading font-bold text-lg text-white mb-2">
                     {service.title}
                   </h3>
                   <p className="text-sm text-gray-400 leading-relaxed">{service.description}</p>
                 </div>
-
-                {/* Corner accent */}
                 <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-white/[0.02] to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </motion.div>
             )

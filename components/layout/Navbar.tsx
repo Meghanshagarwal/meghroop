@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Bot } from 'lucide-react'
 import Link from 'next/link'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
+  { label: 'AI Agents', href: '#agentic-ai' },
   { label: 'Services', href: '#services' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
@@ -51,8 +52,15 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="px-4 py-2 text-sm text-gray-400 hover:text-white rounded-lg hover:bg-white/[0.06] transition-all duration-200"
+                className={`px-4 py-2 text-sm rounded-lg transition-all duration-200 ${
+                  link.label === 'AI Agents'
+                    ? 'text-purple-300 hover:text-purple-200 hover:bg-purple-500/10'
+                    : 'text-gray-400 hover:text-white hover:bg-white/[0.06]'
+                }`}
               >
+                {link.label === 'AI Agents' && (
+                  <Bot size={12} className="inline mr-1.5 -mt-0.5" />
+                )}
                 {link.label}
               </Link>
             </li>
@@ -95,8 +103,15 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block px-4 py-3 text-sm text-gray-400 hover:text-white rounded-lg hover:bg-white/[0.06] transition-all duration-200"
+                    className={`block px-4 py-3 text-sm rounded-lg transition-all duration-200 ${
+                      link.label === 'AI Agents'
+                        ? 'text-purple-300 hover:text-purple-200 hover:bg-purple-500/10'
+                        : 'text-gray-400 hover:text-white hover:bg-white/[0.06]'
+                    }`}
                   >
+                    {link.label === 'AI Agents' && (
+                      <Bot size={12} className="inline mr-1.5 -mt-0.5" />
+                    )}
                     {link.label}
                   </Link>
                 </li>
