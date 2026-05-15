@@ -47,7 +47,7 @@ const cards = [
     border: 'border-blue-500/20',
     hover: 'hover:border-blue-500/40',
     glow: 'rgba(59, 130, 246, 0.12)',
-    span: 'md:col-span-1',
+    span: 'md:col-span-2',
   },
   {
     icon: Layers,
@@ -58,7 +58,7 @@ const cards = [
     border: 'border-amber-500/20',
     hover: 'hover:border-amber-500/40',
     glow: 'rgba(245, 158, 11, 0.12)',
-    span: 'md:col-span-2',
+    span: 'md:col-span-3',
     tag: 'Scalable',
   },
 ]

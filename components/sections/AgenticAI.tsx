@@ -66,7 +66,7 @@ const agentCards = [
     iconColor: 'text-rose-400',
     borderHover: 'hover:border-rose-500/40',
     glowColor: 'rgba(244, 63, 94, 0.15)',
-    span: 'md:col-span-1',
+    span: 'md:col-span-2',
   },
   {
     icon: Search,
