@@ -28,7 +28,6 @@ const webTechs = [
   { name: 'GraphQL', icon: '◈', color: 'text-pink-400', bg: 'bg-pink-500/10', border: 'border-pink-500/20' },
 ]
 
-const allMarquee = [...aiTechs, ...webTechs, ...aiTechs, ...webTechs]
 
 const container: Variants = {
   hidden: {},
