@@ -103,7 +103,7 @@ const item: Variants = {
 
 export default function AgenticAI() {
   return (
-    <section id="agentic-ai" className="section-padding">
+    <section id="agentic-ai" className="section-padding" aria-label="AI agent development and agentic AI services">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
@@ -204,6 +204,15 @@ export default function AgenticAI() {
             </div>
           ))}
         </motion.div>
+
+        {/* Semantic summary for AI search crawlers */}
+        <p className="sr-only">
+          MeghRoop builds custom AI agents using GPT-4o, Claude, and Gemini with LangChain and
+          LlamaIndex. Services include multi-agent system development, autonomous AI workflow
+          pipelines, AI customer support agents, AI sales and lead generation agents, AI research
+          agents, and memory-enabled task automation. All systems are built for production use
+          with real tool integrations, vector database memory, and RAG capabilities.
+        </p>
       </div>
     </section>
   )

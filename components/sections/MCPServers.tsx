@@ -75,7 +75,7 @@ const item: Variants = {
 
 export default function MCPServers() {
   return (
-    <section id="mcp" className="section-padding">
+    <section id="mcp" className="section-padding" aria-label="MCP server development and AI infrastructure">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div

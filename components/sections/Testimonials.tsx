@@ -54,7 +54,7 @@ const item: Variants = {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="section-padding">
+    <section id="testimonials" className="section-padding" aria-label="Client testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
@@ -73,7 +73,7 @@ export default function Testimonials() {
             <span className="gradient-text">trust us</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Real words from real clients who&apos;ve experienced the MeghRoop difference.
+            Real words from real clients. We don&apos;t write these. We just try to earn them.
           </p>
         </motion.div>
 
@@ -91,6 +91,8 @@ export default function Testimonials() {
               variants={item}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               className="relative rounded-2xl border border-white/[0.08] overflow-hidden group cursor-default"
+              itemScope
+              itemType="https://schema.org/Review"
             >
               {/* Glass background */}
               <div className="absolute inset-0 glass" />
@@ -112,19 +114,21 @@ export default function Testimonials() {
                   ))}
                 </div>
 
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic">
+                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic" itemProp="reviewBody">
                   &ldquo;{t.quote}&rdquo;
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3" itemProp="author" itemScope itemType="https://schema.org/Person">
                   <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center`}>
-                    <span className="text-xs font-bold text-white font-heading">{t.avatar}</span>
+                    <span className="text-xs font-bold text-white font-heading" aria-hidden="true">{t.avatar}</span>
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-white">{t.author}</div>
+                    <div className="text-sm font-semibold text-white" itemProp="name">{t.author}</div>
                     <div className="text-xs text-gray-500">
-                      {t.role} @ {t.company}
+                      <span itemProp="jobTitle">{t.role}</span>
+                      {' @ '}
+                      <span itemProp="worksFor">{t.company}</span>
                     </div>
                   </div>
                 </div>

@@ -17,6 +17,7 @@ export default function Hero() {
   return (
     <section
       id="home"
+      aria-label="MeghRoop — AI Engineering and Web Development Studio"
       className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg pt-16"
     >
       {/* Floating gradient orbs */}

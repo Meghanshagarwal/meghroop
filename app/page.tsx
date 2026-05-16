@@ -9,6 +9,7 @@ import Services from '@/components/sections/Services'
 import Projects from '@/components/sections/Projects'
 import TechStack from '@/components/sections/TechStack'
 import Testimonials from '@/components/sections/Testimonials'
+import FAQ from '@/components/sections/FAQ'
 import Contact from '@/components/sections/Contact'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { getSupabase, type Project } from '@/lib/supabase'
@@ -31,7 +32,7 @@ export default async function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <About />
         <AgenticAI />
@@ -41,6 +42,7 @@ export default async function Home() {
         <Projects projects={projects} />
         <TechStack />
         <Testimonials />
+        <FAQ />
         <Contact />
       </main>
       <Footer />

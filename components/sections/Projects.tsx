@@ -113,7 +113,7 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
   const project = projects[current]
 
   return (
-    <section id="projects" className="section-padding overflow-hidden">
+    <section id="projects" className="section-padding overflow-hidden" aria-label="Featured projects by MeghRoop">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div

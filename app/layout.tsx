@@ -3,48 +3,103 @@ import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
 import { getSupabase } from '@/lib/supabase'
+import JsonLd from '@/components/common/JsonLd'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
 })
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
+  display: 'swap',
 })
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.com'
+
 export const metadata: Metadata = {
-  title: 'MeghRoop — Creative Development Studio',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'MeghRoop — AI Engineering & Web Development Studio',
+    template: '%s | MeghRoop',
+  },
   description:
-    'MeghRoop is a creative web development studio. We design and develop premium websites, scalable web applications, and modern digital experiences for startups and businesses.',
+    'MeghRoop is a creative engineering and AI studio. We build custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences with Next.js and React. Based in India, working worldwide.',
   keywords: [
-    'web development',
-    'Next.js',
-    'React',
-    'creative studio',
+    'AI agent development',
+    'agentic AI',
+    'n8n automation',
+    'workflow automation',
+    'MCP server development',
+    'Model Context Protocol',
+    'AI integration',
+    'Next.js development studio',
+    'React development',
+    'full stack development',
+    'GEO optimization',
+    'generative engine optimization',
+    'AI search optimization',
+    'autonomous AI workflows',
+    'multi-agent systems',
+    'LangChain',
+    'AI operations automation',
+    'custom AI tools',
+    'creative engineering studio',
+    'web development India',
     'MeghRoop',
-    'UI/UX',
-    'full stack',
-    'web design',
   ],
-  authors: [{ name: 'MeghRoop Studio' }],
+  authors: [
+    { name: 'Meghansh', url: SITE_URL },
+    { name: 'Roop', url: SITE_URL },
+  ],
+  creator: 'MeghRoop',
+  publisher: 'MeghRoop',
+  category: 'Technology',
   openGraph: {
-    title: 'MeghRoop — Creative Development Studio',
+    title: 'MeghRoop — AI Engineering & Web Development Studio',
     description:
-      'We design and develop premium websites, scalable web applications, and modern digital experiences.',
-    type: 'website',
+      'Custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences. Two engineers. Built properly.',
+    url: SITE_URL,
+    siteName: 'MeghRoop',
     locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'MeghRoop — AI Engineering & Web Development Studio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MeghRoop — Creative Development Studio',
+    title: 'MeghRoop — AI Engineering & Web Development Studio',
     description:
-      'We design and develop premium websites, scalable web applications, and modern digital experiences.',
+      'Custom AI agents, autonomous workflows, MCP servers, and premium web. Two engineers. Built properly.',
+    images: ['/og-image.png'],
+    creator: '@meghroop',
+    site: '@meghroop',
+  },
+  alternates: {
+    canonical: SITE_URL,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
   },
 }
 
@@ -77,8 +132,15 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="preconnect" href="https://images.pexels.com" />
+        {/* Resource hints */}
+        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* JSON-LD structured data */}
+        <JsonLd />
+
         {/* Google Analytics 4 */}
         {gaId && (
           <>

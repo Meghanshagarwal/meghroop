@@ -114,7 +114,7 @@ const item: Variants = {
 
 export default function Services() {
   return (
-    <section id="services" className="section-padding">
+    <section id="services" className="section-padding" aria-label="Services offered by MeghRoop">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
@@ -177,6 +177,15 @@ export default function Services() {
             )
           })}
         </motion.div>
+
+        {/* Crawlable semantic summary — GEO signal for AI search discoverability */}
+        <p className="sr-only">
+          MeghRoop offers full stack web development, React and Next.js application development,
+          WordPress development, UI/UX implementation, API integration, website performance optimization,
+          responsive web design, GEO and AI search optimization, and modern web experiences with
+          cinematic motion design. All services are delivered by a two-person studio based in India,
+          working with clients worldwide.
+        </p>
       </div>
     </section>
   )

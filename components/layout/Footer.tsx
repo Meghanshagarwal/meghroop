@@ -124,32 +124,41 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <nav aria-label="Footer navigation">
             <h3 className="text-sm font-semibold text-white mb-4 font-heading">Navigation</h3>
             <ul className="space-y-2">
-              {['Home', 'About', 'Services', 'Projects', 'Contact'].map((item) => (
-                <li key={item}>
+              {[
+                { label: 'Home', href: '#home' },
+                { label: 'About', href: '#about' },
+                { label: 'AI Agents', href: '#agentic-ai' },
+                { label: 'Services', href: '#services' },
+                { label: 'Projects', href: '#projects' },
+                { label: 'FAQ', href: '#faq' },
+                { label: 'Contact', href: '#contact' },
+              ].map((item) => (
+                <li key={item.label}>
                   <Link
-                    href={`#${item.toLowerCase()}`}
+                    href={item.href}
                     className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Services */}
           <div>
             <h3 className="text-sm font-semibold text-white mb-4 font-heading">Services</h3>
             <ul className="space-y-2">
               {[
+                'AI Agent Development',
+                'n8n Workflow Automation',
+                'MCP Server Development',
                 'Full Stack Development',
                 'React & Next.js',
-                'WordPress Development',
-                'UI/UX Implementation',
-                'API Integration',
+                'GEO & AI Search Optimization',
               ].map((service) => (
                 <li key={service}>
                   <span className="text-sm text-gray-400">{service}</span>
@@ -207,6 +216,15 @@ export default function Footer() {
             </span>
           </motion.div>
         </div>
+
+        {/* Crawlable GEO + semantic positioning — invisible to users, clear to AI */}
+        <p className="sr-only">
+          MeghRoop is a creative engineering and AI studio based in India, working with clients worldwide.
+          We specialize in custom AI agent development, agentic AI systems, n8n workflow automation,
+          MCP server development, multi-agent systems, full stack web development with React and Next.js,
+          and generative engine optimization (GEO) for AI search discoverability.
+          Founded in 2022. Contact: hello@meghroop.com
+        </p>
 
         <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-400">

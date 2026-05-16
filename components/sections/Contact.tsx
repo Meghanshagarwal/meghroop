@@ -49,7 +49,7 @@ export default function Contact() {
     'w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.06] transition-all duration-200'
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
+    <section id="contact" className="section-padding relative overflow-hidden" aria-label="Contact MeghRoop">
       {/* Background orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]" />
@@ -130,6 +130,11 @@ export default function Contact() {
               </div>
               <div className="font-heading font-bold text-2xl text-white">24 hours</div>
               <div className="text-xs text-gray-500 mt-1">Mon–Sat, 9AM–9PM IST. Often much sooner.</div>
+              <address className="not-italic mt-3 text-xs text-gray-600 leading-relaxed">
+                MeghRoop Studio<br />
+                India · Working worldwide<br />
+                <a href="mailto:hello@meghroop.com" className="hover:text-gray-400 transition-colors">hello@meghroop.com</a>
+              </address>
             </div>
           </motion.div>
 

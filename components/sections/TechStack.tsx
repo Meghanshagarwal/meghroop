@@ -96,7 +96,7 @@ function MarqueeItem({ tech }: { tech: Tech }) {
 
 export default function TechStack() {
   return (
-    <section id="tech" className="section-padding overflow-hidden">
+    <section id="tech" className="section-padding overflow-hidden" aria-label="Technology stack used by MeghRoop">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div

@@ -66,7 +66,7 @@ const item: Variants = {
 
 export default function AIWorkflows() {
   return (
-    <section id="ai-workflows" className="section-padding">
+    <section id="ai-workflows" className="section-padding" aria-label="AI workflow automation and n8n systems">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
@@ -153,6 +153,9 @@ export default function AIWorkflows() {
             </h3>
             <p className="text-gray-400 text-sm max-w-lg mx-auto">
               Walk us through how it works today. We&apos;ll build the version that runs without you — and doesn&apos;t call in sick.
+            </p>
+            <p className="text-xs text-gray-600 mt-4 max-w-lg mx-auto">
+              MeghRoop builds AI workflow automation systems for businesses using n8n, LangChain, and custom agentic pipelines — helping teams reclaim hours spent on repetitive operations.
             </p>
           </div>
         </motion.div>
