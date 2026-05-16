@@ -7,7 +7,7 @@ const cards = [
   {
     icon: Server,
     title: 'MCP Server Development',
-    description: 'Custom MCP servers that hand your data, tools, and APIs to AI models in structured, grounded context — so the model always knows exactly what it\'s working with.',
+    description: 'Custom MCP servers that hand your data, tools, and APIs to AI models in structured, grounded context — so the model always knows exactly what it&apos;s working with. No guessing. No hallucinating your own product.',
     gradient: 'from-cyan-600/30 to-blue-600/30',
     iconColor: 'text-cyan-400',
     border: 'border-cyan-500/20',
@@ -19,7 +19,7 @@ const cards = [
   {
     icon: Plug,
     title: 'AI Tool Connectivity',
-    description: 'Your databases, CRMs, and third-party APIs — exposed as callable tools your agents can use mid-task, in real time, without a round trip to a developer.',
+    description: 'Your databases, CRMs, and APIs — exposed as callable tools your agents can use mid-task, in real time, without looping in a developer every time.',
     gradient: 'from-violet-600/30 to-purple-600/30',
     iconColor: 'text-violet-400',
     border: 'border-violet-500/20',
@@ -30,7 +30,7 @@ const cards = [
   {
     icon: LayoutGrid,
     title: 'AI Context Management',
-    description: 'Structured pipelines that give AI exactly what it needs, exactly when it needs it — fewer hallucinations, sharper answers, more trust in the output.',
+    description: 'Structured pipelines that give AI exactly what it needs, exactly when it needs it — fewer hallucinations, sharper answers, and output you can actually trust.',
     gradient: 'from-emerald-600/30 to-teal-600/30',
     iconColor: 'text-emerald-400',
     border: 'border-emerald-500/20',
@@ -41,7 +41,7 @@ const cards = [
   {
     icon: GitBranch,
     title: 'AI System Orchestration',
-    description: 'Orchestration layers that route tasks between models, agents, and tools in the right order — coordinated, observable, and reliable enough to trust in production.',
+    description: 'Orchestration layers that route tasks between models, agents, and tools in the right order — coordinated, observable, and reliable enough to trust with real work.',
     gradient: 'from-blue-600/30 to-indigo-600/30',
     iconColor: 'text-blue-400',
     border: 'border-blue-500/20',
@@ -52,7 +52,7 @@ const cards = [
   {
     icon: Layers,
     title: 'AI Workflow Infrastructure',
-    description: 'The boring-but-critical stuff that makes AI workflows actually reliable — queues, retries, state management, structured logging, and observability from day one. Not bolted on later.',
+    description: 'The boring-but-critical stuff that makes AI actually reliable — queues, retries, state management, structured logging, observability from day one. We build systems that quietly do their job. Like good infrastructure should.',
     gradient: 'from-amber-600/30 to-orange-600/30',
     iconColor: 'text-amber-400',
     border: 'border-amber-500/20',
@@ -87,14 +87,14 @@ export default function MCPServers() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-            MCP Servers
+            Wait — MCP what?
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
             The layer that makes your{' '}
             <span className="gradient-text">AI actually know things.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Model Context Protocol servers that expose your real data, tools, and systems to AI — so it stops guessing and starts being genuinely useful.
+            Model Context Protocol. It&apos;s the open standard that finally lets AI talk to the real world — your data, your tools, your systems. So it stops guessing and starts being genuinely useful.
           </p>
         </motion.div>
 
@@ -151,7 +151,7 @@ export default function MCPServers() {
         >
           <div className="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 rounded-2xl sm:rounded-full border border-cyan-500/20 bg-cyan-500/[0.04] text-xs sm:text-sm text-gray-400 text-center">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
-            MCP — the open standard that finally lets AI talk to the real world
+            MCP — the protocol that gives your AI something real to work with
             <ArrowRight size={14} className="text-cyan-400 flex-shrink-0" />
           </div>
         </motion.div>

@@ -55,11 +55,11 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
           className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-5 sm:mb-6"
         >
-          We build the web.{' '}
+          We build things.{' '}
           <br />
-          <span className="gradient-text">And the AI</span>
+          <span className="gradient-text">Useful things.</span>
           <br />
-          that runs it.
+          Alive things.
         </motion.h1>
 
         {/* Subtext */}
@@ -67,8 +67,8 @@ export default function Hero() {
           {...fadeUp(0.35)}
           className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8"
         >
-          Two engineers. One studio. We build AI agents, autonomous systems, and web experiences that{' '}
-          <span className="text-white">actually feel like they were made by humans who give a damn</span>.
+          Two engineers. One obsession. We build AI systems, autonomous agents, and web experiences that{' '}
+          <span className="text-white">people actually remember — and can&apos;t quite explain why.</span>
         </motion.p>
 
         {/* Capability pills */}
@@ -98,7 +98,7 @@ export default function Hero() {
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'start_project', location: 'hero' })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
           >
-            Let&apos;s Talk
+            Say Hello
           </Link>
         </motion.div>
 
@@ -109,7 +109,7 @@ export default function Hero() {
         >
           {[
             { value: '30+', label: 'Things shipped' },
-            { value: '2022', label: 'Est. & still building' },
+            { value: '2022', label: 'Est. Still here.' },
             { value: '0', label: 'Unhappy clients' },
           ].map(({ value, label }) => (
             <div key={label} className="flex flex-col items-center gap-1">

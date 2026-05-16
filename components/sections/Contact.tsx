@@ -67,14 +67,14 @@ export default function Contact() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
-            Let&apos;s make something.
+            So.
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Got an idea?{' '}
-            <span className="gradient-text">We&apos;re already curious.</span>
+            Hello.{' '}
+            <span className="gradient-text">That&apos;s usually how these start.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Tell us what you&apos;re building, what&apos;s broken, or just what you&apos;re thinking. We read every message — even the unnecessarily detailed ones.
+            Tell us what you&apos;re building, what&apos;s broken, or just what you&apos;re thinking about. We read every message. Even the unnecessarily long ones.
           </p>
         </motion.div>
 
@@ -99,7 +99,7 @@ export default function Contact() {
               {
                 icon: MessageSquare,
                 label: 'WhatsApp',
-                value: 'Sometimes faster than email',
+                value: 'Sometimes a quick message beats 17 emails.',
                 href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210'}`,
                 color: 'text-emerald-400',
                 bg: 'bg-emerald-500/10 border-emerald-500/20',
@@ -129,7 +129,7 @@ export default function Contact() {
                 <span className="text-xs text-emerald-400 font-medium">Usually back within</span>
               </div>
               <div className="font-heading font-bold text-2xl text-white">24 hours</div>
-              <div className="text-xs text-gray-500 mt-1">Mon–Sat, 9AM–9PM IST — often much faster</div>
+              <div className="text-xs text-gray-500 mt-1">Mon–Sat, 9AM–9PM IST. Often much sooner.</div>
             </div>
           </motion.div>
 
@@ -148,8 +148,8 @@ export default function Contact() {
                     <CheckCircle2 size={32} className="text-emerald-400" />
                   </div>
                   <div className="text-center">
-                    <div className="font-heading font-bold text-xl text-white mb-2">It&apos;s in our inbox.</div>
-                    <div className="text-sm text-gray-500">We&apos;ll be in touch — usually faster than you expect.</div>
+                    <div className="font-heading font-bold text-xl text-white mb-2">Got it. We&apos;ll be in touch.</div>
+                    <div className="text-sm text-gray-500">Usually faster than you&apos;d expect. We read every one.</div>
                   </div>
                   <button
                     onClick={() => setStatus('idle')}
@@ -169,7 +169,7 @@ export default function Contact() {
                         name="name"
                         value={form.name}
                         onChange={handleChange}
-                        placeholder="John Doe"
+                        placeholder="What should we call you?"
                         required
                         className={inputClass}
                       />
@@ -182,7 +182,7 @@ export default function Contact() {
                         name="email"
                         value={form.email}
                         onChange={handleChange}
-                        placeholder="john@example.com"
+                        placeholder="Where should we reply?"
                         required
                         className={inputClass}
                       />
@@ -190,7 +190,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="projectType" className="text-xs text-gray-400 mb-1.5 block">Project Type</label>
+                    <label htmlFor="projectType" className="text-xs text-gray-400 mb-1.5 block">What are we talking about?</label>
                     <select
                       id="projectType"
                       name="projectType"
@@ -213,13 +213,13 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="text-xs text-gray-400 mb-1.5 block">Message *</label>
+                    <label htmlFor="message" className="text-xs text-gray-400 mb-1.5 block">What&apos;s on your mind? *</label>
                     <textarea
                       id="message"
                       name="message"
                       value={form.message}
                       onChange={handleChange}
-                      placeholder="Tell us what you're building, what's broken, or where you're stuck. No template required."
+                      placeholder="Tell us what you're building, what's broken, or just what's on your mind. No template required."
                       required
                       rows={5}
                       className={`${inputClass} resize-none`}
@@ -227,7 +227,7 @@ export default function Contact() {
                   </div>
 
                   {status === 'error' && (
-                    <p className="text-sm text-red-400">Something went wrong. Please try again or email us directly.</p>
+                    <p className="text-sm text-red-400">Something went sideways. Try again, or just email us directly — we promise we read those too.</p>
                   )}
 
                   <button
@@ -243,7 +243,7 @@ export default function Contact() {
                     ) : (
                       <>
                         <Send size={16} />
-                        Send It
+                        Send it over
                       </>
                     )}
                   </button>

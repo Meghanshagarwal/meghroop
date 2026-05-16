@@ -18,7 +18,7 @@ const defaultProjects: import('@/lib/supabase').Project[] = [
   {
     id: '1', created_at: '', display_order: 0,
     title: 'Corporate Business Website',
-    description: 'Built for a B2B company that needed enterprise clients to take them seriously at first scroll. Cinematic design, smooth animations, and an SEO foundation that actually ranked.',
+    description: 'Built for a B2B company that needed enterprise clients to take them seriously at first scroll. Cinematic design, motion that earns its keep, and an SEO foundation that actually ranked. Not bad.',
     gradient: 'from-purple-600 via-violet-600 to-blue-600',
     image: PROJECT_IMAGE,
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
@@ -27,7 +27,7 @@ const defaultProjects: import('@/lib/supabase').Project[] = [
   {
     id: '2', created_at: '', display_order: 1,
     title: 'Sports Court Booking Platform',
-    description: 'A full-stack platform where real-time availability, Stripe payments, and an admin dashboard all had to work perfectly — or people couldn\'t book a court. They work perfectly.',
+    description: 'Real-time availability, Stripe payments, admin dashboard — all had to work perfectly or people couldn\'t book a court. They work perfectly. We checked.',
     gradient: 'from-blue-600 via-cyan-600 to-teal-600',
     image: PROJECT_IMAGE,
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
@@ -36,7 +36,7 @@ const defaultProjects: import('@/lib/supabase').Project[] = [
   {
     id: '3', created_at: '', display_order: 2,
     title: 'Coffee Shop Website',
-    description: 'A brand-led website for a premium coffee shop that needed to feel as good as the coffee. Animated menu, online ordering, loyalty integration. Foot traffic went up.',
+    description: 'A brand-led website that needed to feel as good as the coffee. Animated menu, online ordering, loyalty integration. Foot traffic went up. We like to think we helped.',
     gradient: 'from-amber-600 via-orange-600 to-red-600',
     image: PROJECT_IMAGE,
     tags: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'CMS'],
@@ -45,7 +45,7 @@ const defaultProjects: import('@/lib/supabase').Project[] = [
   {
     id: '4', created_at: '', display_order: 3,
     title: 'Modern Business Website',
-    description: 'Conversion-focused, HubSpot-integrated, analytics-tracked. Built for a business that needed leads, not just a web presence. Lead gen doubled in three months.',
+    description: 'Conversion-focused, HubSpot-integrated, analytics-tracked. Built for a business that needed leads, not just a presence. Lead gen doubled in three months. We made websites people actually remember.',
     gradient: 'from-emerald-600 via-green-600 to-teal-600',
     image: PROJECT_IMAGE,
     tags: ['React', 'TypeScript', 'GSAP', 'HubSpot'],
@@ -129,8 +129,8 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
               The Work
             </div>
             <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white">
-              Some things we&apos;re{' '}
-              <span className="gradient-text">genuinely proud of</span>
+              Things we built.{' '}
+              <span className="gradient-text">Things we&apos;re proud of.</span>
             </h2>
           </div>
 
@@ -268,7 +268,7 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
         {/* Progress dots + status */}
         <div className="flex items-center justify-between mt-5 sm:mt-6">
           <p className="text-xs text-gray-400">
-            {paused ? 'Paused' : 'Auto-playing'} · drag or swipe to explore
+            {paused ? 'Paused — take your time.' : 'Scrolling · drag or swipe to look around'}
           </p>
           <div className="flex items-center">
             {projects.map((_, i) => (

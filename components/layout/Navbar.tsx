@@ -73,7 +73,7 @@ export default function Navbar() {
             href="#contact"
             className="px-4 py-2 text-sm font-medium text-white bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.1] rounded-lg transition-all duration-200"
           >
-            Start a Project
+            Let&apos;s Talk
           </Link>
         </div>
 
@@ -122,7 +122,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="block px-4 py-3 text-sm font-medium text-white text-center bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg"
                 >
-                  Start a Project
+                  Let&apos;s Talk
                 </Link>
               </li>
             </ul>

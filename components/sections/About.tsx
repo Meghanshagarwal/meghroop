@@ -27,14 +27,15 @@ export default function About() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-            Wait — who are we?
+            Okay, but who actually are you?
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Small team.{' '}
-            <span className="gradient-text">Sharp work.</span>
+            Two people.{' '}
+            <span className="gradient-text">Multiple tabs open.</span>
+            <br />Still shipping.
           </h2>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            Meghansh and Roop. Two engineers with one shared obsession — building things that actually hold up. No account managers. No bloat. Just the two people doing the work, talking to you directly.
+            Meghansh and Roop. Two engineers, one shared obsession — building things that actually hold up. No account managers. No handoffs. No &ldquo;let me loop in the team.&rdquo; Just us. Doing the work. Talking to you directly.
           </p>
         </motion.div>
 
@@ -53,7 +54,7 @@ export default function About() {
           <StatCard
             icon={Clock}
             value="2+"
-            label="Years In"
+            label="Years in"
             sub="Started in 2022. Not slowing down."
             gradient="from-purple-500/20 to-blue-500/20"
             iconColor="text-purple-400"
@@ -64,11 +65,11 @@ export default function About() {
           <StatCard
             icon={Rocket}
             value="30+"
-            label="Projects Shipped"
+            label="Things shipped"
             sub="A few we almost broke building."
             gradient="from-blue-500/20 to-cyan-500/20"
             iconColor="text-blue-400"
-            bullets={['Brands that needed presence', 'Products that needed a brain', 'Startups that needed both — yesterday']}
+            bullets={['Brands that needed a presence', 'Products that needed a brain', 'Startups that needed both — yesterday']}
           />
 
           {/* Wide card — Team (full width on mobile, 2-col on desktop) */}
@@ -108,7 +109,7 @@ export default function About() {
 
               <div>
                 <p className="text-sm text-gray-400 leading-relaxed mb-3">
-                  We write the code, design the systems, and ship the whole thing. No middlemen, no handoffs, no &ldquo;let me check with the team.&rdquo; You talk directly to the people actually building.
+                  We write the code, design the systems, and ship the whole thing. No middlemen. No dropped context. No &ldquo;let me check with the team.&rdquo; You&apos;re talking to the team. It&apos;s us.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['Design', 'Frontend', 'Backend', 'AI Engineering'].map((tag) => (
@@ -140,7 +141,7 @@ export default function About() {
                     <Code2 size={20} className="text-emerald-400" />
                   </div>
                   <div className="font-heading font-bold text-4xl sm:text-5xl text-white mb-1">15+</div>
-                  <div className="text-sm font-semibold text-white/70">Tools we actually know</div>
+                  <div className="text-sm font-semibold text-white/70">Tools we actually know well</div>
                 </div>
                 <div className="flex flex-col gap-1 items-end mt-1">
                   {['Frontend', 'Backend', 'Tools'].map((cat) => (
@@ -189,7 +190,7 @@ export default function About() {
               </div>
 
               <p className="text-xs text-gray-500 leading-relaxed">
-                No cargo-culting. Every tool here earned its place — fast, battle-tested, and boring in exactly the right way.
+                No cargo-culting. Every tool here earned its place — fast, battle-tested, and gloriously boring in exactly the right way.
               </p>
             </div>
           </motion.div>
@@ -197,23 +198,23 @@ export default function About() {
           {/* Stat — Satisfaction */}
           <StatCard
             icon={Star}
-            value="100%"
-            label="Happy Clients"
-            sub="Zero. Our proudest number."
+            value="0"
+            label="Unhappy clients"
+            sub="Our proudest metric, honestly."
             gradient="from-amber-500/20 to-orange-500/20"
             iconColor="text-amber-400"
-            bullets={['5★ on every engagement', 'Most clients come back for more', 'A few became genuinely good friends']}
+            bullets={['5★ on every engagement', 'Most clients come back with more', 'A few became genuinely good friends']}
           />
 
           {/* Stat — Support */}
           <StatCard
             icon={Zap}
             value="24h"
-            label="Response Time"
-            sub="Sometimes in 20 minutes. Seriously."
+            label="We reply within"
+            sub="Often much, much sooner."
             gradient="from-rose-500/20 to-pink-500/20"
             iconColor="text-rose-400"
-            bullets={['Mon–Sat, 9AM–9PM IST', 'WhatsApp preferred — we actually read it', 'Post-launch support, no extra invoice']}
+            bullets={['Mon–Sat, 9AM–9PM IST', 'WhatsApp preferred — we actually read it', 'Post-launch support, no surprise invoice']}
           />
         </motion.div>
       </div>

@@ -92,7 +92,7 @@ export default function Footer() {
               <span className="font-heading font-bold text-lg text-white">MeghRoop</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-              Two people. One shared obsession with building things that actually hold up. AI systems, web experiences, intelligent infrastructure — made in India, built for everywhere.
+              Not a massive agency. Not trying to be one. Two people, one obsession — AI systems, web experiences, and intelligent infrastructure that quietly does its job. Made in India. Built for everywhere.
             </p>
 
             {/* Social icons */}
@@ -213,7 +213,7 @@ export default function Footer() {
             © {new Date().getFullYear()} MeghRoop Studio. All rights reserved.
           </p>
           <p className="text-sm text-gray-400">
-            Built with care using{' '}
+            Built by hand with{' '}
             <span className="gradient-text-purple font-medium">Next.js & Framer Motion</span>
           </p>
         </div>

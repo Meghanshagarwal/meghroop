@@ -10,7 +10,7 @@ const services = [
     icon: Code2,
     title: 'Full Stack Development',
     description:
-      'Database to deployment — we own the whole thing. No handoffs between strangers, no dropped context. One team, one product, shipped properly.',
+      'Database to deployment — we own the whole thing. No handoffs. No dropped context. No &ldquo;that&apos;s the other team&apos;s part.&rdquo; One team. One product. Shipped properly.',
     gradient: 'from-purple-600/30 to-blue-600/30',
     iconColor: 'text-purple-400',
     borderHover: 'hover:border-purple-500/40',
@@ -21,7 +21,7 @@ const services = [
     icon: Layers,
     title: 'React & Next.js',
     description:
-      'The React ecosystem, used by people who actually read the docs. Fast by default. Optimized on purpose.',
+      'The React ecosystem, used by people who actually read the docs. Fast by default. Optimized on purpose. Boring in the best possible way.',
     gradient: 'from-blue-600/30 to-cyan-600/30',
     iconColor: 'text-blue-400',
     borderHover: 'hover:border-blue-500/40',
@@ -31,7 +31,7 @@ const services = [
     icon: Globe,
     title: 'WordPress Development',
     description:
-      'WordPress without the horror stories. Custom themes, headless setups, and a PageSpeed score you can actually show people.',
+      'WordPress without the horror stories. Custom themes, headless setups, and a PageSpeed score you can actually show people without flinching.',
     gradient: 'from-emerald-600/30 to-teal-600/30',
     iconColor: 'text-emerald-400',
     borderHover: 'hover:border-emerald-500/40',
@@ -41,7 +41,7 @@ const services = [
     icon: Palette,
     title: 'UI/UX Implementation',
     description:
-      'Your Figma file, brought to life without excuses. The micro-interactions your designer annotated as "just a vibe" — we build those.',
+      'Your Figma file, brought to life without excuses. The micro-interactions your designer annotated as &ldquo;just a vibe&rdquo; — we build those too.',
     gradient: 'from-pink-600/30 to-rose-600/30',
     iconColor: 'text-pink-400',
     borderHover: 'hover:border-pink-500/40',
@@ -51,7 +51,7 @@ const services = [
     icon: Plug,
     title: 'API Integration',
     description:
-      'Stripe, CRMs, AI APIs, webhooks, third-party everything. If it has an endpoint and documentation, we can wire it up. If it doesn\'t, we\'ll figure it out anyway.',
+      'Stripe, CRMs, AI APIs, webhooks, third-party everything. Has an endpoint? We wire it. Doesn&apos;t? We figure it out anyway.',
     gradient: 'from-violet-600/30 to-purple-600/30',
     iconColor: 'text-violet-400',
     borderHover: 'hover:border-violet-500/40',
@@ -61,7 +61,7 @@ const services = [
     icon: Zap,
     title: 'Website Optimization',
     description:
-      'Core Web Vitals you\'ll want to screenshot. Real gains from real profiling — not guesswork, not hope, not a faster hosting plan.',
+      'Core Web Vitals you&apos;ll want to screenshot. Turns out users like fast websites. Real gains from real profiling — not guesswork, not hope, not a pricier hosting plan.',
     gradient: 'from-amber-600/30 to-orange-600/30',
     iconColor: 'text-amber-400',
     borderHover: 'hover:border-amber-500/40',
@@ -72,7 +72,7 @@ const services = [
     icon: Smartphone,
     title: 'Responsive Web Design',
     description:
-      'Phone-first, beautiful everywhere else. Not bolted on at the end — designed that way from the first line of CSS.',
+      'Phone-first. Beautiful everywhere else. Not bolted on at the end — designed that way from the very first line of CSS.',
     gradient: 'from-cyan-600/30 to-blue-600/30',
     iconColor: 'text-cyan-400',
     borderHover: 'hover:border-cyan-500/40',
@@ -82,7 +82,7 @@ const services = [
     icon: Search,
     title: 'GEO & AI Search Optimization',
     description:
-      'Google is one channel. ChatGPT, Perplexity, and AI overviews are the others. We make sure you show up in all of them — structured data, semantic content, and GEO built for wherever search goes next.',
+      'Search engines matter. AI answers matter more now. We help you show up in Google and inside AI conversations — structured data, semantic content, and GEO built for wherever search goes next.',
     gradient: 'from-rose-600/30 to-pink-600/30',
     iconColor: 'text-rose-400',
     borderHover: 'hover:border-rose-500/40',
@@ -93,7 +93,7 @@ const services = [
     icon: Sparkles,
     title: 'Modern Web Experiences',
     description:
-      'Scroll-triggered reveals. Cinematic transitions. The motion that makes people stop mid-scroll and send the link to someone. We build exactly that.',
+      'Some things deserve better than another template. Scroll-triggered reveals. Cinematic transitions. The motion that makes people stop mid-scroll and send the link to someone.',
     gradient: 'from-indigo-600/30 to-violet-600/30',
     iconColor: 'text-indigo-400',
     borderHover: 'hover:border-indigo-500/40',
@@ -126,14 +126,14 @@ export default function Services() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-            So, what do we actually build?
+            Okay so what do you actually do?
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Everything you need.{' '}
-            <span className="gradient-text">Nothing you don&apos;t.</span>
+            Not built to blend in.{' '}
+            <span className="gradient-text">Built to work.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            From a blank repo to a product people actually use. We handle the full stack — web, AI, automation, and everything in between.
+            From a blank repo to a product people actually use — and talk about. Web, AI, automation, and everything in between. We handle the whole thing.
           </p>
         </motion.div>
 

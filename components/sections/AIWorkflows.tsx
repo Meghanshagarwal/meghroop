@@ -78,14 +78,14 @@ export default function AIWorkflows() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            But here&apos;s the thing —
+            Anyway. Here&apos;s where it gets interesting.
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
             Your operations,{' '}
             <span className="gradient-text">running themselves.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            We wire n8n, LangChain, and custom agents into the work that shouldn&apos;t need a human. Leads, emails, data, support — handled, logged, done.
+            We build systems that quietly do their job. Like good infrastructure should. n8n, LangChain, and custom agents wired into the work that shouldn&apos;t need a human anymore.
           </p>
         </motion.div>
 
@@ -149,10 +149,10 @@ export default function AIWorkflows() {
           <div className="relative z-10">
             <p className="text-sm text-gray-400 mb-2">Built on n8n · LangChain · OpenAI · Claude · Zapier · Make</p>
             <h3 className="font-heading font-bold text-xl sm:text-2xl text-white mb-3">
-              Got a process that needs a brain?
+              Got a process that deserves a brain?
             </h3>
             <p className="text-gray-400 text-sm max-w-lg mx-auto">
-              Walk us through how it works today. We&apos;ll build the version that runs without you.
+              Walk us through how it works today. We&apos;ll build the version that runs without you — and doesn&apos;t call in sick.
             </p>
           </div>
         </motion.div>
