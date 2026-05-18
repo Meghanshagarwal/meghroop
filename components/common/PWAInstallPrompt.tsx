@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -84,7 +85,7 @@ export default function PWAInstallPrompt() {
       `}</style>
 
       {/* Icon */}
-      <img
+      <Image
         src="/icon-96.png"
         alt="MeghRoop"
         width={44}
