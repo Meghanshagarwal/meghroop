@@ -58,11 +58,11 @@ export default function FAQ() {
             Questions people actually ask
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Straight answers.{' '}
-            <span className="gradient-text">No fluff.</span>
+            Things worth{' '}
+            <span className="gradient-text">actually answering.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto">
-            The questions we get asked the most. Answered like actual humans, not a terms-of-service page.
+            The questions we get the most. Answered like humans, not a terms-of-service page.
           </p>
         </motion.div>
 

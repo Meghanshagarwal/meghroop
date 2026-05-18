@@ -118,11 +118,11 @@ export default function AgenticAI() {
             AI is cool. Useful AI is cooler.
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            AI that doesn&apos;t just answer.{' '}
-            <span className="gradient-text">It gets things done.</span>
+            AI that does things.{' '}
+            <span className="gradient-text">Not just says things.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Agents that reason, plan, and execute — connected to your tools, your data, your actual workflows. Not chatbots. Not wrappers. Autonomous systems that quietly do their job.
+            Agents that reason, plan, and execute — wired into your real tools, your real data, your actual workflow. Not demos. Not wrappers. Systems that quietly get things done while you&apos;re doing something else.
           </p>
         </motion.div>
 

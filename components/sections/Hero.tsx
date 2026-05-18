@@ -68,8 +68,8 @@ export default function Hero() {
           {...fadeUp(0.35)}
           className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8"
         >
-          Two engineers. One obsession. We build AI systems, autonomous agents, and web experiences that{' '}
-          <span className="text-white">people actually remember — and can&apos;t quite explain why.</span>
+          Two engineers. One obsession. We build AI systems, autonomous agents, and web experiences —{' '}
+          <span className="text-white">the kind that stay open in someone&apos;s tab for longer than makes sense.</span>
         </motion.p>
 
         {/* Capability pills */}

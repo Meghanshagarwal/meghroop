@@ -151,7 +151,7 @@ export default function MCPServers() {
         >
           <div className="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 rounded-2xl sm:rounded-full border border-cyan-500/20 bg-cyan-500/[0.04] text-xs sm:text-sm text-gray-400 text-center">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
-            MCP — the protocol that gives your AI something real to work with
+            MCP — so your AI stops guessing and starts knowing
             <ArrowRight size={14} className="text-cyan-400 flex-shrink-0" />
           </div>
         </motion.div>

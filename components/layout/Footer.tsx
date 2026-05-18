@@ -231,8 +231,8 @@ export default function Footer() {
             © {new Date().getFullYear()} MeghRoop Studio. All rights reserved.
           </p>
           <p className="text-sm text-gray-400">
-            Built by hand with{' '}
-            <span className="gradient-text-purple font-medium">Next.js & Framer Motion</span>
+            Handbuilt. Slightly overthought.{' '}
+            <span className="gradient-text-purple font-medium">Shipped anyway.</span>
           </p>
         </div>
       </div>

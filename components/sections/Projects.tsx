@@ -129,8 +129,8 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
               The Work
             </div>
             <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white">
-              Things we built.{' '}
-              <span className="gradient-text">Things we&apos;re proud of.</span>
+              Some things we built.{' '}
+              <span className="gradient-text">A few we almost broke building.</span>
             </h2>
           </div>
 

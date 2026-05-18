@@ -82,7 +82,7 @@ const services = [
     icon: Search,
     title: 'GEO & AI Search Optimization',
     description:
-      'Search engines matter. AI answers matter more now. We help you show up in Google and inside AI conversations — structured data, semantic content, and GEO built for wherever search goes next.',
+      "People don't just search anymore. They ask. We make sure your brand shows up in both places — the Google result, and the AI-generated answer that's slowly replacing it.",
     gradient: 'from-rose-600/30 to-pink-600/30',
     iconColor: 'text-rose-400',
     borderHover: 'hover:border-rose-500/40',
@@ -129,11 +129,11 @@ export default function Services() {
             Okay so what do you actually do?
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Not built to blend in.{' '}
-            <span className="gradient-text">Built to work.</span>
+            From blank file{' '}
+            <span className="gradient-text">to something people open twice.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            From a blank repo to a product people actually use — and talk about. Web, AI, automation, and everything in between. We handle the whole thing.
+            Web, AI, automation, and everything that connects them. One team. No handoffs. No &ldquo;that&apos;s another department.&rdquo; We handle the whole thing.
           </p>
         </motion.div>
 

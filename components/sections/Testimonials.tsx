@@ -66,14 +66,14 @@ export default function Testimonials() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            Testimonials
+            The honest part.
           </div>
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Clients who{' '}
-            <span className="gradient-text">trust us</span>
+            Words from people{' '}
+            <span className="gradient-text">who didn&apos;t have to say them.</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Real words from real clients. We don&apos;t write these. We just try to earn them.
+            Real words. Real clients. We don&apos;t write these — we just try to deserve them.
           </p>
         </motion.div>
 
