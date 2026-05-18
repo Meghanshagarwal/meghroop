@@ -634,6 +634,19 @@
           <button class="dl-btn" onclick="dlSVG('favicon','meghroop-favicon-mark.svg')" style="margin-left:6px;">↓ SVG</button>
         </div>
       </div>
+      <div class="asset-card">
+        <div class="asset-preview" style="background:#0d0d0d;min-height:100px;padding:28px 20px;display:flex;align-items:center;justify-content:center;">
+          <canvas id="app-icon-canvas" width="1024" height="1024" style="width:100px;height:100px;border-radius:22px;"></canvas>
+        </div>
+        <div class="asset-meta">
+          <div>
+            <div class="asset-name">App Icon</div>
+            <div class="asset-dims">1024 × 1024 px</div>
+          </div>
+          <button class="dl-btn" onclick="dlPNG('app-icon-canvas','meghroop-app-icon.png')">↓ PNG</button>
+          <button class="dl-btn" onclick="dlSVG('app-icon','meghroop-app-icon.svg')" style="margin-left:6px;">↓ SVG</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1438,6 +1451,7 @@ function drawAll() {
     ['gh-banner',    drawGitHubBanner],
     ['ig-post',      drawInstagramPost],
     ['ig-highlight', drawHighlightCover],
+    ['app-icon-canvas', drawProfile],
     ['fb-cover',     drawFacebookCover],
     ['yt-banner',    drawYouTubeChannelArt],
   ];
@@ -1472,6 +1486,24 @@ function genLogoSVG(variant) {
   var ls = -0.042 * fs;
   ctx.font = '700 ' + fs + 'px "Space Grotesk", sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = ls.toFixed(2) + 'px';
+
+  /* App Icon: M mark in rounded square – 1024×1024 */
+  if (variant === 'app-icon') {
+    var sq = 1024;
+    var r  = Math.round(sq * 0.175);
+    var ms = sq * 0.52;
+    var mh = ms * 0.8;
+    var mx = (sq - ms) / 2, my = (sq - mh) / 2;
+    var s  = ms / 20;
+    function p2(x, y) { return (mx + x*s).toFixed(2) + ',' + (my + y*s).toFixed(2); }
+    return '<?xml version="1.0" encoding="UTF-8"?>'
+      + '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + sq + ' ' + sq + '" width="' + sq + '" height="' + sq + '">'
+      + '<rect width="' + sq + '" height="' + sq + '" rx="' + r + '" fill="#0d0d0d"/>'
+      + '<rect width="' + sq + '" height="' + sq + '" rx="' + r + '" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="4"/>'
+      + '<polyline points="' + p2(1,15) + ' ' + p2(1,1) + ' ' + p2(10,9.5) + ' ' + p2(19,1) + ' ' + p2(19,15) + '"'
+      + ' stroke="white" stroke-width="' + (2.2/s).toFixed(2) + '" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+      + '</svg>';
+  }
 
   /* Favicon: M mark in rounded square */
   if (variant === 'favicon') {
