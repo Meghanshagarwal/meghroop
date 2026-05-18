@@ -1,22 +1,57 @@
 {
   "name": "MeghRoop",
   "short_name": "MeghRoop",
-  "description": "AI Engineering & Web Development Studio. Custom AI agents, autonomous workflows, MCP servers, and premium web experiences.",
-  "start_url": "/",
+  "description": "AI Engineering & Web Development Studio — custom AI agents, autonomous workflows, MCP servers, and premium web experiences.",
+  "start_url": "/?source=pwa",
+  "id": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#000000",
   "theme_color": "#000000",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["business", "technology"],
+  "prefer_related_applications": false,
   "icons": [
+    {
+      "src": "/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/favicon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "/favicon.ico",
-      "sizes": "32x32",
-      "type": "image/x-icon"
+      "src": "/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MeghRoop Studio"
     }
   ]
 }

@@ -4,6 +4,7 @@ import './globals.css'
 import Script from 'next/script'
 import { getSupabase } from '@/lib/supabase'
 import JsonLd from '@/components/common/JsonLd'
+import PWAInstallPrompt from '@/components/common/PWAInstallPrompt'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -101,16 +102,24 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
       { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
       { url: '/favicon.ico', sizes: '32x32' },
     ],
     shortcut: '/favicon.ico',
-    apple: '/favicon-512.png',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   manifest: '/manifest.json',
   other: {
     'msapplication-TileColor': '#000000',
+    'msapplication-TileImage': '/icon-192.png',
     'theme-color': '#000000',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-title': 'MeghRoop',
+    'mobile-web-app-capable': 'yes',
   },
 }
 
@@ -148,6 +157,17 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://images.pexels.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Service Worker registration */}
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').catch(function() {});
+              });
+            }
+          `}
+        </Script>
 
         {/* JSON-LD structured data */}
         <JsonLd />
@@ -216,6 +236,7 @@ export default async function RootLayout({
           </noscript>
         )}
         {children}
+        <PWAInstallPrompt />
       </body>
     </html>
   )
