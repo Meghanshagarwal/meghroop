@@ -3,6 +3,19 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
+# Social media crawlers — explicitly allowed
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
 # AI crawlers — explicitly welcome
 User-agent: GPTBot
 Allow: /
@@ -25,4 +38,4 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
-Sitemap: https://meghroop.com/sitemap.xml
+Sitemap: https://meghroop.tech/sitemap.xml
