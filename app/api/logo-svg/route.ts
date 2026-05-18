@@ -2,6 +2,7 @@ import satori from 'satori'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { NextRequest, NextResponse } from 'next/server'
+import type { ReactNode } from 'react'
 
 const fontBuffer = readFileSync(join(process.cwd(), 'public/SpaceGrotesk-Bold.ttf'))
 
@@ -40,67 +41,66 @@ export async function GET(req: NextRequest) {
   const v = (req.nextUrl.searchParams.get('v') ?? 'primary') as keyof typeof configs
   const cfg = configs[v] ?? configs.primary
 
-  const svg = await satori(
-    {
-      type: 'div',
-      props: {
-        style: {
-          display: 'flex',
-          alignItems: 'center',
-          gap: cfg.dot ? '8px' : '0px',
-          background: 'transparent',
-          padding: '0 4px',
-        },
-        children: [
-          {
-            type: 'span',
-            props: {
-              style: {
-                display: 'flex',
-                fontFamily: 'Space Grotesk',
-                fontWeight: 700,
-                fontSize: cfg.fontSize,
-                letterSpacing: '-0.042em',
-                lineHeight: 1,
-              },
-              children: [
-                {
-                  type: 'span',
-                  props: { style: { color: cfg.meghColor }, children: 'Megh' },
-                },
-                {
-                  type: 'span',
-                  props: { style: { color: cfg.roopColor }, children: 'Roop' },
-                },
-              ],
+  const element: ReactNode = {
+    type: 'div',
+    props: {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: cfg.dot ? '8px' : '0px',
+        background: 'transparent',
+        padding: '0 4px',
+      },
+      children: [
+        {
+          type: 'span',
+          props: {
+            style: {
+              display: 'flex',
+              fontFamily: 'Space Grotesk',
+              fontWeight: 700,
+              fontSize: cfg.fontSize,
+              letterSpacing: '-0.042em',
+              lineHeight: 1,
             },
+            children: [
+              {
+                type: 'span',
+                props: { style: { color: cfg.meghColor }, children: 'Megh' },
+              },
+              {
+                type: 'span',
+                props: { style: { color: cfg.roopColor }, children: 'Roop' },
+              },
+            ],
           },
-          ...(cfg.dot
-            ? [
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      width: cfg.dotSize,
-                      height: cfg.dotSize,
-                      borderRadius: 2,
-                      background: 'linear-gradient(135deg, #c084fc, #60a5fa)',
-                      flexShrink: 0,
-                      marginBottom: cfg.fontSize * 0.22,
-                    },
+        },
+        ...(cfg.dot
+          ? [
+              {
+                type: 'div',
+                props: {
+                  style: {
+                    width: cfg.dotSize,
+                    height: cfg.dotSize,
+                    borderRadius: 2,
+                    background: 'linear-gradient(135deg, #c084fc, #60a5fa)',
+                    flexShrink: 0,
+                    marginBottom: cfg.fontSize * 0.22,
                   },
                 },
-              ]
-            : []),
-        ],
-      },
+              },
+            ]
+          : []),
+      ],
     },
-    {
-      width: cfg.width,
-      height: cfg.height,
-      fonts: [{ name: 'Space Grotesk', data: fontBuffer, weight: 700, style: 'normal' }],
-    }
-  )
+  } as ReactNode
+
+  const svg = await satori(element, {
+    width: cfg.width,
+    height: cfg.height,
+    fonts: [{ name: 'Space Grotesk', data: fontBuffer, weight: 700, style: 'normal' }],
+  })
 
   return new NextResponse(svg, {
     headers: {
