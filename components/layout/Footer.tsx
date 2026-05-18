@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Mail } from 'lucide-react'
+import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 
 type IconProps = { size?: number }
 
@@ -85,11 +86,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                <span className="text-white font-bold font-heading text-sm">M</span>
-              </div>
-              <span className="font-heading font-bold text-lg text-white">MeghRoop</span>
+            <div className="flex items-center gap-2.5 mb-4">
+              <MeghRoopLogo variant="favicon" />
+              <MeghRoopLogo variant="primary" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
               Not a massive agency. Not trying to be one. Two people, one obsession — AI systems, web experiences, and intelligent infrastructure that quietly does its job. Made in India. Built for everywhere.
