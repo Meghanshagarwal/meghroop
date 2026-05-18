@@ -32,7 +32,8 @@ export default function About() {
           <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
             Two people.{' '}
             <span className="gradient-text">Multiple tabs open.</span>
-            <br />Still shipping.
+            <br className="hidden md:block" />
+            {' '}Still shipping.
           </h2>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
             Meghansh and Roop. Two engineers, one shared obsession — building things that actually hold up. No account managers. No handoffs. No &ldquo;let me loop in the team.&rdquo; Just us. Doing the work. Talking to you directly.
