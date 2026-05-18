@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Bot } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Bot } from 'lucide-react'
 import Link from 'next/link'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 
@@ -17,7 +17,6 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -77,58 +76,7 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
       </nav>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden backdrop-blur-xl bg-black/90 border-b border-white/[0.06] overflow-hidden"
-          >
-            <ul className="px-6 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={`block px-4 py-3 text-sm rounded-lg transition-all duration-200 ${
-                      link.label === 'AI Agents'
-                        ? 'text-purple-300 hover:text-purple-200 hover:bg-purple-500/10'
-                        : 'text-gray-400 hover:text-white hover:bg-white/[0.06]'
-                    }`}
-                  >
-                    {link.label === 'AI Agents' && (
-                      <Bot size={12} className="inline mr-1.5 -mt-0.5" />
-                    )}
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="mt-2">
-                <Link
-                  href="#contact"
-                  onClick={() => setMenuOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium text-white text-center bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg"
-                >
-                  Let&apos;s Talk
-                </Link>
-              </li>
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.header>
   )
 }

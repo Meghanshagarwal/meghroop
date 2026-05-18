@@ -49,7 +49,7 @@ export default function About() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
+          className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-4"
         >
           {/* Stat — Years */}
           <StatCard
@@ -84,14 +84,15 @@ export default function About() {
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
 
-            <div className="relative z-10 p-5 sm:p-6 h-full flex flex-col justify-between gap-4">
+            <div className="relative z-10 p-3.5 sm:p-5 md:p-6 h-full flex flex-col justify-between gap-3 sm:gap-4">
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-4">
-                    <Users size={20} className="text-cyan-400" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-3 sm:mb-4">
+                    <Users size={16} className="text-cyan-400 sm:hidden" />
+                    <Users size={20} className="text-cyan-400 hidden sm:block" />
                   </div>
-                  <div className="font-heading font-bold text-4xl sm:text-5xl text-white mb-1">2</div>
-                  <div className="text-sm font-semibold text-white/70">People. All of it.</div>
+                  <div className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-1">2</div>
+                  <div className="text-xs sm:text-sm font-semibold text-white/70">People. All of it.</div>
                 </div>
                 <div className="flex gap-2 mt-1">
                   {[
@@ -134,15 +135,16 @@ export default function About() {
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
 
-            <div className="relative z-10 p-5 sm:p-6 h-full flex flex-col justify-between gap-4 sm:gap-5">
+            <div className="relative z-10 p-3.5 sm:p-5 md:p-6 h-full flex flex-col justify-between gap-3 sm:gap-5">
               {/* Top */}
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-4">
-                    <Code2 size={20} className="text-emerald-400" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-3 sm:mb-4">
+                    <Code2 size={16} className="text-emerald-400 sm:hidden" />
+                    <Code2 size={20} className="text-emerald-400 hidden sm:block" />
                   </div>
-                  <div className="font-heading font-bold text-4xl sm:text-5xl text-white mb-1">15+</div>
-                  <div className="text-sm font-semibold text-white/70">Tools we actually know well</div>
+                  <div className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-1">15+</div>
+                  <div className="text-xs sm:text-sm font-semibold text-white/70">Tools we actually know well</div>
                 </div>
                 <div className="flex flex-col gap-1 items-end mt-1">
                   {['Frontend', 'Backend', 'Tools'].map((cat) => (
@@ -254,18 +256,19 @@ function StatCard({
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
       <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
 
-      <div className="relative z-10 p-5 sm:p-6 flex flex-col justify-between h-full gap-4">
+      <div className="relative z-10 p-3.5 sm:p-5 md:p-6 flex flex-col justify-between h-full gap-3 md:gap-4">
         <div>
-          <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-3 sm:mb-4">
-            <Icon size={20} className={iconColor} />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/[0.06] flex items-center justify-center mb-2.5 sm:mb-4">
+            <Icon size={16} className={`${iconColor} sm:hidden`} />
+            <Icon size={20} className={`${iconColor} hidden sm:block`} />
           </div>
-          <div className="font-heading font-bold text-3xl sm:text-4xl text-white">{value}</div>
-          <div className="text-xs sm:text-sm font-semibold text-white/70 mt-0.5">{label}</div>
-          <div className="text-xs text-gray-500 mt-1">{sub}</div>
+          <div className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-white">{value}</div>
+          <div className="text-[11px] sm:text-xs md:text-sm font-semibold text-white/70 mt-0.5 leading-snug">{label}</div>
+          <div className="text-[10px] sm:text-xs text-gray-500 mt-1 leading-snug">{sub}</div>
         </div>
 
         {bullets && (
-          <ul className="space-y-1.5">
+          <ul className="hidden sm:flex flex-col space-y-1.5">
             {bullets.map((b) => (
               <li key={b} className="flex items-start gap-2">
                 <span className={`mt-[3px] w-1.5 h-1.5 rounded-full flex-shrink-0 ${iconColor.replace('text-', 'bg-')} opacity-70`} />
