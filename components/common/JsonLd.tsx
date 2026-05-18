@@ -93,6 +93,76 @@ const organizationSchema = {
     'https://x.com/meghroop',
     'https://instagram.com/meghroop',
   ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    bestRating: '5',
+    worstRating: '1',
+    ratingCount: '4',
+    reviewCount: '4',
+  },
+  review: [
+    {
+      '@type': 'Review',
+      reviewBody:
+        'MeghRoop completely transformed our online presence. The attention to detail, clean animations, and overall quality of work far exceeded our expectations. Highly recommend.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Rajesh Kumar',
+        jobTitle: 'CEO',
+      },
+    },
+    {
+      '@type': 'Review',
+      reviewBody:
+        'Working with MeghRoop was a fantastic experience. They understood our brand vision instantly and delivered a stunning website that our customers love.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Priya Sharma',
+        jobTitle: 'Founder',
+      },
+    },
+    {
+      '@type': 'Review',
+      reviewBody:
+        'They built our entire sports court booking platform from scratch. Professional, timely, and the quality of code is exceptional. Will definitely work with them again.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Amit Patel',
+        jobTitle: 'CTO',
+      },
+    },
+    {
+      '@type': 'Review',
+      reviewBody:
+        'Our coffee shop website has received so many compliments from customers. The design is beautiful, the site is fast, and it perfectly represents our brand.',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Neha Gupta',
+        jobTitle: 'Owner',
+      },
+    },
+  ],
 }
 
 const websiteSchema = {

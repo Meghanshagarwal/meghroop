@@ -91,8 +91,6 @@ export default function Testimonials() {
               variants={item}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               className="relative rounded-2xl border border-white/[0.08] overflow-hidden group cursor-default"
-              itemScope
-              itemType="https://schema.org/Review"
             >
               {/* Glass background */}
               <div className="absolute inset-0 glass" />
@@ -114,21 +112,21 @@ export default function Testimonials() {
                   ))}
                 </div>
 
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic" itemProp="reviewBody">
+                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic">
                   &ldquo;{t.quote}&rdquo;
                 </p>
 
                 {/* Author */}
-                <div className="flex items-center gap-3" itemProp="author" itemScope itemType="https://schema.org/Person">
+                <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center`}>
                     <span className="text-xs font-bold text-white font-heading" aria-hidden="true">{t.avatar}</span>
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-white" itemProp="name">{t.author}</div>
+                    <div className="text-sm font-semibold text-white">{t.author}</div>
                     <div className="text-xs text-gray-500">
-                      <span itemProp="jobTitle">{t.role}</span>
+                      <span>{t.role}</span>
                       {' @ '}
-                      <span itemProp="worksFor">{t.company}</span>
+                      <span>{t.company}</span>
                     </div>
                   </div>
                 </div>
