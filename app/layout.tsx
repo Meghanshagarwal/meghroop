@@ -5,6 +5,7 @@ import Script from 'next/script'
 import { getSupabase } from '@/lib/supabase'
 import JsonLd from '@/components/common/JsonLd'
 import PWAInstallPrompt from '@/components/common/PWAInstallPrompt'
+import MobileNav from '@/components/common/MobileNav'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -236,6 +237,7 @@ export default async function RootLayout({
           </noscript>
         )}
         {children}
+        <MobileNav />
         <PWAInstallPrompt />
       </body>
     </html>
