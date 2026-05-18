@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Bot } from 'lucide-react'
 import Link from 'next/link'
+import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -37,13 +38,12 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="#home" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-            <span className="text-white font-bold font-heading text-sm">M</span>
-          </div>
-          <span className="font-heading font-bold text-lg text-white group-hover:gradient-text transition-all duration-300">
-            MeghRoop
-          </span>
+        <Link href="#home" className="flex items-center gap-2.5 group" aria-label="MeghRoop home">
+          <MeghRoopLogo variant="favicon" />
+          <MeghRoopLogo
+            variant="navbar"
+            className="transition-opacity duration-200 group-hover:opacity-80"
+          />
         </Link>
 
         {/* Desktop Nav */}
