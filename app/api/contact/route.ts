@@ -214,7 +214,7 @@ export async function POST(req: NextRequest) {
 
       <!-- Footer -->
       <tr><td style="padding:20px 32px;border-top:1px solid rgba(255,255,255,0.05);text-align:center;">
-        <p style="margin:0 0 6px;color:#4b5563;font-size:12px;">Explore our work at <a href="https://meghroop.com" style="color:#60a5fa;text-decoration:none;">meghroop.com</a></p>
+        <p style="margin:0 0 6px;color:#4b5563;font-size:12px;">Explore our work at <a href="https://meghroop.tech" style="color:#60a5fa;text-decoration:none;">meghroop.tech</a></p>
         <p style="margin:0;color:#374151;font-size:11px;">— The MeghRoop Team</p>
       </td></tr>
 

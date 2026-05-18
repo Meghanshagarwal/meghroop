@@ -107,6 +107,11 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
     apple: '/favicon-512.png',
   },
+  manifest: '/manifest.json',
+  other: {
+    'msapplication-TileColor': '#000000',
+    'theme-color': '#000000',
+  },
 }
 
 async function getAnalyticsIds() {
