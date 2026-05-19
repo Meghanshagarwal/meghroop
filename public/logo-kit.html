@@ -185,6 +185,24 @@
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #000; }
     ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+
+    /* ── Email Signature tabs ── */
+    .sig-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .sig-tab {
+      padding: 6px 16px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: #71717a; font-size: 12px; font-weight: 500;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer; transition: all .15s;
+    }
+    .sig-tab:hover { border-color: rgba(255,255,255,0.15); color: #fff; }
+    .sig-tab.active { background: rgba(167,139,250,0.12); border-color: rgba(167,139,250,0.35); color: #a78bfa; }
+    .sig-preview-wrap {
+      background: #ffffff; border-radius: 10px 10px 0 0;
+      padding: 32px 28px; min-height: 120px;
+    }
+    .sig-copy-note { font-size: 11px; color: #52525b; margin-top: 10px; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -225,6 +243,7 @@
     <a href="#facebook">Facebook</a>
     <a href="#youtube">YouTube</a>
     <a href="#og-image">OG Image</a>
+    <a href="#mail-signature">Email Signature</a>
   </nav>
 
   <!-- ════════════════════════════════════════ -->
@@ -605,6 +624,50 @@
     </div>
     <p class="safe-note" style="margin-top:12px;">
       <span>Usage:</span> This image appears when sharing <code style="color:#a1a1aa;font-size:10px;">meghroop.tech</code> on WhatsApp, Telegram, Twitter, LinkedIn, and other platforms that support Open Graph previews.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- EMAIL SIGNATURE -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="platform-section" id="mail-signature">
+    <div class="platform-header">
+      <div class="platform-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="22,6 12,13 2,6" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="platform-name">Email Signature</div>
+        <div class="platform-desc">HTML · email-client compatible · 2 co-founder variants</div>
+      </div>
+    </div>
+
+    <div class="sig-tabs">
+      <button class="sig-tab active" onclick="switchSig(0, this)">Meghansh Agarwal</button>
+      <button class="sig-tab" onclick="switchSig(1, this)">Roop Jaiswal</button>
+    </div>
+
+    <div class="asset-card">
+      <div class="sig-preview-wrap">
+        <div id="sig-preview"></div>
+      </div>
+      <div class="asset-meta" style="flex-wrap:wrap;gap:10px;">
+        <div>
+          <div class="asset-name" id="sig-label">Meghansh Agarwal · Co-Founder</div>
+          <div class="asset-dims">HTML · paste directly in Gmail / Outlook</div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="dl-btn" onclick="copySig()">⊞ Copy HTML</button>
+          <button class="dl-btn" onclick="downloadSig()">↓ .html</button>
+        </div>
+      </div>
+    </div>
+    <p class="sig-copy-note">
+      <span style="color:#a78bfa;">How to use:</span> Click <strong style="color:#e4e4e7;">Copy HTML</strong> → in Gmail go to Settings → General → Signature → paste. In Outlook, insert as HTML. Update social links with your actual profile URLs before use.
     </p>
   </section>
 
@@ -1533,6 +1596,100 @@ function dlPNG(id, filename) {
 
 /* Start drawing immediately even before font (fallback system font) */
 drawAll();
+
+/* ═══════════════════════════════════════════════════════════
+   EMAIL SIGNATURE
+═══════════════════════════════════════════════════════════ */
+var SIG_PEOPLE = [
+  { name: 'Meghansh Agarwal', title: 'Co-Founder', filename: 'meghroop-signature-meghansh.html' },
+  { name: 'Roop Jaiswal',     title: 'Co-Founder', filename: 'meghroop-signature-roop.html'     }
+];
+var sigIndex = 0;
+
+function buildSigHTML(person) {
+  return [
+    '<!-- MeghRoop Email Signature — ' + person.name + ' -->',
+    '<table cellpadding="0" cellspacing="0" border="0" width="480" style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;border-collapse:collapse;">',
+    '  <tbody>',
+    '    <tr>',
+    '      <!-- M mark badge -->',
+    '      <td valign="top" style="padding-right:18px;padding-top:2px;">',
+    '        <table cellpadding="0" cellspacing="0" border="0"><tbody><tr>',
+    '          <td width="44" height="44" style="width:44px;height:44px;background:#0d0d0d;border-radius:10px;text-align:center;vertical-align:middle;">',
+    '            <img src="https://meghroop.tech/icon-96.png" width="44" height="44" alt="MeghRoop" style="display:block;border-radius:10px;width:44px;height:44px;">',
+    '          </td>',
+    '        </tr></tbody></table>',
+    '      </td>',
+    '      <!-- Purple divider -->',
+    '      <td valign="top" style="width:2px;background:linear-gradient(180deg,#c084fc,#60a5fa);padding:0;border-radius:2px;">&nbsp;</td>',
+    '      <!-- Info -->',
+    '      <td valign="top" style="padding-left:18px;">',
+    '        <p style="margin:0 0 1px;font-size:15px;font-weight:700;color:#111111;letter-spacing:-0.02em;">' + person.name + '</p>',
+    '        <p style="margin:0 0 10px;font-size:10px;font-weight:600;color:#999999;letter-spacing:0.14em;text-transform:uppercase;">' + person.title + ' &middot; MeghRoop</p>',
+    '        <p style="margin:0 0 8px;font-size:12px;">',
+    '          <a href="https://meghroop.tech" style="color:#c084fc;text-decoration:none;font-weight:600;">meghroop.tech</a>',
+    '        </p>',
+    '        <table cellpadding="0" cellspacing="0" border="0"><tbody><tr>',
+    '          <td style="padding-right:10px;">',
+    '            <a href="https://linkedin.com/company/meghroop" style="font-size:11px;color:#999999;text-decoration:none;">LinkedIn</a>',
+    '          </td>',
+    '          <td style="padding-right:10px;">',
+    '            <a href="https://instagram.com/meghroop" style="font-size:11px;color:#999999;text-decoration:none;">Instagram</a>',
+    '          </td>',
+    '          <td>',
+    '            <a href="https://facebook.com/meghroop" style="font-size:11px;color:#999999;text-decoration:none;">Facebook</a>',
+    '          </td>',
+    '        </tr></tbody></table>',
+    '      </td>',
+    '    </tr>',
+    '  </tbody>',
+    '</table>'
+  ].join('\n');
+}
+
+function renderSig() {
+  var preview = document.getElementById('sig-preview');
+  var label   = document.getElementById('sig-label');
+  if (!preview) return;
+  preview.innerHTML = buildSigHTML(SIG_PEOPLE[sigIndex]);
+  if (label) label.textContent = SIG_PEOPLE[sigIndex].name + ' · ' + SIG_PEOPLE[sigIndex].title;
+}
+
+function switchSig(idx, btn) {
+  sigIndex = idx;
+  document.querySelectorAll('.sig-tab').forEach(function(t){ t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  renderSig();
+}
+
+function copySig() {
+  var html = buildSigHTML(SIG_PEOPLE[sigIndex]);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(html).then(function() {
+      var btn = event.target; var orig = btn.textContent;
+      btn.textContent = '✓ Copied!'; btn.style.color = '#34d399';
+      setTimeout(function(){ btn.textContent = orig; btn.style.color = ''; }, 2000);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = html; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+}
+
+function downloadSig() {
+  var html = '<!DOCTYPE html>\n<html><head><meta charset="UTF-8"></head><body>\n' + buildSigHTML(SIG_PEOPLE[sigIndex]) + '\n</body></html>';
+  var blob = new Blob([html], { type: 'text/html' });
+  var link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = SIG_PEOPLE[sigIndex].filename;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+/* Init signature preview */
+renderSig();
 
 /* ═══════════════════════════════════════════════════════════
    SVG GENERATION FOR LOGO VARIANTS
