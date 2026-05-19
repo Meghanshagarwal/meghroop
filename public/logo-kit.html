@@ -2204,23 +2204,23 @@ function drawBizFront(canvas, person, mode) {
     drawMarkBadge(ctx, px + 20, h * 0.27, 40, 22);
     drawWordmark(ctx, px + 50, h * 0.285, 28);
   } else {
-    /* Light badge */
+    /* Light badge — same vertical centre as dark mode (h*0.27) */
     ctx.save();
     ctx.fillStyle = '#111111';
-    roundRect(ctx, px, h*0.245, 40, 40, 7);
+    roundRect(ctx, px, h * 0.27 - 20, 40, 40, 7);
     ctx.fill();
-    drawMMark(ctx, px + 20, h * 0.265, 22, '#ffffff', 2);
+    drawMMark(ctx, px + 20, h * 0.27, 22, '#ffffff', 2);
     ctx.restore();
-    /* Wordmark dark */
+    /* Wordmark — y is alphabetic baseline, same as dark drawWordmark call */
     ctx.save();
     ctx.font = '700 28px "Space Grotesk",sans-serif';
     if ('letterSpacing' in ctx) ctx.letterSpacing = (-0.042*28).toFixed(2)+'px';
-    ctx.fillStyle = '#111111';
     ctx.textBaseline = 'alphabetic';
-    ctx.fillText('Megh', px + 50, h * 0.285 + 28*0.75);
+    ctx.fillStyle = '#111111';
+    ctx.fillText('Megh', px + 50, h * 0.285);
     var mw = ctx.measureText('Megh').width;
     ctx.fillStyle = 'rgba(0,0,0,0.7)';
-    ctx.fillText('Roop', px + 50 + mw, h * 0.285 + 28*0.75);
+    ctx.fillText('Roop', px + 50 + mw, h * 0.285);
     ctx.restore();
   }
 
@@ -2320,7 +2320,7 @@ function drawBizBack(canvas, mode) {
     if ('letterSpacing' in ctx) ctx.letterSpacing = (-0.042*wmarkFs).toFixed(2)+'px';
     ctx.textBaseline = 'alphabetic';
     var xStart = (w - wmarkW) / 2;
-    var yBase  = h * 0.60 + wmarkFs * 0.75;
+    var yBase  = h * 0.60;
     ctx.fillStyle = '#111111';
     ctx.fillText('Megh', xStart, yBase);
     var mw = ctx.measureText('Megh').width;
