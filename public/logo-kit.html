@@ -248,6 +248,25 @@
     }
     .tm-notice strong { color: #e4e4e7; }
 
+    /* ── Do's & Don'ts ── */
+    .dd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 14px; margin-top: 4px; }
+    .dd-card { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); background: #0d0d0d; }
+    .dd-card.do   { border-color: rgba(52,211,153,0.2); }
+    .dd-card.dont { border-color: rgba(248,113,113,0.2); }
+    .dd-badge {
+      padding: 8px 14px; font-size: 11px; font-weight: 600;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .dd-card.do   .dd-badge { background: rgba(52,211,153,0.08); color: #34d399; }
+    .dd-card.dont .dd-badge { background: rgba(248,113,113,0.08); color: #f87171; }
+    .dd-caption { padding: 10px 14px 12px; font-size: 11px; color: #71717a; line-height: 1.5; }
+
+    /* ── Letterhead ── */
+    .lh-preview-wrap {
+      border-radius: 10px 10px 0 0; padding: 0; overflow: hidden; min-height: 200px;
+      transition: background .2s;
+    }
+
     /* ── Brand Reference expanded ── */
     .ref-heading {
       font-size: 11px; font-weight: 600; letter-spacing: .14em;
@@ -342,10 +361,14 @@
     <a href="#facebook">Facebook</a>
     <a href="#youtube">YouTube</a>
     <a href="#whatsapp">WhatsApp</a>
+    <a href="#zoom-bg">Zoom / Meet</a>
     <a href="#og-image">OG Image</a>
     <a href="#mail-signature">Email Signature</a>
+    <a href="#letterhead">Letterhead</a>
     <a href="#business-card">Business Card</a>
+    <a href="#wallpaper">Wallpaper</a>
     <a href="#brand-reference">Brand Reference</a>
+    <a href="#dos-donts">Do's &amp; Don'ts</a>
     <a href="#trademark">Usage Guidelines</a>
   </nav>
 
@@ -745,6 +768,40 @@
   <div class="divider"></div>
 
   <!-- ════════════════════════════════════════ -->
+  <!-- ZOOM / MEET BACKGROUND -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="platform-section" id="zoom-bg">
+    <div class="platform-header">
+      <div class="platform-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M15 10l4.553-2.277A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="platform-name">Zoom / Meet Background</div>
+        <div class="platform-desc">1920 × 1080 px · virtual background for video calls</div>
+      </div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-preview" style="padding:0;background:#000;border-radius:10px 10px 0 0;overflow:hidden;">
+        <canvas id="zoom-canvas" width="1920" height="1080" style="width:100%;height:auto;display:block;"></canvas>
+      </div>
+      <div class="asset-meta">
+        <div>
+          <div class="asset-name">Virtual Background</div>
+          <div class="asset-dims">1920 × 1080 px · PNG</div>
+        </div>
+        <button class="dl-btn" onclick="dlPNG('zoom-canvas','meghroop-zoom-background.png')">↓ PNG</button>
+      </div>
+    </div>
+    <p class="safe-note" style="margin-top:12px;">
+      <span>How to use:</span> In Zoom → Settings → Backgrounds & Effects → Add (+) → choose this file. In Google Meet → More options → Apply visual effects → Upload.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════ -->
   <!-- OG IMAGE -->
   <!-- ════════════════════════════════════════ -->
   <section class="platform-section" id="og-image">
@@ -832,6 +889,50 @@
   <div class="divider"></div>
 
   <!-- ════════════════════════════════════════ -->
+  <!-- LETTERHEAD -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="platform-section" id="letterhead">
+    <div class="platform-header">
+      <div class="platform-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="14 2 14 8 20 8" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="16" y1="13" x2="8" y2="13" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="16" y1="17" x2="8" y2="17" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="platform-name">Letterhead</div>
+        <div class="platform-desc">HTML template · proposals, emails, official documents · Light &amp; Dark</div>
+      </div>
+    </div>
+    <div class="sig-mode-tabs">
+      <button class="sig-mode-tab active" onclick="switchLHMode('light', this)">☀ Light</button>
+      <button class="sig-mode-tab" onclick="switchLHMode('dark', this)">◑ Dark</button>
+    </div>
+    <div class="asset-card">
+      <div class="lh-preview-wrap" id="lh-preview-wrap">
+        <div id="lh-preview"></div>
+      </div>
+      <div class="asset-meta" style="flex-wrap:wrap;gap:10px;">
+        <div>
+          <div class="asset-name" id="lh-label">Letterhead — Light</div>
+          <div class="asset-dims">HTML · copy into your document or email</div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="dl-btn" onclick="copyLH()">⊞ Copy HTML</button>
+          <button class="dl-btn" onclick="downloadLH()">↓ .html</button>
+        </div>
+      </div>
+    </div>
+    <p class="sig-copy-note">
+      <span style="color:#a78bfa;">How to use:</span> Copy HTML and paste into Gmail (compose → insert HTML), Notion, or any rich text editor. Replace the placeholder content area with your actual document text.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════ -->
   <!-- BUSINESS CARD -->
   <!-- ════════════════════════════════════════ -->
   <section class="platform-section" id="business-card">
@@ -892,6 +993,46 @@
     <p class="safe-note" style="margin-top:12px;">
       <span>Print spec:</span> 3.5 × 2 inch at 300 DPI · Add 3mm bleed when sending to a print shop · CMYK conversion recommended for physical print.
     </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- DESKTOP WALLPAPER -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="platform-section" id="wallpaper">
+    <div class="platform-header">
+      <div class="platform-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="3" width="20" height="14" rx="2" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 21h8M12 17v4" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="platform-name">Desktop Wallpaper</div>
+        <div class="platform-desc">2560 × 1440 px (2K) · 1920 × 1080 px (Full HD)</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="asset-card">
+        <div class="asset-preview" style="padding:0;background:#000;border-radius:10px 10px 0 0;overflow:hidden;">
+          <canvas id="wall-2k" width="2560" height="1440" style="width:100%;height:auto;display:block;"></canvas>
+        </div>
+        <div class="asset-meta">
+          <div><div class="asset-name">2K / QHD</div><div class="asset-dims">2560 × 1440 px</div></div>
+          <button class="dl-btn" onclick="dlPNG('wall-2k','meghroop-wallpaper-2k.png')">↓ PNG</button>
+        </div>
+      </div>
+      <div class="asset-card">
+        <div class="asset-preview" style="padding:0;background:#000;border-radius:10px 10px 0 0;overflow:hidden;">
+          <canvas id="wall-1080" width="1920" height="1080" style="width:100%;height:auto;display:block;"></canvas>
+        </div>
+        <div class="asset-meta">
+          <div><div class="asset-name">Full HD</div><div class="asset-dims">1920 × 1080 px</div></div>
+          <button class="dl-btn" onclick="dlPNG('wall-1080','meghroop-wallpaper-1080p.png')">↓ PNG</button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <div class="divider"></div>
@@ -1321,6 +1462,79 @@
   <div class="divider"></div>
 
   <!-- ════════════════════════════════════════ -->
+  <!-- DO'S & DON'TS -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="platform-section" id="dos-donts">
+    <div class="platform-header">
+      <div class="platform-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="#34d399" stroke-width="1.8"/>
+          <path d="M8 12l3 3 5-5" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="platform-name">Do's &amp; Don'ts</div>
+        <div class="platform-desc">Correct and incorrect logo usage — visual guide</div>
+      </div>
+    </div>
+
+    <h3 class="ref-heading" style="color:#34d399;">✓ Do — Correct Usage</h3>
+    <div class="dd-grid">
+      <div class="dd-card do">
+        <canvas id="dd-do1" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✓ Correct</div>
+        <div class="dd-caption">Use logo on dark brand background with clear space</div>
+      </div>
+      <div class="dd-card do">
+        <canvas id="dd-do2" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✓ Correct</div>
+        <div class="dd-caption">Use logo on clean white/light background</div>
+      </div>
+      <div class="dd-card do">
+        <canvas id="dd-do3" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✓ Correct</div>
+        <div class="dd-caption">M-mark alone — on dark bg, with breathing room</div>
+      </div>
+    </div>
+
+    <h3 class="ref-heading" style="color:#f87171;margin-top:28px;">✗ Don't — Incorrect Usage</h3>
+    <div class="dd-grid">
+      <div class="dd-card dont">
+        <canvas id="dd-dont1" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✗ Don't</div>
+        <div class="dd-caption">Don't stretch or distort the logo proportions</div>
+      </div>
+      <div class="dd-card dont">
+        <canvas id="dd-dont2" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✗ Don't</div>
+        <div class="dd-caption">Don't rotate or tilt the logo</div>
+      </div>
+      <div class="dd-card dont">
+        <canvas id="dd-dont3" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✗ Don't</div>
+        <div class="dd-caption">Don't recolor — use only approved brand colors</div>
+      </div>
+      <div class="dd-card dont">
+        <canvas id="dd-dont4" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✗ Don't</div>
+        <div class="dd-caption">Don't add drop shadows, outlines, or glow effects</div>
+      </div>
+      <div class="dd-card dont">
+        <canvas id="dd-dont5" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✗ Don't</div>
+        <div class="dd-caption">Don't place on low-contrast or busy backgrounds</div>
+      </div>
+      <div class="dd-card dont">
+        <canvas id="dd-dont6" width="400" height="220" style="width:100%;height:auto;display:block;"></canvas>
+        <div class="dd-badge">✗ Don't</div>
+        <div class="dd-caption">Don't crowd — always maintain minimum clear space</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════ -->
   <!-- TRADEMARK & USAGE GUIDELINES -->
   <!-- ════════════════════════════════════════ -->
   <section class="platform-section" id="trademark">
@@ -1476,6 +1690,7 @@ let fontReady = false;
   await document.fonts.ready;
   drawAll();
   redrawBizCards();
+  renderLH();
   const status = document.getElementById('font-status');
   status.textContent = 'Assets ready';
   setTimeout(() => status.classList.add('hidden'), 1500);
@@ -2018,6 +2233,332 @@ function drawFacebookCover(canvas) {
 /* ═══════════════════════════════════════════════════════════
    DRAW ALL CANVASES
 ═══════════════════════════════════════════════════════════ */
+/* ── ZOOM / MEET BACKGROUND 1920×1080 ── */
+function drawZoomBg(canvas) {
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+  drawGrid(ctx, w, h, 80);
+  drawGlow(ctx, w * 0.5, h * 0.45, w * 0.55, 167, 139, 250, 0.22);
+  drawGlow(ctx, w * 0.5, h * 0.45, w * 0.35, 96, 165, 250, 0.12);
+  /* Accent bar left */
+  var ag = ctx.createLinearGradient(0, 0, 0, h);
+  ag.addColorStop(0, C.purp); ag.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = ag; ctx.fillRect(0, 0, 4, h);
+  /* M mark */
+  var markSz = Math.round(h * 0.24);
+  drawMMark(ctx, w / 2, h * 0.40, markSz, '#ffffff', Math.max(2, h * 0.007));
+  /* Label */
+  var labelFs = Math.round(h * 0.022);
+  ctx.save();
+  ctx.font = '500 ' + labelFs + 'px "Space Grotesk",sans-serif';
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
+  var lw = ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width;
+  ctx.restore();
+  drawLabel(ctx, (w - lw) / 2, h * 0.575, 'CREATIVE ENGINEERING & AI STUDIO', labelFs, C.zinc600);
+  /* Wordmark */
+  var wmarkFs = Math.round(h * 0.075);
+  ctx.save(); ctx.globalAlpha = 0;
+  var wmarkW = drawWordmark(ctx, 0, -9999, wmarkFs);
+  ctx.restore();
+  drawWordmark(ctx, (w - wmarkW) / 2, h * 0.645, wmarkFs);
+  /* Tagline */
+  ctx.save();
+  ctx.font = '400 ' + Math.round(h * 0.026) + 'px "Space Grotesk",sans-serif';
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
+  ctx.fillStyle = C.zinc500; ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
+  ctx.fillText('We build things. Useful things. Alive things.', w / 2, h * 0.718);
+  ctx.restore();
+  /* URL bottom-right */
+  ctx.save();
+  ctx.font = '500 ' + Math.round(h * 0.022) + 'px "Space Grotesk",sans-serif';
+  ctx.fillStyle = C.zinc600; ctx.textBaseline = 'middle'; ctx.textAlign = 'right';
+  ctx.fillText('meghroop.tech', w - 48, h * 0.935);
+  ctx.restore();
+  drawVignetteEdges(ctx, w, h, 0.45);
+}
+
+/* ── DESKTOP WALLPAPER (reused for both 2K and 1080p) ── */
+function drawWallpaper(canvas) {
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, w, h);
+  drawGrid(ctx, w, h, Math.round(w / 40));
+  /* Two glows — asymmetric */
+  drawGlow(ctx, w * 0.30, h * 0.50, w * 0.50, 167, 139, 250, 0.20);
+  drawGlow(ctx, w * 0.72, h * 0.50, w * 0.40, 96, 165, 250, 0.12);
+  /* Subtle horizontal accent */
+  var ag = ctx.createLinearGradient(0, h * 0.5, w, h * 0.5);
+  ag.addColorStop(0, 'rgba(0,0,0,0)');
+  ag.addColorStop(0.3, 'rgba(192,132,252,0.06)');
+  ag.addColorStop(0.7, 'rgba(96,165,250,0.06)');
+  ag.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = ag; ctx.fillRect(0, 0, w, h);
+  /* M mark — large watermark right */
+  drawMMark(ctx, w * 0.78, h * 0.50, h * 0.55, 'rgba(255,255,255,0.035)', Math.max(2, h * 0.006));
+  /* Content — left aligned */
+  var px = Math.round(w * 0.09);
+  var labelFs = Math.round(h * 0.022);
+  drawLabel(ctx, px, h * 0.42, 'CREATIVE ENGINEERING & AI STUDIO', labelFs, C.zinc600);
+  var wmarkFs = Math.round(h * 0.095);
+  drawWordmark(ctx, px, h * 0.535, wmarkFs);
+  ctx.save();
+  ctx.font = '400 ' + Math.round(h * 0.028) + 'px "Space Grotesk",sans-serif';
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
+  ctx.fillStyle = C.zinc500; ctx.textBaseline = 'middle';
+  ctx.fillText('We build things. Useful things. Alive things.', px, h * 0.625);
+  ctx.restore();
+  /* URL */
+  ctx.save();
+  ctx.font = '500 ' + Math.round(h * 0.020) + 'px "Space Grotesk",sans-serif';
+  ctx.fillStyle = C.purp; ctx.textBaseline = 'middle';
+  ctx.fillText('meghroop.tech', px, h * 0.715);
+  ctx.restore();
+  drawVignetteEdges(ctx, w, h, 0.4);
+}
+
+/* ── LETTERHEAD ── */
+var lhMode = 'light';
+
+function buildLetterheadHTML(mode) {
+  var isDark = mode === 'dark';
+  var bg     = isDark ? '#080808' : '#ffffff';
+  var border = isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid #eeeeee';
+  var nameC  = isDark ? '#ffffff'  : '#111111';
+  var subC   = isDark ? '#a1a1aa'  : '#999999';
+  var bodyC  = isDark ? '#71717a'  : '#555555';
+  var footC  = isDark ? '#52525b'  : '#aaaaaa';
+  var divClr = isDark ? 'rgba(255,255,255,0.08)' : '#eeeeee';
+  var gradL  = isDark ? '#c084fc'  : '#9333ea';
+  var gradR  = isDark ? '#60a5fa'  : '#3b82f6';
+  return [
+    '<!-- MeghRoop Letterhead (' + mode + ') -->',
+    '<table cellpadding="0" cellspacing="0" border="0" width="680" style="font-family:\'Space Grotesk\',\'Helvetica Neue\',Helvetica,Arial,sans-serif;background:' + bg + ';border:' + border + ';border-radius:12px;overflow:hidden;">',
+    '  <tbody>',
+    '    <!-- Header -->',
+    '    <tr><td style="padding:36px 48px 0;">',
+    '      <table cellpadding="0" cellspacing="0" border="0" width="100%"><tbody><tr>',
+    '        <td valign="middle" style="width:44px;">',
+    '          <img src="https://meghroop.tech/icon-96.png" width="44" height="44" alt="M" style="display:block;border-radius:10px;background:#0d0d0d;width:44px;height:44px;">',
+    '        </td>',
+    '        <td valign="middle" style="padding-left:14px;border-left:2px solid ' + gradL + ';">',
+    '          <p style="margin:0;font-size:20px;font-weight:700;letter-spacing:-0.02em;color:' + nameC + ';">MeghRoop</p>',
+    '          <p style="margin:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:' + subC + ';">Creative Engineering &amp; AI Studio</p>',
+    '        </td>',
+    '        <td valign="middle" style="text-align:right;">',
+    '          <p style="margin:0;font-size:11px;color:' + bodyC + ';line-height:1.8;"><a href="https://meghroop.tech" style="color:#c084fc;text-decoration:none;">meghroop.tech</a><br>hello@meghroop.tech<br>Rajasthan, India</p>',
+    '        </td>',
+    '      </tr></tbody></table>',
+    '    </td></tr>',
+    '    <!-- Gradient divider -->',
+    '    <tr><td style="padding:16px 48px 0;">',
+    '      <div style="height:2px;background:linear-gradient(90deg,' + gradL + ',' + gradR + ',transparent);border-radius:2px;"></div>',
+    '    </td></tr>',
+    '    <!-- Content area -->',
+    '    <tr><td style="padding:32px 48px;">',
+    '      <p style="margin:0 0 12px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:' + subC + ';">Document Title Here</p>',
+    '      <p style="margin:0 0 16px;font-size:24px;font-weight:700;letter-spacing:-0.02em;color:' + nameC + ';">Proposal / Invoice / Letter</p>',
+    '      <p style="margin:0;font-size:14px;color:' + bodyC + ';line-height:1.75;">[Your content goes here. Replace this placeholder with your actual document text. This template maintains consistent MeghRoop branding across all official communications.]</p>',
+    '    </td></tr>',
+    '    <!-- Footer -->',
+    '    <tr><td style="padding:0 48px 32px;">',
+    '      <div style="height:1px;background:' + divClr + ';margin-bottom:16px;"></div>',
+    '      <table cellpadding="0" cellspacing="0" border="0" width="100%"><tbody><tr>',
+    '        <td style="font-size:10px;color:' + footC + ';">MeghRoop · Creative Engineering &amp; AI Studio</td>',
+    '        <td style="text-align:right;font-size:10px;color:' + footC + ';">meghroop.tech · Rajasthan, India</td>',
+    '      </tr></tbody></table>',
+    '    </td></tr>',
+    '  </tbody>',
+    '</table>'
+  ].join('\n');
+}
+
+function renderLH() {
+  var wrap  = document.getElementById('lh-preview-wrap');
+  var prev  = document.getElementById('lh-preview');
+  var label = document.getElementById('lh-label');
+  if (!prev) return;
+  var isDark = lhMode === 'dark';
+  if (wrap) {
+    wrap.style.background = isDark ? '#000000' : '#f0f0f0';
+    wrap.style.padding    = '32px 24px';
+  }
+  prev.innerHTML = buildLetterheadHTML(lhMode);
+  if (label) label.textContent = 'Letterhead — ' + (isDark ? 'Dark' : 'Light');
+}
+
+function switchLHMode(mode, btn) {
+  lhMode = mode;
+  document.querySelectorAll('#letterhead .sig-mode-tab').forEach(function(t){ t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  renderLH();
+}
+
+function copyLH() {
+  var html = buildLetterheadHTML(lhMode);
+  var btn  = event.target;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(html).then(function() {
+      var orig = btn.textContent;
+      btn.textContent = '✓ Copied!'; btn.style.color = '#34d399';
+      setTimeout(function(){ btn.textContent = orig; btn.style.color = ''; }, 2000);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = html; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+}
+
+function downloadLH() {
+  var gFont = '<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">\n';
+  var bodyBg = lhMode === 'dark' ? '#000000' : '#f0f0f0';
+  var html = '<!DOCTYPE html>\n<html><head><meta charset="UTF-8">\n' + gFont + '</head>\n<body style="background:' + bodyBg + ';padding:40px;margin:0;">\n' + buildLetterheadHTML(lhMode) + '\n</body></html>';
+  var blob = new Blob([html], { type: 'text/html' });
+  var link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'meghroop-letterhead-' + lhMode + '.html';
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+/* ── DO'S & DON'TS helpers ── */
+function ddBg(ctx, w, h, bgColor) {
+  ctx.fillStyle = bgColor || C.bgCard; ctx.fillRect(0,0,w,h);
+  drawGrid(ctx, w, h, 40);
+}
+function ddWordmark(ctx, w, h, fs, cx, cy) {
+  ctx.save(); ctx.globalAlpha = 0;
+  var ww = drawWordmark(ctx, 0, -9999, fs);
+  ctx.restore();
+  drawWordmark(ctx, cx - ww/2, cy + fs*0.35, fs);
+}
+function ddMark(ctx, cx, cy, sz, color, sw) {
+  drawMMark(ctx, cx, cy, sz, color || '#ffffff', sw || 2);
+}
+
+/* DO examples */
+function drawDoDark(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  ddBg(ctx,w,h,C.bg);
+  drawGlow(ctx,w/2,h/2,w*0.55,167,139,250,0.18);
+  ddWordmark(ctx,w,h,Math.round(w*0.09),w/2,h*0.5);
+  drawVignetteEdges(ctx,w,h,0.4);
+}
+function drawDoLight(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,w,h);
+  ctx.save(); ctx.strokeStyle='rgba(0,0,0,0.04)'; ctx.lineWidth=1;
+  for(var x=0;x<=w;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(var y=0;y<=h;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+  ctx.restore();
+  /* dark wordmark on white */
+  var fs = Math.round(w*0.09);
+  ctx.save(); ctx.globalAlpha=0; var ww=drawWordmark(ctx,0,-9999,fs); ctx.restore();
+  var xStart=(w-ww)/2, yBase=h*0.5+fs*0.35;
+  ctx.save();
+  ctx.font='700 '+fs+'px "Space Grotesk",sans-serif';
+  if('letterSpacing'in ctx)ctx.letterSpacing=(-0.042*fs).toFixed(2)+'px';
+  ctx.textBaseline='alphabetic';
+  ctx.fillStyle='#111111'; ctx.fillText('Megh',xStart,yBase);
+  var mw=ctx.measureText('Megh').width;
+  ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillText('Roop',xStart+mw,yBase);
+  ctx.restore();
+}
+function drawDoMark(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  ddBg(ctx,w,h,C.bg);
+  drawGlow(ctx,w/2,h/2,w*0.55,167,139,250,0.18);
+  drawGlow(ctx,w/2,h/2,w*0.35,96,165,250,0.10);
+  ddMark(ctx,w/2,h/2,w*0.22,'#ffffff',2);
+  drawVignetteEdges(ctx,w,h,0.4);
+}
+
+/* DON'T examples */
+function drawDontStretch(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  ddBg(ctx,w,h,C.bg);
+  ctx.save(); ctx.scale(1.9, 0.55); ctx.translate(0, h*0.35);
+  ddMark(ctx,w/2,h*0.28,w*0.14,'#ffffff',2);
+  var fs=Math.round(w*0.09);
+  ctx.globalAlpha=0; var ww=drawWordmark(ctx,0,-9999,fs); ctx.globalAlpha=1;
+  drawWordmark(ctx,(w-ww)/2,h*0.56+fs*0.35,fs);
+  ctx.restore();
+  /* Red X */
+  _drawRedX(ctx,w,h);
+}
+function drawDontRotate(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  ddBg(ctx,w,h,C.bg);
+  ctx.save(); ctx.translate(w/2,h/2); ctx.rotate(-0.38);
+  var fs=Math.round(w*0.085);
+  ctx.globalAlpha=0; var ww=drawWordmark(ctx,0,-9999,fs); ctx.globalAlpha=1;
+  drawWordmark(ctx,-ww/2,fs*0.35,fs);
+  ctx.restore();
+  _drawRedX(ctx,w,h);
+}
+function drawDontColor(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  ddBg(ctx,w,h,C.bg);
+  /* wrong color — bright red */
+  ctx.save(); ctx.globalAlpha=0; var ww=drawWordmark(ctx,0,-9999,Math.round(w*0.09)); ctx.restore();
+  var fs=Math.round(w*0.09), xStart=(w-ww)/2, yBase=h*0.5+fs*0.35;
+  ctx.save();
+  ctx.font='700 '+fs+'px "Space Grotesk",sans-serif';
+  if('letterSpacing'in ctx)ctx.letterSpacing=(-0.042*fs).toFixed(2)+'px';
+  ctx.textBaseline='alphabetic';
+  ctx.fillStyle='#ef4444'; ctx.fillText('Megh',xStart,yBase);
+  var mw=ctx.measureText('Megh').width;
+  ctx.fillStyle='#f97316'; ctx.fillText('Roop',xStart+mw,yBase);
+  ctx.restore();
+  _drawRedX(ctx,w,h);
+}
+function drawDontEffects(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  ddBg(ctx,w,h,C.bg);
+  /* draw with shadow */
+  ctx.save();
+  ctx.shadowColor='rgba(167,139,250,0.9)'; ctx.shadowBlur=20;
+  var fs=Math.round(w*0.09);
+  ctx.globalAlpha=0; var ww=drawWordmark(ctx,0,-9999,fs); ctx.globalAlpha=1;
+  drawWordmark(ctx,(w-ww)/2,h*0.5+fs*0.35,fs);
+  ctx.restore();
+  _drawRedX(ctx,w,h);
+}
+function drawDontBusyBg(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  /* busy gradient background */
+  var g = ctx.createLinearGradient(0,0,w,h);
+  g.addColorStop(0,'#6366f1'); g.addColorStop(0.5,'#ec4899'); g.addColorStop(1,'#f59e0b');
+  ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+  var fs=Math.round(w*0.09);
+  ctx.save(); ctx.globalAlpha=0; var ww=drawWordmark(ctx,0,-9999,fs); ctx.restore();
+  drawWordmark(ctx,(w-ww)/2,h*0.5+fs*0.35,fs);
+  _drawRedX(ctx,w,h);
+}
+function drawDontCrowded(canvas) {
+  var ctx = canvas.getContext('2d'); var w=canvas.width,h=canvas.height;
+  ddBg(ctx,w,h,C.bg);
+  /* draw wordmark touching all edges — no clear space */
+  var fs=Math.round(w*0.18);
+  ctx.save(); ctx.globalAlpha=0; var ww=drawWordmark(ctx,0,-9999,fs); ctx.restore();
+  var scale = (w*0.98)/ww;
+  ctx.save(); ctx.scale(scale,scale);
+  drawWordmark(ctx,(w*0.01)/scale, (h*0.5+fs*0.35)/scale, fs);
+  ctx.restore();
+  _drawRedX(ctx,w,h);
+}
+function _drawRedX(ctx,w,h) {
+  ctx.save();
+  ctx.strokeStyle='rgba(248,113,113,0.6)'; ctx.lineWidth=Math.max(2,w*0.008);
+  ctx.lineCap='round';
+  var m=w*0.06;
+  ctx.beginPath(); ctx.moveTo(m,m); ctx.lineTo(w-m,h-m); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(w-m,m); ctx.lineTo(m,h-m); ctx.stroke();
+  ctx.restore();
+}
+
 /* ── LOGO CLEAR SPACE ── */
 function drawClearSpace(canvas) {
   var ctx = canvas.getContext('2d');
@@ -2399,8 +2940,20 @@ function drawAll() {
     ['app-icon-canvas', drawProfile],
     ['fb-cover',     drawFacebookCover],
     ['yt-banner',    drawYouTubeChannelArt],
-    ['wa-status',       drawWhatsAppStatus],
+    ['wa-status',         drawWhatsAppStatus],
+    ['zoom-canvas',       drawZoomBg],
+    ['wall-2k',           drawWallpaper],
+    ['wall-1080',         drawWallpaper],
     ['clearspace-canvas', drawClearSpace],
+    ['dd-do1',   drawDoDark],
+    ['dd-do2',   drawDoLight],
+    ['dd-do3',   drawDoMark],
+    ['dd-dont1', drawDontStretch],
+    ['dd-dont2', drawDontRotate],
+    ['dd-dont3', drawDontColor],
+    ['dd-dont4', drawDontEffects],
+    ['dd-dont5', drawDontBusyBg],
+    ['dd-dont6', drawDontCrowded],
   ];
   tasks.forEach(function(t) {
     var el = document.getElementById(t[0]);
@@ -2534,6 +3087,9 @@ function downloadSig() {
 
 /* Init signature preview */
 renderSig();
+
+/* Init letterhead preview */
+renderLH();
 
 /* ═══════════════════════════════════════════════════════════
    SVG GENERATION FOR LOGO VARIANTS
