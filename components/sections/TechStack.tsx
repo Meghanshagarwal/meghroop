@@ -5,7 +5,7 @@ import type { IconType } from 'react-icons'
 import {
   SiOpenai, SiLangchain, SiReact, SiNextdotjs, SiNodedotjs,
   SiTypescript, SiTailwindcss, SiFramer, SiPostgresql, SiMongodb,
-  SiShopify, SiDocker, SiSupabase, SiGraphql,
+  SiShopify, SiWordpress, SiDocker, SiSupabase, SiGraphql,
 } from 'react-icons/si'
 import { Bot, Server, Database, Layers, Zap, Cpu } from 'lucide-react'
 
@@ -40,6 +40,7 @@ const webTechs: Tech[] = [
   { name: 'PostgreSQL',    SiIcon: SiPostgresql, color: 'text-indigo-400', bg: 'bg-indigo-500/10', border: 'border-indigo-500/20' },
   { name: 'MongoDB',       SiIcon: SiMongodb,    color: 'text-green-400',  bg: 'bg-green-500/10',  border: 'border-green-500/20'  },
   { name: 'Shopify',       SiIcon: SiShopify,    color: 'text-green-400',  bg: 'bg-green-500/10',  border: 'border-green-500/20'  },
+  { name: 'WordPress',     SiIcon: SiWordpress,  color: 'text-blue-400',   bg: 'bg-blue-500/10',   border: 'border-blue-500/20'   },
   { name: 'Docker',        SiIcon: SiDocker,     color: 'text-blue-500',   bg: 'bg-blue-500/10',   border: 'border-blue-500/20'   },
   { name: 'Supabase',      SiIcon: SiSupabase,   color: 'text-teal-400',   bg: 'bg-teal-500/10',   border: 'border-teal-500/20'   },
   { name: 'GraphQL',       SiIcon: SiGraphql,    color: 'text-pink-400',   bg: 'bg-pink-500/10',   border: 'border-pink-500/20'   },
@@ -150,7 +151,7 @@ export default function TechStack() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="hidden sm:grid grid-cols-4 md:grid-cols-6 gap-3"
+          className="hidden sm:grid grid-cols-4 md:grid-cols-7 gap-3"
         >
           {webTechs.map((tech) => (
             <TechCard key={tech.name} tech={tech} />
