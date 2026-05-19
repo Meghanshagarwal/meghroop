@@ -845,20 +845,25 @@
       </div>
       <div>
         <div class="platform-name">Business Card</div>
-        <div class="platform-desc">3.5 × 2 in · 1050 × 600 px · Front &amp; Back</div>
+        <div class="platform-desc">3.5 × 2 in · 1050 × 600 px · Front &amp; Back · Light &amp; Dark</div>
       </div>
     </div>
 
     <!-- Co-founder tabs -->
-    <div class="sig-tabs" style="margin-bottom:20px;">
+    <div class="sig-tabs">
       <button class="sig-tab active" onclick="switchCard(0, this)">Meghansh Agarwal</button>
       <button class="sig-tab" onclick="switchCard(1, this)">Roop Jaiswal</button>
+    </div>
+    <!-- Light / Dark toggle -->
+    <div class="sig-mode-tabs">
+      <button class="sig-mode-tab active" onclick="switchBizMode('dark', this)">◑ Dark</button>
+      <button class="sig-mode-tab" onclick="switchBizMode('light', this)">☀ Light</button>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
       <!-- Front -->
       <div class="asset-card">
-        <div class="asset-preview" style="padding:20px;background:#000;">
+        <div class="asset-preview" id="biz-front-wrap" style="padding:20px;background:#000;">
           <canvas id="biz-front" width="1050" height="600" style="width:100%;height:auto;display:block;border-radius:6px;"></canvas>
         </div>
         <div class="asset-meta">
@@ -872,7 +877,7 @@
 
       <!-- Back -->
       <div class="asset-card">
-        <div class="asset-preview" style="padding:20px;background:#000;">
+        <div class="asset-preview" id="biz-back-wrap" style="padding:20px;background:#000;">
           <canvas id="biz-back" width="1050" height="600" style="width:100%;height:auto;display:block;border-radius:6px;"></canvas>
         </div>
         <div class="asset-meta">
@@ -2144,50 +2149,102 @@ var BIZ_PEOPLE = [
   { name: 'Roop Jaiswal',     title: 'Co-Founder', email: 'roop@meghroop.tech'     }
 ];
 var bizIndex = 0;
+var bizMode  = 'dark';
 
-function drawBizFront(canvas, person) {
+/* Light palette for business card */
+var CL = {
+  bg:      '#ffffff',
+  bgCard:  '#f5f5f5',
+  name:    '#111111',
+  title:   '#888888',
+  email:   '#9333ea',
+  phone:   '#555555',
+  loc:     '#aaaaaa',
+  divider: 'rgba(0,0,0,0.08)',
+  grid:    'rgba(0,0,0,0.03)',
+  mMark:   'rgba(0,0,0,0.07)',
+  purp:    '#9333ea',
+  accent:  '#9333ea',
+};
+
+function drawBizFront(canvas, person, mode) {
+  var isDark = (mode !== 'light');
   var ctx = canvas.getContext('2d');
   var w = canvas.width, h = canvas.height;
 
-  ctx.fillStyle = C.bg;
+  /* Background */
+  ctx.fillStyle = isDark ? C.bg : CL.bg;
   ctx.fillRect(0, 0, w, h);
-  drawGrid(ctx, w, h, 56);
 
-  /* Glow left area */
-  drawGlow(ctx, w * 0.18, h * 0.5, w * 0.38, 167, 139, 250, 0.20);
-  drawGlow(ctx, w * 0.22, h * 0.5, w * 0.25, 96,  165, 250, 0.10);
+  /* Grid */
+  ctx.save();
+  ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.025)' : CL.grid;
+  ctx.lineWidth = 1;
+  for (var x = 0; x <= w; x += 56) { ctx.beginPath(); ctx.moveTo(x+.5,0); ctx.lineTo(x+.5,h); ctx.stroke(); }
+  for (var y = 0; y <= h; y += 56) { ctx.beginPath(); ctx.moveTo(0,y+.5); ctx.lineTo(w,y+.5); ctx.stroke(); }
+  ctx.restore();
+
+  /* Glow — only dark */
+  if (isDark) {
+    drawGlow(ctx, w * 0.18, h * 0.5, w * 0.38, 167, 139, 250, 0.20);
+    drawGlow(ctx, w * 0.22, h * 0.5, w * 0.25, 96,  165, 250, 0.10);
+  }
 
   /* Accent line top */
   var ag = ctx.createLinearGradient(0, 0, w * 0.55, 0);
-  ag.addColorStop(0, C.purp); ag.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = ag; ctx.fillRect(0, 0, w * 0.55, 3);
+  ag.addColorStop(0, isDark ? C.purp : CL.accent);
+  ag.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = ag;
+  ctx.fillRect(0, 0, w * 0.55, 3);
 
   var px = 68;
 
   /* Badge + wordmark */
-  drawMarkBadge(ctx, px + 20, h * 0.27, 40, 22);
-  drawWordmark(ctx, px + 50, h * 0.285, 28);
+  if (isDark) {
+    drawMarkBadge(ctx, px + 20, h * 0.27, 40, 22);
+    drawWordmark(ctx, px + 50, h * 0.285, 28);
+  } else {
+    /* Light badge */
+    ctx.save();
+    ctx.fillStyle = '#111111';
+    roundRect(ctx, px, h*0.245, 40, 40, 7);
+    ctx.fill();
+    drawMMark(ctx, px + 20, h * 0.265, 22, '#ffffff', 2);
+    ctx.restore();
+    /* Wordmark dark */
+    ctx.save();
+    ctx.font = '700 28px "Space Grotesk",sans-serif';
+    if ('letterSpacing' in ctx) ctx.letterSpacing = (-0.042*28).toFixed(2)+'px';
+    ctx.fillStyle = '#111111';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillText('Megh', px + 50, h * 0.285 + 28*0.75);
+    var mw = ctx.measureText('Megh').width;
+    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.fillText('Roop', px + 50 + mw, h * 0.285 + 28*0.75);
+    ctx.restore();
+  }
 
   /* Divider */
-  ctx.fillStyle = 'rgba(255,255,255,0.06)';
+  ctx.fillStyle = isDark ? 'rgba(255,255,255,0.06)' : CL.divider;
   ctx.fillRect(px, h * 0.40, 260, 1);
 
   /* Name */
   ctx.save();
   ctx.font = '700 21px "Space Grotesk",sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '-0.02em';
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = isDark ? '#ffffff' : CL.name;
   ctx.textBaseline = 'alphabetic';
   ctx.fillText(person.name, px, h * 0.515);
   ctx.restore();
 
   /* Title */
-  drawLabel(ctx, px, h * 0.595, person.title.toUpperCase() + '  ·  MEGHROOP', 10, C.zinc500);
+  drawLabel(ctx, px, h * 0.595, person.title.toUpperCase() + '  ·  MEGHROOP', 10,
+    isDark ? C.zinc500 : CL.title);
 
   /* Email */
   ctx.save();
   ctx.font = '500 11px "Space Grotesk",sans-serif';
-  ctx.fillStyle = C.purp;
+  ctx.fillStyle = isDark ? C.purp : CL.email;
   ctx.textBaseline = 'middle';
   ctx.fillText(person.email, px, h * 0.685);
   ctx.restore();
@@ -2195,7 +2252,7 @@ function drawBizFront(canvas, person) {
   /* Phone */
   ctx.save();
   ctx.font = '400 11px "Space Grotesk",sans-serif';
-  ctx.fillStyle = C.zinc400;
+  ctx.fillStyle = isDark ? C.zinc400 : CL.phone;
   ctx.textBaseline = 'middle';
   ctx.fillText('+91 8949508264', px, h * 0.775);
   ctx.restore();
@@ -2203,49 +2260,80 @@ function drawBizFront(canvas, person) {
   /* Location */
   ctx.save();
   ctx.font = '400 11px "Space Grotesk",sans-serif';
-  ctx.fillStyle = C.zinc600;
+  ctx.fillStyle = isDark ? C.zinc600 : CL.loc;
   ctx.textBaseline = 'middle';
   ctx.fillText('Rajasthan, India', px, h * 0.865);
   ctx.restore();
 
-  /* Right — M mark large ghost */
-  drawMMark(ctx, w * 0.80, h * 0.50, w * 0.14, 'rgba(255,255,255,0.06)', Math.max(2, w*0.005));
+  /* Right — M mark ghost */
+  drawMMark(ctx, w * 0.80, h * 0.50, w * 0.14,
+    isDark ? 'rgba(255,255,255,0.06)' : CL.mMark,
+    Math.max(2, w * 0.005));
 
-  drawVignetteEdges(ctx, w, h, 0.45);
+  if (isDark) drawVignetteEdges(ctx, w, h, 0.45);
 }
 
-function drawBizBack(canvas) {
+function drawBizBack(canvas, mode) {
+  var isDark = (mode !== 'light');
   var ctx = canvas.getContext('2d');
   var w = canvas.width, h = canvas.height;
-  ctx.fillStyle = C.bg;
+
+  ctx.fillStyle = isDark ? C.bg : CL.bg;
   ctx.fillRect(0, 0, w, h);
-  drawGrid(ctx, w, h, 56);
 
-  drawGlow(ctx, w/2, h/2, w*0.55, 167, 139, 250, 0.20);
-  drawGlow(ctx, w/2, h/2, w*0.35, 96,  165, 250, 0.10);
+  /* Grid */
+  ctx.save();
+  ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.025)' : CL.grid;
+  ctx.lineWidth = 1;
+  for (var x = 0; x <= w; x += 56) { ctx.beginPath(); ctx.moveTo(x+.5,0); ctx.lineTo(x+.5,h); ctx.stroke(); }
+  for (var y = 0; y <= h; y += 56) { ctx.beginPath(); ctx.moveTo(0,y+.5); ctx.lineTo(w,y+.5); ctx.stroke(); }
+  ctx.restore();
 
-  /* Accent top line */
+  if (isDark) {
+    drawGlow(ctx, w/2, h/2, w*0.55, 167, 139, 250, 0.20);
+    drawGlow(ctx, w/2, h/2, w*0.35, 96,  165, 250, 0.10);
+  }
+
+  /* Accent centre line */
   var ag = ctx.createLinearGradient(w*0.2, 0, w*0.8, 0);
   ag.addColorStop(0, 'rgba(0,0,0,0)');
-  ag.addColorStop(0.5, C.purp);
+  ag.addColorStop(0.5, isDark ? C.purp : CL.purp);
   ag.addColorStop(1, 'rgba(0,0,0,0)');
   ctx.fillStyle = ag; ctx.fillRect(0, 2, w, 2);
 
-  drawMMark(ctx, w/2, h*0.36, w*0.13, '#ffffff', Math.max(2, w*0.005));
+  drawMMark(ctx, w/2, h*0.36, w*0.13,
+    isDark ? '#ffffff' : '#111111',
+    Math.max(2, w*0.005));
 
-  /* Wordmark — measure invisibly, then draw centred */
+  /* Wordmark centred */
   var wmarkFs = 36;
   ctx.save();
   ctx.globalAlpha = 0;
   var wmarkW = drawWordmark(ctx, 0, -9999, wmarkFs);
   ctx.restore();
-  drawWordmark(ctx, (w - wmarkW) / 2, h * 0.60, wmarkFs);
 
-  /* Label — centred */
+  if (isDark) {
+    drawWordmark(ctx, (w - wmarkW) / 2, h * 0.60, wmarkFs);
+  } else {
+    ctx.save();
+    ctx.font = '700 ' + wmarkFs + 'px "Space Grotesk",sans-serif';
+    if ('letterSpacing' in ctx) ctx.letterSpacing = (-0.042*wmarkFs).toFixed(2)+'px';
+    ctx.textBaseline = 'alphabetic';
+    var xStart = (w - wmarkW) / 2;
+    var yBase  = h * 0.60 + wmarkFs * 0.75;
+    ctx.fillStyle = '#111111';
+    ctx.fillText('Megh', xStart, yBase);
+    var mw = ctx.measureText('Megh').width;
+    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.fillText('Roop', xStart + mw, yBase);
+    ctx.restore();
+  }
+
+  /* Label centred */
   ctx.save();
   ctx.font = '500 11px "Space Grotesk",sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
-  ctx.fillStyle    = C.zinc600;
+  ctx.fillStyle    = isDark ? C.zinc600 : '#aaaaaa';
   ctx.textBaseline = 'middle';
   var lw = ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width;
   ctx.fillText('CREATIVE ENGINEERING & AI STUDIO', (w - lw) / 2, h * 0.73);
@@ -2253,20 +2341,25 @@ function drawBizBack(canvas) {
 
   ctx.save();
   ctx.font = '500 12px "Space Grotesk",sans-serif';
-  ctx.fillStyle = C.purp;
+  ctx.fillStyle    = isDark ? C.purp : CL.purp;
   ctx.textBaseline = 'middle';
-  ctx.textAlign = 'center';
+  ctx.textAlign    = 'center';
   ctx.fillText('meghroop.tech', w/2, h*0.845);
   ctx.restore();
 
-  drawVignetteEdges(ctx, w, h, 0.4);
+  if (isDark) drawVignetteEdges(ctx, w, h, 0.4);
 }
 
 function redrawBizCards() {
-  var front = document.getElementById('biz-front');
-  var back  = document.getElementById('biz-back');
-  if (front) drawBizFront(front, BIZ_PEOPLE[bizIndex]);
-  if (back)  drawBizBack(back);
+  var front     = document.getElementById('biz-front');
+  var back      = document.getElementById('biz-back');
+  var frontWrap = document.getElementById('biz-front-wrap');
+  var backWrap  = document.getElementById('biz-back-wrap');
+  var bg = bizMode === 'light' ? '#e8e8e8' : '#000000';
+  if (frontWrap) frontWrap.style.background = bg;
+  if (backWrap)  backWrap.style.background  = bg;
+  if (front) drawBizFront(front, BIZ_PEOPLE[bizIndex], bizMode);
+  if (back)  drawBizBack(back, bizMode);
 }
 
 function switchCard(idx, btn) {
@@ -2276,10 +2369,17 @@ function switchCard(idx, btn) {
   redrawBizCards();
 }
 
+function switchBizMode(mode, btn) {
+  bizMode = mode;
+  document.querySelectorAll('#business-card .sig-mode-tab').forEach(function(t){ t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  redrawBizCards();
+}
+
 function dlBizCard(id, side) {
   var person = BIZ_PEOPLE[bizIndex];
   var slug   = person.name.toLowerCase().replace(/\s+/g, '-');
-  dlPNG(id, 'meghroop-bizcard-' + slug + '-' + side + '.png');
+  dlPNG(id, 'meghroop-bizcard-' + slug + '-' + side + '-' + bizMode + '.png');
 }
 
 function drawAll() {
