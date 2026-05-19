@@ -2140,8 +2140,8 @@ function drawWhatsAppStatus(canvas) {
 
 /* ── BUSINESS CARD helpers ── */
 var BIZ_PEOPLE = [
-  { name: 'Meghansh Agarwal', title: 'Co-Founder' },
-  { name: 'Roop Jaiswal',     title: 'Co-Founder' }
+  { name: 'Meghansh Agarwal', title: 'Co-Founder', email: 'meghansh@meghroop.tech' },
+  { name: 'Roop Jaiswal',     title: 'Co-Founder', email: 'roop@meghroop.tech'     }
 ];
 var bizIndex = 0;
 
@@ -2165,34 +2165,50 @@ function drawBizFront(canvas, person) {
   var px = 68;
 
   /* Badge + wordmark */
-  drawMarkBadge(ctx, px + 20, h * 0.30, 40, 22);
-  drawWordmark(ctx, px + 50, h * 0.315, 28);
+  drawMarkBadge(ctx, px + 20, h * 0.27, 40, 22);
+  drawWordmark(ctx, px + 50, h * 0.285, 28);
 
   /* Divider */
   ctx.fillStyle = 'rgba(255,255,255,0.06)';
-  ctx.fillRect(px, h * 0.44, 220, 1);
+  ctx.fillRect(px, h * 0.40, 260, 1);
 
   /* Name */
   ctx.save();
-  ctx.font = '700 22px "Space Grotesk",sans-serif';
+  ctx.font = '700 21px "Space Grotesk",sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '-0.02em';
   ctx.fillStyle = '#ffffff';
   ctx.textBaseline = 'alphabetic';
-  ctx.fillText(person.name, px, h * 0.575);
+  ctx.fillText(person.name, px, h * 0.515);
   ctx.restore();
 
   /* Title */
-  drawLabel(ctx, px, h * 0.655, person.title.toUpperCase() + '  ·  MEGHROOP', 10, C.zinc500);
+  drawLabel(ctx, px, h * 0.595, person.title.toUpperCase() + '  ·  MEGHROOP', 10, C.zinc500);
 
-  /* Website */
+  /* Email */
   ctx.save();
-  ctx.font = '500 12px "Space Grotesk",sans-serif';
+  ctx.font = '500 11px "Space Grotesk",sans-serif';
   ctx.fillStyle = C.purp;
   ctx.textBaseline = 'middle';
-  ctx.fillText('meghroop.tech', px, h * 0.77);
+  ctx.fillText(person.email, px, h * 0.685);
   ctx.restore();
 
-  /* Right — M mark large */
+  /* Phone */
+  ctx.save();
+  ctx.font = '400 11px "Space Grotesk",sans-serif';
+  ctx.fillStyle = C.zinc400;
+  ctx.textBaseline = 'middle';
+  ctx.fillText('+91 8949508264', px, h * 0.775);
+  ctx.restore();
+
+  /* Location */
+  ctx.save();
+  ctx.font = '400 11px "Space Grotesk",sans-serif';
+  ctx.fillStyle = C.zinc600;
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Rajasthan, India', px, h * 0.865);
+  ctx.restore();
+
+  /* Right — M mark large ghost */
   drawMMark(ctx, w * 0.80, h * 0.50, w * 0.14, 'rgba(255,255,255,0.06)', Math.max(2, w*0.005));
 
   drawVignetteEdges(ctx, w, h, 0.45);
