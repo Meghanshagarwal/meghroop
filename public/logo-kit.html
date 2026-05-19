@@ -256,8 +256,10 @@
     <a href="#instagram">Instagram</a>
     <a href="#facebook">Facebook</a>
     <a href="#youtube">YouTube</a>
+    <a href="#whatsapp">WhatsApp</a>
     <a href="#og-image">OG Image</a>
     <a href="#mail-signature">Email Signature</a>
+    <a href="#business-card">Business Card</a>
   </nav>
 
   <!-- ════════════════════════════════════════ -->
@@ -601,6 +603,57 @@
 
   <div class="divider"></div>
 
+  <!-- ════════════════════════════════════════ -->
+  <!-- WHATSAPP -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="platform-section" id="whatsapp">
+    <div class="platform-header">
+      <div class="platform-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="platform-name">WhatsApp</div>
+        <div class="platform-desc">DP 500×500 · Status 1080×1920</div>
+      </div>
+    </div>
+
+    <div class="assets-row">
+      <!-- DP -->
+      <div class="asset-card">
+        <div class="asset-preview">
+          <canvas id="wa-profile" width="500" height="500" style="width:140px;height:140px;" class="circle-preview"></canvas>
+        </div>
+        <div class="asset-meta">
+          <div>
+            <div class="asset-name">Display Picture</div>
+            <div class="asset-dims">500 × 500 px</div>
+          </div>
+          <button class="dl-btn" onclick="dlPNG('wa-profile','meghroop-whatsapp-dp.png')">↓ PNG</button>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="banner-stack">
+        <div class="asset-card">
+          <div class="asset-preview">
+            <canvas id="wa-status" width="1080" height="1920" style="width:auto;height:280px;display:block;margin:0 auto;"></canvas>
+          </div>
+          <div class="asset-meta">
+            <div>
+              <div class="asset-name">Status / Story</div>
+              <div class="asset-dims">1080 × 1920 px</div>
+            </div>
+            <button class="dl-btn" onclick="dlPNG('wa-status','meghroop-whatsapp-status.png')">↓ PNG</button>
+          </div>
+        </div>
+        <p class="safe-note">
+          <span>Safe zone:</span> Keep key content in the centre 1080×1350 area — top and bottom 285px may be cropped by WhatsApp UI.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <div class="divider"></div>
 
@@ -686,6 +739,66 @@
     </div>
     <p class="sig-copy-note">
       <span style="color:#a78bfa;">How to use:</span> Click <strong style="color:#e4e4e7;">Copy HTML</strong> → in Gmail go to Settings → General → Signature → paste. In Outlook, insert as HTML. Update social links with your actual profile URLs before use.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- BUSINESS CARD -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="platform-section" id="business-card">
+    <div class="platform-header">
+      <div class="platform-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="5" width="20" height="14" rx="2" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="2" y1="10" x2="22" y2="10" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="6" y1="15" x2="10" y2="15" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="platform-name">Business Card</div>
+        <div class="platform-desc">3.5 × 2 in · 1050 × 600 px · Front &amp; Back</div>
+      </div>
+    </div>
+
+    <!-- Co-founder tabs -->
+    <div class="sig-tabs" style="margin-bottom:20px;">
+      <button class="sig-tab active" onclick="switchCard(0, this)">Meghansh Agarwal</button>
+      <button class="sig-tab" onclick="switchCard(1, this)">Roop Jaiswal</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <!-- Front -->
+      <div class="asset-card">
+        <div class="asset-preview" style="padding:20px;background:#000;">
+          <canvas id="biz-front" width="1050" height="600" style="width:100%;height:auto;display:block;border-radius:6px;"></canvas>
+        </div>
+        <div class="asset-meta">
+          <div>
+            <div class="asset-name">Front</div>
+            <div class="asset-dims">1050 × 600 px</div>
+          </div>
+          <button class="dl-btn" onclick="dlBizCard('biz-front', 'front')">↓ PNG</button>
+        </div>
+      </div>
+
+      <!-- Back -->
+      <div class="asset-card">
+        <div class="asset-preview" style="padding:20px;background:#000;">
+          <canvas id="biz-back" width="1050" height="600" style="width:100%;height:auto;display:block;border-radius:6px;"></canvas>
+        </div>
+        <div class="asset-meta">
+          <div>
+            <div class="asset-name">Back</div>
+            <div class="asset-dims">1050 × 600 px</div>
+          </div>
+          <button class="dl-btn" onclick="dlBizCard('biz-back', 'back')">↓ PNG</button>
+        </div>
+      </div>
+    </div>
+    <p class="safe-note" style="margin-top:12px;">
+      <span>Print spec:</span> 3.5 × 2 inch at 300 DPI · Add 3mm bleed when sending to a print shop · CMYK conversion recommended for physical print.
     </p>
   </section>
 
@@ -1035,6 +1148,7 @@ let fontReady = false;
   }
   await document.fonts.ready;
   drawAll();
+  redrawBizCards();
   const status = document.getElementById('font-status');
   status.textContent = 'Assets ready';
   setTimeout(() => status.classList.add('hidden'), 1500);
@@ -1577,6 +1691,168 @@ function drawFacebookCover(canvas) {
 /* ═══════════════════════════════════════════════════════════
    DRAW ALL CANVASES
 ═══════════════════════════════════════════════════════════ */
+/* ── WHATSAPP STATUS 1080×1920 ── */
+function drawWhatsAppStatus(canvas) {
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, w, h);
+  drawGrid(ctx, w, h, 80);
+
+  drawGlow(ctx, w/2, h*0.42, w*0.75, 167, 139, 250, 0.22);
+  drawGlow(ctx, w/2, h*0.42, w*0.50, 96,  165, 250, 0.12);
+
+  var markSz = Math.round(w * 0.28);
+  drawMMark(ctx, w/2, h*0.38, markSz, '#ffffff', Math.max(3, w*0.007));
+
+  drawLabel(ctx, w/2 - ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width/2,
+    h*0.56, 'CREATIVE ENGINEERING & AI STUDIO', Math.round(w*0.027), C.zinc600);
+
+  var wmarkFs = Math.round(w * 0.092);
+  var wmarkW  = drawWordmark(ctx, 0, 0, wmarkFs);
+  drawWordmark(ctx, (w - wmarkW) / 2, h*0.625, wmarkFs);
+
+  drawTagline(ctx, w/2, h*0.695,
+    'We build things. Useful things. Alive things.',
+    Math.round(w * 0.032), C.zinc500);
+
+  /* URL bottom */
+  ctx.save();
+  ctx.font = '500 ' + Math.round(w*0.028) + 'px "Space Grotesk",sans-serif';
+  ctx.fillStyle = C.zinc600;
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
+  ctx.fillText('meghroop.tech', w/2, h*0.88);
+  ctx.restore();
+
+  drawVignetteEdges(ctx, w, h, 0.5);
+}
+
+/* ── BUSINESS CARD helpers ── */
+var BIZ_PEOPLE = [
+  { name: 'Meghansh Agarwal', title: 'Co-Founder' },
+  { name: 'Roop Jaiswal',     title: 'Co-Founder' }
+];
+var bizIndex = 0;
+
+function drawBizFront(canvas, person) {
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, w, h);
+  drawGrid(ctx, w, h, 56);
+
+  /* Glow left area */
+  drawGlow(ctx, w * 0.18, h * 0.5, w * 0.38, 167, 139, 250, 0.20);
+  drawGlow(ctx, w * 0.22, h * 0.5, w * 0.25, 96,  165, 250, 0.10);
+
+  /* Accent line top */
+  var ag = ctx.createLinearGradient(0, 0, w * 0.55, 0);
+  ag.addColorStop(0, C.purp); ag.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = ag; ctx.fillRect(0, 0, w * 0.55, 3);
+
+  var px = 68;
+
+  /* Badge + wordmark */
+  drawMarkBadge(ctx, px + 20, h * 0.30, 40, 22);
+  drawWordmark(ctx, px + 50, h * 0.315, 28);
+
+  /* Divider */
+  ctx.fillStyle = 'rgba(255,255,255,0.06)';
+  ctx.fillRect(px, h * 0.44, 220, 1);
+
+  /* Name */
+  ctx.save();
+  ctx.font = '700 22px "Space Grotesk",sans-serif';
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '-0.02em';
+  ctx.fillStyle = '#ffffff';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText(person.name, px, h * 0.575);
+  ctx.restore();
+
+  /* Title */
+  drawLabel(ctx, px, h * 0.655, person.title.toUpperCase() + '  ·  MEGHROOP', 10, C.zinc500);
+
+  /* Website */
+  ctx.save();
+  ctx.font = '500 12px "Space Grotesk",sans-serif';
+  ctx.fillStyle = C.purp;
+  ctx.textBaseline = 'middle';
+  ctx.fillText('meghroop.tech', px, h * 0.77);
+  ctx.restore();
+
+  /* Right — M mark large */
+  drawMMark(ctx, w * 0.80, h * 0.50, w * 0.14, 'rgba(255,255,255,0.06)', Math.max(2, w*0.005));
+
+  drawVignetteEdges(ctx, w, h, 0.45);
+}
+
+function drawBizBack(canvas) {
+  var ctx = canvas.getContext('2d');
+  var w = canvas.width, h = canvas.height;
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, w, h);
+  drawGrid(ctx, w, h, 56);
+
+  drawGlow(ctx, w/2, h/2, w*0.55, 167, 139, 250, 0.20);
+  drawGlow(ctx, w/2, h/2, w*0.35, 96,  165, 250, 0.10);
+
+  /* Accent top line */
+  var ag = ctx.createLinearGradient(w*0.2, 0, w*0.8, 0);
+  ag.addColorStop(0, 'rgba(0,0,0,0)');
+  ag.addColorStop(0.5, C.purp);
+  ag.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = ag; ctx.fillRect(0, 2, w, 2);
+
+  drawMMark(ctx, w/2, h*0.36, w*0.13, '#ffffff', Math.max(2, w*0.005));
+
+  var wmarkFs = 36;
+  var wmarkW  = drawWordmark(ctx, 0, 0, wmarkFs);
+  drawWordmark(ctx, (w - wmarkW)/2, h*0.60, wmarkFs);
+
+  drawLabel(ctx, 0, h*0.73, 'CREATIVE ENGINEERING & AI STUDIO', 11, C.zinc600);
+  /* centre label */
+  ctx.save();
+  ctx.font = '500 11px "Space Grotesk",sans-serif';
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
+  ctx.fillStyle = C.zinc600;
+  var lw = ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width;
+  ctx.textBaseline = 'middle';
+  ctx.fillText('CREATIVE ENGINEERING & AI STUDIO', (w - lw)/2, h*0.73);
+  ctx.restore();
+
+  ctx.save();
+  ctx.font = '500 12px "Space Grotesk",sans-serif';
+  ctx.fillStyle = C.purp;
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
+  ctx.fillText('meghroop.tech', w/2, h*0.845);
+  ctx.restore();
+
+  drawVignetteEdges(ctx, w, h, 0.4);
+}
+
+function redrawBizCards() {
+  var front = document.getElementById('biz-front');
+  var back  = document.getElementById('biz-back');
+  if (front) drawBizFront(front, BIZ_PEOPLE[bizIndex]);
+  if (back)  drawBizBack(back);
+}
+
+function switchCard(idx, btn) {
+  bizIndex = idx;
+  document.querySelectorAll('#business-card .sig-tab').forEach(function(t){ t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  redrawBizCards();
+}
+
+function dlBizCard(id, side) {
+  var person = BIZ_PEOPLE[bizIndex];
+  var slug   = person.name.toLowerCase().replace(/\s+/g, '-');
+  dlPNG(id, 'meghroop-bizcard-' + slug + '-' + side + '.png');
+}
+
 function drawAll() {
   var tasks = [
     ['li-profile',   drawProfile],
@@ -1585,6 +1861,7 @@ function drawAll() {
     ['ig-profile',   drawProfile],
     ['fb-profile',   drawProfile],
     ['yt-profile',   drawProfile],
+    ['wa-profile',   drawProfile],
     ['li-banner',    drawLinkedInBanner],
     ['tw-banner',    drawTwitterBanner],
     ['gh-banner',    drawGitHubBanner],
@@ -1593,6 +1870,7 @@ function drawAll() {
     ['app-icon-canvas', drawProfile],
     ['fb-cover',     drawFacebookCover],
     ['yt-banner',    drawYouTubeChannelArt],
+    ['wa-status',    drawWhatsAppStatus],
   ];
   tasks.forEach(function(t) {
     var el = document.getElementById(t[0]);
@@ -1614,6 +1892,7 @@ function dlPNG(id, filename) {
 
 /* Start drawing immediately even before font (fallback system font) */
 drawAll();
+redrawBizCards();
 
 /* ═══════════════════════════════════════════════════════════
    EMAIL SIGNATURE
