@@ -2217,19 +2217,22 @@ function drawBizBack(canvas) {
 
   drawMMark(ctx, w/2, h*0.36, w*0.13, '#ffffff', Math.max(2, w*0.005));
 
+  /* Wordmark — measure invisibly, then draw centred */
   var wmarkFs = 36;
-  var wmarkW  = drawWordmark(ctx, 0, 0, wmarkFs);
-  drawWordmark(ctx, (w - wmarkW)/2, h*0.60, wmarkFs);
+  ctx.save();
+  ctx.globalAlpha = 0;
+  var wmarkW = drawWordmark(ctx, 0, -9999, wmarkFs);
+  ctx.restore();
+  drawWordmark(ctx, (w - wmarkW) / 2, h * 0.60, wmarkFs);
 
-  drawLabel(ctx, 0, h*0.73, 'CREATIVE ENGINEERING & AI STUDIO', 11, C.zinc600);
-  /* centre label */
+  /* Label — centred */
   ctx.save();
   ctx.font = '500 11px "Space Grotesk",sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
-  ctx.fillStyle = C.zinc600;
-  var lw = ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width;
+  ctx.fillStyle    = C.zinc600;
   ctx.textBaseline = 'middle';
-  ctx.fillText('CREATIVE ENGINEERING & AI STUDIO', (w - lw)/2, h*0.73);
+  var lw = ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width;
+  ctx.fillText('CREATIVE ENGINEERING & AI STUDIO', (w - lw) / 2, h * 0.73);
   ctx.restore();
 
   ctx.save();
