@@ -1959,27 +1959,45 @@ function drawWhatsAppStatus(canvas) {
   drawGlow(ctx, w/2, h*0.42, w*0.75, 167, 139, 250, 0.22);
   drawGlow(ctx, w/2, h*0.42, w*0.50, 96,  165, 250, 0.12);
 
+  /* M mark */
   var markSz = Math.round(w * 0.28);
   drawMMark(ctx, w/2, h*0.38, markSz, '#ffffff', Math.max(3, w*0.007));
 
-  drawLabel(ctx, w/2 - ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width/2,
-    h*0.56, 'CREATIVE ENGINEERING & AI STUDIO', Math.round(w*0.027), C.zinc600);
+  /* Label — measure with correct font before centering */
+  var labelFs  = Math.round(w * 0.027);
+  var labelTxt = 'CREATIVE ENGINEERING & AI STUDIO';
+  ctx.save();
+  ctx.font = '500 ' + labelFs + 'px "Space Grotesk", sans-serif';
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0.16em';
+  var labelW = ctx.measureText(labelTxt).width;
+  ctx.restore();
+  drawLabel(ctx, (w - labelW) / 2, h * 0.56, labelTxt, labelFs, C.zinc600);
 
+  /* Wordmark — measure invisibly first, then draw centred */
   var wmarkFs = Math.round(w * 0.092);
-  var wmarkW  = drawWordmark(ctx, 0, 0, wmarkFs);
-  drawWordmark(ctx, (w - wmarkW) / 2, h*0.625, wmarkFs);
+  ctx.save();
+  ctx.globalAlpha = 0;
+  var wmarkW = drawWordmark(ctx, 0, -9999, wmarkFs);
+  ctx.restore();
+  drawWordmark(ctx, (w - wmarkW) / 2, h * 0.625, wmarkFs);
 
-  drawTagline(ctx, w/2, h*0.695,
-    'We build things. Useful things. Alive things.',
-    Math.round(w * 0.032), C.zinc500);
+  /* Tagline — centred with textAlign */
+  ctx.save();
+  ctx.font = '400 ' + Math.round(w * 0.032) + 'px "Space Grotesk", sans-serif';
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
+  ctx.fillStyle   = C.zinc500;
+  ctx.textBaseline = 'middle';
+  ctx.textAlign    = 'center';
+  ctx.fillText('We build things. Useful things. Alive things.', w/2, h * 0.695);
+  ctx.restore();
 
   /* URL bottom */
   ctx.save();
-  ctx.font = '500 ' + Math.round(w*0.028) + 'px "Space Grotesk",sans-serif';
-  ctx.fillStyle = C.zinc600;
+  ctx.font = '500 ' + Math.round(w * 0.028) + 'px "Space Grotesk", sans-serif';
+  ctx.fillStyle    = C.zinc600;
   ctx.textBaseline = 'middle';
-  ctx.textAlign = 'center';
-  ctx.fillText('meghroop.tech', w/2, h*0.88);
+  ctx.textAlign    = 'center';
+  ctx.fillText('meghroop.tech', w/2, h * 0.88);
   ctx.restore();
 
   drawVignetteEdges(ctx, w, h, 0.5);
