@@ -114,7 +114,7 @@ export default function About() {
                   We write the code, design the systems, and ship the whole thing. No middlemen. No dropped context. No &ldquo;let me check with the team.&rdquo; You&apos;re talking to the team. It&apos;s us.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {['Design', 'Frontend', 'Backend', 'AI Engineering'].map((tag) => (
+                  {['Design', 'Frontend', 'Backend', 'AI Engineering', 'Shopify'].map((tag) => (
                     <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.06] text-gray-400">
                       {tag}
                     </span>
@@ -171,11 +171,11 @@ export default function About() {
                     techs: ['Node.js', 'Express', 'REST API', 'MongoDB', 'PostgreSQL'],
                   },
                   {
-                    label: 'Tools & CMS',
+                    label: 'Tools & Commerce',
                     color: 'text-purple-400',
                     border: 'border-purple-500/20',
                     bg: 'bg-purple-500/[0.05]',
-                    techs: ['WordPress', 'Git', 'Vercel', 'Figma', 'Stripe'],
+                    techs: ['Shopify', 'Git', 'Vercel', 'Figma', 'Stripe'],
                   },
                 ].map(({ label, color, border, bg, techs }) => (
                   <div key={label} className={`rounded-xl border ${border} ${bg} p-3`}>

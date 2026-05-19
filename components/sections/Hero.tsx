@@ -11,7 +11,7 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.7, delay, ease: 'easeOut' as const },
 })
 
-const pills = ['Agentic AI', 'n8n Automation', 'MCP Servers', 'Next.js', 'AI Search Optimization']
+const pills = ['Agentic AI', 'Shopify Engineering', 'n8n Automation', 'MCP Servers', 'Headless Commerce', 'AI Search Optimization']
 
 export default function Hero() {
   return (
@@ -68,7 +68,7 @@ export default function Hero() {
           {...fadeUp(0.35)}
           className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8"
         >
-          Two engineers. One obsession. We build AI systems, autonomous agents, and web experiences —{' '}
+          Two engineers. One obsession. We build AI systems, autonomous agents, Shopify storefronts, and web experiences —{' '}
           <span className="text-white">the kind that stay open in someone&apos;s tab for longer than makes sense.</span>
         </motion.p>
 

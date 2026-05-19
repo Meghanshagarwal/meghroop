@@ -26,6 +26,10 @@ const faqs = [
     a: "People don't just search anymore. They ask. ChatGPT, Perplexity, Claude, Google AI Overviews — these systems generate answers, and they pull from content they can understand and trust. GEO is the practice of structuring your content and website so AI systems actually cite you in those answers. Traditional SEO gets you ranked in search results. GEO gets you mentioned inside the answer itself.",
   },
   {
+    q: 'Do you build Shopify stores?',
+    a: "Yes — but we call it Shopify engineering, not 'store building'. We build custom Shopify storefronts, headless Shopify experiences, and AI-powered commerce systems. Abandoned cart automations, inventory workflows, AI customer support agents wired into your Shopify backend, Shopify SEO. If you sell online and want your store to actually perform — technically and commercially — that's what we do.",
+  },
+  {
     q: 'How is MeghRoop different from a web agency?',
     a: "Two people. No account managers. No handoffs. You talk directly to the engineers building your product. We're not a massive agency and not trying to be one. We specialize in AI-first systems and modern web — not templates, not no-code tools. If we build it, we built all of it.",
   },

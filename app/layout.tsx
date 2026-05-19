@@ -24,12 +24,22 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'MeghRoop — AI Engineering & Web Development Studio',
+    default: 'MeghRoop — AI Engineering, Shopify Development & Web Studio',
     template: '%s | MeghRoop',
   },
   description:
-    'MeghRoop is a creative engineering and AI studio. We build custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences with Next.js and React. Based in India, working worldwide.',
+    'MeghRoop is a creative AI engineering studio. We build custom AI agents, Shopify stores, autonomous workflow systems, MCP servers, and premium web experiences with Next.js and React. Shopify development, Shopify automation, and AI-powered commerce systems. Based in India, working worldwide.',
   keywords: [
+    'Shopify development',
+    'Shopify developer',
+    'Shopify agency',
+    'Shopify experts',
+    'Shopify store development',
+    'Shopify automation',
+    'headless Shopify',
+    'Shopify SEO',
+    'AI commerce',
+    'Shopify AI',
     'AI agent development',
     'agentic AI',
     'n8n automation',
@@ -47,6 +57,7 @@ export const metadata: Metadata = {
     'multi-agent systems',
     'LangChain',
     'AI operations automation',
+    'conversion optimization',
     'custom AI tools',
     'creative engineering studio',
     'web development India',
@@ -60,9 +71,9 @@ export const metadata: Metadata = {
   publisher: 'MeghRoop',
   category: 'Technology',
   openGraph: {
-    title: 'MeghRoop — AI Engineering & Web Development Studio',
+    title: 'MeghRoop — AI Engineering, Shopify Development & Web Studio',
     description:
-      'Custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences. Two engineers. Built properly.',
+      'Custom AI agents, Shopify engineering, autonomous workflow systems, MCP servers, and premium web experiences. Two engineers. Built properly.',
     url: SITE_URL,
     siteName: 'MeghRoop',
     locale: 'en_US',
@@ -79,9 +90,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MeghRoop — AI Engineering & Web Development Studio',
+    title: 'MeghRoop — AI Engineering, Shopify Development & Web Studio',
     description:
-      'Custom AI agents, autonomous workflows, MCP servers, and premium web. Two engineers. Built properly.',
+      'Custom AI agents, Shopify engineering, autonomous workflows, MCP servers, and premium web. Two engineers. Built properly.',
     images: ['/og-image.jpg'],
     creator: '@meghroop',
     site: '@meghroop',

@@ -2,7 +2,7 @@
 
 import { motion, type Variants } from 'framer-motion'
 import {
-  Code2, Layers, Globe, Palette, Zap, Plug, Smartphone, Sparkles, Search,
+  Code2, Layers, ShoppingBag, Palette, Zap, Plug, Sparkles, Search, Store,
 } from 'lucide-react'
 
 const services = [
@@ -28,14 +28,26 @@ const services = [
     span: 'md:col-span-1',
   },
   {
-    icon: Globe,
-    title: 'WordPress Development',
+    icon: ShoppingBag,
+    title: 'Shopify Engineering',
     description:
-      'WordPress without the horror stories. Custom themes, headless setups, and a PageSpeed score you can actually show people without flinching.',
+      'Not "building a store". Engineering a commerce system. Custom Shopify storefronts, headless setups, AI-powered automation — abandoned cart flows, inventory triggers, order ops — all wired into your backend. Fast websites are nice. Fast stores make money.',
     gradient: 'from-emerald-600/30 to-teal-600/30',
     iconColor: 'text-emerald-400',
     borderHover: 'hover:border-emerald-500/40',
+    span: 'md:col-span-2',
+    tag: 'Commerce',
+  },
+  {
+    icon: Store,
+    title: 'Intelligent Commerce Systems',
+    description:
+      'Shopify + AI. Abandoned carts recovered automatically. Inventory managed without spreadsheets. Customer support that actually resolves. Commerce that runs itself — mostly.',
+    gradient: 'from-teal-600/30 to-cyan-600/30',
+    iconColor: 'text-teal-400',
+    borderHover: 'hover:border-teal-500/40',
     span: 'md:col-span-1',
+    tag: 'AI-Powered',
   },
   {
     icon: Palette,
@@ -51,7 +63,7 @@ const services = [
     icon: Plug,
     title: 'API Integration',
     description:
-      'Stripe, CRMs, AI APIs, webhooks, third-party everything. Has an endpoint? We wire it. Doesn&apos;t? We figure it out anyway.',
+      'Stripe, Shopify APIs, CRMs, AI APIs, webhooks, third-party everything. Has an endpoint? We wire it. Doesn&apos;t? We figure it out anyway.',
     gradient: 'from-violet-600/30 to-purple-600/30',
     iconColor: 'text-violet-400',
     borderHover: 'hover:border-violet-500/40',
@@ -61,28 +73,18 @@ const services = [
     icon: Zap,
     title: 'Website Optimization',
     description:
-      'Core Web Vitals you&apos;ll want to screenshot. Turns out users like fast websites. Real gains from real profiling — not guesswork, not hope, not a pricier hosting plan.',
+      'Core Web Vitals you&apos;ll want to screenshot. Fast pages rank better, convert better, and make everyone less frustrated. Real gains from real profiling — not guesswork, not hope.',
     gradient: 'from-amber-600/30 to-orange-600/30',
     iconColor: 'text-amber-400',
     borderHover: 'hover:border-amber-500/40',
-    span: 'md:col-span-2',
-    tag: 'Performance',
-  },
-  {
-    icon: Smartphone,
-    title: 'Responsive Web Design',
-    description:
-      'Phone-first. Beautiful everywhere else. Not bolted on at the end — designed that way from the very first line of CSS.',
-    gradient: 'from-cyan-600/30 to-blue-600/30',
-    iconColor: 'text-cyan-400',
-    borderHover: 'hover:border-cyan-500/40',
     span: 'md:col-span-1',
+    tag: 'Performance',
   },
   {
     icon: Search,
     title: 'GEO & AI Search Optimization',
     description:
-      "People don't just search anymore. They ask. We make sure your brand shows up in both places — the Google result, and the AI-generated answer that's slowly replacing it.",
+      "People don't just search anymore. They ask. We make sure your brand shows up in both places — the Google result, and the AI-generated answer that's slowly replacing it. Yes, that includes Shopify SEO.",
     gradient: 'from-rose-600/30 to-pink-600/30',
     iconColor: 'text-rose-400',
     borderHover: 'hover:border-rose-500/40',
@@ -181,10 +183,11 @@ export default function Services() {
         {/* Crawlable semantic summary — GEO signal for AI search discoverability */}
         <p className="sr-only">
           MeghRoop offers full stack web development, React and Next.js application development,
-          WordPress development, UI/UX implementation, API integration, website performance optimization,
-          responsive web design, GEO and AI search optimization, and modern web experiences with
-          cinematic motion design. All services are delivered by a two-person studio based in India,
-          working with clients worldwide.
+          Shopify development and Shopify engineering, headless Shopify storefronts, Shopify automation,
+          AI-powered commerce systems, intelligent commerce automation, UI/UX implementation,
+          API integration, website performance optimization, Shopify SEO, GEO and AI search optimization,
+          and modern web experiences with cinematic motion design. MeghRoop is a Shopify development
+          studio and AI engineering studio based in India, working with clients worldwide.
         </p>
       </div>
     </section>

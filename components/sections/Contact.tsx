@@ -209,6 +209,11 @@ export default function Contact() {
                           <option key={type} value={type} className="bg-gray-900">{type}</option>
                         ))}
                       </optgroup>
+                      <optgroup label="── Shopify & Commerce" className="bg-gray-900 text-gray-400">
+                        {['Shopify Development','Headless Shopify','Shopify + AI Automation','Shopify SEO','AI Commerce System','Shopify Store Build'].map((type) => (
+                          <option key={type} value={type} className="bg-gray-900">{type}</option>
+                        ))}
+                      </optgroup>
                       <optgroup label="── Web Services" className="bg-gray-900 text-gray-400">
                         {['Full Stack Development','React / Next.js App','WordPress Website','UI/UX Implementation','Website Optimization','GEO & AI Search Optimization','Other'].map((type) => (
                           <option key={type} value={type} className="bg-gray-900">{type}</option>

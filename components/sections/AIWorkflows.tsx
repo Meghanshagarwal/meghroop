@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, type Variants } from 'framer-motion'
-import { ArrowRight, Users, Mail, HeadphonesIcon, BarChart3, Database, Repeat } from 'lucide-react'
+import { ArrowRight, Users, Mail, HeadphonesIcon, BarChart3, Database, Repeat, ShoppingBag, Package, Store } from 'lucide-react'
 
 const workflows = [
   {
@@ -51,6 +51,30 @@ const workflows = [
     border: 'border-rose-500/20',
     bg: 'bg-rose-500/[0.05]',
     steps: ['Raw Data Intake', 'Cleaning & Transform', 'AI Extraction', 'Structured Output'],
+  },
+  {
+    icon: ShoppingBag,
+    title: 'Shopify Abandoned Cart Recovery',
+    color: 'text-green-400',
+    border: 'border-green-500/20',
+    bg: 'bg-green-500/[0.05]',
+    steps: ['Cart Detection', 'AI Personalisation', 'Timed Sequences', 'Revenue Recovery'],
+  },
+  {
+    icon: Package,
+    title: 'Shopify Order & Inventory',
+    color: 'text-orange-400',
+    border: 'border-orange-500/20',
+    bg: 'bg-orange-500/[0.05]',
+    steps: ['Inventory Monitoring', 'Low-Stock Alerts', 'Fulfillment Triggers', 'Supplier Sync'],
+  },
+  {
+    icon: Store,
+    title: 'Shopify AI Commerce Ops',
+    color: 'text-violet-400',
+    border: 'border-violet-500/20',
+    bg: 'bg-violet-500/[0.05]',
+    steps: ['Order Query Routing', 'Returns Automation', 'AI Resolution', 'CRM & Shopify Sync'],
   },
 ]
 
@@ -147,15 +171,15 @@ export default function AIWorkflows() {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-transparent to-blue-600/10" />
           <div className="relative z-10">
-            <p className="text-sm text-gray-400 mb-2">Built on n8n · LangChain · OpenAI · Claude · Zapier · Make</p>
+            <p className="text-sm text-gray-400 mb-2">Built on n8n · LangChain · OpenAI · Claude · Shopify API · Zapier · Make</p>
             <h3 className="font-heading font-bold text-xl sm:text-2xl text-white mb-3">
               Got a process that deserves a brain?
             </h3>
             <p className="text-gray-400 text-sm max-w-lg mx-auto">
-              Walk us through how it works today. We&apos;ll build the version that runs without you — and doesn&apos;t call in sick.
+              Walk us through how it works today. We&apos;ll build the version that runs without you — and doesn&apos;t call in sick. Some automations save hours. Some save sanity.
             </p>
             <p className="text-xs text-gray-600 mt-4 max-w-lg mx-auto">
-              MeghRoop builds AI workflow automation systems for businesses using n8n, LangChain, and custom agentic pipelines — helping teams reclaim hours spent on repetitive operations.
+              MeghRoop builds AI workflow automation systems using n8n, LangChain, and custom agentic pipelines — including Shopify automation, abandoned cart recovery, inventory management workflows, and AI-powered commerce operations.
             </p>
           </div>
         </motion.div>

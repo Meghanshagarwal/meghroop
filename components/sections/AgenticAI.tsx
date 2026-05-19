@@ -3,7 +3,7 @@
 import { motion, type Variants } from 'framer-motion'
 import {
   Bot, Brain, Network, Zap, Search, MessageSquare, TrendingUp, Settings2,
-  Cpu, GitMerge, Database,
+  Cpu, GitMerge, Database, ShoppingBag,
 } from 'lucide-react'
 
 const agentCards = [
@@ -79,6 +79,17 @@ const agentCards = [
     span: 'md:col-span-1',
   },
   {
+    icon: ShoppingBag,
+    title: 'Shopify Commerce Agents',
+    description: 'AI agents wired into your Shopify backend — recovering abandoned carts, routing support tickets, managing inventory alerts, and handling post-purchase flows. Commerce that actually runs itself. Well, mostly.',
+    gradient: 'from-emerald-600/30 to-teal-600/30',
+    iconColor: 'text-emerald-400',
+    borderHover: 'hover:border-emerald-500/40',
+    glowColor: 'rgba(16, 185, 129, 0.15)',
+    span: 'md:col-span-1',
+    tag: 'Commerce',
+  },
+  {
     icon: Brain,
     title: 'AI Task Automation',
     description: 'Memory-enabled AI that learns your processes, remembers decisions across sessions, and handles complex tasks with the kind of judgement that makes you forget it&apos;s not a person. Almost.',
@@ -86,7 +97,7 @@ const agentCards = [
     iconColor: 'text-violet-400',
     borderHover: 'hover:border-violet-500/40',
     glowColor: 'rgba(124, 58, 237, 0.15)',
-    span: 'md:col-span-3',
+    span: 'md:col-span-2',
     tag: 'Advanced',
   },
 ]
@@ -210,8 +221,9 @@ export default function AgenticAI() {
           MeghRoop builds custom AI agents using GPT-4o, Claude, and Gemini with LangChain and
           LlamaIndex. Services include multi-agent system development, autonomous AI workflow
           pipelines, AI customer support agents, AI sales and lead generation agents, AI research
-          agents, and memory-enabled task automation. All systems are built for production use
-          with real tool integrations, vector database memory, and RAG capabilities.
+          agents, Shopify commerce agents, Shopify AI automation, and memory-enabled task automation.
+          All systems are built for production use with real tool integrations, vector database memory,
+          RAG capabilities, and Shopify API integrations.
         </p>
       </div>
     </section>
