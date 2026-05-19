@@ -1634,7 +1634,7 @@ function buildSigHTML(person, mode) {
   var suffix   = isDark ? '-dark'    : '-light';
   return [
     '<!-- MeghRoop Email Signature — ' + person.name + ' (' + mode + ') -->',
-    '<table cellpadding="0" cellspacing="0" border="0" width="480" style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;border-collapse:collapse;' + (isDark ? 'background:#0d0d0d;border:1px solid rgba(255,255,255,0.08);border-radius:12px;' : '') + '">',
+    '<table cellpadding="0" cellspacing="0" border="0" width="480" style="font-family:\'Space Grotesk\',\'Helvetica Neue\',Helvetica,Arial,sans-serif;border-collapse:collapse;' + (isDark ? 'background:#0d0d0d;border:1px solid rgba(255,255,255,0.08);border-radius:12px;' : '') + '">',
     '  <tbody>',
     '    <tr>',
     '      <td style="width:12px;"></td>',
@@ -1713,7 +1713,8 @@ function downloadSig() {
   var body     = sigMode === 'dark'
     ? '<body style="background:#080808;padding:32px;">\n'
     : '<body style="background:#ffffff;padding:32px;">\n';
-  var html = '<!DOCTYPE html>\n<html><head><meta charset="UTF-8"></head>\n' + body + buildSigHTML(person, sigMode) + '\n</body></html>';
+  var gFont = '<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">\n';
+  var html = '<!DOCTYPE html>\n<html><head><meta charset="UTF-8">\n' + gFont + '</head>\n' + body + buildSigHTML(person, sigMode) + '\n</body></html>';
   var blob = new Blob([html], { type: 'text/html' });
   var link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
