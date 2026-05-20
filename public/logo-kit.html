@@ -1785,6 +1785,57 @@
     </div>
 
     <p class="safe-note" style="margin-top:0;">Always use the cropped wordmark PNG (whitespace-trimmed) for correct sizing. The raw export from logo-kit contains safe-zone padding — do not scale from the raw file.</p>
+
+    <!-- Post Background System -->
+    <div style="margin-top:32px;">
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;letter-spacing:.02em;">Post Background System</div>
+      <div style="font-size:12px;color:#52525b;font-family:'Inter',sans-serif;margin-bottom:20px;">The cinematic dark canvas used across all branded social posts — grid + orb treatment. Download as blank background for new posts.</div>
+
+      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;">
+
+        <!-- Square 1080×1080 -->
+        <div>
+          <div style="font-family:monospace;font-size:11px;color:#52525b;margin-bottom:8px;letter-spacing:.08em;">Square · 1080 × 1080</div>
+          <canvas id="post-bg-square" width="1080" height="1080" style="width:220px;height:220px;display:block;border-radius:10px;border:1px solid rgba(255,255,255,0.1);"></canvas>
+          <button class="dl-btn" style="margin-top:10px;width:220px;" onclick="dlPNG('post-bg-square','meghroop-post-bg-square.png')">↓ PNG 1080×1080</button>
+        </div>
+
+        <!-- Portrait 1080×1920 -->
+        <div>
+          <div style="font-family:monospace;font-size:11px;color:#52525b;margin-bottom:8px;letter-spacing:.08em;">Portrait · 1080 × 1920</div>
+          <canvas id="post-bg-portrait" width="1080" height="1920" style="width:124px;height:220px;display:block;border-radius:10px;border:1px solid rgba(255,255,255,0.1);"></canvas>
+          <button class="dl-btn" style="margin-top:10px;width:124px;" onclick="dlPNG('post-bg-portrait','meghroop-post-bg-portrait.png')">↓ PNG</button>
+        </div>
+
+        <!-- Specs -->
+        <div style="flex:1;min-width:220px;padding-top:20px;">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span style="font-size:12px;color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;">Background</span>
+              <span style="font-size:12px;font-family:monospace;color:#fff;">#000000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span style="font-size:12px;color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;">Grid</span>
+              <span style="font-size:12px;font-family:monospace;color:#fff;">rgba(255,255,255,.03) · 60px</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span style="font-size:12px;color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;">Orb 1 — Purple</span>
+              <span style="font-size:12px;font-family:monospace;color:#a78bfa;">rgba(139,92,246,.22)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+              <span style="font-size:12px;color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;">Orb 2 — Blue</span>
+              <span style="font-size:12px;font-family:monospace;color:#60a5fa;">rgba(59,130,246,.16)</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 0;">
+              <span style="font-size:12px;color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;">Orb 3 — Cyan</span>
+              <span style="font-size:12px;font-family:monospace;color:#22d3ee;">rgba(34,211,238,.10)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </section>
 
   <p style="text-align:center;color:#3f3f46;font-size:11px;font-family:monospace;margin-top:56px;letter-spacing:.1em;">
@@ -3105,11 +3156,55 @@ function drawAll() {
     ['dd-dont4', drawDontEffects],
     ['dd-dont5', drawDontBusyBg],
     ['dd-dont6', drawDontCrowded],
+    ['post-bg-square',   drawPostBg],
+    ['post-bg-portrait', drawPostBg],
   ];
   tasks.forEach(function(t) {
     var el = document.getElementById(t[0]);
     if (el) t[1](el);
   });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   POST BACKGROUND SYSTEM
+═══════════════════════════════════════════════════════════ */
+function drawPostBg(canvas) {
+  var w = canvas.width;
+  var h = canvas.height;
+  var ctx = canvas.getContext('2d');
+
+  // Black background
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, w, h);
+
+  // Grid
+  var gridSize = Math.round(w / 18); // ~60px at 1080
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 1;
+  for (var x = 0; x <= w; x += gridSize) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+  for (var y = 0; y <= h; y += gridSize) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+  }
+
+  // Orb helper
+  function drawOrb(cx, cy, r, colorStop) {
+    var grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    grad.addColorStop(0, colorStop);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Purple orb — top right
+  drawOrb(w * 0.85, h * -0.05, w * 0.52, 'rgba(139,92,246,0.22)');
+  // Blue orb — bottom left
+  drawOrb(w * -0.04, h * 1.05, w * 0.44, 'rgba(59,130,246,0.16)');
+  // Cyan orb — mid
+  drawOrb(w * 0.1, h * 0.62, w * 0.28, 'rgba(34,211,238,0.10)');
 }
 
 /* ═══════════════════════════════════════════════════════════
