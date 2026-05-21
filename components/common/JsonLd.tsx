@@ -104,7 +104,7 @@ const organizationSchema = {
   review: [
     {
       '@type': 'Review',
-      itemReviewed: { '@id': `${SITE_URL}/#organization` },
+
       reviewBody:
         'MeghRoop completely transformed our online presence. The attention to detail, clean animations, and overall quality of work far exceeded our expectations. Highly recommend.',
       reviewRating: {
@@ -120,7 +120,7 @@ const organizationSchema = {
     },
     {
       '@type': 'Review',
-      itemReviewed: { '@id': `${SITE_URL}/#organization` },
+
       reviewBody:
         'Working with MeghRoop was a fantastic experience. They understood our brand vision instantly and delivered a stunning website that our customers love.',
       reviewRating: {
@@ -136,7 +136,7 @@ const organizationSchema = {
     },
     {
       '@type': 'Review',
-      itemReviewed: { '@id': `${SITE_URL}/#organization` },
+
       reviewBody:
         'They built our entire sports court booking platform from scratch. Professional, timely, and the quality of code is exceptional. Will definitely work with them again.',
       reviewRating: {
@@ -152,7 +152,7 @@ const organizationSchema = {
     },
     {
       '@type': 'Review',
-      itemReviewed: { '@id': `${SITE_URL}/#organization` },
+
       reviewBody:
         'Our coffee shop website has received so many compliments from customers. The design is beautiful, the site is fast, and it perfectly represents our brand.',
       reviewRating: {
