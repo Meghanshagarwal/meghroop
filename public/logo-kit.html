@@ -1800,6 +1800,13 @@
           <button class="dl-btn" style="margin-top:10px;width:220px;" onclick="dlPNG('post-bg-square','meghroop-post-bg-square.png')">↓ PNG 1080×1080</button>
         </div>
 
+        <!-- Instagram Portrait 1080×1350 -->
+        <div>
+          <div style="font-family:monospace;font-size:11px;color:#52525b;margin-bottom:8px;letter-spacing:.08em;">Instagram · 1080 × 1350</div>
+          <canvas id="post-bg-insta" width="1080" height="1350" style="width:176px;height:220px;display:block;border-radius:10px;border:1px solid rgba(255,255,255,0.1);"></canvas>
+          <button class="dl-btn" style="margin-top:10px;width:176px;" onclick="dlPNG('post-bg-insta','meghroop-post-bg-insta-1080x1350.png')">↓ PNG 1080×1350</button>
+        </div>
+
         <!-- Portrait 1080×1920 -->
         <div>
           <div style="font-family:monospace;font-size:11px;color:#52525b;margin-bottom:8px;letter-spacing:.08em;">Portrait · 1080 × 1920</div>
@@ -3157,6 +3164,7 @@ function drawAll() {
     ['dd-dont5', drawDontBusyBg],
     ['dd-dont6', drawDontCrowded],
     ['post-bg-square',   drawPostBg],
+    ['post-bg-insta',    drawPostBg],
     ['post-bg-portrait', drawPostBg],
   ];
   tasks.forEach(function(t) {
