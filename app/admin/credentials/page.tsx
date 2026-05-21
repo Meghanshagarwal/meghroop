@@ -14,6 +14,9 @@ type Credential = {
 const inputClass =
   'w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.06] transition-all font-mono'
 
+const selectClass =
+  'w-full bg-[#1a1a1a] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500/50 transition-all cursor-pointer'
+
 const CATEGORIES = ['General', 'GitHub', 'Facebook', 'Instagram', 'Google', 'LinkedIn', 'n8n', 'Supabase', 'Other']
 
 export default function CredentialsPage() {
@@ -144,9 +147,9 @@ export default function CredentialsPage() {
               <select
                 value={form.category}
                 onChange={(e) => setForm((p) => ({ ...p, category: e.target.value }))}
-                className={inputClass + ' cursor-pointer'}
+                className={selectClass}
               >
-                {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                {CATEGORIES.map((c) => <option key={c} value={c} className="bg-[#1a1a1a] text-white">{c}</option>)}
               </select>
             </div>
           </div>
