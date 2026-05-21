@@ -98,7 +98,7 @@ export const metadata: Metadata = {
     site: '@meghroop',
   },
   alternates: {
-    canonical: SITE_URL,
+    canonical: '/',
   },
   robots: {
     index: true,
