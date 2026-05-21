@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: '%s | MeghRoop',
   },
   description:
-    'MeghRoop is a creative AI engineering studio. We build custom AI agents, Shopify stores, autonomous workflow systems, MCP servers, and premium web experiences with Next.js and React. Shopify development, Shopify automation, and AI-powered commerce systems. Based in India, working worldwide.',
+    'MeghRoop — AI engineering studio. Custom AI agents, autonomous workflows, MCP servers, and premium Next.js web experiences. India-based, working worldwide.',
   keywords: [
     'Shopify development',
     'Shopify developer',
