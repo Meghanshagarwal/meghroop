@@ -1,4 +1,7 @@
+import type { Metadata } from 'next'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
+
+export const metadata: Metadata = { robots: { index: false, follow: false } }
 
 const variants = [
   {

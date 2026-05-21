@@ -2,21 +2,11 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /logo-export/
+Disallow: /logo-preview/
+Disallow: /offline/
 
-# Social media crawlers — explicitly allowed
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: WhatsApp
-Allow: /
-
-# AI crawlers — explicitly welcome
+# AI crawlers — explicitly welcome (GEO)
 User-agent: GPTBot
 Allow: /
 
@@ -32,10 +22,10 @@ Allow: /
 User-agent: Anthropic-AI
 Allow: /
 
-User-agent: Omgilibot
+User-agent: YouBot
 Allow: /
 
-User-agent: YouBot
+User-agent: Omgilibot
 Allow: /
 
 Sitemap: https://meghroop.tech/sitemap.xml
