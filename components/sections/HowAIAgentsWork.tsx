@@ -92,7 +92,7 @@ export default function HowAIAgentsWork() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-12 md:gap-y-8 mb-12"
         >
           {steps.map((step, idx) => {
             const Icon = step.icon
@@ -108,7 +108,7 @@ export default function HowAIAgentsWork() {
                       <div className="w-12 h-12 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center group-hover:bg-white/[0.1] transition-colors duration-300 flex-shrink-0">
                         <Icon size={24} className={step.iconColor} />
                       </div>
-                      <div className="text-xs font-semibold text-gray-500 tracking-widest pt-1">{String(idx + 1).padStart(2, '0')}</div>
+                      <div className="text-2xl font-heading font-bold gradient-text-purple pt-0.5">{String(idx + 1).padStart(2, '0')}</div>
                     </div>
                     <h3 className="font-heading font-bold text-lg text-white mb-2">{step.title}</h3>
                     <p className="text-sm text-gray-400 leading-relaxed flex-grow">{step.description}</p>
@@ -118,11 +118,19 @@ export default function HowAIAgentsWork() {
                   <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-white/[0.02] to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
-                {/* Connecting arrow (visible on larger screens, between items) */}
-                {idx < steps.length - 1 && (
-                  <div className="hidden lg:block absolute -right-6 top-1/2 -translate-y-1/2">
-                    <div className="w-12 h-0.5 bg-gradient-to-r from-white/20 to-transparent" />
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-white/40" />
+                {/* Connecting arrows for 2-column layout */}
+                {/* Arrow to the right (between columns) */}
+                {idx % 2 === 0 && idx < steps.length - 1 && (
+                  <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-20">
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-white/30 to-white/10" />
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-white/50" />
+                  </div>
+                )}
+                {/* Arrow downward (between rows) */}
+                {idx % 2 === 1 && idx < steps.length - 1 && (
+                  <div className="hidden md:block absolute -bottom-6 left-1/2 -translate-x-1/2 z-20">
+                    <div className="h-6 w-0.5 bg-gradient-to-b from-white/30 to-white/10" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-white/50" />
                   </div>
                 )}
               </motion.div>

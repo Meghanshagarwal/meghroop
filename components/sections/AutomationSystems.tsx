@@ -33,7 +33,7 @@ const automationSystems = [
     gradient: 'from-emerald-600/30 to-teal-600/30',
     iconColor: 'text-emerald-400',
     borderHover: 'hover:border-emerald-500/40',
-    span: 'md:col-span-2',
+    span: 'md:col-span-1',
     tag: 'E-Commerce Focus',
     use: 'Shopify automation, operational workflows',
   },
@@ -84,7 +84,7 @@ const automationSystems = [
     gradient: 'from-violet-600/30 to-purple-600/30',
     iconColor: 'text-violet-400',
     borderHover: 'hover:border-violet-500/40',
-    span: 'md:col-span-2',
+    span: 'md:col-span-1',
     tag: 'Infrastructure',
     use: 'System integration, API orchestration',
   },
@@ -132,7 +132,7 @@ export default function AutomationSystems() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
         >
           {automationSystems.map((system) => {
             const Icon = system.icon
