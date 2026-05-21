@@ -90,7 +90,7 @@ export default function DevelopmentProcess() {
           viewport={{ once: true }}
           className="space-y-4"
         >
-          {steps.map((step, index) => (
+          {steps.map((step) => (
             <motion.div
               key={step.title}
               variants={item}
