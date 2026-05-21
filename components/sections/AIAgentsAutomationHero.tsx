@@ -100,7 +100,7 @@ export default function AIAgentsAutomationHero() {
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'build_automation', location: 'hero' })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
           >
-            Let's Build
+            Let&apos;s Build
           </Link>
         </motion.div>
 

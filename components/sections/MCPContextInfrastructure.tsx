@@ -142,28 +142,26 @@ export default function MCPContextInfrastructure() {
             <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <div className="relative z-10 p-6 font-mono text-xs text-gray-400 space-y-2 h-full flex flex-col justify-center">
-              <div className="text-purple-400">// MCP Server connects AI to your systems</div>
+              <div className="text-purple-400">{`// MCP Server connects AI to your systems`}</div>
               <div className="pl-4">
-                <div>const mcp = {'{{'}</div>
+                <div className="text-purple-400">mcp.tools = {'['}</div>
                 <div className="pl-4">
-                  <div className="text-blue-400">tools:</div>
-                  <div className="pl-4">
-                    <div>- fetchCustomer(id)</div>
-                    <div>- queryInventory()</div>
-                    <div>- updateCRM(data)</div>
-                  </div>
+                  <div>fetchCustomer(id),</div>
+                  <div>queryInventory(),</div>
+                  <div>updateCRM(data),</div>
                 </div>
-                <div className="pl-4">
-                  <div className="text-blue-400">context:</div>
-                  <div className="pl-4">
-                    <div>- vectorDB: productKnowledge</div>
-                    <div>- cache: recentDecisions</div>
-                    <div>- memory: sessionHistory</div>
-                  </div>
-                </div>
-                <div>{{'}}'}</div>
+                <div className="text-purple-400">{']'}</div>
               </div>
-              <div className="text-purple-400 mt-2">// AI now reasons from real data, not imagination</div>
+              <div className="pl-4 mt-2">
+                <div className="text-purple-400">mcp.context = {'{'}</div>
+                <div className="pl-4">
+                  <div className="text-blue-400">vectorDB: productKnowledge,</div>
+                  <div className="text-blue-400">cache: recentDecisions,</div>
+                  <div className="text-blue-400">memory: sessionHistory</div>
+                </div>
+                <div className="text-purple-400">{'}'}</div>
+              </div>
+              <div className="text-purple-400 mt-2">{`// AI now reasons from real data`}</div>
             </div>
 
             <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-white/[0.02] to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
