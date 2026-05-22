@@ -80,10 +80,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        type: 'image/jpeg',
+        type: 'image/png',
         alt: 'MeghRoop — AI Engineering & Web Development Studio',
       },
     ],
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     title: 'MeghRoop — AI Engineering, Shopify Development & Web Studio',
     description:
       'Custom AI agents, Shopify engineering, autonomous workflows, MCP servers, and premium web. Two engineers. Built properly.',
-    images: ['/og-image.jpg'],
+    images: ['/opengraph-image'],
     creator: '@meghroop',
     site: '@meghroop',
   },

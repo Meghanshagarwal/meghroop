@@ -27,14 +27,14 @@ const LinkedinIcon = ({ size = 16 }: IconProps) => (
 
 const InstagramIcon = ({ size = 16 }: IconProps) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204 0.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
   </svg>
 )
 
 const socialLinks = [
   {
     icon: GithubIcon,
-    href: 'https://github.com',
+    href: 'https://github.com/meghroop',
     label: 'GitHub',
     hoverColor: 'hover:text-white',
     glowColor: 'rgba(255,255,255,0.12)',
@@ -43,7 +43,7 @@ const socialLinks = [
   },
   {
     icon: XIcon,
-    href: 'https://x.com',
+    href: 'https://x.com/meghroop',
     label: 'X',
     hoverColor: 'hover:text-white',
     glowColor: 'rgba(255,255,255,0.12)',
@@ -52,7 +52,7 @@ const socialLinks = [
   },
   {
     icon: InstagramIcon,
-    href: 'https://instagram.com',
+    href: 'https://instagram.com/meghroop',
     label: 'Instagram',
     hoverColor: 'hover:text-pink-400',
     glowColor: 'rgba(236,72,153,0.25)',
@@ -61,7 +61,7 @@ const socialLinks = [
   },
   {
     icon: LinkedinIcon,
-    href: 'https://linkedin.com',
+    href: 'https://linkedin.com/company/meghroop',
     label: 'LinkedIn',
     hoverColor: 'hover:text-blue-400',
     glowColor: 'rgba(59,130,246,0.25)',
@@ -70,7 +70,7 @@ const socialLinks = [
   },
   {
     icon: Mail,
-    href: 'mailto:hello@meghroop.com',
+    href: 'mailto:hello@meghroop.tech',
     label: 'Email',
     hoverColor: 'hover:text-purple-400',
     glowColor: 'rgba(139,92,246,0.25)',
@@ -81,7 +81,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-black">
+    <footer className="border-t border-white/[0.06] bg-black" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
           {/* Brand */}
@@ -127,13 +127,11 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-white mb-4 font-heading">Navigation</h3>
             <ul className="space-y-2">
               {[
-                { label: 'Home', href: '#home' },
-                { label: 'About', href: '#about' },
-                { label: 'AI Agents', href: '#agentic-ai' },
-                { label: 'Services', href: '#services' },
-                { label: 'Projects', href: '#projects' },
-                { label: 'FAQ', href: '#faq' },
-                { label: 'Contact', href: '#contact' },
+                { label: 'Home', href: '/' },
+                { label: 'About Studio', href: '/about' },
+                { label: 'Systems & Showcases', href: '/systems' },
+                { label: 'Engineering Journal', href: '/journal' },
+                { label: 'Initiate Conversation', href: '/contact' },
               ].map((item) => (
                 <li key={item.label}>
                   <Link
@@ -148,23 +146,29 @@ export default function Footer() {
           </nav>
 
           {/* Services */}
-          <div>
-            <h3 className="text-sm font-semibold text-white mb-4 font-heading">Services</h3>
+          <nav aria-label="Footer capabilities directory">
+            <h3 className="text-sm font-semibold text-white mb-4 font-heading">Capabilities</h3>
             <ul className="space-y-2">
               {[
-                'AI Agent Development',
-                'n8n Workflow Automation',
-                'MCP Server Development',
-                'Full Stack Development',
-                'React & Next.js',
-                'GEO & AI Search Optimization',
+                { label: 'AI Agents & Automation', href: '/ai-agents-automation' },
+                { label: 'Model Context Infrastructure', href: '/mcp-infrastructure' },
+                { label: 'n8n Workflow Automation', href: '/n8n-workflows' },
+                { label: 'AI Search Optimization (GEO)', href: '/ai-search-optimization' },
+                { label: 'Headless Shopify Engineering', href: '/shopify-engineering' },
+                { label: 'High-Performance Web Engineering', href: '/web-engineering' },
+                { label: 'WordPress Engineering', href: '/wordpress-engineering' },
               ].map((service) => (
-                <li key={service}>
-                  <span className="text-sm text-gray-400">{service}</span>
+                <li key={service.href}>
+                  <Link
+                    href={service.href}
+                    className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+                  >
+                    {service.label}
+                  </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
         {/* India badge */}
@@ -222,7 +226,7 @@ export default function Footer() {
           We specialize in custom AI agent development, agentic AI systems, n8n workflow automation,
           MCP server development, multi-agent systems, full stack web development with React and Next.js,
           and generative engine optimization (GEO) for AI search discoverability.
-          Founded in 2022. Contact: hello@meghroop.com
+          Founded in 2022. Contact: hello@meghroop.tech
         </p>
 
         <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">

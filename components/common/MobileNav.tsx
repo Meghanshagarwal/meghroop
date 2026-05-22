@@ -54,7 +54,10 @@ export default function MobileNav() {
 
   const scrollTo = (id: NavId) => {
     const el = document.getElementById(id);
-    if (!el) return;
+    if (!el) {
+      window.location.href = `/#${id}`;
+      return;
+    }
     const top = el.getBoundingClientRect().top + window.scrollY - 72;
     window.scrollTo({ top, behavior: 'smooth' });
     setActive(id);

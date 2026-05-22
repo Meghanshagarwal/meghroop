@@ -7,12 +7,12 @@ import Link from 'next/link'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'AI Agents', href: '#agentic-ai' },
-  { label: 'Services', href: '#services' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'AI Agents', href: '/#agentic-ai' },
+  { label: 'Systems', href: '/systems' },
+  { label: 'Journal', href: '/journal' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export default function Navbar() {
@@ -37,7 +37,7 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="#home" className="flex items-center gap-2.5 group" aria-label="MeghRoop home">
+        <Link href="/" className="flex items-center gap-2.5 group" aria-label="MeghRoop home">
           <MeghRoopLogo variant="favicon" />
           <MeghRoopLogo
             variant="navbar"
@@ -69,7 +69,7 @@ export default function Navbar() {
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <Link
-            href="#contact"
+            href="/contact"
             className="px-4 py-2 text-sm font-medium text-white bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.1] rounded-lg transition-all duration-200"
           >
             Let&apos;s Talk
