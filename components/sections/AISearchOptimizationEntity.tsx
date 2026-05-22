@@ -100,7 +100,7 @@ export default function AISearchOptimizationEntity() {
             <span className="gradient-text">brand systems.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Your brand is more than a website. It's an entity in the AI-powered internet. Build systems that establish who you are across every discovery channel.
+            Your brand is more than a website. It&apos;s an entity in the AI-powered internet. Build systems that establish who you are across every discovery channel.
           </p>
         </motion.div>
 

@@ -108,7 +108,7 @@ export default function AISearchOptimizationWebStructure() {
             <span className="gradient-text">structure.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Not just responsive design. Engineered systems that scale with AI understanding. Here's what modern website architecture looks like.
+            Not just responsive design. Engineered systems that scale with AI understanding. Here&apos;s what modern website architecture looks like.
           </p>
         </motion.div>
 

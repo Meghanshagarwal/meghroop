@@ -114,7 +114,7 @@ export default function AISearchOptimizationWhatItMeans() {
             <span className="gradient-text">actually means.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Modern visibility isn't about fooling algorithms. It's about building systems that AI genuinely understands. Here&apos;s what that looks like.
+            Modern visibility isn&apos;t about fooling algorithms. It&apos;s about building systems that AI genuinely understands. Here&apos;s what that looks like.
           </p>
         </motion.div>
 

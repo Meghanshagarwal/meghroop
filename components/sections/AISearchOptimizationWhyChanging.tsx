@@ -104,7 +104,7 @@ export default function AISearchOptimizationWhyChanging() {
             <span className="gradient-text">fundamentally changing.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
-            Not tactics. Not updates. Fundamental shifts in how search and discovery work. Here's the reality.
+            Not tactics. Not updates. Fundamental shifts in how search and discovery work. Here&apos;s the reality.
           </p>
         </motion.div>
 
@@ -137,7 +137,7 @@ export default function AISearchOptimizationWhyChanging() {
                 The bottom line.
               </h3>
               <p className="text-gray-400 leading-relaxed">
-                Old SEO strategies won't work in the new search landscape. You need to build systems that make genuine sense to AI. That means semantic architecture, technical soundness, and authentic expertise. When you do this right, you don't just rank higher—you become part of the intelligence layer. You become a source of truth.
+                Old SEO strategies won&apos;t work in the new search landscape. You need to build systems that make genuine sense to AI. That means semantic architecture, technical soundness, and authentic expertise. When you do this right, you don&apos;t just rank higher—you become part of the intelligence layer. You become a source of truth.
               </p>
             </div>
           </div>
