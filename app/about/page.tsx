@@ -1,18 +1,22 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 
 // Import About Section Components
 import AboutHero from '@/components/sections/AboutHero'
-import AboutWho from '@/components/sections/AboutWho'
-import AboutBeliefs from '@/components/sections/AboutBeliefs'
-import AboutProcess from '@/components/sections/AboutProcess'
-import AboutWhatWeBuild from '@/components/sections/AboutWhatWeBuild'
-import AboutPhilosophy from '@/components/sections/AboutPhilosophy'
-import AboutAtmosphere from '@/components/sections/AboutAtmosphere'
-import AboutHuman from '@/components/sections/AboutHuman'
-import AboutCTA from '@/components/sections/AboutCTA'
+
+// Dynamically import below-the-fold sections
+const AboutWho = dynamic(() => import('@/components/sections/AboutWho'), { ssr: false })
+const AboutBeliefs = dynamic(() => import('@/components/sections/AboutBeliefs'), { ssr: false })
+const AboutProcess = dynamic(() => import('@/components/sections/AboutProcess'), { ssr: false })
+const AboutWhatWeBuild = dynamic(() => import('@/components/sections/AboutWhatWeBuild'), { ssr: false })
+const AboutPhilosophy = dynamic(() => import('@/components/sections/AboutPhilosophy'), { ssr: false })
+const AboutAtmosphere = dynamic(() => import('@/components/sections/AboutAtmosphere'), { ssr: false })
+const AboutHuman = dynamic(() => import('@/components/sections/AboutHuman'), { ssr: false })
+const AboutCTA = dynamic(() => import('@/components/sections/AboutCTA'), { ssr: false })
+
 
 export const metadata: Metadata = {
   title: 'About MeghRoop | AI Engineering & Creative Technology Studio',

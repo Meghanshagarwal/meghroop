@@ -1,18 +1,22 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 
 // Import Contact Section Components
 import ContactHero from '@/components/sections/ContactHero'
-import ContactExperience from '@/components/sections/ContactExperience'
-import ContactWhatFor from '@/components/sections/ContactWhatFor'
-import ContactWorkflow from '@/components/sections/ContactWorkflow'
-import ContactInternetNative from '@/components/sections/ContactInternetNative'
-import ContactMinimalDetails from '@/components/sections/ContactMinimalDetails'
-import ContactHumanMoment from '@/components/sections/ContactHumanMoment'
-import ContactFAQ from '@/components/sections/ContactFAQ'
-import ContactCTA from '@/components/sections/ContactCTA'
+
+// Dynamically import below-the-fold sections
+const ContactExperience = dynamic(() => import('@/components/sections/ContactExperience'), { ssr: false })
+const ContactWhatFor = dynamic(() => import('@/components/sections/ContactWhatFor'), { ssr: false })
+const ContactWorkflow = dynamic(() => import('@/components/sections/ContactWorkflow'), { ssr: false })
+const ContactInternetNative = dynamic(() => import('@/components/sections/ContactInternetNative'), { ssr: false })
+const ContactMinimalDetails = dynamic(() => import('@/components/sections/ContactMinimalDetails'), { ssr: false })
+const ContactHumanMoment = dynamic(() => import('@/components/sections/ContactHumanMoment'), { ssr: false })
+const ContactFAQ = dynamic(() => import('@/components/sections/ContactFAQ'), { ssr: false })
+const ContactCTA = dynamic(() => import('@/components/sections/ContactCTA'), { ssr: false })
+
 
 export const metadata: Metadata = {
   title: 'Contact MeghRoop | AI Engineering & Web Development Studio',

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { Bot } from 'lucide-react'
 import Link from 'next/link'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
@@ -25,11 +24,8 @@ export default function Navbar() {
   }, [])
 
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 border-b animate-slide-down transition-all duration-300 ${
         scrolled
           ? 'backdrop-blur-xl bg-black/70 border-white/[0.06]'
           : 'bg-transparent border-transparent'
@@ -77,6 +73,6 @@ export default function Navbar() {
         </div>
 
       </nav>
-    </motion.header>
+    </header>
   )
 }

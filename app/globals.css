@@ -106,4 +106,78 @@ body {
       padding: 100px 0;
     }
   }
+
+  /* Keyframes for native GPU-accelerated entrance animations */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+
+  /* GPU layered acceleration for layout/glow floaters */
+  .animate-float,
+  .animate-float-delay,
+  .animate-float-slow {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Glow optimization on mobile devices */
+  @media (max-width: 768px) {
+    .blur-\[100px\],
+    .blur-\[120px\],
+    .blur-\[130px\],
+    .blur-\[140px\],
+    .blur-\[150px\],
+    .blur-\[160px\] {
+      filter: blur(40px) !important;
+      transform: translateZ(0);
+      will-change: transform, opacity;
+    }
+  }
 }
+

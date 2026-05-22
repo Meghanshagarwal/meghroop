@@ -1,7 +1,4 @@
-'use client'
-
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 
@@ -82,16 +79,13 @@ export default function Footer() {
             {/* Social icons */}
             <div className="flex items-center gap-2.5 mt-6">
               {socialLinks.map(({ icon: Icon, href, label, hoverColor, glowColor, borderHover, bgHover }) => (
-                <motion.a
+                <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  whileHover={{ scale: 1.15, y: -2 }}
-                  whileTap={{ scale: 0.92 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  className={`relative w-9 h-9 rounded-xl border border-white/[0.08] flex items-center justify-center text-gray-400 ${hoverColor} ${borderHover} ${bgHover} transition-colors duration-200 group`}
+                  className={`relative w-9 h-9 rounded-xl border border-white/[0.08] flex items-center justify-center text-gray-400 transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95 ${hoverColor} ${borderHover} ${bgHover} group`}
                   style={{
                     ['--glow' as string]: glowColor,
                   }}
@@ -102,7 +96,7 @@ export default function Footer() {
                     style={{ boxShadow: `0 0 16px ${glowColor}, 0 0 4px ${glowColor}` }}
                   />
                   <Icon size={15} />
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
@@ -158,11 +152,7 @@ export default function Footer() {
 
         {/* India badge */}
         <div className="flex justify-center mb-6">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.06] bg-white/[0.02] group hover:border-white/[0.12] hover:bg-white/[0.04] transition-all duration-300"
           >
             {/* India flag SVG */}
@@ -202,7 +192,7 @@ export default function Footer() {
             <span className="font-heading text-[11px] tracking-[0.18em] uppercase text-gray-600 group-hover:text-gray-400 transition-colors duration-300 select-none">
               For Everywhere
             </span>
-          </motion.div>
+          </div>
         </div>
 
         {/* Crawlable GEO + semantic positioning — invisible to users, clear to AI */}

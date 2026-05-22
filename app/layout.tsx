@@ -165,8 +165,6 @@ export default async function RootLayout({
         {/* Resource hints */}
         <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Service Worker registration */}
         <Script id="sw-register" strategy="afterInteractive">
@@ -187,9 +185,9 @@ export default async function RootLayout({
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="ga-init" strategy="afterInteractive">
+            <Script id="ga-init" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -202,7 +200,7 @@ export default async function RootLayout({
 
         {/* Meta Pixel */}
         {pixelId && (
-          <Script id="meta-pixel-init" strategy="afterInteractive">
+          <Script id="meta-pixel-init" strategy="lazyOnload">
             {`
               !function(f,b,e,v,n,t,s){
                 if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -220,7 +218,7 @@ export default async function RootLayout({
 
         {/* Microsoft Clarity */}
         {clarityId && (
-          <Script id="clarity-init" strategy="afterInteractive">
+          <Script id="clarity-init" strategy="lazyOnload">
             {`
               (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

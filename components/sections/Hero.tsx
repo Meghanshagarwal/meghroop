@@ -1,15 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { ArrowRight, Bot } from 'lucide-react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/analytics'
-
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, delay, ease: 'easeOut' as const },
-})
 
 const pills = ['Agentic AI', 'Shopify Engineering', 'n8n Automation', 'MCP Servers', 'Headless Commerce', 'AI Search Optimization']
 
@@ -33,7 +26,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         {/* Studio badge */}
-        <motion.div {...fadeUp(0)} className="flex justify-center mb-6 sm:mb-8">
+        <div className="flex justify-center mb-6 sm:mb-8 animate-fade-up">
           <div className="inline-flex flex-wrap justify-center items-center gap-x-2 gap-y-1 px-3 sm:px-4 py-2 rounded-full glass text-xs sm:text-sm text-gray-300">
             <Bot size={13} className="text-purple-400 flex-shrink-0" />
             <span>Creative Engineering & AI Studio</span>
@@ -42,38 +35,42 @@ export default function Hero() {
               <span className="text-emerald-400 text-xs">Open to new projects</span>
             </span>
           </div>
-        </motion.div>
+        </div>
 
         {/* Studio name */}
-        <motion.p {...fadeUp(0.1)} className="font-heading font-bold text-sm sm:text-base text-gray-500 uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4">
+        <p
+          className="font-heading font-bold text-sm sm:text-base text-gray-500 uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 animate-fade-up"
+          style={{ animationDelay: '100ms' }}
+        >
           MeghRoop
-        </motion.p>
+        </p>
 
         {/* Main headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-          className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-5 sm:mb-6"
+        <h1
+          className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-5 sm:mb-6 animate-fade-up"
+          style={{ animationDelay: '200ms' }}
         >
           We build things.{' '}
           <br />
           <span className="gradient-text">Useful things.</span>
           <br />
           Alive things.
-        </motion.h1>
+        </h1>
 
         {/* Subtext */}
-        <motion.p
-          {...fadeUp(0.35)}
-          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8"
+        <p
+          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 animate-fade-up"
+          style={{ animationDelay: '350ms' }}
         >
           Two engineers. One obsession. We build AI systems, autonomous agents, Shopify storefronts, and web experiences —{' '}
           <span className="text-white">the kind that stay open in someone&apos;s tab for longer than makes sense.</span>
-        </motion.p>
+        </p>
 
         {/* Capability pills */}
-        <motion.div {...fadeUp(0.42)} className="flex flex-wrap justify-center gap-2 mb-10">
+        <div
+          className="flex flex-wrap justify-center gap-2 mb-10 animate-fade-up"
+          style={{ animationDelay: '420ms' }}
+        >
           {pills.map((pill) => (
             <span
               key={pill}
@@ -82,10 +79,13 @@ export default function Hero() {
               {pill}
             </span>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA Buttons */}
-        <motion.div {...fadeUp(0.5)} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <div
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-up"
+          style={{ animationDelay: '500ms' }}
+        >
           <Link
             href="#agentic-ai"
             onClick={() => trackEvent('cta_click', 'ViewContent', { label: 'explore_ai', location: 'hero' })}
@@ -101,12 +101,12 @@ export default function Hero() {
           >
             Say Hello
           </Link>
-        </motion.div>
+        </div>
 
         {/* Social proof bar */}
-        <motion.div
-          {...fadeUp(0.6)}
-          className="mt-10 sm:mt-16 flex flex-row items-center justify-center gap-8 sm:gap-10"
+        <div
+          className="mt-10 sm:mt-16 flex flex-row items-center justify-center gap-8 sm:gap-10 animate-fade-up"
+          style={{ animationDelay: '600ms' }}
         >
           {[
             { value: '30+', label: 'Things shipped' },
@@ -118,7 +118,7 @@ export default function Hero() {
               <span className="text-xs text-gray-500">{label}</span>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Bottom fade */}
@@ -126,3 +126,4 @@ export default function Hero() {
     </section>
   )
 }
+

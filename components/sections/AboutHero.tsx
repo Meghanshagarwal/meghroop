@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Monitor } from 'lucide-react'
 
 export default function AboutHero() {
@@ -14,45 +13,36 @@ export default function AboutHero() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center flex flex-col items-center">
         {/* Status Pill */}
-        <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs text-gray-400 mb-6 font-mono border border-white/[0.06] hover:border-white/10 transition-colors"
+        <div
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs text-gray-400 mb-6 font-mono border border-white/[0.06] hover:border-white/10 transition-colors animate-fade-up"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
           STUDIO STATUS: ACTIVE
           <span className="text-gray-600">{"//"}</span>
           <span className="text-purple-400">meghroop-about-core-v3.0</span>
-        </motion.div>
+        </div>
 
         {/* Cinematic Slogans */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl"
+        <h1
+          className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl animate-fade-up"
+          style={{ animationDelay: '100ms' }}
         >
           Two people. Multiple tabs open. <br className="hidden sm:inline" />
           <span className="gradient-text">Still shipping.</span>
-        </motion.h1>
+        </h1>
 
         {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-12"
+        <p
+          className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-12 animate-fade-up"
+          style={{ animationDelay: '200ms' }}
         >
           MeghRoop is a modern AI engineering and creative technology studio. We design high-conversion storefronts, secure automated operations, and internet-native systems built to scale.
-        </motion.p>
+        </p>
 
         {/* Telemetry card for the founders */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-full max-w-3xl rounded-2xl border border-white/[0.08] bg-[#050505]/75 p-6 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.12] transition-colors duration-300"
+        <div
+          className="w-full max-w-3xl rounded-2xl border border-white/[0.08] bg-[#050505]/75 p-6 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.12] transition-colors duration-300 animate-fade-up"
+          style={{ animationDelay: '300ms' }}
         >
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
           
@@ -86,7 +76,7 @@ export default function AboutHero() {
             </div>
             <span className="animate-pulse">Threads Active: 2/2</span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
