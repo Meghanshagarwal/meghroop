@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/n8n-workflows',
     '/mcp-infrastructure',
     '/systems',
+    '/about',
   ]
 
   return routes.map((route) => ({
