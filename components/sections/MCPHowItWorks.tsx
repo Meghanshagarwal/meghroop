@@ -34,14 +34,14 @@ export default function MCPHowItWorks() {
         </motion.div>
 
         {/* Visual Architecture Representation */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] gap-6 items-stretch">
           {/* Step 1: User & Interface (LLM Agent) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-4 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-6 sm:p-8 flex flex-col justify-between group hover:border-white/[0.12] transition-colors duration-300 relative overflow-hidden"
+            className="col-span-1 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-6 sm:p-8 flex flex-col justify-between group hover:border-white/[0.12] transition-colors duration-300 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-500/5 to-transparent rounded-bl-full pointer-events-none" />
             <div>
@@ -63,7 +63,7 @@ export default function MCPHowItWorks() {
           </motion.div>
 
           {/* Connection Vector 1 */}
-          <div className="hidden lg:flex lg:col-span-1 items-center justify-center">
+          <div className="hidden lg:flex items-center justify-center w-12 sm:w-16 h-full">
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -81,7 +81,7 @@ export default function MCPHowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-4 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-6 sm:p-8 flex flex-col justify-between group hover:border-white/[0.12] transition-colors duration-300 relative overflow-hidden"
+            className="col-span-1 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-6 sm:p-8 flex flex-col justify-between group hover:border-white/[0.12] transition-colors duration-300 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-500/5 to-transparent rounded-bl-full pointer-events-none" />
             <div>
@@ -106,7 +106,7 @@ export default function MCPHowItWorks() {
           </motion.div>
 
           {/* Connection Vector 2 */}
-          <div className="hidden lg:flex lg:col-span-1 items-center justify-center">
+          <div className="hidden lg:flex items-center justify-center w-12 sm:w-16 h-full">
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -124,7 +124,7 @@ export default function MCPHowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="lg:col-span-2 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-6 sm:p-8 flex flex-col justify-between group hover:border-white/[0.12] transition-colors duration-300 relative overflow-hidden"
+            className="col-span-1 rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-6 sm:p-8 flex flex-col justify-between group hover:border-white/[0.12] transition-colors duration-300 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-emerald-500/5 to-transparent rounded-bl-full pointer-events-none" />
             <div>
@@ -136,9 +136,12 @@ export default function MCPHowItWorks() {
                 Connected microservices, CRMs, and internal relational DBs execute safe queries, injecting grounded logic right back.
               </p>
             </div>
-            <div className="flex items-center gap-2 bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-3 font-mono text-[10px] text-emerald-400 justify-center">
-              <Zap size={12} className="animate-bounce" />
-              <span>Response 200 OK</span>
+            <div className="flex items-center gap-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 font-mono text-[11px] text-emerald-400">
+              <Zap size={16} className="text-emerald-400 animate-bounce flex-shrink-0" />
+              <div>
+                <span className="font-bold">STATUS 200</span> OK
+                <div className="text-[9px] text-emerald-500/60 mt-0.5">Response successfully emitted.</div>
+              </div>
             </div>
           </motion.div>
         </div>
