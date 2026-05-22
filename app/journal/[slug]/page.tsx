@@ -7,6 +7,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { articles } from '@/lib/journal'
+import CodeBuiltVisual from '@/components/common/CodeBuiltVisual'
 
 interface ArticlePageProps {
   params: { slug: string }
@@ -259,16 +260,9 @@ export default function ArticleDetail({ params }: ArticlePageProps) {
             </div>
           </header>
 
-          {/* Hero Image */}
-          <div className="relative w-full h-[300px] sm:h-[480px] rounded-3xl overflow-hidden mb-16 border border-white/[0.08]">
-            <Image
-              src={article.heroImage}
-              alt={article.title}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-w-1200px) 100vw, 1200px"
-            />
+          {/* Pure Code-built Editorial Visual Hero instead of AI/stock image */}
+          <div className="relative w-full h-[300px] sm:h-[480px] rounded-3xl overflow-hidden mb-16 border border-white/[0.08] bg-black">
+            <CodeBuiltVisual category={article.category} slug={article.slug} />
           </div>
 
           {/* Article Grid Layout: Content vs Sidebar */}

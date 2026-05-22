@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, Clock, ArrowUpRight, Search, BookOpen } from 'lucide-react'
 import { Article } from '@/lib/journal'
+import CodeBuiltVisual from '@/components/common/CodeBuiltVisual'
 
 interface JournalCatalogProps {
   articles: Article[]
@@ -147,16 +148,9 @@ export default function JournalCatalog({ articles }: JournalCatalogProps) {
                       </div>
                     </div>
 
-                    {/* Image Thumbnail */}
-                    <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-6 border border-white/[0.06]">
-                      <Image
-                        src={article.heroImage}
-                        alt={article.title}
-                        fill
-                        priority={idx < 2}
-                        className="object-cover opacity-60 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700"
-                        sizes="(max-w-768px) 100vw, 50vw"
-                      />
+                    {/* Code-built Editorial Visual instead of AI/stock image */}
+                    <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-6 border border-white/[0.06] bg-black">
+                      <CodeBuiltVisual category={article.category} slug={article.slug} />
                     </div>
 
                     {/* Title & Subtitle */}
