@@ -29,7 +29,7 @@ export default function ShopifyEngineeringCTA() {
           </h2>
 
           <motion.p {...fadeUp(0.15)} className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto mb-10">
-            Your storefront deserves better systems. Fast, intentional, conversion-focused ecommerce that doesn't feel generic. Let's
+            Your storefront deserves better systems. Fast, intentional, conversion-focused ecommerce that doesn&apos;t feel generic. Let&apos;s
             build something that matters.
           </motion.p>
 
@@ -49,7 +49,7 @@ export default function ShopifyEngineeringCTA() {
               onClick={() => trackEvent('cta_click', 'WhatsApp', { label: 'shopify_engineering_cta' })}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-white/[0.12] text-white font-semibold hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
             >
-              Let's Chat
+              Let&apos;s Chat
             </Link>
           </motion.div>
         </motion.div>

@@ -6,7 +6,7 @@ const reasons = [
   {
     title: 'They all use templates.',
     description:
-      'Theme stores look interchangeable. Same layouts. Same interactions. Same boring. Templates are cheap. They don\'t build brand memory. They don\'t convert better than competitors.',
+      'Theme stores look interchangeable. Same layouts. Same interactions. Same boring. Templates are cheap. They don&apos;t build brand memory. They don&apos;t convert better than competitors.',
     color: 'from-red-600/30',
     borderColor: 'border-red-500/40',
   },
@@ -27,7 +27,7 @@ const reasons = [
   {
     title: 'They don\'t focus on conversion.',
     description:
-      'Generic stores have generic checkout flows. No psychology. No friction removal. No optimization. A store that doesn\'t convert is just a brochure. Expensive brochures that make no money.',
+      'Generic stores have generic checkout flows. No psychology. No friction removal. No optimization. A store that doesn&apos;t convert is just a brochure. Expensive brochures that make no money.',
     color: 'from-yellow-600/30',
     borderColor: 'border-yellow-500/40',
   },
@@ -121,7 +121,7 @@ export default function WhyStoresFeelGeneric() {
               business, your exact customers, your exact goals.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              We don't sell volume. We build systems. Storefronts that convert. Stores your customers remember. Modern commerce
+              We don&apos;t sell volume. We build systems. Storefronts that convert. Stores your customers remember. Modern commerce
               infrastructure that scales with you.
             </p>
           </div>

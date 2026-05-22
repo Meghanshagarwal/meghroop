@@ -7,7 +7,6 @@ import {
   Zap,
   Palette,
   Video,
-  Package,
   BarChart3,
   Layers,
   Brain,
