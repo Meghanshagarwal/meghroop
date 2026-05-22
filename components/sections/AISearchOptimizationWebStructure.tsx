@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, type Variants } from 'framer-motion'
-import { Boxes, Layers, Structure, Zap } from 'lucide-react'
+import { Boxes, Layers, Grid3x3, Zap } from 'lucide-react'
 
 const container: Variants = {
   hidden: {},
@@ -26,7 +26,7 @@ const item: Variants = {
 
 const systems = [
   {
-    icon: Structure,
+    icon: Grid3x3,
     title: 'Semantic Architecture',
     description: 'Information organized by meaning, not marketing categories. Topics, subtopics, and related concepts arranged logically.',
   },
@@ -46,7 +46,7 @@ const systems = [
     description: 'Structured data that describes exactly what you offer. Product schemas, local business, FAQs, articles, all properly marked.',
   },
   {
-    icon: Structure,
+    icon: Grid3x3,
     title: 'AI-Readable UX',
     description: 'Clean code, semantic HTML, logical navigation. Humans and AI can both understand the structure.',
   },
