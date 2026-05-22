@@ -90,7 +90,7 @@ const organizationSchema = {
   sameAs: [
     'https://linkedin.com/company/meghroop',
     'https://www.instagram.com/meghroop.tech',
-    'https://facebook.com/meghroop',
+    'https://www.facebook.com/meghroop.tech',
   ],
   aggregateRating: {
     '@type': 'AggregateRating',

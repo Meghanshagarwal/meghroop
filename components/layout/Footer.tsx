@@ -55,7 +55,7 @@ const socialLinks = [
   },
   {
     icon: FacebookIcon,
-    href: 'https://facebook.com/meghroop',
+    href: 'https://www.facebook.com/meghroop.tech',
     label: 'Facebook',
     hoverColor: 'hover:text-blue-500',
     glowColor: 'rgba(59,130,246,0.25)',

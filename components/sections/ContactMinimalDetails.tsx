@@ -35,7 +35,7 @@ export default function ContactMinimalDetails() {
   const socialLinks = [
     { icon: LinkedinIcon, href: 'https://linkedin.com/company/meghroop', label: 'LinkedIn // Studio' },
     { icon: InstagramIcon, href: 'https://www.instagram.com/meghroop.tech', label: 'Instagram // Feed' },
-    { icon: FacebookIcon, href: 'https://facebook.com/meghroop', label: 'Facebook // Hub' },
+    { icon: FacebookIcon, href: 'https://www.facebook.com/meghroop.tech', label: 'Facebook // Hub' },
   ]
 
   return (
