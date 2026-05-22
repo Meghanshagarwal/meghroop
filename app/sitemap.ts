@@ -3,12 +3,22 @@ import type { MetadataRoute } from 'next'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: SITE_URL,
-      lastModified: new Date('2026-05-21'),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
+  const routes = [
+    '',
+    '/web-engineering',
+    '/shopify-engineering',
+    '/wordpress-engineering',
+    '/ai-agents-automation',
+    '/ai-search-optimization',
+    '/n8n-workflows',
+    '/mcp-infrastructure',
   ]
+
+  return routes.map((route) => ({
+    url: `${SITE_URL}${route}`,
+    lastModified: new Date('2026-05-22'),
+    changeFrequency: 'weekly',
+    priority: route === '' ? 1.0 : 0.8,
+  }))
 }
+
