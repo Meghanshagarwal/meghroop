@@ -17,7 +17,7 @@ const defaultProjects: import('@/lib/supabase').Project[] = [
     gradient: 'from-purple-600 via-violet-600 to-blue-600',
     image: PROJECT_IMAGE,
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-    live_url: '#', github_url: '#', year: '2024', category: 'Corporate',
+    live_url: '/contact', github_url: '/contact', year: '2024', category: 'Corporate',
   },
   {
     id: '2', created_at: '', display_order: 1,
@@ -26,7 +26,7 @@ const defaultProjects: import('@/lib/supabase').Project[] = [
     gradient: 'from-blue-600 via-cyan-600 to-teal-600',
     image: PROJECT_IMAGE,
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    live_url: '#', github_url: '#', year: '2024', category: 'Platform',
+    live_url: '/contact', github_url: '/contact', year: '2024', category: 'Platform',
   },
   {
     id: '3', created_at: '', display_order: 2,
@@ -35,7 +35,7 @@ const defaultProjects: import('@/lib/supabase').Project[] = [
     gradient: 'from-amber-600 via-orange-600 to-red-600',
     image: PROJECT_IMAGE,
     tags: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'CMS'],
-    live_url: '#', github_url: '#', year: '2023', category: 'E-commerce',
+    live_url: '/contact', github_url: '/contact', year: '2023', category: 'E-commerce',
   },
   {
     id: '4', created_at: '', display_order: 3,
@@ -44,7 +44,7 @@ const defaultProjects: import('@/lib/supabase').Project[] = [
     gradient: 'from-emerald-600 via-green-600 to-teal-600',
     image: PROJECT_IMAGE,
     tags: ['React', 'TypeScript', 'GSAP', 'HubSpot'],
-    live_url: '#', github_url: '#', year: '2023', category: 'Business',
+    live_url: '/contact', github_url: '/contact', year: '2023', category: 'Business',
   },
 ]
 

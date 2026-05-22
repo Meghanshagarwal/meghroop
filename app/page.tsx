@@ -18,7 +18,7 @@ const FAQ = dynamic(() => import('@/components/sections/FAQ'), { ssr: false })
 const Contact = dynamic(() => import('@/components/sections/Contact'), { ssr: false })
 
 
-export const revalidate = 60
+export const revalidate = 86400
 
 async function getProjects(): Promise<Project[]> {
   try {
