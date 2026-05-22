@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/ai-search-optimization',
     '/n8n-workflows',
     '/mcp-infrastructure',
+    '/systems',
   ]
 
   return routes.map((route) => ({
