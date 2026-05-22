@@ -54,6 +54,13 @@ body {
     background-clip: text;
   }
 
+  .gradient-text-cyan {
+    background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .card-border {
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
