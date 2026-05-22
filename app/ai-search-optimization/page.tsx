@@ -41,11 +41,11 @@ export const metadata: Metadata = {
     title: 'AI Search Optimization & SEO for LLMs | MeghRoop',
     description:
       'Premium AI search optimization. Semantic SEO, structured data, GEO optimization, and AI discoverability. Build systems AI can actually understand.',
-    url: 'https://meghroop.com/ai-search-optimization',
+    url: 'https://meghroop.tech/ai-search-optimization',
     siteName: 'MeghRoop',
     images: [
       {
-        url: 'https://meghroop.com/og-image.jpg',
+        url: 'https://meghroop.tech/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'MeghRoop AI Search Optimization Services',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description: 'Premium AI search optimization. Semantic SEO, structured data, and AI discoverability for modern search systems.',
   },
   alternates: {
-    canonical: 'https://meghroop.com/ai-search-optimization',
+    canonical: 'https://meghroop.tech/ai-search-optimization',
   },
 }
 

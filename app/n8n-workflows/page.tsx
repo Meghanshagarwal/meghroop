@@ -44,11 +44,11 @@ export const metadata: Metadata = {
     title: 'n8n Workflow Automation & Business Automation Systems | MeghRoop',
     description:
       'Premium automation infrastructure. Custom n8n workflows, AI-enhanced automation, and operational systems. CRM automation, lead routing, API orchestration, and intelligent backend automation.',
-    url: 'https://meghroop.com/n8n-workflows',
+    url: 'https://meghroop.tech/n8n-workflows',
     siteName: 'MeghRoop',
     images: [
       {
-        url: 'https://meghroop.com/og-image.jpg',
+        url: 'https://meghroop.tech/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'MeghRoop n8n Workflow Automation Services',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
       'Premium automation infrastructure. Custom n8n workflows, AI-enhanced automation, API orchestration, and intelligent backend automation for your business.',
   },
   alternates: {
-    canonical: 'https://meghroop.com/n8n-workflows',
+    canonical: 'https://meghroop.tech/n8n-workflows',
   },
 }
 

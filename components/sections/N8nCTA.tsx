@@ -63,7 +63,7 @@ export default function N8nCTA() {
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
           <Link
-            href="mailto:hello@meghroop.com"
+            href="mailto:hello@meghroop.tech"
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'email_us', location: 'final_cta' })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-white/[0.12] text-white font-semibold text-base hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
           >

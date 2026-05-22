@@ -62,11 +62,11 @@ export default function WebEngineeringCTA() {
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
           <a
-            href="mailto:hello@meghroop.com?subject=Web%20Engineering%20Project"
+            href="mailto:hello@meghroop.tech?subject=Web%20Engineering%20Project"
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'email_hello', location: 'cta' })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
           >
-            hello@meghroop.com
+            hello@meghroop.tech
           </a>
         </motion.div>
 

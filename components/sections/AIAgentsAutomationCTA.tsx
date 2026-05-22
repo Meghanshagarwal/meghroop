@@ -45,7 +45,7 @@ export default function AIAgentsAutomationCTA() {
         {/* CTA Buttons */}
         <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10">
           <a
-            href="mailto:hello@meghroop.com"
+            href="mailto:hello@meghroop.tech"
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'email_inquiry', location: 'final_cta' })}
             className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
           >
@@ -66,7 +66,7 @@ export default function AIAgentsAutomationCTA() {
         <motion.div {...fadeUp(0.4)} className="space-y-2 text-center">
           <p className="text-sm text-gray-500">Or just message us</p>
           <p className="text-base text-gray-400">
-            <span className="font-semibold text-white">hello@meghroop.com</span>
+            <span className="font-semibold text-white">hello@meghroop.tech</span>
           </p>
         </motion.div>
       </div>

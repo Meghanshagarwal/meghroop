@@ -154,7 +154,7 @@ export default function AISearchOptimizationFAQ() {
               Still have questions? Let&apos;s talk about how AI search optimization can help your site.
             </p>
             <p className="text-sm text-gray-500">
-              Email us at <a href="mailto:hello@meghroop.com" className="text-cyan-400 hover:text-cyan-300 transition-colors">hello@meghroop.com</a> or reach out using the contact form.
+              Email us at <a href="mailto:hello@meghroop.tech" className="text-cyan-400 hover:text-cyan-300 transition-colors">hello@meghroop.tech</a> or reach out using the contact form.
             </p>
           </div>
         </motion.div>

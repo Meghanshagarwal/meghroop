@@ -39,11 +39,11 @@ export const metadata: Metadata = {
     title: 'Web Engineering & Modern Website Development | MeghRoop',
     description:
       'Premium web engineering services. Fast, beautiful, scalable websites built with Next.js, React, and modern frontend systems. Custom web development for startups and enterprises.',
-    url: 'https://meghroop.com/web-engineering',
+    url: 'https://meghroop.tech/web-engineering',
     siteName: 'MeghRoop',
     images: [
       {
-        url: 'https://meghroop.com/og-image.jpg',
+        url: 'https://meghroop.tech/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'MeghRoop Web Engineering Services',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     description: 'Premium web engineering. Fast, beautiful, scalable websites built with Next.js, React, and modern systems.',
   },
   alternates: {
-    canonical: 'https://meghroop.com/web-engineering',
+    canonical: 'https://meghroop.tech/web-engineering',
   },
 }
 

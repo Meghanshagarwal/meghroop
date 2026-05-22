@@ -43,11 +43,11 @@ export const metadata: Metadata = {
     title: 'Premium Shopify Engineering & Ecommerce Development',
     description:
       'Custom Shopify storefronts and engineering. Fast, modern, conversion-focused ecommerce solutions. Automation systems, headless commerce, and AI-powered experiences.',
-    url: 'https://meghroop.com/shopify-engineering',
+    url: 'https://meghroop.tech/shopify-engineering',
     siteName: 'MeghRoop',
     images: [
       {
-        url: 'https://meghroop.com/og-image.jpg',
+        url: 'https://meghroop.tech/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'MeghRoop Shopify Engineering Services',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     description: 'Custom Shopify storefronts built for conversion. Fast, modern, automation-ready ecommerce systems.',
   },
   alternates: {
-    canonical: 'https://meghroop.com/shopify-engineering',
+    canonical: 'https://meghroop.tech/shopify-engineering',
   },
 }
 

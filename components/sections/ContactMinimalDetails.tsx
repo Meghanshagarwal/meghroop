@@ -33,9 +33,9 @@ export default function ContactMinimalDetails() {
   }
 
   const socialLinks = [
-    { icon: GithubIcon, href: 'https://github.com/Meghanshagarwal/meghroop', label: 'GitHub // Repo' },
-    { icon: XIcon, href: 'https://twitter.com', label: 'Twitter // X' },
-    { icon: LinkedinIcon, href: 'https://linkedin.com', label: 'LinkedIn // Studio' },
+    { icon: GithubIcon, href: 'https://github.com/meghroop', label: 'GitHub // Repo' },
+    { icon: XIcon, href: 'https://x.com/meghroop', label: 'Twitter // X' },
+    { icon: LinkedinIcon, href: 'https://linkedin.com/company/meghroop', label: 'LinkedIn // Studio' },
   ]
 
   return (

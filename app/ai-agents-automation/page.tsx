@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     title: 'AI Agents & Autonomous Workflows | MeghRoop',
     description:
       'Build custom AI agents that reason, plan, and execute. Autonomous workflows for customer support, sales, operations, and business automation. Agentic AI that actually works.',
-    url: 'https://meghroop.com/ai-agents-automation',
+    url: 'https://meghroop.tech/ai-agents-automation',
     siteName: 'MeghRoop',
     images: [
       {
-        url: 'https://meghroop.com/og-image.jpg',
+        url: 'https://meghroop.tech/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'MeghRoop AI Agents & Automation Services',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     description: 'Build custom AI agents that reason, plan, and execute. Autonomous workflows for any business process.',
   },
   alternates: {
-    canonical: 'https://meghroop.com/ai-agents-automation',
+    canonical: 'https://meghroop.tech/ai-agents-automation',
   },
 }
 

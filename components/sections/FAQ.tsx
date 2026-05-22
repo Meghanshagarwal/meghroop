@@ -39,7 +39,7 @@ const faqs = [
   },
   {
     q: 'How do I get started?',
-    a: "Just reach out. Email hello@meghroop.com or use the contact form. Tell us what you're building or what's broken. We reply within 24 hours — usually much sooner. No discovery calls before a discovery call. Just a real conversation.",
+    a: "Just reach out. Email hello@meghroop.tech or use the contact form. Tell us what you're building or what's broken. We reply within 24 hours — usually much sooner. No discovery calls before a discovery call. Just a real conversation.",
   },
 ]
 
@@ -147,10 +147,10 @@ export default function FAQ() {
           <p className="text-sm text-gray-400">
             Email{' '}
             <a
-              href="mailto:hello@meghroop.com"
+              href="mailto:hello@meghroop.tech"
               className="text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-2"
             >
-              hello@meghroop.com
+              hello@meghroop.tech
             </a>{' '}
             — we actually read those.
           </p>

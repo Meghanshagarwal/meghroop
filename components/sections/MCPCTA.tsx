@@ -39,12 +39,12 @@ export default function MCPCTA() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="mailto:hello@meghroop.com"
+                href="mailto:hello@meghroop.tech"
                 onClick={() => trackEvent('cta_click', 'Contact', { label: 'email_founders', location: 'mcp_cta' })}
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white text-black font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
               >
                 <Mail size={16} />
-                hello@meghroop.com
+                hello@meghroop.tech
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
               <Link

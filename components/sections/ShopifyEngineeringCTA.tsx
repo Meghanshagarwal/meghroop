@@ -35,7 +35,7 @@ export default function ShopifyEngineeringCTA() {
 
           <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="mailto:hello@meghroop.com?subject=Shopify Engineering Inquiry"
+              href="mailto:hello@meghroop.tech?subject=Shopify Engineering Inquiry"
               onClick={() => trackEvent('cta_click', 'Contact', { label: 'shopify_engineering_cta' })}
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-black font-semibold hover:bg-gray-100 transition-all duration-200 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
             >

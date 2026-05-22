@@ -91,8 +91,8 @@ export default function Contact() {
               {
                 icon: Mail,
                 label: 'Email Us',
-                value: 'hello@meghroop.com',
-                href: 'mailto:hello@meghroop.com',
+                value: 'hello@meghroop.tech',
+                href: 'mailto:hello@meghroop.tech',
                 color: 'text-purple-400',
                 bg: 'bg-purple-500/10 border-purple-500/20',
               },
@@ -133,7 +133,7 @@ export default function Contact() {
               <address className="not-italic mt-3 text-xs text-gray-600 leading-relaxed">
                 MeghRoop Studio<br />
                 India · Working worldwide<br />
-                <a href="mailto:hello@meghroop.com" className="hover:text-gray-400 transition-colors">hello@meghroop.com</a>
+                <a href="mailto:hello@meghroop.tech" className="hover:text-gray-400 transition-colors">hello@meghroop.tech</a>
               </address>
             </div>
           </motion.div>

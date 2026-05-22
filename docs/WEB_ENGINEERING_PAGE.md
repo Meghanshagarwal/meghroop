@@ -6,7 +6,7 @@ A premium cinematic service page for `/web-engineering` has been successfully cr
 
 ## Page URL
 
-`https://meghroop.com/web-engineering`
+`https://meghroop.tech/web-engineering`
 
 ## Key Features
 
@@ -51,7 +51,7 @@ A premium cinematic service page for `/web-engineering` has been successfully cr
 **OpenGraph**:
 - OG Title: "Web Engineering & Modern Website Development | MeghRoop"
 - OG Description: "Premium web engineering services. Fast, beautiful, scalable websites built with Next.js, React, and modern frontend systems. Custom web development for startups and enterprises."
-- Canonical URL: "https://meghroop.com/web-engineering"
+- Canonical URL: "https://meghroop.tech/web-engineering"
 
 ## Page Structure (11 Sections)
 
@@ -149,7 +149,7 @@ Accordion interface with smooth animations.
 ### 10. CTA Section (`WebEngineeringCTA.tsx`)
 - Minimal, human, premium messaging
 - Cinematic hero-style layout
-- Primary CTA: Email to hello@meghroop.com
+- Primary CTA: Email to hello@meghroop.tech
 - Secondary CTA: Learn More (FAQ)
 - Location and communication style callout
 

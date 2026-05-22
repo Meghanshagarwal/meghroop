@@ -41,11 +41,11 @@ export const metadata: Metadata = {
     title: 'WordPress Development & Engineering | Premium CMS Solutions',
     description:
       'Expert WordPress engineering. Custom publishing systems, headless CMS, SEO-optimized sites, high-performance content infrastructure. Modern WordPress built for scale and performance.',
-    url: 'https://meghroop.com/wordpress-engineering',
+    url: 'https://meghroop.tech/wordpress-engineering',
     siteName: 'MeghRoop',
     images: [
       {
-        url: 'https://meghroop.com/og-image.jpg',
+        url: 'https://meghroop.tech/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'MeghRoop WordPress Engineering Services',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description: 'Expert WordPress engineering. Custom publishing systems, headless CMS, high-performance content infrastructure. Modern WordPress for scale.',
   },
   alternates: {
-    canonical: 'https://meghroop.com/wordpress-engineering',
+    canonical: 'https://meghroop.tech/wordpress-engineering',
   },
 }
 

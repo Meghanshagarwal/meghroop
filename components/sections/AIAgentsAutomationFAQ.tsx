@@ -167,10 +167,10 @@ export default function AIAgentsAutomationFAQ() {
           <p className="text-sm text-gray-400">
             Email{' '}
             <a
-              href="mailto:hello@meghroop.com"
+              href="mailto:hello@meghroop.tech"
               className="text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-2"
             >
-              hello@meghroop.com
+              hello@meghroop.tech
             </a>{' '}
             — we&apos;ll answer thoughtfully.
           </p>
