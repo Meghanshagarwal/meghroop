@@ -1,22 +1,25 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import WordPressEngineeringHero from '@/components/sections/WordPressEngineeringHero'
-import WordPressWhatWeBuild from '@/components/sections/WordPressWhatWeBuild'
-import WordPressPerformance from '@/components/sections/WordPressPerformance'
-import WordPressHeadlessCMS from '@/components/sections/WordPressHeadlessCMS'
-import WordPressSEO from '@/components/sections/WordPressSEO'
-import WordPressOpinionSection from '@/components/sections/WordPressOpinionSection'
-import WordPressAutomation from '@/components/sections/WordPressAutomation'
-import WordPressDevelopmentProcess from '@/components/sections/WordPressDevelopmentProcess'
-import WordPressTechStack from '@/components/sections/WordPressTechStack'
-import WordPressFAQ from '@/components/sections/WordPressFAQ'
-import WordPressCTA from '@/components/sections/WordPressCTA'
+
+// Dynamic below-the-fold imports
+const WordPressWhatWeBuild = dynamic(() => import('@/components/sections/WordPressWhatWeBuild'), { ssr: false })
+const WordPressPerformance = dynamic(() => import('@/components/sections/WordPressPerformance'), { ssr: false })
+const WordPressHeadlessCMS = dynamic(() => import('@/components/sections/WordPressHeadlessCMS'), { ssr: false })
+const WordPressSEO = dynamic(() => import('@/components/sections/WordPressSEO'), { ssr: false })
+const WordPressOpinionSection = dynamic(() => import('@/components/sections/WordPressOpinionSection'), { ssr: false })
+const WordPressAutomation = dynamic(() => import('@/components/sections/WordPressAutomation'), { ssr: false })
+const WordPressDevelopmentProcess = dynamic(() => import('@/components/sections/WordPressDevelopmentProcess'), { ssr: false })
+const WordPressTechStack = dynamic(() => import('@/components/sections/WordPressTechStack'), { ssr: false })
+const WordPressFAQ = dynamic(() => import('@/components/sections/WordPressFAQ'), { ssr: false })
+const WordPressCTA = dynamic(() => import('@/components/sections/WordPressCTA'), { ssr: false })
 
 export const metadata: Metadata = {
-  title: 'WordPress Development & Engineering | Premium CMS Solutions | MeghRoop',
-  description: 'Expert WordPress development and engineering. Custom CMS solutions, headless WordPress, SEO-optimized publishing systems, high-performance content infrastructure. Modern WordPress for startups and enterprises.',
+  title: 'WordPress Development & Headless CMS Engineering | MeghRoop',
+  description: 'Expert custom WordPress development and headless CMS engineering. We build high-performance, SEO-optimized publishing systems, scalable content infrastructures, and API integrations.',
   keywords: [
     'WordPress development',
     'WordPress engineering',
@@ -38,9 +41,9 @@ export const metadata: Metadata = {
     'WordPress integrations',
   ],
   openGraph: {
-    title: 'WordPress Development & Engineering | Premium CMS Solutions',
+    title: 'WordPress Development & Headless CMS Engineering | MeghRoop',
     description:
-      'Expert WordPress engineering. Custom publishing systems, headless CMS, SEO-optimized sites, high-performance content infrastructure. Modern WordPress built for scale and performance.',
+      'Expert WordPress engineering. Custom publishing systems, headless CMS, SEO-optimized sites, high-performance content infrastructure.',
     url: 'https://meghroop.tech/wordpress-engineering',
     siteName: 'MeghRoop',
     images: [
@@ -55,8 +58,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WordPress Development & Engineering | Premium CMS Solutions',
-    description: 'Expert WordPress engineering. Custom publishing systems, headless CMS, high-performance content infrastructure. Modern WordPress for scale.',
+    title: 'WordPress Development & Headless CMS Engineering | MeghRoop',
+    description: 'Expert WordPress engineering. Custom publishing systems, headless CMS, high-performance content infrastructure.',
   },
   alternates: {
     canonical: 'https://meghroop.tech/wordpress-engineering',

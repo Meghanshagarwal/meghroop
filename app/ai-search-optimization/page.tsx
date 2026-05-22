@@ -1,22 +1,25 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import AISearchOptimizationHero from '@/components/sections/AISearchOptimizationHero'
-import AISearchOptimizationWhatItMeans from '@/components/sections/AISearchOptimizationWhatItMeans'
-import AISearchOptimizationHowItWorks from '@/components/sections/AISearchOptimizationHowItWorks'
-import AISearchOptimizationTechnicalSEO from '@/components/sections/AISearchOptimizationTechnicalSEO'
-import AISearchOptimizationEntity from '@/components/sections/AISearchOptimizationEntity'
-import AISearchOptimizationWhyChanging from '@/components/sections/AISearchOptimizationWhyChanging'
-import AISearchOptimizationWebStructure from '@/components/sections/AISearchOptimizationWebStructure'
-import AISearchOptimizationProcess from '@/components/sections/AISearchOptimizationProcess'
-import AISearchOptimizationTechStack from '@/components/sections/AISearchOptimizationTechStack'
-import AISearchOptimizationFAQ from '@/components/sections/AISearchOptimizationFAQ'
-import AISearchOptimizationCTA from '@/components/sections/AISearchOptimizationCTA'
+
+// Dynamic below-the-fold imports
+const AISearchOptimizationWhatItMeans = dynamic(() => import('@/components/sections/AISearchOptimizationWhatItMeans'), { ssr: false })
+const AISearchOptimizationHowItWorks = dynamic(() => import('@/components/sections/AISearchOptimizationHowItWorks'), { ssr: false })
+const AISearchOptimizationTechnicalSEO = dynamic(() => import('@/components/sections/AISearchOptimizationTechnicalSEO'), { ssr: false })
+const AISearchOptimizationEntity = dynamic(() => import('@/components/sections/AISearchOptimizationEntity'), { ssr: false })
+const AISearchOptimizationWhyChanging = dynamic(() => import('@/components/sections/AISearchOptimizationWhyChanging'), { ssr: false })
+const AISearchOptimizationWebStructure = dynamic(() => import('@/components/sections/AISearchOptimizationWebStructure'), { ssr: false })
+const AISearchOptimizationProcess = dynamic(() => import('@/components/sections/AISearchOptimizationProcess'), { ssr: false })
+const AISearchOptimizationTechStack = dynamic(() => import('@/components/sections/AISearchOptimizationTechStack'), { ssr: false })
+const AISearchOptimizationFAQ = dynamic(() => import('@/components/sections/AISearchOptimizationFAQ'), { ssr: false })
+const AISearchOptimizationCTA = dynamic(() => import('@/components/sections/AISearchOptimizationCTA'), { ssr: false })
 
 export const metadata: Metadata = {
-  title: 'AI Search Optimization & SEO for LLMs | MeghRoop',
-  description: 'Premium AI search optimization services. Semantic SEO, structured data, GEO optimization, and AI discoverability for modern search. Build systems that rank in LLMs.',
+  title: 'AI Search Optimization & GEO (Generative Engine Optimization) | MeghRoop',
+  description: 'Premium AI search optimization and GEO (Generative Engine Optimization) services. Optimize your semantic architecture, knowledge graphs, and entities to rank inside Perplexity, Claude, ChatGPT, and Gemini.',
   keywords: [
     'AI search optimization',
     'AI SEO',
@@ -38,7 +41,7 @@ export const metadata: Metadata = {
     'knowledge graphs',
   ],
   openGraph: {
-    title: 'AI Search Optimization & SEO for LLMs | MeghRoop',
+    title: 'AI Search Optimization & GEO (Generative Engine Optimization) | MeghRoop',
     description:
       'Premium AI search optimization. Semantic SEO, structured data, GEO optimization, and AI discoverability. Build systems AI can actually understand.',
     url: 'https://meghroop.tech/ai-search-optimization',
@@ -55,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Search Optimization & SEO for LLMs | MeghRoop',
+    title: 'AI Search Optimization & GEO (Generative Engine Optimization) | MeghRoop',
     description: 'Premium AI search optimization. Semantic SEO, structured data, and AI discoverability for modern search systems.',
   },
   alternates: {

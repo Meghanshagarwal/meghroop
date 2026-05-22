@@ -14,7 +14,7 @@ const fadeUp = (delay = 0) => ({
 export default function N8nCTA() {
   return (
     <section
-      id="final-cta"
+      id="contact"
       aria-label="Call to action for workflow automation"
       className="relative py-16 sm:py-24 overflow-hidden"
     >
@@ -51,7 +51,7 @@ export default function N8nCTA() {
         </motion.p>
 
         {/* CTA Buttons */}
-        <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8">
+        <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10">
           <Link
             href="https://calendly.com/meghroop/consultation"
             target="_blank"
@@ -74,10 +74,33 @@ export default function N8nCTA() {
         {/* Tagline */}
         <motion.p
           {...fadeUp(0.45)}
-          className="text-gray-500 text-sm md:text-base"
+          className="text-gray-500 text-sm md:text-base mb-16"
         >
           We build automation infrastructure that actually works.
         </motion.p>
+
+        {/* Cross-linking capabilities mesh index */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-16 flex flex-wrap justify-center items-center gap-x-5 gap-y-3.5 border-t border-white/[0.06] pt-8 text-xs text-gray-500 max-w-2xl mx-auto font-sans"
+        >
+          <Link href="/ai-agents-automation" className="hover:text-blue-400 transition-colors">AI Agents & Automation</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/mcp-infrastructure" className="hover:text-blue-400 transition-colors">MCP Infrastructure</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/n8n-workflows" className="hover:text-blue-400 transition-colors">n8n Workflows</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/ai-search-optimization" className="hover:text-blue-400 transition-colors">AI Search (GEO)</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/shopify-engineering" className="hover:text-blue-400 transition-colors">Shopify Development</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/web-engineering" className="hover:text-blue-400 transition-colors">Next.js Web Engineering</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/wordpress-engineering" className="hover:text-blue-400 transition-colors">WordPress Engineering</Link>
+        </motion.div>
       </div>
     </section>
   )

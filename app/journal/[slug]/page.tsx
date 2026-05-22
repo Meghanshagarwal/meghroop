@@ -135,7 +135,7 @@ export default function ArticleDetail({ params }: ArticlePageProps) {
     description: article.description,
     image: article.heroImage,
     datePublished: article.date,
-    dateModified: article.date,
+    dateModified: article.lastUpdated,
     author: {
       '@type': 'Person',
       name: article.author.name,
@@ -243,10 +243,20 @@ export default function ArticleDetail({ params }: ArticlePageProps) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-6 text-sm text-gray-400">
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-sm text-gray-400">
                 <span className="flex items-center gap-2">
                   <Calendar size={14} className="text-gray-500" />
+                  <span>Published: </span>
                   {new Date(article.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </span>
+                <span className="flex items-center gap-2 text-purple-300">
+                  <Calendar size={14} className="text-purple-400" />
+                  <span>Updated: </span>
+                  {new Date(article.lastUpdated).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
@@ -405,6 +415,83 @@ export default function ArticleDetail({ params }: ArticlePageProps) {
               </div>
             </aside>
           </div>
+
+          {/* Related Articles Section */}
+          <section className="mt-24 pt-16 border-t border-white/[0.08]" aria-label="Related Articles">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/5 text-purple-300 text-xs font-medium mb-3 font-heading tracking-wider uppercase">
+                  Editorial Feed
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-bold font-heading text-white">
+                  Read Next
+                </h2>
+              </div>
+              <Link 
+                href="/journal" 
+                className="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors group"
+              >
+                View all articles
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {articles
+                .filter((a) => a.slug !== article.slug)
+                .slice(0, 3)
+                .map((relatedArticle) => (
+                  <article
+                    key={relatedArticle.slug}
+                    className="group relative rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5 flex flex-col justify-between overflow-hidden hover:border-white/[0.15] transition-colors duration-300 min-h-[380px]"
+                  >
+                    {/* Background Radial Glow */}
+                    <div className="absolute -right-20 -bottom-20 w-64 h-64 rounded-full bg-purple-500/5 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                    <div>
+                      {/* Code-built Editorial Visual */}
+                      <div className="relative w-full h-32 rounded-xl overflow-hidden mb-4 border border-white/[0.06] bg-black">
+                        <CodeBuiltVisual category={relatedArticle.category} slug={relatedArticle.slug} />
+                      </div>
+
+                      <span className="inline-block text-[10px] tracking-wider uppercase font-medium font-heading text-purple-400 mb-2">
+                        {relatedArticle.category}
+                      </span>
+
+                      <Link href={`/journal/${relatedArticle.slug}`} className="block group/link">
+                        <h3 className="text-lg font-bold font-heading text-white group-hover:text-purple-300 transition-colors duration-300 mb-2 line-clamp-2 leading-snug">
+                          {relatedArticle.title}
+                        </h3>
+                      </Link>
+                      <p className="text-gray-400 text-xs font-light line-clamp-3 leading-relaxed">
+                        {relatedArticle.description}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-white/[0.06] mt-4">
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-6 h-6 rounded-full overflow-hidden border border-white/[0.1] bg-white/[0.05]">
+                          <Image
+                            src={relatedArticle.author.avatar}
+                            alt={relatedArticle.author.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div>
+                          <div className="text-xs font-medium text-white">{relatedArticle.author.name}</div>
+                        </div>
+                      </div>
+
+                      <span className="text-[10px] text-gray-500 flex items-center gap-1">
+                        <Clock size={10} />
+                        {relatedArticle.readTime}
+                      </span>
+                    </div>
+                  </article>
+                ))}
+            </div>
+          </section>
         </div>
       </article>
 

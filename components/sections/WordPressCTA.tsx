@@ -73,10 +73,33 @@ export default function WordPressCTA() {
         {/* Social proof */}
         <motion.p
           {...fadeUp(0.45)}
-          className="mt-10 sm:mt-16 text-xs text-gray-500 max-w-lg mx-auto"
+          className="mt-10 sm:mt-16 text-xs text-gray-500 max-w-lg mx-auto mb-12"
         >
           Based in India. Working everywhere. Direct communication. No account managers. Just engineers building your publishing system.
         </motion.p>
+
+        {/* Cross-linking capabilities mesh index */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-12 flex flex-wrap justify-center items-center gap-x-5 gap-y-3.5 border-t border-white/[0.06] pt-8 text-xs text-gray-500 max-w-2xl mx-auto font-sans"
+        >
+          <Link href="/ai-agents-automation" className="hover:text-cyan-400 transition-colors">AI Agents & Automation</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/mcp-infrastructure" className="hover:text-cyan-400 transition-colors">MCP Infrastructure</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/n8n-workflows" className="hover:text-cyan-400 transition-colors">n8n Workflows</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/ai-search-optimization" className="hover:text-cyan-400 transition-colors">AI Search (GEO)</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/shopify-engineering" className="hover:text-cyan-400 transition-colors">Shopify Development</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/web-engineering" className="hover:text-cyan-400 transition-colors">Next.js Web Engineering</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/wordpress-engineering" className="hover:text-cyan-400 transition-colors">WordPress Engineering</Link>
+        </motion.div>
       </div>
 
       {/* Bottom fade */}

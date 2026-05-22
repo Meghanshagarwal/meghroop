@@ -13,7 +13,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function AISearchOptimizationCTA() {
   return (
-    <section id="cta" aria-label="Call to action for AI search optimization" className="section-padding relative overflow-hidden">
+    <section id="contact" aria-label="Call to action for AI search optimization" className="section-padding relative overflow-hidden">
       {/* Background gradient orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-600/15 rounded-full blur-[120px] animate-float" />
@@ -56,10 +56,27 @@ export default function AISearchOptimizationCTA() {
         {/* Secondary text */}
         <motion.p
           {...fadeUp(0.4)}
-          className="text-sm text-gray-500 mt-8"
+          className="text-sm text-gray-500 mt-8 mb-16"
         >
           No generic SEO agency language. Just humans who understand semantic systems, modern search, and how to build for the internet that actually exists.
         </motion.p>
+
+        {/* Cross-linking capabilities mesh index */}
+        <motion.div {...fadeUp(0.5)} className="mt-16 flex flex-wrap justify-center items-center gap-x-5 gap-y-3.5 border-t border-white/[0.06] pt-8 text-xs text-gray-500 max-w-2xl mx-auto">
+          <Link href="/ai-agents-automation" className="hover:text-purple-400 transition-colors">AI Agents & Automation</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/mcp-infrastructure" className="hover:text-purple-400 transition-colors">MCP Infrastructure</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/n8n-workflows" className="hover:text-purple-400 transition-colors">n8n Workflows</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/ai-search-optimization" className="hover:text-purple-400 transition-colors">AI Search (GEO)</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/shopify-engineering" className="hover:text-purple-400 transition-colors">Shopify Development</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/web-engineering" className="hover:text-purple-400 transition-colors">Next.js Web Engineering</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/wordpress-engineering" className="hover:text-purple-400 transition-colors">WordPress Engineering</Link>
+        </motion.div>
       </div>
     </section>
   )

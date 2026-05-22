@@ -1,21 +1,24 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import WebEngineeringHero from '@/components/sections/WebEngineeringHero'
-import WebEngineeringWhatWeBuild from '@/components/sections/WebEngineeringWhatWeBuild'
-import DesignEngineering from '@/components/sections/DesignEngineering'
-import PerformanceSection from '@/components/sections/PerformanceSection'
-import CinematicUISection from '@/components/sections/CinematicUISection'
-import WhyWebsitesFeelDead from '@/components/sections/WhyWebsitesFeelDead'
-import DevelopmentProcess from '@/components/sections/DevelopmentProcess'
-import WebEngineeringTechStack from '@/components/sections/WebEngineeringTechStack'
-import WebEngineeringFAQ from '@/components/sections/WebEngineeringFAQ'
-import WebEngineeringCTA from '@/components/sections/WebEngineeringCTA'
+
+// Dynamic below-the-fold imports
+const WebEngineeringWhatWeBuild = dynamic(() => import('@/components/sections/WebEngineeringWhatWeBuild'), { ssr: false })
+const DesignEngineering = dynamic(() => import('@/components/sections/DesignEngineering'), { ssr: false })
+const PerformanceSection = dynamic(() => import('@/components/sections/PerformanceSection'), { ssr: false })
+const CinematicUISection = dynamic(() => import('@/components/sections/CinematicUISection'), { ssr: false })
+const WhyWebsitesFeelDead = dynamic(() => import('@/components/sections/WhyWebsitesFeelDead'), { ssr: false })
+const DevelopmentProcess = dynamic(() => import('@/components/sections/DevelopmentProcess'), { ssr: false })
+const WebEngineeringTechStack = dynamic(() => import('@/components/sections/WebEngineeringTechStack'), { ssr: false })
+const WebEngineeringFAQ = dynamic(() => import('@/components/sections/WebEngineeringFAQ'), { ssr: false })
+const WebEngineeringCTA = dynamic(() => import('@/components/sections/WebEngineeringCTA'), { ssr: false })
 
 export const metadata: Metadata = {
-  title: 'Web Engineering & Modern Website Development | MeghRoop',
-  description: 'Premium web engineering services. Custom websites, Next.js development, React applications, UI engineering, and high-performance web systems. Modern frontend architecture for startups and enterprises.',
+  title: 'Next.js Web Engineering & Frontend Development Studio | MeghRoop',
+  description: 'Premium Next.js web engineering services. We develop fast, scalable, and beautifully designed web systems, React applications, and custom cinematic user experiences.',
   keywords: [
     'web engineering',
     'website development',
@@ -36,9 +39,9 @@ export const metadata: Metadata = {
     'interactive web experiences',
   ],
   openGraph: {
-    title: 'Web Engineering & Modern Website Development | MeghRoop',
+    title: 'Next.js Web Engineering & Frontend Development Studio | MeghRoop',
     description:
-      'Premium web engineering services. Fast, beautiful, scalable websites built with Next.js, React, and modern frontend systems. Custom web development for startups and enterprises.',
+      'Premium web engineering services. Fast, beautiful, scalable websites built with Next.js, React, and modern frontend systems.',
     url: 'https://meghroop.tech/web-engineering',
     siteName: 'MeghRoop',
     images: [
@@ -53,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Web Engineering & Modern Website Development | MeghRoop',
+    title: 'Next.js Web Engineering & Frontend Development Studio | MeghRoop',
     description: 'Premium web engineering. Fast, beautiful, scalable websites built with Next.js, React, and modern systems.',
   },
   alternates: {

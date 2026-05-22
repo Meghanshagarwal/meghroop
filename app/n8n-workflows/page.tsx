@@ -1,23 +1,26 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import N8nWorkflowsHero from '@/components/sections/N8nWorkflowsHero'
-import N8nWhatWeAutomate from '@/components/sections/N8nWhatWeAutomate'
-import N8nHowWorkflowsWork from '@/components/sections/N8nHowWorkflowsWork'
-import N8nAIAutomation from '@/components/sections/N8nAIAutomation'
-import N8nAPIIntegrations from '@/components/sections/N8nAPIIntegrations'
-import N8nWhyAutomationsFail from '@/components/sections/N8nWhyAutomationsFail'
-import N8nRealBusinessSystems from '@/components/sections/N8nRealBusinessSystems'
-import N8nDevelopmentProcess from '@/components/sections/N8nDevelopmentProcess'
-import N8nTechStack from '@/components/sections/N8nTechStack'
-import N8nFAQ from '@/components/sections/N8nFAQ'
-import N8nCTA from '@/components/sections/N8nCTA'
+
+// Dynamic below-the-fold imports
+const N8nWhatWeAutomate = dynamic(() => import('@/components/sections/N8nWhatWeAutomate'), { ssr: false })
+const N8nHowWorkflowsWork = dynamic(() => import('@/components/sections/N8nHowWorkflowsWork'), { ssr: false })
+const N8nAIAutomation = dynamic(() => import('@/components/sections/N8nAIAutomation'), { ssr: false })
+const N8nAPIIntegrations = dynamic(() => import('@/components/sections/N8nAPIIntegrations'), { ssr: false })
+const N8nWhyAutomationsFail = dynamic(() => import('@/components/sections/N8nWhyAutomationsFail'), { ssr: false })
+const N8nRealBusinessSystems = dynamic(() => import('@/components/sections/N8nRealBusinessSystems'), { ssr: false })
+const N8nDevelopmentProcess = dynamic(() => import('@/components/sections/N8nDevelopmentProcess'), { ssr: false })
+const N8nTechStack = dynamic(() => import('@/components/sections/N8nTechStack'), { ssr: false })
+const N8nFAQ = dynamic(() => import('@/components/sections/N8nFAQ'), { ssr: false })
+const N8nCTA = dynamic(() => import('@/components/sections/N8nCTA'), { ssr: false })
 
 export const metadata: Metadata = {
-  title: 'n8n Workflow Automation & Automation Infrastructure | MeghRoop',
+  title: 'n8n Workflows & AI Automation Engineering | MeghRoop',
   description:
-    'Premium n8n automation services. Workflow automation, business automation, AI workflows, API integrations, and automation infrastructure. Custom n8n workflows for CRM automation, lead routing, ecommerce, and operational systems.',
+    'Premium n8n automation and workflow engineering services. We build custom operational pipelines, CRM automations, complex API integrations, and robust business automation infrastructure.',
   keywords: [
     'n8n automation',
     'workflow automation',
@@ -41,9 +44,9 @@ export const metadata: Metadata = {
     'automation architecture',
   ],
   openGraph: {
-    title: 'n8n Workflow Automation & Business Automation Systems | MeghRoop',
+    title: 'n8n Workflows & AI Automation Engineering | MeghRoop',
     description:
-      'Premium automation infrastructure. Custom n8n workflows, AI-enhanced automation, and operational systems. CRM automation, lead routing, API orchestration, and intelligent backend automation.',
+      'Premium automation infrastructure. Custom n8n workflows, AI-enhanced automation, CRM automation, API orchestration, and intelligent backend automation.',
     url: 'https://meghroop.tech/n8n-workflows',
     siteName: 'MeghRoop',
     images: [
@@ -58,7 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'n8n Workflow Automation & Business Automation Systems | MeghRoop',
+    title: 'n8n Workflows & AI Automation Engineering | MeghRoop',
     description:
       'Premium automation infrastructure. Custom n8n workflows, AI-enhanced automation, API orchestration, and intelligent backend automation for your business.',
   },

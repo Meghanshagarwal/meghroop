@@ -1,20 +1,23 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import AIAgentsAutomationHero from '@/components/sections/AIAgentsAutomationHero'
-import WhatWeBuild from '@/components/sections/WhatWeBuild'
-import HowAIAgentsWork from '@/components/sections/HowAIAgentsWork'
-import AutomationSystems from '@/components/sections/AutomationSystems'
-import MCPContextInfrastructure from '@/components/sections/MCPContextInfrastructure'
-import WhyImplementationsFail from '@/components/sections/WhyImplementationsFail'
-import AIAgentsProcessSection from '@/components/sections/AIAgentsProcessSection'
-import AIAgentsAutomationFAQ from '@/components/sections/AIAgentsAutomationFAQ'
-import AIAgentsAutomationCTA from '@/components/sections/AIAgentsAutomationCTA'
+
+// Dynamic below-the-fold imports
+const WhatWeBuild = dynamic(() => import('@/components/sections/WhatWeBuild'), { ssr: false })
+const HowAIAgentsWork = dynamic(() => import('@/components/sections/HowAIAgentsWork'), { ssr: false })
+const AutomationSystems = dynamic(() => import('@/components/sections/AutomationSystems'), { ssr: false })
+const MCPContextInfrastructure = dynamic(() => import('@/components/sections/MCPContextInfrastructure'), { ssr: false })
+const WhyImplementationsFail = dynamic(() => import('@/components/sections/WhyImplementationsFail'), { ssr: false })
+const AIAgentsProcessSection = dynamic(() => import('@/components/sections/AIAgentsProcessSection'), { ssr: false })
+const AIAgentsAutomationFAQ = dynamic(() => import('@/components/sections/AIAgentsAutomationFAQ'), { ssr: false })
+const AIAgentsAutomationCTA = dynamic(() => import('@/components/sections/AIAgentsAutomationCTA'), { ssr: false })
 
 export const metadata: Metadata = {
-  title: 'AI Agents & Automation | Build Autonomous Workflows | MeghRoop',
-  description: 'Custom AI agents, autonomous workflows, and intelligent automation systems. Build agentic AI for customer support, sales, operations, and workflows. n8n, MCP servers, and workflow orchestration.',
+  title: 'AI Agents & Automation Systems | Autonomous Workflow Studio | MeghRoop',
+  description: 'Custom AI agents, autonomous workflow orchestration, and intelligent automation systems. We build agentic AI solutions for operations, CRM, sales, and workflows using n8n and custom MCP servers.',
   keywords: [
     'AI agents',
     'AI automation',
@@ -32,9 +35,9 @@ export const metadata: Metadata = {
     'AI integrations',
   ],
   openGraph: {
-    title: 'AI Agents & Autonomous Workflows | MeghRoop',
+    title: 'AI Agents & Automation Systems | Autonomous Workflow Studio | MeghRoop',
     description:
-      'Build custom AI agents that reason, plan, and execute. Autonomous workflows for customer support, sales, operations, and business automation. Agentic AI that actually works.',
+      'Build custom AI agents that reason, plan, and execute. Autonomous workflows for customer support, sales, operations, and business automation.',
     url: 'https://meghroop.tech/ai-agents-automation',
     siteName: 'MeghRoop',
     images: [
@@ -49,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Agents & Autonomous Workflows | MeghRoop',
+    title: 'AI Agents & Automation Systems | Autonomous Workflow Studio | MeghRoop',
     description: 'Build custom AI agents that reason, plan, and execute. Autonomous workflows for any business process.',
   },
   alternates: {

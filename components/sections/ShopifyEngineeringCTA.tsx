@@ -13,7 +13,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function ShopifyEngineeringCTA() {
   return (
-    <section id="cta" className="section-padding overflow-hidden" aria-label="Call to action for Shopify development">
+    <section id="contact" className="section-padding overflow-hidden" aria-label="Call to action for Shopify development">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Floating gradient orbs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
@@ -33,7 +33,7 @@ export default function ShopifyEngineeringCTA() {
             build something that matters.
           </motion.p>
 
-          <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <Link
               href="mailto:hello@meghroop.tech?subject=Shopify Engineering Inquiry"
               onClick={() => trackEvent('cta_click', 'Contact', { label: 'shopify_engineering_cta' })}
@@ -52,6 +52,29 @@ export default function ShopifyEngineeringCTA() {
               Let&apos;s Chat
             </Link>
           </motion.div>
+        </motion.div>
+
+        {/* Cross-linking capabilities mesh index */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-16 flex flex-wrap justify-center items-center gap-x-5 gap-y-3.5 border-t border-white/[0.06] pt-8 text-xs text-gray-500 max-w-2xl mx-auto text-center"
+        >
+          <Link href="/ai-agents-automation" className="hover:text-emerald-400 transition-colors">AI Agents & Automation</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/mcp-infrastructure" className="hover:text-emerald-400 transition-colors">MCP Infrastructure</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/n8n-workflows" className="hover:text-emerald-400 transition-colors">n8n Workflows</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/ai-search-optimization" className="hover:text-emerald-400 transition-colors">AI Search (GEO)</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/shopify-engineering" className="hover:text-emerald-400 transition-colors">Shopify Development</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/web-engineering" className="hover:text-emerald-400 transition-colors">Next.js Web Engineering</Link>
+          <span className="text-white/10">•</span>
+          <Link href="/wordpress-engineering" className="hover:text-emerald-400 transition-colors">WordPress Engineering</Link>
         </motion.div>
       </div>
     </section>

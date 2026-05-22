@@ -1,25 +1,26 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
-
-// Import Section Components
 import MCPInfrastructureHero from '@/components/sections/MCPInfrastructureHero'
-import MCPWhatItMeans from '@/components/sections/MCPWhatItMeans'
-import MCPHowItWorks from '@/components/sections/MCPHowItWorks'
-import MCPAIAgents from '@/components/sections/MCPAIAgents'
-import MCPIntelligentInfrastructure from '@/components/sections/MCPIntelligentInfrastructure'
-import MCPWhySystemsFeelLimited from '@/components/sections/MCPWhySystemsFeelLimited'
-import MCPUseCases from '@/components/sections/MCPUseCases'
-import MCPDevelopmentProcess from '@/components/sections/MCPDevelopmentProcess'
-import MCPTechStack from '@/components/sections/MCPTechStack'
-import MCPFAQ from '@/components/sections/MCPFAQ'
-import MCPCTA from '@/components/sections/MCPCTA'
+
+// Dynamic below-the-fold imports
+const MCPWhatItMeans = dynamic(() => import('@/components/sections/MCPWhatItMeans'), { ssr: false })
+const MCPHowItWorks = dynamic(() => import('@/components/sections/MCPHowItWorks'), { ssr: false })
+const MCPAIAgents = dynamic(() => import('@/components/sections/MCPAIAgents'), { ssr: false })
+const MCPIntelligentInfrastructure = dynamic(() => import('@/components/sections/MCPIntelligentInfrastructure'), { ssr: false })
+const MCPWhySystemsFeelLimited = dynamic(() => import('@/components/sections/MCPWhySystemsFeelLimited'), { ssr: false })
+const MCPUseCases = dynamic(() => import('@/components/sections/MCPUseCases'), { ssr: false })
+const MCPDevelopmentProcess = dynamic(() => import('@/components/sections/MCPDevelopmentProcess'), { ssr: false })
+const MCPTechStack = dynamic(() => import('@/components/sections/MCPTechStack'), { ssr: false })
+const MCPFAQ = dynamic(() => import('@/components/sections/MCPFAQ'), { ssr: false })
+const MCPCTA = dynamic(() => import('@/components/sections/MCPCTA'), { ssr: false })
 
 export const metadata: Metadata = {
-  title: 'MCP Infrastructure & AI Context Systems | Model Context Protocol | MeghRoop',
+  title: 'MCP Infrastructure & AI Agent Integration | Model Context Protocol | MeghRoop',
   description:
-    'Custom Model Context Protocol (MCP) infrastructure, vector database memory pools, and intelligent agent backend orchestration. We build context-aware AI systems that act on grounded truths.',
+    'Custom Model Context Protocol (MCP) infrastructure, vector database memory pools, and intelligent agent backend orchestration. We build context-aware AI systems grounded in reality.',
   keywords: [
     'MCP Infrastructure',
     'MCP Servers',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     'Next.js AI Development',
   ],
   openGraph: {
-    title: 'Custom MCP Infrastructure & AI Context Systems | MeghRoop',
+    title: 'MCP Infrastructure & AI Agent Integration | Model Context Protocol | MeghRoop',
     description:
       'Turn disconnected AI models into powerful, grounded enterprise systems. Custom Model Context Protocol servers, vector memory layers, and secure orchestration pipelines.',
     url: 'https://meghroop.tech/mcp-infrastructure',
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Custom MCP Infrastructure & AI Context Systems | MeghRoop',
+    title: 'MCP Infrastructure & AI Agent Integration | Model Context Protocol | MeghRoop',
     description: 'We build the secure, resilient context gateways that let AI talk directly to your databases, APIs, and tools.',
   },
   alternates: {

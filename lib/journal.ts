@@ -11,6 +11,7 @@ export interface Article {
   subtitle: string
   description: string
   date: string
+  lastUpdated: string
   readTime: string
   category: string
   author: {
@@ -35,6 +36,7 @@ export const articles: Article[] = [
     subtitle: 'Stop LLM hallucinations by establishing structured, context-rich pathways directly into your database and API layers.',
     description: 'An engineering deep-dive into Model Context Protocol (MCP). Learn how standardizing the database-to-LLM layer eliminates hallucinations and creates reliable, production-ready AI agents.',
     date: '2026-05-18',
+    lastUpdated: '2026-05-22',
     readTime: '8 min read',
     category: 'AI Infrastructure',
     author: {
@@ -153,7 +155,7 @@ await server.connect(transport);`
       },
       {
         type: 'paragraph',
-        content: 'At MeghRoop, we build bespoke MCP servers using ultra-lightweight deployments that compile directly to secure, edge-running environments. This ensures that when your AI agent is running, the context retrieval round-trip is measured in single-digit milliseconds, creating a seamless user experience.'
+        content: 'At MeghRoop, we build bespoke [MCP infrastructure](/mcp-infrastructure) using ultra-lightweight deployments that compile directly to secure, edge-running environments. This ensures that when your AI agent is running, the context retrieval round-trip is measured in single-digit milliseconds, creating a seamless user experience.'
       }
     ],
     seo: {
@@ -178,6 +180,7 @@ await server.connect(transport);`
     subtitle: 'Traditional SEO is shifting. Here is how to optimize your digital footprint to rank inside ChatGPT, Perplexity, and Google AI Overviews.',
     description: 'A comprehensive engineering guide to Generative Engine Optimization (GEO). Learn how modern Retrieval-Augmented Generation engines parse the web and how to structure your website to maximize AI brand citations.',
     date: '2026-05-15',
+    lastUpdated: '2026-05-22',
     readTime: '7 min read',
     category: 'AI Search Optimization',
     author: {
@@ -242,7 +245,7 @@ await server.connect(transport);`
       },
       {
         type: 'paragraph',
-        content: 'Example: Instead of saying "We have been working in the AI space for quite some time and our team specializes in building custom agents that can automate your operations," write: "**MeghRoop is an AI engineering studio that builds custom autonomous agents and n8n workflow systems.**"'
+        content: 'Example: Instead of saying "We have been working in the AI space for quite some time and our team specializes in building custom agents that can automate your operations," write: "**MeghRoop is an AI engineering studio that builds custom autonomous agents, [AI search optimization](/ai-search-optimization) engines, and [n8n workflow systems](/n8n-workflows).**"'
       },
       {
         type: 'heading',
@@ -282,7 +285,7 @@ await server.connect(transport);`
       },
       {
         type: 'paragraph',
-        content: 'At MeghRoop, we run ongoing search audits across platforms like Perplexity, ChatGPT Search, and Google Gemini. We track how often our clients appear in generative answers, helping them build authority and stay visible as search changes.'
+        content: 'At MeghRoop, our [Generative Engine Optimization (GEO)](/ai-search-optimization) team runs ongoing search audits across platforms like Perplexity, ChatGPT Search, and Google Gemini. We track how often our clients appear in generative answers, helping them build authority and stay visible as search changes.'
       }
     ],
     seo: {
@@ -307,6 +310,7 @@ await server.connect(transport);`
     subtitle: 'Monolithic Shopify themes bleed conversion rate. Here is the engineering guide to globally-distributed, edge-cached, ultra-fast commerce.',
     description: 'Learn the engineering architecture required to build a headless Shopify storefront on Next.js. Discover strategies for sub-400ms page speeds, dynamic Incremental Static Regeneration (ISR), and flawless visual stability.',
     date: '2026-05-12',
+    lastUpdated: '2026-05-22',
     readTime: '6 min read',
     category: 'Web Engineering',
     author: {
@@ -331,7 +335,7 @@ await server.connect(transport);`
       },
       {
         type: 'quote',
-        content: 'Headless commerce solves this by decoupling the customer-facing frontend from Shopify’s backend. This gives you complete creative freedom and enables incredibly fast page speeds.'
+        content: 'Our custom [Shopify engineering](/shopify-engineering) framework solves this by decoupling the customer-facing frontend from Shopify’s backend. This gives you complete creative freedom and enables incredibly fast page speeds.'
       },
       {
         type: 'heading',
@@ -443,7 +447,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       },
       {
         type: 'paragraph',
-        content: 'To prevent this, our headless storefronts enforce exact aspect ratio boxes for all product images. We use Next.js next/image to automatically generate modern WebP/AVIF formats, handle responsive sizing, and display solid color placeholders until the images load, keeping layouts perfectly stable.'
+        content: 'To prevent this, our [headless Shopify storefronts](/shopify-engineering) enforce exact aspect ratio boxes for all product images. We use Next.js next/image to automatically generate modern WebP/AVIF formats, handle responsive sizing, and display solid color placeholders until the images load, keeping layouts perfectly stable.'
       }
     ],
     seo: {
@@ -468,6 +472,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     subtitle: 'Moving beyond simple triggers: how to build mission-critical, enterprise-grade AI automation pipelines that never fail.',
     description: 'An engineering blueprint to build resilient, self-healing workflow automation pipelines using n8n and advanced error-capturing architectures.',
     date: '2026-05-10',
+    lastUpdated: '2026-05-22',
     readTime: '7 min read',
     category: 'Automation',
     author: {
@@ -501,7 +506,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       },
       {
         type: 'paragraph',
-        content: 'At MeghRoop, we use n8n—an open, highly-extensible node-based workflow platform—to build advanced automation systems. To ensure these pipelines never fail silently, we use an architecture built around three core principles:'
+        content: 'At MeghRoop, we construct custom [n8n workflows](/n8n-workflows)—leveraging this open, highly-extensible node-based workflow platform—to build advanced automation systems. To ensure these pipelines never fail silently, we use an architecture built around three core principles:'
       },
       {
         type: 'heading',
@@ -537,7 +542,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       },
       {
         type: 'paragraph',
-        content: 'We also use n8n to choreograph complex, multi-agent AI systems. Rather than running a single long-running agent, we split tasks across specialized, sub-agents connected by state machines.'
+        content: 'We also build resilient [AI agent automation](/ai-agents-automation) architectures to choreograph complex, multi-agent AI systems, utilizing [n8n workflow pipelines](/n8n-workflows) connected by state machines.'
       },
       {
         type: 'paragraph',
