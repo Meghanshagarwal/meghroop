@@ -147,7 +147,7 @@ export default function AISearchOptimizationProcess() {
               Why this process works.
             </h3>
             <p className="text-gray-400 leading-relaxed">
-              We don't just optimize existing websites. We build semantic systems from the ground up. Entity mapping ensures everything makes sense. Architecture design ensures scalability. Technical implementation ensures performance. Discoverability optimization ensures visibility. Structured data engineering ensures AI understands you. And continuous evolution ensures you stay ahead as search keeps changing.
+              We don&apos;t just optimize existing websites. We build semantic systems from the ground up. Entity mapping ensures everything makes sense. Architecture design ensures scalability. Technical implementation ensures performance. Discoverability optimization ensures visibility. Structured data engineering ensures AI understands you. And continuous evolution ensures you stay ahead as search keeps changing.
             </p>
           </div>
         </motion.div>

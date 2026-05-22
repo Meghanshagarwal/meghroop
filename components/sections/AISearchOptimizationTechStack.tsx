@@ -170,7 +170,7 @@ export default function AISearchOptimizationTechStack() {
               Why this tech stack?
             </h3>
             <p className="text-gray-400 leading-relaxed">
-              JSON-LD and Schema.org give AI precise semantic data. Semantic HTML ensures both humans and crawlers understand structure. Next.js provides server-side rendering, essential for SEO and proper crawlability. Core Web Vitals optimization ensures pages load fast—a ranking signal across all search systems. Google Search Console and Lighthouse give real visibility into performance. And AI crawler optimization ensures your site is indexed and understood by LLM systems. This stack isn't just fast—it's semantic-first and AI-ready.
+              JSON-LD and Schema.org give AI precise semantic data. Semantic HTML ensures both humans and crawlers understand structure. Next.js provides server-side rendering, essential for SEO and proper crawlability. Core Web Vitals optimization ensures pages load fast—a ranking signal across all search systems. Google Search Console and Lighthouse give real visibility into performance. And AI crawler optimization ensures your site is indexed and understood by LLM systems. This stack isn&apos;t just fast—it&apos;s semantic-first and AI-ready.
             </p>
           </div>
         </motion.div>
