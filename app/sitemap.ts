@@ -14,13 +14,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/mcp-infrastructure',
     '/systems',
     '/about',
+    '/contact',
   ]
 
   return routes.map((route) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date('2026-05-22'),
     changeFrequency: 'weekly',
-    priority: route === '' ? 1.0 : 0.8,
+    priority: route === '' ? 1.0 : route === '/contact' ? 0.9 : 0.8,
   }))
 }
 
