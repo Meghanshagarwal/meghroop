@@ -94,8 +94,6 @@ export const metadata: Metadata = {
     description:
       'Custom AI agents, Shopify engineering, autonomous workflows, MCP servers, and premium web. Two engineers. Built properly.',
     images: ['/opengraph-image'],
-    creator: '@meghroop',
-    site: '@meghroop',
   },
   alternates: {
     canonical: '/',

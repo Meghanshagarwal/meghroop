@@ -7,18 +7,6 @@ import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 
 type IconProps = { size?: number }
 
-const GithubIcon = ({ size = 16 }: IconProps) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-  </svg>
-)
-
-const XIcon = ({ size = 16 }: IconProps) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-)
-
 const LinkedinIcon = ({ size = 16 }: IconProps) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -31,33 +19,21 @@ const InstagramIcon = ({ size = 16 }: IconProps) => (
   </svg>
 )
 
+const FacebookIcon = ({ size = 16 }: IconProps) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.8c0-.05 0-.1 0-.15z" />
+  </svg>
+)
+
 const socialLinks = [
   {
-    icon: GithubIcon,
-    href: 'https://github.com/meghroop',
-    label: 'GitHub',
-    hoverColor: 'hover:text-white',
-    glowColor: 'rgba(255,255,255,0.12)',
-    borderHover: 'hover:border-white/30',
-    bgHover: 'hover:bg-white/[0.08]',
-  },
-  {
-    icon: XIcon,
-    href: 'https://x.com/meghroop',
-    label: 'X',
-    hoverColor: 'hover:text-white',
-    glowColor: 'rgba(255,255,255,0.12)',
-    borderHover: 'hover:border-white/30',
-    bgHover: 'hover:bg-white/[0.08]',
-  },
-  {
-    icon: InstagramIcon,
-    href: 'https://instagram.com/meghroop',
-    label: 'Instagram',
-    hoverColor: 'hover:text-pink-400',
-    glowColor: 'rgba(236,72,153,0.25)',
-    borderHover: 'hover:border-pink-500/40',
-    bgHover: 'hover:bg-pink-500/[0.08]',
+    icon: Mail,
+    href: 'mailto:hello@meghroop.tech',
+    label: 'Email',
+    hoverColor: 'hover:text-purple-400',
+    glowColor: 'rgba(139,92,246,0.25)',
+    borderHover: 'hover:border-purple-500/40',
+    bgHover: 'hover:bg-purple-500/[0.08]',
   },
   {
     icon: LinkedinIcon,
@@ -69,13 +45,22 @@ const socialLinks = [
     bgHover: 'hover:bg-blue-500/[0.08]',
   },
   {
-    icon: Mail,
-    href: 'mailto:hello@meghroop.tech',
-    label: 'Email',
-    hoverColor: 'hover:text-purple-400',
-    glowColor: 'rgba(139,92,246,0.25)',
-    borderHover: 'hover:border-purple-500/40',
-    bgHover: 'hover:bg-purple-500/[0.08]',
+    icon: InstagramIcon,
+    href: 'https://www.instagram.com/meghroop.tech',
+    label: 'Instagram',
+    hoverColor: 'hover:text-pink-400',
+    glowColor: 'rgba(236,72,153,0.25)',
+    borderHover: 'hover:border-pink-500/40',
+    bgHover: 'hover:bg-pink-500/[0.08]',
+  },
+  {
+    icon: FacebookIcon,
+    href: 'https://facebook.com/meghroop',
+    label: 'Facebook',
+    hoverColor: 'hover:text-blue-500',
+    glowColor: 'rgba(59,130,246,0.25)',
+    borderHover: 'hover:border-blue-500/40',
+    bgHover: 'hover:bg-blue-500/[0.08]',
   },
 ]
 

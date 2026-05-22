@@ -88,10 +88,9 @@ const organizationSchema = {
     ],
   },
   sameAs: [
-    'https://github.com/meghroop',
     'https://linkedin.com/company/meghroop',
-    'https://x.com/meghroop',
-    'https://instagram.com/meghroop',
+    'https://www.instagram.com/meghroop.tech',
+    'https://facebook.com/meghroop',
   ],
   aggregateRating: {
     '@type': 'AggregateRating',
