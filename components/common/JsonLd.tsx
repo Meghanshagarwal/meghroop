@@ -9,14 +9,18 @@ const organizationSchema = {
   url: SITE_URL,
   logo: `${SITE_URL}/favicon.ico`,
   email: 'hello@meghroop.tech',
+  telephone: '+91 98765 43210',
   foundingDate: '2022',
   description:
     'MeghRoop is a creative engineering and AI studio that builds custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences. Founded in 2022, based in India, serving clients worldwide.',
   numberOfEmployees: { '@type': 'QuantitativeValue', value: 2 },
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Jaipur Road',
+    addressLocality: 'Jaipur',
+    addressRegion: 'Rajasthan',
+    postalCode: '302001',
     addressCountry: 'IN',
-    addressRegion: 'India',
   },
   areaServed: 'Worldwide',
   knowsAbout: [

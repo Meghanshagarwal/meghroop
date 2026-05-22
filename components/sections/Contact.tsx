@@ -132,8 +132,9 @@ export default function Contact() {
               <div className="text-xs text-gray-500 mt-1">Mon–Sat, 9AM–9PM IST. Often much sooner.</div>
               <address className="not-italic mt-3 text-xs text-gray-600 leading-relaxed">
                 MeghRoop Studio<br />
-                India · Working worldwide<br />
-                <a href="mailto:hello@meghroop.tech" className="hover:text-gray-400 transition-colors">hello@meghroop.tech</a>
+                Jaipur, Rajasthan, India · Working worldwide<br />
+                Email: <a href="mailto:hello@meghroop.tech" className="hover:text-gray-400 transition-colors">hello@meghroop.tech</a><br />
+                Phone: <a href="tel:+919876543210" className="hover:text-gray-400 transition-colors">+91 98765 43210</a>
               </address>
             </div>
           </motion.div>

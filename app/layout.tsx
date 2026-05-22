@@ -24,11 +24,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'MeghRoop — AI Engineering Studio, Shopify Development & n8n Workflows',
+    default: 'MeghRoop — AI Engineering & Shopify Development Studio',
     template: '%s | MeghRoop',
   },
   description:
-    'MeghRoop is an elite AI Engineering & Web Studio. We engineer custom autonomous AI agents, complex n8n workflows, Shopify storefronts, MCP infrastructure, and AI search optimized systems.',
+    'MeghRoop is a premium AI engineering & web studio. We build custom AI agents, complex n8n workflows, Shopify storefronts, and context-aware systems.',
   keywords: [
     'AI Engineering Studio',
     'AI Agents',
