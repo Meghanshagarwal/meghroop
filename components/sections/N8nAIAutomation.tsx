@@ -150,7 +150,7 @@ export default function N8nAIAutomation() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <p className="text-gray-300 leading-relaxed mb-4">
-                <span className="text-white font-semibold">Good workflows quietly save hours every week.</span> Your team doesn't notice because work just flows. Leads get routed to the right person. Customers get responses. Data stays sync'd. Support tickets get resolved. Everything moves forward without needing a human to push it.
+                <span className="text-white font-semibold">Good workflows quietly save hours every week.</span> Your team doesn&apos;t notice because work just flows. Leads get routed to the right person. Customers get responses. Data stays sync&apos;d. Support tickets get resolved. Everything moves forward without needing a human to push it.
               </p>
               <p className="text-gray-400 text-sm">
                 That&apos;s the goal. Automation so smooth that it becomes invisible. Your team focuses on judgment calls. The systems handle the repetition.

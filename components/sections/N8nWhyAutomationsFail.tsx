@@ -17,17 +17,17 @@ const failures = [
   {
     icon: Shuffle,
     title: 'No error handling or fallbacks',
-    description: 'When automation breaks (and it will), there's no graceful degradation. No human handoff. No logging. The whole process just stops and nobody notices until something breaks.',
+    description: 'When automation breaks (and it will), there\'s no graceful degradation. No human handoff. No logging. The whole process just stops and nobody notices until something breaks.',
   },
   {
     icon: Users,
     title: 'People left out of the loop',
-    description: 'Automation that doesn't include humans for judgment calls causes problems. High-stakes decisions need review. Low-risk tasks run automatically. Most automations get this backwards.',
+    description: 'Automation that doesn\'t include humans for judgment calls causes problems. High-stakes decisions need review. Low-risk tasks run automatically. Most automations get this backwards.',
   },
   {
     icon: Settings,
     title: 'Set it and forget it mentality',
-    description: 'Systems built once and never maintained. Requirements change. APIs update. Business processes evolve. Automations that aren't monitored and updated slowly break.',
+    description: 'Systems built once and never maintained. Requirements change. APIs update. Business processes evolve. Automations that aren\'t monitored and updated slowly break.',
   },
   {
     icon: Zap,

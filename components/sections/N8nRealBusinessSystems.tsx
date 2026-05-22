@@ -178,7 +178,7 @@ export default function N8nRealBusinessSystems() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <p className="text-gray-300 leading-relaxed">
-                <span className="text-white font-semibold">Clarity of purpose.</span> Every step serves a clear goal. No wasted actions. No "because we can automate it" logic. Just focused automation that moves work forward.
+                <span className="text-white font-semibold">Clarity of purpose.</span> Every step serves a clear goal. No wasted actions. No &quot;because we can automate it&quot; logic. Just focused automation that moves work forward.
               </p>
             </div>
             <div>
@@ -188,7 +188,7 @@ export default function N8nRealBusinessSystems() {
             </div>
             <div>
               <p className="text-gray-300 leading-relaxed">
-                <span className="text-white font-semibold">Measurable outcomes.</span> Every automated workflow produces metrics. You know it's working. You can improve it. You can measure the impact on your business.
+                <span className="text-white font-semibold">Measurable outcomes.</span> Every automated workflow produces metrics. You know it&apos;s working. You can improve it. You can measure the impact on your business.
               </p>
             </div>
           </div>
