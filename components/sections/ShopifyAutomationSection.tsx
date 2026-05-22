@@ -131,10 +131,10 @@ export default function ShopifyAutomationSection() {
             </p>
             <p className="text-gray-400 leading-relaxed mb-4">
               We integrate Shopify with n8n, Zapier, and custom APIs. Order workflows that move without manual work. CRM that stays
-              in sync. Inventory that never lies. Customers who get instant emails. Reporting that updates in real-time.
+              in sync. Inventory that never lies. Customers who get instant emails. Reporting that updates in real&apos;time.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              Ecommerce infrastructure means your team can focus on growth, not operations. That's what scales. That's what we
+              Ecommerce infrastructure means your team can focus on growth, not operations. That&apos;s what scales. That&apos;s what we
               build.
             </p>
           </div>

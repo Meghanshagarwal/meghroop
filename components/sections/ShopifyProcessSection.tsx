@@ -32,7 +32,7 @@ const steps = [
     number: '4',
     title: 'Automation Systems',
     description:
-      'Order workflows. Inventory sync. CRM integration. n8n orchestration. Backend infrastructure that scales and doesn\'t break.',
+      'Order workflows. Inventory sync. CRM integration. n8n orchestration. Backend infrastructure that scales and doesn&apos;t break.',
     color: 'from-sky-600/30',
     borderColor: 'border-sky-500/40',
   },
@@ -48,7 +48,7 @@ const steps = [
     number: '6',
     title: 'Launch & Iteration',
     description:
-      'Testing in production. Monitoring dashboards. A/B frameworks ready. We don\'t disappear after launch. Your store gets better over time.',
+      'Testing in production. Monitoring dashboards. A/B frameworks ready. We don&apos;t disappear after launch. Your store gets better over time.',
     color: 'from-purple-600/30',
     borderColor: 'border-purple-500/40',
   },
@@ -145,7 +145,7 @@ export default function ShopifyProcessSection() {
               throughout. We ship in phases, not big bangs. Your feedback shapes the outcome.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              The result is storefronts that are thoughtfully built, well-tested, and ready to scale. Shopify stores that don't just
+              The result is storefronts that are thoughtfully built, well-tested, and ready to scale. Shopify stores that don&apos;t just
               exist—they convert, they perform, and they grow.
             </p>
           </div>

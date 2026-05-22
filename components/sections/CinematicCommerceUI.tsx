@@ -122,8 +122,8 @@ export default function CinematicCommerceUI() {
           <div className="relative z-10">
             <h3 className="font-heading font-bold text-xl text-white mb-4">Why motion matters in ecommerce.</h3>
             <p className="text-gray-400 leading-relaxed mb-4">
-              Luxury brands don't rush their experiences. They make you feel every interaction. Every detail is intentional.
-              Ecommerce shouldn't be different. Smooth animations reduce cognitive load. Well-designed motion feels faster. Premium
+              Luxury brands don&apos;t rush their experiences. They make you feel every interaction. Every detail is intentional.
+              Ecommerce shouldn&apos;t be different. Smooth animations reduce cognitive load. Well-designed motion feels faster. Premium
               interfaces make people willing to spend.
             </p>
             <p className="text-gray-400 leading-relaxed">
