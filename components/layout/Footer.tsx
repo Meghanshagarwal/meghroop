@@ -22,6 +22,12 @@ const FacebookIcon = ({ size = 16 }: IconProps) => (
   </svg>
 )
 
+const XIcon = ({ size = 16 }: IconProps) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+)
+
 const socialLinks = [
   {
     icon: Mail,
@@ -40,6 +46,15 @@ const socialLinks = [
     glowColor: 'rgba(59,130,246,0.25)',
     borderHover: 'hover:border-blue-500/40',
     bgHover: 'hover:bg-blue-500/[0.08]',
+  },
+  {
+    icon: XIcon,
+    href: 'https://x.com/meghroop_tech',
+    label: 'Twitter',
+    hoverColor: 'hover:text-sky-400',
+    glowColor: 'rgba(56,189,248,0.25)',
+    borderHover: 'hover:border-sky-500/40',
+    bgHover: 'hover:bg-sky-500/[0.08]',
   },
   {
     icon: InstagramIcon,

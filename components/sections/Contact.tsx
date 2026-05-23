@@ -5,6 +5,12 @@ import { motion } from 'framer-motion'
 import { Send, Mail, MessageSquare, CheckCircle2, Loader2 } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 
+const XIcon = ({ size = 16 }: { size?: number }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+)
+
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', projectType: '', message: '' })
@@ -95,6 +101,14 @@ export default function Contact() {
                 href: 'mailto:hello@meghroop.tech',
                 color: 'text-purple-400',
                 bg: 'bg-purple-500/10 border-purple-500/20',
+              },
+              {
+                icon: XIcon,
+                label: 'Twitter / X',
+                value: '@meghroop_tech',
+                href: 'https://x.com/meghroop_tech',
+                color: 'text-sky-400',
+                bg: 'bg-sky-500/10 border-sky-500/20',
               },
               {
                 icon: MessageSquare,

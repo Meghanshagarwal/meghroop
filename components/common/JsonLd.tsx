@@ -95,6 +95,7 @@ const organizationSchema = {
     'https://linkedin.com/company/meghroop',
     'https://www.instagram.com/meghroop.tech',
     'https://www.facebook.com/meghroop.tech',
+    'https://x.com/meghroop_tech',
   ],
   aggregateRating: {
     '@type': 'AggregateRating',

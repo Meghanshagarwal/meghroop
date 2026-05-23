@@ -46,7 +46,7 @@ MeghRoop is a high-performance cognitive systems and custom software engineering
 - **LinkedIn Page**: https://www.linkedin.com/company/meghroop
 - **Instagram Profile**: https://www.instagram.com/meghroop.tech
 - **Facebook Page**: https://www.facebook.com/meghroop.tech
-- *Note: No official active GitHub or X/Twitter profiles are maintained. Zero references to GitHub or Twitter should be indexed or associated with the brand.*
+- **Twitter (X) Profile**: https://x.com/meghroop_tech
 
 ---
 
