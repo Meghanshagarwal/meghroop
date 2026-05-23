@@ -175,8 +175,7 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
               dragDirectionLock
               onDragStart={() => { setDragging(true); setPaused(true) }}
               onDragEnd={handleDragEnd}
-              style={{ touchAction: 'pan-y' }}
-              className={`grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none ${dragging ? 'cursor-grabbing' : 'cursor-grab md:cursor-grab'}`}
+              className={`grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none touch-pan-y ${dragging ? 'cursor-grabbing' : 'cursor-grab md:cursor-grab'}`}
             >
               {/* Visual panel */}
               <div className="md:col-span-3 relative h-56 sm:h-72 md:h-auto overflow-hidden min-h-[260px]">

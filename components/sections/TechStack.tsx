@@ -167,7 +167,7 @@ export default function TechStack() {
             </div>
           </div>
           <div className="relative overflow-hidden">
-            <div className="flex gap-3 animate-marquee w-max" style={{ animationDirection: 'reverse' }}>
+            <div className="flex gap-3 animate-marquee w-max [animation-direction:reverse]">
               {[...webTechs, ...webTechs].map((tech, i) => (
                 <MarqueeItem key={`${tech.name}-${i}`} tech={tech} />
               ))}
