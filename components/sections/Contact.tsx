@@ -1,21 +1,28 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Send, Mail, MessageSquare, CheckCircle2, Loader2 } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 
-const XIcon = ({ size = 16 }: { size?: number }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-)
 
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', projectType: '', message: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [whatsappNumber, setWhatsappNumber] = useState('919876543210')
   const formStartedRef = useRef(false)
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.whatsapp_number) {
+          setWhatsappNumber(data.whatsapp_number)
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -53,6 +60,10 @@ export default function Contact() {
 
   const inputClass =
     'w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.06] transition-all duration-200'
+
+  const formattedPhone = whatsappNumber.startsWith('91') && whatsappNumber.length === 12
+    ? `+91 ${whatsappNumber.slice(2, 7)} ${whatsappNumber.slice(7)}`
+    : `+${whatsappNumber}`
 
   return (
     <section id="contact" className="section-padding relative overflow-hidden" aria-label="Contact MeghRoop">
@@ -103,18 +114,10 @@ export default function Contact() {
                 bg: 'bg-purple-500/10 border-purple-500/20',
               },
               {
-                icon: XIcon,
-                label: 'Twitter / X',
-                value: '@meghroop_tech',
-                href: 'https://x.com/meghroop_tech',
-                color: 'text-sky-400',
-                bg: 'bg-sky-500/10 border-sky-500/20',
-              },
-              {
                 icon: MessageSquare,
                 label: 'WhatsApp',
                 value: 'Sometimes a quick message beats 17 emails.',
-                href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210'}`,
+                href: `https://wa.me/${whatsappNumber}`,
                 color: 'text-emerald-400',
                 bg: 'bg-emerald-500/10 border-emerald-500/20',
               },
@@ -148,7 +151,7 @@ export default function Contact() {
                 MeghRoop Studio<br />
                 Jaipur, Rajasthan, India · Working worldwide<br />
                 Email: <a href="mailto:hello@meghroop.tech" className="hover:text-gray-400 transition-colors">hello@meghroop.tech</a><br />
-                Phone: <a href="tel:+919876543210" className="hover:text-gray-400 transition-colors">+91 98765 43210</a>
+                Phone: <a href={`tel:+${whatsappNumber}`} className="hover:text-gray-400 transition-colors">{formattedPhone}</a>
               </address>
             </div>
           </motion.div>

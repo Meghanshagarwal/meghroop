@@ -1,10 +1,23 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { trackEvent } from '@/lib/analytics'
 
 export default function WhatsAppButton() {
-  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210'
+  const [number, setNumber] = useState('919876543210')
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.whatsapp_number) {
+          setNumber(data.whatsapp_number)
+        }
+      })
+      .catch(() => {})
+  }, [])
+
   const message = encodeURIComponent('Hi MeghRoop! I would like to discuss a project.')
   const href = `https://wa.me/${number}?text=${message}`
 
