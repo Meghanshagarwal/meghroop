@@ -174,6 +174,50 @@ const organizationSchema = {
   ],
 }
 
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${SITE_URL}/#localbusiness`,
+  name: 'MeghRoop',
+  image: `${SITE_URL}/og-image.png`,
+  url: SITE_URL,
+  telephone: '+91 98765 43210',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jaipur Road',
+    addressLocality: 'Jaipur',
+    addressRegion: 'Rajasthan',
+    postalCode: '302001',
+    addressCountry: 'IN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 26.9124,
+    longitude: 75.7873,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ],
+    opens: '09:00',
+    closes: '21:00',
+  },
+  sameAs: [
+    'https://linkedin.com/company/meghroop',
+    'https://www.instagram.com/meghroop.tech',
+    'https://www.facebook.com/meghroop.tech',
+    'https://x.com/meghroop_tech',
+    'https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ',
+  ],
+}
+
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -263,6 +307,10 @@ export default function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
       <script
         type="application/ld+json"

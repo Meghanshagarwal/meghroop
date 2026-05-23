@@ -82,7 +82,7 @@ export default function About() {
             <div className="absolute inset-0 bg-[#0a0a0a]" />
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/15 to-purple-500/15" />
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
+            <div className="absolute inset-0 rounded-2xl border border-white/[0.08]" />
 
             <div className="relative z-10 p-3.5 sm:p-5 md:p-6 h-full flex flex-col justify-between gap-3 sm:gap-4">
               <div className="flex items-start justify-between">
@@ -133,7 +133,7 @@ export default function About() {
             <div className="absolute inset-0 bg-[#0a0a0a]" />
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/15 to-blue-500/15" />
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
+            <div className="absolute inset-0 rounded-2xl border border-white/[0.08]" />
 
             <div className="relative z-10 p-3.5 sm:p-5 md:p-6 h-full flex flex-col justify-between gap-3 sm:gap-5">
               {/* Top */}
@@ -254,7 +254,7 @@ function StatCard({
       <div className="absolute inset-0 bg-[#0a0a0a]" />
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-40`} />
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-      <div className="absolute inset-0 rounded-2xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }} />
+      <div className="absolute inset-0 rounded-2xl border border-white/[0.08]" />
 
       <div className="relative z-10 p-3.5 sm:p-5 md:p-6 flex flex-col justify-between h-full gap-3 md:gap-4">
         <div>

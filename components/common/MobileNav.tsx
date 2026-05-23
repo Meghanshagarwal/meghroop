@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Home, FolderOpen, BrainCircuit, Layers, Mail } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
   { id: 'home',     label: 'Home',     Icon: Home },
@@ -72,33 +73,13 @@ export default function MobileNav() {
       <nav
         ref={navRef}
         aria-label="Mobile navigation"
+        className="md:hidden fixed bottom-[1.1rem] left-1/2 -translate-x-1/2 z-[9990] transition-transform duration-[400ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] w-[min(calc(100vw-2rem),360px)]"
         style={{
-          position: 'fixed',
-          bottom: '1.1rem',
-          left: '50%',
           transform: `translateX(-50%) translateY(${visible ? '0' : 'calc(100% + 1.5rem)'})`,
-          zIndex: 9990,
-          transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-          width: 'min(calc(100vw - 2rem), 360px)',
         }}
-        className="md:hidden"
       >
         {/* Pill container */}
-        <div
-          style={{
-            background: 'rgba(8, 8, 8, 0.82)',
-            backdropFilter: 'blur(28px)',
-            WebkitBackdropFilter: 'blur(28px)',
-            border: '1px solid rgba(255, 255, 255, 0.07)',
-            borderRadius: '9999px',
-            padding: '0.45rem 0.6rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            boxShadow:
-              '0 4px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.03) inset, 0 1px 0 rgba(255,255,255,0.06) inset',
-          }}
-        >
+        <div className="bg-[#080808]/82 backdrop-blur-[28px] border border-white/[0.07] rounded-full py-[0.45rem] px-[0.6rem] flex items-center justify-between shadow-[0_4px_32px_rgba(0,0,0,0.7),_inset_0_0_0_1px_rgba(255,255,255,0.03),_inset_0_1px_0_rgba(255,255,255,0.06)]">
           {NAV_ITEMS.map(({ id, label, Icon }) => {
             const isActive = active === id;
             return (
@@ -107,68 +88,35 @@ export default function MobileNav() {
                 onClick={() => scrollTo(id)}
                 aria-label={label}
                 aria-current={isActive ? 'page' : undefined}
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.2rem',
-                  padding: '0.45rem 0.3rem',
-                  borderRadius: '9999px',
-                  border: 'none',
-                  background: isActive
-                    ? 'rgba(255,255,255,0.08)'
-                    : 'transparent',
-                  boxShadow: isActive
-                    ? '0 0 16px rgba(167, 139, 250, 0.15), 0 0 0 1px rgba(255,255,255,0.06) inset'
-                    : 'none',
-                  cursor: 'pointer',
-                  transition: 'background 0.25s ease, box-shadow 0.25s ease',
-                  position: 'relative',
-                  WebkitTapHighlightColor: 'transparent',
-                  minWidth: 0,
-                }}
+                className={cn(
+                  'flex-1 flex flex-col items-center justify-center gap-[0.2rem] py-[0.45rem] px-[0.3rem] rounded-full border-none cursor-pointer relative min-w-0 transition-all duration-200 [-webkit-tap-highlight-color:transparent]',
+                  isActive
+                    ? 'bg-white/[0.08] shadow-[0_0_16px_rgba(167,139,250,0.15),_inset_0_0_0_1px_rgba(255,255,255,0.06)]'
+                    : 'bg-transparent shadow-none'
+                )}
               >
                 {/* Glow dot above active icon */}
                 {isActive && (
                   <span
                     aria-hidden="true"
-                    style={{
-                      position: 'absolute',
-                      top: '6px',
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      width: '3px',
-                      height: '3px',
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #a78bfa, #60a5fa)',
-                      boxShadow: '0 0 6px rgba(167,139,250,0.9)',
-                    }}
+                    className="absolute top-[6px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-gradient-to-br from-[#a78bfa] to-[#60a5fa] shadow-[0_0_6px_rgba(167,139,250,0.9)]"
                   />
                 )}
 
                 <Icon
                   size={isActive ? 19 : 18}
                   strokeWidth={isActive ? 2 : 1.6}
-                  style={{
-                    color: isActive ? '#fff' : 'rgba(255,255,255,0.38)',
-                    transition: 'color 0.25s ease, transform 0.25s ease',
-                    transform: isActive ? 'translateY(1px)' : 'none',
-                    flexShrink: 0,
-                  }}
+                  className={cn(
+                    'shrink-0 transition-all duration-[250ms] ease-out',
+                    isActive ? 'text-white translate-y-[1px]' : 'text-white/38 translate-y-0'
+                  )}
                 />
 
                 <span
-                  style={{
-                    fontSize: '0.6rem',
-                    fontWeight: isActive ? 600 : 400,
-                    letterSpacing: '0.02em',
-                    color: isActive ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.3)',
-                    transition: 'color 0.25s ease, font-weight 0.1s ease',
-                    lineHeight: 1,
-                    whiteSpace: 'nowrap',
-                  }}
+                  className={cn(
+                    'text-[0.6rem] tracking-[0.02em] leading-none whitespace-nowrap transition-all duration-[250ms] ease-out',
+                    isActive ? 'font-semibold text-white/90' : 'font-normal text-white/30'
+                  )}
                 >
                   {label}
                 </span>

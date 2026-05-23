@@ -57,15 +57,16 @@ export default function MeghRoopLogo({ variant = 'primary', className }: MeghRoo
     <span className={cn('inline-flex items-center gap-[6px]', className)}>
       <span
         className={cn(
-          'font-heading font-bold leading-none select-none tracking-tight',
+          'font-heading font-bold leading-none select-none',
           // Size
           isNavbar ? 'text-[17px]' : 'text-[22px]',
           // Color treatment
           isMonochrome ? 'text-white' : 'text-white',
           // Dark variant: barely-there glow that reads as "luminous"
-          isDark && '[text-shadow:0_0_20px_rgba(167,139,250,0.25)]'
+          isDark && '[text-shadow:0_0_20px_rgba(167,139,250,0.25)]',
+          // Custom precise letter spacing
+          'tracking-[-0.042em]'
         )}
-        style={{ letterSpacing: '-0.042em' }}
       >
         {/*
           Two spans for visual rhythm — "Megh" anchors left, "Roop" anchors right.
