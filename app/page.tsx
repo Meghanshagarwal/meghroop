@@ -1,21 +1,20 @@
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { getSupabase, type Project } from '@/lib/supabase'
 
-// Dynamically import heavy below-the-fold sections
-const About = dynamic(() => import('@/components/sections/About'), { ssr: false })
-const AgenticAI = dynamic(() => import('@/components/sections/AgenticAI'), { ssr: false })
-const MCPServers = dynamic(() => import('@/components/sections/MCPServers'), { ssr: false })
-const AIWorkflows = dynamic(() => import('@/components/sections/AIWorkflows'), { ssr: false })
-const Services = dynamic(() => import('@/components/sections/Services'), { ssr: false })
-const Projects = dynamic(() => import('@/components/sections/Projects'), { ssr: false })
-const TechStack = dynamic(() => import('@/components/sections/TechStack'), { ssr: false })
-const Testimonials = dynamic(() => import('@/components/sections/Testimonials'), { ssr: false })
-const FAQ = dynamic(() => import('@/components/sections/FAQ'), { ssr: false })
-const Contact = dynamic(() => import('@/components/sections/Contact'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import About from '@/components/sections/About'
+import AgenticAI from '@/components/sections/AgenticAI'
+import MCPServers from '@/components/sections/MCPServers'
+import AIWorkflows from '@/components/sections/AIWorkflows'
+import Services from '@/components/sections/Services'
+import Projects from '@/components/sections/Projects'
+import TechStack from '@/components/sections/TechStack'
+import Testimonials from '@/components/sections/Testimonials'
+import FAQ from '@/components/sections/FAQ'
+import Contact from '@/components/sections/Contact'
 
 
 export const revalidate = 86400

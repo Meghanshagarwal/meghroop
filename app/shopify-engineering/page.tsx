@@ -1,21 +1,20 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import ShopifyEngineeringHero from '@/components/sections/ShopifyEngineeringHero'
 
-// Dynamic below-the-fold imports
-const ShopifyEngineeringWhatWeBuild = dynamic(() => import('@/components/sections/ShopifyEngineeringWhatWeBuild'), { ssr: false })
-const ShopifyAISection = dynamic(() => import('@/components/sections/ShopifyAISection'), { ssr: false })
-const ShopifyPerformanceSection = dynamic(() => import('@/components/sections/ShopifyPerformanceSection'), { ssr: false })
-const CinematicCommerceUI = dynamic(() => import('@/components/sections/CinematicCommerceUI'), { ssr: false })
-const WhyStoresFeelGeneric = dynamic(() => import('@/components/sections/WhyStoresFeelGeneric'), { ssr: false })
-const ShopifyAutomationSection = dynamic(() => import('@/components/sections/ShopifyAutomationSection'), { ssr: false })
-const ShopifyProcessSection = dynamic(() => import('@/components/sections/ShopifyProcessSection'), { ssr: false })
-const ShopifyTechStack = dynamic(() => import('@/components/sections/ShopifyTechStack'), { ssr: false })
-const ShopifyEngineeringFAQ = dynamic(() => import('@/components/sections/ShopifyEngineeringFAQ'), { ssr: false })
-const ShopifyEngineeringCTA = dynamic(() => import('@/components/sections/ShopifyEngineeringCTA'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import ShopifyEngineeringWhatWeBuild from '@/components/sections/ShopifyEngineeringWhatWeBuild'
+import ShopifyAISection from '@/components/sections/ShopifyAISection'
+import ShopifyPerformanceSection from '@/components/sections/ShopifyPerformanceSection'
+import CinematicCommerceUI from '@/components/sections/CinematicCommerceUI'
+import WhyStoresFeelGeneric from '@/components/sections/WhyStoresFeelGeneric'
+import ShopifyAutomationSection from '@/components/sections/ShopifyAutomationSection'
+import ShopifyProcessSection from '@/components/sections/ShopifyProcessSection'
+import ShopifyTechStack from '@/components/sections/ShopifyTechStack'
+import ShopifyEngineeringFAQ from '@/components/sections/ShopifyEngineeringFAQ'
+import ShopifyEngineeringCTA from '@/components/sections/ShopifyEngineeringCTA'
 
 export const metadata: Metadata = {
   title: 'Shopify Development & E-commerce Engineering Studio | MeghRoop',

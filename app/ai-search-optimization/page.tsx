@@ -1,21 +1,20 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import AISearchOptimizationHero from '@/components/sections/AISearchOptimizationHero'
 
-// Dynamic below-the-fold imports
-const AISearchOptimizationWhatItMeans = dynamic(() => import('@/components/sections/AISearchOptimizationWhatItMeans'), { ssr: false })
-const AISearchOptimizationHowItWorks = dynamic(() => import('@/components/sections/AISearchOptimizationHowItWorks'), { ssr: false })
-const AISearchOptimizationTechnicalSEO = dynamic(() => import('@/components/sections/AISearchOptimizationTechnicalSEO'), { ssr: false })
-const AISearchOptimizationEntity = dynamic(() => import('@/components/sections/AISearchOptimizationEntity'), { ssr: false })
-const AISearchOptimizationWhyChanging = dynamic(() => import('@/components/sections/AISearchOptimizationWhyChanging'), { ssr: false })
-const AISearchOptimizationWebStructure = dynamic(() => import('@/components/sections/AISearchOptimizationWebStructure'), { ssr: false })
-const AISearchOptimizationProcess = dynamic(() => import('@/components/sections/AISearchOptimizationProcess'), { ssr: false })
-const AISearchOptimizationTechStack = dynamic(() => import('@/components/sections/AISearchOptimizationTechStack'), { ssr: false })
-const AISearchOptimizationFAQ = dynamic(() => import('@/components/sections/AISearchOptimizationFAQ'), { ssr: false })
-const AISearchOptimizationCTA = dynamic(() => import('@/components/sections/AISearchOptimizationCTA'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import AISearchOptimizationWhatItMeans from '@/components/sections/AISearchOptimizationWhatItMeans'
+import AISearchOptimizationHowItWorks from '@/components/sections/AISearchOptimizationHowItWorks'
+import AISearchOptimizationTechnicalSEO from '@/components/sections/AISearchOptimizationTechnicalSEO'
+import AISearchOptimizationEntity from '@/components/sections/AISearchOptimizationEntity'
+import AISearchOptimizationWhyChanging from '@/components/sections/AISearchOptimizationWhyChanging'
+import AISearchOptimizationWebStructure from '@/components/sections/AISearchOptimizationWebStructure'
+import AISearchOptimizationProcess from '@/components/sections/AISearchOptimizationProcess'
+import AISearchOptimizationTechStack from '@/components/sections/AISearchOptimizationTechStack'
+import AISearchOptimizationFAQ from '@/components/sections/AISearchOptimizationFAQ'
+import AISearchOptimizationCTA from '@/components/sections/AISearchOptimizationCTA'
 
 export const metadata: Metadata = {
   title: 'AI Search Optimization & GEO (Generative Engine Optimization) | MeghRoop',

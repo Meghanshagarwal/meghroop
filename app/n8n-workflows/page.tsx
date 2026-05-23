@@ -1,21 +1,20 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import N8nWorkflowsHero from '@/components/sections/N8nWorkflowsHero'
 
-// Dynamic below-the-fold imports
-const N8nWhatWeAutomate = dynamic(() => import('@/components/sections/N8nWhatWeAutomate'), { ssr: false })
-const N8nHowWorkflowsWork = dynamic(() => import('@/components/sections/N8nHowWorkflowsWork'), { ssr: false })
-const N8nAIAutomation = dynamic(() => import('@/components/sections/N8nAIAutomation'), { ssr: false })
-const N8nAPIIntegrations = dynamic(() => import('@/components/sections/N8nAPIIntegrations'), { ssr: false })
-const N8nWhyAutomationsFail = dynamic(() => import('@/components/sections/N8nWhyAutomationsFail'), { ssr: false })
-const N8nRealBusinessSystems = dynamic(() => import('@/components/sections/N8nRealBusinessSystems'), { ssr: false })
-const N8nDevelopmentProcess = dynamic(() => import('@/components/sections/N8nDevelopmentProcess'), { ssr: false })
-const N8nTechStack = dynamic(() => import('@/components/sections/N8nTechStack'), { ssr: false })
-const N8nFAQ = dynamic(() => import('@/components/sections/N8nFAQ'), { ssr: false })
-const N8nCTA = dynamic(() => import('@/components/sections/N8nCTA'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import N8nWhatWeAutomate from '@/components/sections/N8nWhatWeAutomate'
+import N8nHowWorkflowsWork from '@/components/sections/N8nHowWorkflowsWork'
+import N8nAIAutomation from '@/components/sections/N8nAIAutomation'
+import N8nAPIIntegrations from '@/components/sections/N8nAPIIntegrations'
+import N8nWhyAutomationsFail from '@/components/sections/N8nWhyAutomationsFail'
+import N8nRealBusinessSystems from '@/components/sections/N8nRealBusinessSystems'
+import N8nDevelopmentProcess from '@/components/sections/N8nDevelopmentProcess'
+import N8nTechStack from '@/components/sections/N8nTechStack'
+import N8nFAQ from '@/components/sections/N8nFAQ'
+import N8nCTA from '@/components/sections/N8nCTA'
 
 export const metadata: Metadata = {
   title: 'n8n Workflows & AI Automation Engineering | MeghRoop',

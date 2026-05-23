@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
@@ -7,15 +6,15 @@ import WhatsAppButton from '@/components/common/WhatsAppButton'
 // Import Section Components
 import SystemsHero from '@/components/sections/SystemsHero'
 
-// Dynamically import below-the-fold sections
-const SystemsFeaturedGrid = dynamic(() => import('@/components/sections/SystemsFeaturedGrid'), { ssr: false })
-const SystemsBreakdown = dynamic(() => import('@/components/sections/SystemsBreakdown'), { ssr: false })
-const SystemsThinking = dynamic(() => import('@/components/sections/SystemsThinking'), { ssr: false })
-const SystemsLabs = dynamic(() => import('@/components/sections/SystemsLabs'), { ssr: false })
-const SystemsOpinion = dynamic(() => import('@/components/sections/SystemsOpinion'), { ssr: false })
-const SystemsTechStack = dynamic(() => import('@/components/sections/SystemsTechStack'), { ssr: false })
-const SystemsFAQ = dynamic(() => import('@/components/sections/SystemsFAQ'), { ssr: false })
-const SystemsCTA = dynamic(() => import('@/components/sections/SystemsCTA'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import SystemsFeaturedGrid from '@/components/sections/SystemsFeaturedGrid'
+import SystemsBreakdown from '@/components/sections/SystemsBreakdown'
+import SystemsThinking from '@/components/sections/SystemsThinking'
+import SystemsLabs from '@/components/sections/SystemsLabs'
+import SystemsOpinion from '@/components/sections/SystemsOpinion'
+import SystemsTechStack from '@/components/sections/SystemsTechStack'
+import SystemsFAQ from '@/components/sections/SystemsFAQ'
+import SystemsCTA from '@/components/sections/SystemsCTA'
 
 export const metadata: Metadata = {
   title: 'Engineered Systems & Digital Workflows | Web Projects & AI Infrastructure | MeghRoop',

@@ -1,20 +1,19 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import WebEngineeringHero from '@/components/sections/WebEngineeringHero'
 
-// Dynamic below-the-fold imports
-const WebEngineeringWhatWeBuild = dynamic(() => import('@/components/sections/WebEngineeringWhatWeBuild'), { ssr: false })
-const DesignEngineering = dynamic(() => import('@/components/sections/DesignEngineering'), { ssr: false })
-const PerformanceSection = dynamic(() => import('@/components/sections/PerformanceSection'), { ssr: false })
-const CinematicUISection = dynamic(() => import('@/components/sections/CinematicUISection'), { ssr: false })
-const WhyWebsitesFeelDead = dynamic(() => import('@/components/sections/WhyWebsitesFeelDead'), { ssr: false })
-const DevelopmentProcess = dynamic(() => import('@/components/sections/DevelopmentProcess'), { ssr: false })
-const WebEngineeringTechStack = dynamic(() => import('@/components/sections/WebEngineeringTechStack'), { ssr: false })
-const WebEngineeringFAQ = dynamic(() => import('@/components/sections/WebEngineeringFAQ'), { ssr: false })
-const WebEngineeringCTA = dynamic(() => import('@/components/sections/WebEngineeringCTA'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import WebEngineeringWhatWeBuild from '@/components/sections/WebEngineeringWhatWeBuild'
+import DesignEngineering from '@/components/sections/DesignEngineering'
+import PerformanceSection from '@/components/sections/PerformanceSection'
+import CinematicUISection from '@/components/sections/CinematicUISection'
+import WhyWebsitesFeelDead from '@/components/sections/WhyWebsitesFeelDead'
+import DevelopmentProcess from '@/components/sections/DevelopmentProcess'
+import WebEngineeringTechStack from '@/components/sections/WebEngineeringTechStack'
+import WebEngineeringFAQ from '@/components/sections/WebEngineeringFAQ'
+import WebEngineeringCTA from '@/components/sections/WebEngineeringCTA'
 
 export const metadata: Metadata = {
   title: 'Next.js Web Engineering & Frontend Development Studio | MeghRoop',

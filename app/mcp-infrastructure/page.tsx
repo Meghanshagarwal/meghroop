@@ -1,21 +1,20 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import MCPInfrastructureHero from '@/components/sections/MCPInfrastructureHero'
 
-// Dynamic below-the-fold imports
-const MCPWhatItMeans = dynamic(() => import('@/components/sections/MCPWhatItMeans'), { ssr: false })
-const MCPHowItWorks = dynamic(() => import('@/components/sections/MCPHowItWorks'), { ssr: false })
-const MCPAIAgents = dynamic(() => import('@/components/sections/MCPAIAgents'), { ssr: false })
-const MCPIntelligentInfrastructure = dynamic(() => import('@/components/sections/MCPIntelligentInfrastructure'), { ssr: false })
-const MCPWhySystemsFeelLimited = dynamic(() => import('@/components/sections/MCPWhySystemsFeelLimited'), { ssr: false })
-const MCPUseCases = dynamic(() => import('@/components/sections/MCPUseCases'), { ssr: false })
-const MCPDevelopmentProcess = dynamic(() => import('@/components/sections/MCPDevelopmentProcess'), { ssr: false })
-const MCPTechStack = dynamic(() => import('@/components/sections/MCPTechStack'), { ssr: false })
-const MCPFAQ = dynamic(() => import('@/components/sections/MCPFAQ'), { ssr: false })
-const MCPCTA = dynamic(() => import('@/components/sections/MCPCTA'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import MCPWhatItMeans from '@/components/sections/MCPWhatItMeans'
+import MCPHowItWorks from '@/components/sections/MCPHowItWorks'
+import MCPAIAgents from '@/components/sections/MCPAIAgents'
+import MCPIntelligentInfrastructure from '@/components/sections/MCPIntelligentInfrastructure'
+import MCPWhySystemsFeelLimited from '@/components/sections/MCPWhySystemsFeelLimited'
+import MCPUseCases from '@/components/sections/MCPUseCases'
+import MCPDevelopmentProcess from '@/components/sections/MCPDevelopmentProcess'
+import MCPTechStack from '@/components/sections/MCPTechStack'
+import MCPFAQ from '@/components/sections/MCPFAQ'
+import MCPCTA from '@/components/sections/MCPCTA'
 
 export const metadata: Metadata = {
   title: 'MCP Infrastructure & AI Agent Integration | Model Context Protocol | MeghRoop',

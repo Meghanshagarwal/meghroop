@@ -1,21 +1,20 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import WordPressEngineeringHero from '@/components/sections/WordPressEngineeringHero'
 
-// Dynamic below-the-fold imports
-const WordPressWhatWeBuild = dynamic(() => import('@/components/sections/WordPressWhatWeBuild'), { ssr: false })
-const WordPressPerformance = dynamic(() => import('@/components/sections/WordPressPerformance'), { ssr: false })
-const WordPressHeadlessCMS = dynamic(() => import('@/components/sections/WordPressHeadlessCMS'), { ssr: false })
-const WordPressSEO = dynamic(() => import('@/components/sections/WordPressSEO'), { ssr: false })
-const WordPressOpinionSection = dynamic(() => import('@/components/sections/WordPressOpinionSection'), { ssr: false })
-const WordPressAutomation = dynamic(() => import('@/components/sections/WordPressAutomation'), { ssr: false })
-const WordPressDevelopmentProcess = dynamic(() => import('@/components/sections/WordPressDevelopmentProcess'), { ssr: false })
-const WordPressTechStack = dynamic(() => import('@/components/sections/WordPressTechStack'), { ssr: false })
-const WordPressFAQ = dynamic(() => import('@/components/sections/WordPressFAQ'), { ssr: false })
-const WordPressCTA = dynamic(() => import('@/components/sections/WordPressCTA'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import WordPressWhatWeBuild from '@/components/sections/WordPressWhatWeBuild'
+import WordPressPerformance from '@/components/sections/WordPressPerformance'
+import WordPressHeadlessCMS from '@/components/sections/WordPressHeadlessCMS'
+import WordPressSEO from '@/components/sections/WordPressSEO'
+import WordPressOpinionSection from '@/components/sections/WordPressOpinionSection'
+import WordPressAutomation from '@/components/sections/WordPressAutomation'
+import WordPressDevelopmentProcess from '@/components/sections/WordPressDevelopmentProcess'
+import WordPressTechStack from '@/components/sections/WordPressTechStack'
+import WordPressFAQ from '@/components/sections/WordPressFAQ'
+import WordPressCTA from '@/components/sections/WordPressCTA'
 
 export const metadata: Metadata = {
   title: 'WordPress Development & Headless CMS Engineering | MeghRoop',

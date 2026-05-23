@@ -1,19 +1,18 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import AIAgentsAutomationHero from '@/components/sections/AIAgentsAutomationHero'
 
-// Dynamic below-the-fold imports
-const WhatWeBuild = dynamic(() => import('@/components/sections/WhatWeBuild'), { ssr: false })
-const HowAIAgentsWork = dynamic(() => import('@/components/sections/HowAIAgentsWork'), { ssr: false })
-const AutomationSystems = dynamic(() => import('@/components/sections/AutomationSystems'), { ssr: false })
-const MCPContextInfrastructure = dynamic(() => import('@/components/sections/MCPContextInfrastructure'), { ssr: false })
-const WhyImplementationsFail = dynamic(() => import('@/components/sections/WhyImplementationsFail'), { ssr: false })
-const AIAgentsProcessSection = dynamic(() => import('@/components/sections/AIAgentsProcessSection'), { ssr: false })
-const AIAgentsAutomationFAQ = dynamic(() => import('@/components/sections/AIAgentsAutomationFAQ'), { ssr: false })
-const AIAgentsAutomationCTA = dynamic(() => import('@/components/sections/AIAgentsAutomationCTA'), { ssr: false })
+// Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
+import WhatWeBuild from '@/components/sections/WhatWeBuild'
+import HowAIAgentsWork from '@/components/sections/HowAIAgentsWork'
+import AutomationSystems from '@/components/sections/AutomationSystems'
+import MCPContextInfrastructure from '@/components/sections/MCPContextInfrastructure'
+import WhyImplementationsFail from '@/components/sections/WhyImplementationsFail'
+import AIAgentsProcessSection from '@/components/sections/AIAgentsProcessSection'
+import AIAgentsAutomationFAQ from '@/components/sections/AIAgentsAutomationFAQ'
+import AIAgentsAutomationCTA from '@/components/sections/AIAgentsAutomationCTA'
 
 export const metadata: Metadata = {
   title: 'AI Agents & Automation Systems | Autonomous Workflow Studio | MeghRoop',
