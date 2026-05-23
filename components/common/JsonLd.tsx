@@ -96,6 +96,7 @@ const organizationSchema = {
     'https://www.instagram.com/meghroop.tech',
     'https://www.facebook.com/meghroop.tech',
     'https://x.com/meghroop_tech',
+    'https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ',
   ],
   aggregateRating: {
     '@type': 'AggregateRating',

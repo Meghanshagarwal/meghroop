@@ -28,6 +28,12 @@ const XIcon = ({ size = 16 }: IconProps) => (
   </svg>
 )
 
+const YoutubeIcon = ({ size = 16 }: IconProps) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11C6.483 20.455 12 20.455 12 20.455s7.517 0 9.387-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+)
+
 const socialLinks = [
   {
     icon: Mail,
@@ -55,6 +61,15 @@ const socialLinks = [
     glowColor: 'rgba(56,189,248,0.25)',
     borderHover: 'hover:border-sky-500/40',
     bgHover: 'hover:bg-sky-500/[0.08]',
+  },
+  {
+    icon: YoutubeIcon,
+    href: 'https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ',
+    label: 'YouTube',
+    hoverColor: 'hover:text-red-500',
+    glowColor: 'rgba(239,68,68,0.25)',
+    borderHover: 'hover:border-red-500/40',
+    bgHover: 'hover:bg-red-500/[0.08]',
   },
   {
     icon: InstagramIcon,

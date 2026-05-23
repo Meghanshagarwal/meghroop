@@ -23,6 +23,12 @@ const FacebookIcon = ({ size = 14 }: { size?: number }) => (
   </svg>
 )
 
+const YoutubeIcon = ({ size = 14 }: { size?: number }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11C6.483 20.455 12 20.455 12 20.455s7.517 0 9.387-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+)
+
 export default function ContactMinimalDetails() {
   const [copied, setCopied] = useState(false)
 
@@ -36,6 +42,7 @@ export default function ContactMinimalDetails() {
     { icon: LinkedinIcon, href: 'https://linkedin.com/company/meghroop', label: 'LinkedIn // Studio' },
     { icon: InstagramIcon, href: 'https://www.instagram.com/meghroop.tech', label: 'Instagram // Feed' },
     { icon: FacebookIcon, href: 'https://www.facebook.com/meghroop.tech', label: 'Facebook // Hub' },
+    { icon: YoutubeIcon, href: 'https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ', label: 'YouTube // Channel' },
   ]
 
   return (
@@ -93,7 +100,7 @@ export default function ContactMinimalDetails() {
               </button>
             </div>
           </div>
-
+ 
           {/* Card 2: Social Networks */}
           <div className="p-6 sm:p-8 rounded-2xl border border-white/[0.06] bg-[#050505]/50 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.1] transition-all flex flex-col justify-between min-h-[180px]">
             <div className="space-y-4">
@@ -106,7 +113,7 @@ export default function ContactMinimalDetails() {
               </p>
             </div>
             
-            <div className="grid grid-cols-3 gap-2 mt-4">
+            <div className="grid grid-cols-4 gap-2 mt-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon
                 return (
