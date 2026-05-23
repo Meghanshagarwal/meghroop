@@ -24,8 +24,7 @@ export default function AboutHero() {
 
         {/* Cinematic Slogans */}
         <h1
-          className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl animate-fade-up"
-          style={{ animationDelay: '100ms' }}
+          className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl animate-fade-up [animation-delay:100ms]"
         >
           Two people. Multiple tabs open. <br className="hidden sm:inline" />
           <span className="gradient-text">Still shipping.</span>
@@ -33,16 +32,14 @@ export default function AboutHero() {
 
         {/* Subtitle */}
         <p
-          className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-12 animate-fade-up"
-          style={{ animationDelay: '200ms' }}
+          className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-12 animate-fade-up [animation-delay:200ms]"
         >
           MeghRoop is a modern AI engineering and creative technology studio. We design high-conversion storefronts, secure automated operations, and internet-native systems built to scale.
         </p>
 
         {/* Telemetry card for the founders */}
         <div
-          className="w-full max-w-3xl rounded-2xl border border-white/[0.08] bg-[#050505]/75 p-6 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.12] transition-colors duration-300 animate-fade-up"
-          style={{ animationDelay: '300ms' }}
+          className="w-full max-w-3xl rounded-2xl border border-white/[0.08] bg-[#050505]/75 p-6 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.12] transition-colors duration-300 animate-fade-up [animation-delay:300ms]"
         >
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
           

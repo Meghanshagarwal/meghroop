@@ -39,16 +39,14 @@ export default function Hero() {
 
         {/* Studio name */}
         <p
-          className="font-heading font-bold text-sm sm:text-base text-gray-500 uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 animate-fade-up"
-          style={{ animationDelay: '100ms' }}
+          className="font-heading font-bold text-sm sm:text-base text-gray-500 uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 animate-fade-up [animation-delay:100ms]"
         >
           MeghRoop
         </p>
 
         {/* Main headline */}
         <h1
-          className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-5 sm:mb-6 animate-fade-up"
-          style={{ animationDelay: '200ms' }}
+          className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-5 sm:mb-6 animate-fade-up [animation-delay:200ms]"
         >
           We build things.{' '}
           <br />
@@ -59,8 +57,7 @@ export default function Hero() {
 
         {/* Subtext */}
         <p
-          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 animate-fade-up"
-          style={{ animationDelay: '350ms' }}
+          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 animate-fade-up [animation-delay:350ms]"
         >
           Two engineers. One obsession. We build AI systems, autonomous agents, Shopify storefronts, and web experiences —{' '}
           <span className="text-white">the kind that stay open in someone&apos;s tab for longer than makes sense.</span>
@@ -68,8 +65,7 @@ export default function Hero() {
 
         {/* Capability pills */}
         <div
-          className="flex flex-wrap justify-center gap-2 mb-10 animate-fade-up"
-          style={{ animationDelay: '420ms' }}
+          className="flex flex-wrap justify-center gap-2 mb-10 animate-fade-up [animation-delay:420ms]"
         >
           {pills.map((pill) => (
             <span
@@ -83,8 +79,7 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-up"
-          style={{ animationDelay: '500ms' }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-up [animation-delay:500ms]"
         >
           <Link
             href="#agentic-ai"
@@ -105,8 +100,7 @@ export default function Hero() {
 
         {/* Social proof bar */}
         <div
-          className="mt-10 sm:mt-16 flex flex-row items-center justify-center gap-8 sm:gap-10 animate-fade-up"
-          style={{ animationDelay: '600ms' }}
+          className="mt-10 sm:mt-16 flex flex-row items-center justify-center gap-8 sm:gap-10 animate-fade-up [animation-delay:600ms]"
         >
           {[
             { value: '30+', label: 'Things shipped' },

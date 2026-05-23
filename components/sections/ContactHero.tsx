@@ -24,8 +24,7 @@ export default function ContactHero() {
 
         {/* Title */}
         <h1
-          className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl animate-fade-up"
-          style={{ animationDelay: '100ms' }}
+          className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl animate-fade-up [animation-delay:100ms]"
         >
           Good systems usually start <br className="hidden sm:inline" />
           <span className="gradient-text">with a conversation.</span>
@@ -33,16 +32,14 @@ export default function ContactHero() {
 
         {/* Subtitle */}
         <p
-          className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-8 animate-fade-up"
-          style={{ animationDelay: '200ms' }}
+          className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-8 animate-fade-up [animation-delay:200ms]"
         >
           Tell us what you&apos;re building, what needs optimization, or just what&apos;s on your mind. We read every message. Even the unnecessarily long ones.
         </p>
 
         {/* Gateway Telemetry Stats */}
         <div
-          className="w-full max-w-2xl rounded-xl border border-white/[0.08] bg-[#050505]/75 p-4 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.12] transition-colors duration-300 animate-fade-up"
-          style={{ animationDelay: '300ms' }}
+          className="w-full max-w-2xl rounded-xl border border-white/[0.08] bg-[#050505]/75 p-4 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.12] transition-colors duration-300 animate-fade-up [animation-delay:300ms]"
         >
           <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] text-gray-500">
             <span className="flex items-center gap-1.5 text-cyan-400/80">

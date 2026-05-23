@@ -31,8 +31,7 @@ export default function SystemsHero() {
 
         {/* Title */}
         <h1
-          className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl animate-fade-up"
-          style={{ animationDelay: '100ms' }}
+          className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl animate-fade-up [animation-delay:100ms]"
         >
           Selected systems from the <br className="hidden sm:inline" />
           <span className="gradient-text">modern internet.</span>
@@ -40,16 +39,14 @@ export default function SystemsHero() {
 
         {/* Subtitle */}
         <p
-          className="text-gray-400 text-base sm:text-lg md:text-xl max-w-3xl leading-relaxed mb-12 animate-fade-up"
-          style={{ animationDelay: '200ms' }}
+          className="text-gray-400 text-base sm:text-lg md:text-xl max-w-3xl leading-relaxed mb-12 animate-fade-up [animation-delay:200ms]"
         >
           We design interfaces that feel inevitable, workflows that govern complex operational logic, and secure AI systems built to quietly scale.
         </p>
 
         {/* Dynamic telemetry card */}
         <div
-          className="w-full max-w-4xl rounded-2xl border border-white/[0.08] bg-[#050505]/80 p-6 sm:p-8 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.12] transition-colors duration-300 animate-fade-up"
-          style={{ animationDelay: '300ms' }}
+          className="w-full max-w-4xl rounded-2xl border border-white/[0.08] bg-[#050505]/80 p-6 sm:p-8 backdrop-blur-md relative overflow-hidden group hover:border-white/[0.12] transition-colors duration-300 animate-fade-up [animation-delay:300ms]"
         >
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
           

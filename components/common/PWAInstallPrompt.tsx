@@ -57,25 +57,7 @@ export default function PWAInstallPrompt() {
     <div
       role="dialog"
       aria-label="Install MeghRoop app"
-      style={{
-        position: 'fixed',
-        bottom: '1.25rem',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 9999,
-        width: 'min(calc(100vw - 2rem), 380px)',
-        background: 'rgba(18, 18, 18, 0.96)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        borderRadius: '16px',
-        padding: '1rem 1.25rem',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.875rem',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-        animation: 'pwa-slide-up 0.3s ease',
-      }}
+      className="fixed bottom-[1.25rem] left-1/2 -translate-x-1/2 z-[9999] w-[min(calc(100vw-2rem),380px)] bg-[#121212]/96 backdrop-blur-[20px] border border-white/10 rounded-2xl py-4 px-5 flex items-center gap-[0.875rem] shadow-[0_8px_32px_rgba(0,0,0,0.5)] animate-[pwa-slide-up_0.3s_ease]"
     >
       <style>{`
         @keyframes pwa-slide-up {
@@ -90,48 +72,31 @@ export default function PWAInstallPrompt() {
         alt="MeghRoop"
         width={44}
         height={44}
-        style={{ borderRadius: '10px', flexShrink: 0 }}
+        className="rounded-[10px] shrink-0"
       />
 
       {/* Text */}
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ margin: 0, fontSize: '0.875rem', fontWeight: 600, color: '#fff' }}>
+      <div className="flex-1 min-w-0">
+        <p className="m-0 text-sm font-semibold text-white">
           Add to Home Screen
         </p>
-        <p style={{ margin: '0.15rem 0 0', fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)' }}>
+        <p className="mt-[0.15rem] mx-0 mb-0 text-xs text-white/45">
           MeghRoop — works offline too
         </p>
       </div>
 
       {/* Actions */}
-      <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+      <div className="flex gap-2 shrink-0">
         <button
           onClick={handleDismiss}
-          aria-label="Dismiss"
-          style={{
-            background: 'transparent',
-            border: '1px solid rgba(255,255,255,0.15)',
-            color: 'rgba(255,255,255,0.5)',
-            padding: '0.4rem 0.75rem',
-            borderRadius: '8px',
-            fontSize: '0.8rem',
-            cursor: 'pointer',
-          }}
+          aria-label="Not now (dismiss install prompt)"
+          className="bg-transparent border border-white/15 text-white/50 py-[0.4rem] px-[0.75rem] rounded-lg text-[0.8rem] cursor-pointer hover:bg-white/[0.04] hover:text-white transition-colors"
         >
           Not now
         </button>
         <button
           onClick={handleInstall}
-          style={{
-            background: '#fff',
-            color: '#000',
-            border: 'none',
-            padding: '0.4rem 0.875rem',
-            borderRadius: '8px',
-            fontSize: '0.8rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-          }}
+          className="bg-white text-black border-none py-[0.4rem] px-[0.875rem] rounded-lg text-[0.8rem] font-semibold cursor-pointer hover:bg-gray-100 transition-colors"
         >
           Install
         </button>
