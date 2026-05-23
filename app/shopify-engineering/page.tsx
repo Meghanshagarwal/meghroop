@@ -17,8 +17,8 @@ import ShopifyEngineeringFAQ from '@/components/sections/ShopifyEngineeringFAQ'
 import ShopifyEngineeringCTA from '@/components/sections/ShopifyEngineeringCTA'
 
 export const metadata: Metadata = {
-  title: 'Shopify Development & E-commerce Engineering Studio | MeghRoop',
-  description: 'Expert Shopify development and custom ecommerce engineering. We build high-performance storefronts, headless commerce architectures, AI-powered automation systems, and premium Next.js ecommerce sites.',
+  title: 'Shopify & E-commerce Engineering',
+  description: 'Expert Shopify development & custom e-commerce engineering. We build high-performance storefronts, headless architectures, and AI automations.',
   keywords: [
     'Shopify development',
     'Shopify engineering',

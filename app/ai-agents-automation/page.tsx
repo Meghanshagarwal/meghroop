@@ -15,8 +15,8 @@ import AIAgentsAutomationFAQ from '@/components/sections/AIAgentsAutomationFAQ'
 import AIAgentsAutomationCTA from '@/components/sections/AIAgentsAutomationCTA'
 
 export const metadata: Metadata = {
-  title: 'AI Agents & Automation Systems | Autonomous Workflow Studio | MeghRoop',
-  description: 'Custom AI agents, autonomous workflow orchestration, and intelligent automation systems. We build agentic AI solutions for operations, CRM, sales, and workflows using n8n and custom MCP servers.',
+  title: 'AI Agents & Automation',
+  description: 'Custom AI agents and autonomous workflow systems. We build agentic AI solutions for operations, sales, and CRMs using n8n and custom MCP servers.',
   keywords: [
     'AI agents',
     'AI automation',

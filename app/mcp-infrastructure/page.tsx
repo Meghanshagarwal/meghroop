@@ -17,9 +17,9 @@ import MCPFAQ from '@/components/sections/MCPFAQ'
 import MCPCTA from '@/components/sections/MCPCTA'
 
 export const metadata: Metadata = {
-  title: 'MCP Infrastructure & AI Agent Integration | Model Context Protocol | MeghRoop',
+  title: 'MCP Infrastructure & Integration',
   description:
-    'Custom Model Context Protocol (MCP) infrastructure, vector database memory pools, and intelligent agent backend orchestration. We build context-aware AI systems grounded in reality.',
+    'Custom Model Context Protocol (MCP) infrastructure, memory pools, and secure agent backends. We build context-aware systems grounded in your real data.',
   keywords: [
     'MCP Infrastructure',
     'MCP Servers',

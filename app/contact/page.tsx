@@ -18,7 +18,7 @@ import ContactCTA from '@/components/sections/ContactCTA'
 
 
 export const metadata: Metadata = {
-  title: 'Contact MeghRoop | AI Engineering & Web Development Studio',
+  title: 'Start a Project',
   description:
     'Start a conversation about your next system. Inquire about custom AI automation, headless Shopify frontends, and high-performance digital architectures.',
   keywords: [

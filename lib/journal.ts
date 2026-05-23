@@ -159,7 +159,7 @@ await server.connect(transport);`
       }
     ],
     seo: {
-      title: 'Model Context Protocol (MCP) AI Infrastructure Playbook',
+      title: 'Model Context Protocol (MCP) AI Playbook',
       description: 'Stop LLM hallucinations by establishing structured, context-rich pathways directly into your database and API layers with custom MCP servers.',
       keywords: ['Model Context Protocol', 'MCP server development', 'AI grounding infrastructure', 'agentic AI systems', 'LLM databases integration', 'custom AI tools', 'production AI agents']
     },
@@ -289,7 +289,7 @@ await server.connect(transport);`
       }
     ],
     seo: {
-      title: 'Generative Engine Optimization (GEO) Engineering Playbook',
+      title: 'Generative Engine Optimization Playbook',
       description: 'Traditional SEO is shifting. Learn the engineering playbook to make your brand visible to ChatGPT, Perplexity, and Google AI Overviews.',
       keywords: ['Generative Engine Optimization', 'GEO optimization', 'AI Search optimization', 'Perplexity SEO', 'ChatGPT search optimization', 'Semantic SEO', 'JSON-LD entity graph']
     },
@@ -451,7 +451,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       }
     ],
     seo: {
-      title: 'Headless Shopify Next.js Sub-400ms Edge Architecture Playbook',
+      title: 'Headless Shopify Edge Architecture Playbook',
       description: 'Monolithic Shopify themes bleed conversion. Discover the complete technical playbook to build globally-distributed headless storefronts on Next.js.',
       keywords: ['Headless Shopify', 'Next.js e-commerce', 'Shopify Storefront API', 'headless commerce latency', 'Lighthouse web vitals', 'dynamic ISR', 'AVIF image optimization']
     },
@@ -554,7 +554,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       }
     ],
     seo: {
-      title: 'Autonomous n8n Workflow Automation Architecture Playbook',
+      title: 'Autonomous n8n Workflow Automation Playbook',
       description: 'Discover how to build resilient, self-healing workflow automation pipelines using n8n and advanced error-capturing architectures.',
       keywords: ['n8n automation', 'workflow engineering', 'resilient API integration', 'error trigger failover', 'multi-agent orchestration', 'operational automation', 'enterprise automation']
     },

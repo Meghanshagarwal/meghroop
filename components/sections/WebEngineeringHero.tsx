@@ -66,10 +66,16 @@ export default function WebEngineeringHero() {
         {/* Subtext */}
         <motion.p
           {...fadeUp(0.35)}
-          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8"
+          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-4"
         >
           Modern websites built for the internet we have now.{' '}
           <span className="text-white">Custom Next.js applications, cinematic interfaces, and engineered systems that stay open in someone&apos;s tab for longer than makes sense.</span> Not templates. Not slow. Not built to look generic.
+        </motion.p>
+        <motion.p
+          {...fadeUp(0.38)}
+          className="text-gray-500 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed mb-8"
+        >
+          Our web engineering approach focuses heavily on core web performance metrics. By bypassing heavy monolithic frameworks in favor of globally-distributed serverless configurations, optimized asset delivery pipelines, and visual layout stability, we ensure your users experience seamless transitions.
         </motion.p>
 
         {/* Capability pills */}

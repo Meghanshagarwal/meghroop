@@ -17,8 +17,8 @@ import WordPressFAQ from '@/components/sections/WordPressFAQ'
 import WordPressCTA from '@/components/sections/WordPressCTA'
 
 export const metadata: Metadata = {
-  title: 'WordPress Development & Headless CMS Engineering | MeghRoop',
-  description: 'Expert custom WordPress development and headless CMS engineering. We build high-performance, SEO-optimized publishing systems, scalable content infrastructures, and API integrations.',
+  title: 'WordPress & CMS Engineering',
+  description: 'Expert custom WordPress development and headless CMS engineering. We build high-performance publishing systems and scalable content infrastructures.',
   keywords: [
     'WordPress development',
     'WordPress engineering',

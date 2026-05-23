@@ -61,9 +61,17 @@ export default function JournalCatalog({ articles }: JournalCatalogProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-400 text-lg sm:text-xl leading-relaxed font-light"
+            className="text-gray-400 text-lg sm:text-xl leading-relaxed font-light mb-4"
           >
             Deep architectural teardowns, technical playbooks, and strategic perspectives on generative engines, high-performance web systems, and autonomous infrastructure.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="text-gray-500 text-sm sm:text-base leading-relaxed"
+          >
+            Our engineering journal is a collection of direct playbooks and post-mortems from real production deployments. We document our methods, benchmarks, and breakthroughs in Model Context Protocol (MCP) integrations, Generative Engine Optimization (GEO) indexes, headless e-commerce builds, and complex autonomous workflow systems. No surface-level summaries—just granular logs written by engineers, for engineers.
           </motion.p>
         </div>
 

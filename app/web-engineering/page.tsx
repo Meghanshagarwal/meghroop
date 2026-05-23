@@ -16,8 +16,8 @@ import WebEngineeringFAQ from '@/components/sections/WebEngineeringFAQ'
 import WebEngineeringCTA from '@/components/sections/WebEngineeringCTA'
 
 export const metadata: Metadata = {
-  title: 'Next.js Web Engineering & Frontend Development Studio | MeghRoop',
-  description: 'Premium Next.js web engineering services. We develop fast, scalable, and beautifully designed web systems, React applications, and custom cinematic user experiences.',
+  title: 'Next.js & Web Engineering',
+  description: 'Premium Next.js web engineering and frontend development services. We build fast, secure React applications and high-fidelity user experiences.',
   keywords: [
     'web engineering',
     'website development',

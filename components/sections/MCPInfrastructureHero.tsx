@@ -73,10 +73,16 @@ export default function MCPInfrastructureHero() {
         {/* Subtext */}
         <motion.p
           {...fadeUp(0.35)}
-          className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-8"
+          className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-4"
         >
           Disconnected models produce fragmented outcomes. We build{' '}
           <span className="text-white">grounded context pipelines, custom Model Context Protocol (MCP) servers</span>, and memory-aware agent infrastructure to turn raw LLMs into intelligent, deterministic systems that act on truth.
+        </motion.p>
+        <motion.p
+          {...fadeUp(0.38)}
+          className="text-gray-500 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed mb-8"
+        >
+          Model Context Protocol represents a massive paradigm shift in artificial intelligence engineering. By standardizing the way language models securely read company databases, fetch REST API endpoints, and execute contextual tools, we eliminate the brittleness of early chatbot implementations.
         </motion.p>
 
         {/* Capability pills */}

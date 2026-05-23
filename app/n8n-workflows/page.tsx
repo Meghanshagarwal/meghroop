@@ -17,9 +17,9 @@ import N8nFAQ from '@/components/sections/N8nFAQ'
 import N8nCTA from '@/components/sections/N8nCTA'
 
 export const metadata: Metadata = {
-  title: 'n8n Workflows & AI Automation Engineering | MeghRoop',
+  title: 'n8n Workflow Automation',
   description:
-    'Premium n8n automation and workflow engineering services. We build custom operational pipelines, CRM automations, complex API integrations, and robust business automation infrastructure.',
+    'Premium n8n workflow automation services. We build custom operational pipelines, CRM integrations, and self-healing business automation infrastructure.',
   keywords: [
     'n8n automation',
     'workflow automation',

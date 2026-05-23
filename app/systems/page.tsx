@@ -17,9 +17,9 @@ import SystemsFAQ from '@/components/sections/SystemsFAQ'
 import SystemsCTA from '@/components/sections/SystemsCTA'
 
 export const metadata: Metadata = {
-  title: 'Engineered Systems & Digital Workflows | Web Projects & AI Infrastructure | MeghRoop',
+  title: 'Engineered Digital Systems',
   description:
-    'Curated showcase of high-performance custom systems, AI-native infrastructures, Shopify architectures, n8n automations, and intuitive digital interfaces engineered by MeghRoop.',
+    'Curated showcase of high-performance digital systems, custom AI infrastructure, headless Shopify frontends, and robust n8n workflow automations.',
   keywords: [
     'Web Projects',
     'AI Systems',

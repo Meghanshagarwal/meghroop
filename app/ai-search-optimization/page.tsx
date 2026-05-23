@@ -17,8 +17,8 @@ import AISearchOptimizationFAQ from '@/components/sections/AISearchOptimizationF
 import AISearchOptimizationCTA from '@/components/sections/AISearchOptimizationCTA'
 
 export const metadata: Metadata = {
-  title: 'AI Search Optimization & GEO (Generative Engine Optimization) | MeghRoop',
-  description: 'Premium AI search optimization and GEO (Generative Engine Optimization) services. Optimize your semantic architecture, knowledge graphs, and entities to rank inside Perplexity, Claude, ChatGPT, and Gemini.',
+  title: 'AI Search & GEO Optimization',
+  description: 'Premium AI search optimization & GEO services. Optimize your semantic architecture and entity nodes to cite your brand inside ChatGPT & Perplexity.',
   keywords: [
     'AI search optimization',
     'AI SEO',

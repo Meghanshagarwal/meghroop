@@ -18,9 +18,9 @@ import AboutCTA from '@/components/sections/AboutCTA'
 
 
 export const metadata: Metadata = {
-  title: 'About MeghRoop | AI Engineering & Creative Technology Studio',
+  title: 'AI & Web Engineering',
   description:
-    'Two engineers building modern internet systems. Explore who we are, what we believe, how we work, and the custom AI infrastructures and cinematic storefronts we ship.',
+    'Two engineers building modern internet systems. Meet the team, explore our design philosophy, and learn how we ship custom AI & web engineering solutions.',
   keywords: [
     'AI Engineering Studio',
     'Web Engineering Studio',

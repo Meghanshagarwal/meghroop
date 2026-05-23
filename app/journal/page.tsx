@@ -6,9 +6,9 @@ import JournalCatalog from '@/components/sections/JournalCatalog'
 import { articles } from '@/lib/journal'
 
 export const metadata: Metadata = {
-  title: 'Engineering Journal | AI Insights, Web Architecture & Custom Workflows | MeghRoop',
+  title: 'Engineering Journal',
   description:
-    'Deep engineering logs, strategic playbooks, and structural explorations on Generative Engine Optimization (GEO), Model Context Protocol (MCP) networks, headless commerce speeds, and autonomous workflow automation systems.',
+    'Deep engineering logs, strategic playbooks, and structural explorations on Generative Engine Optimization, MCP networks, and n8n workflow systems.',
   keywords: [
     'AI Engineering Journal',
     'Model Context Protocol',

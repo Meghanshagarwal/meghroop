@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   const fullUrl = `${SITE_URL}/journal/${article.slug}`
 
   return {
-    title: `${article.seo.title} | MeghRoop Journal`,
+    title: article.seo.title,
     description: article.seo.description,
     keywords: article.seo.keywords,
     alternates: {
