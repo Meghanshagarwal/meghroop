@@ -17,7 +17,7 @@ import ShopifyEngineeringFAQ from '@/components/sections/ShopifyEngineeringFAQ'
 import ShopifyEngineeringCTA from '@/components/sections/ShopifyEngineeringCTA'
 
 export const metadata: Metadata = {
-  title: 'Shopify & E-commerce Engineering',
+  title: 'Headless Shopify & E-commerce Engineering',
   description: 'Expert Shopify development & custom e-commerce engineering. We build high-performance storefronts, headless architectures, and AI automations.',
   keywords: [
     'Shopify development',

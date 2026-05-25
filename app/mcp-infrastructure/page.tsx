@@ -17,7 +17,7 @@ import MCPFAQ from '@/components/sections/MCPFAQ'
 import MCPCTA from '@/components/sections/MCPCTA'
 
 export const metadata: Metadata = {
-  title: 'MCP Infrastructure & Integration',
+  title: 'Model Context Protocol & MCP Servers',
   description:
     'Custom Model Context Protocol (MCP) infrastructure, memory pools, and secure agent backends. We build context-aware systems grounded in your real data.',
   keywords: [

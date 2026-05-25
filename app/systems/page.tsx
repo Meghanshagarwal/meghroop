@@ -17,7 +17,7 @@ import SystemsFAQ from '@/components/sections/SystemsFAQ'
 import SystemsCTA from '@/components/sections/SystemsCTA'
 
 export const metadata: Metadata = {
-  title: 'Engineered Digital Systems',
+  title: 'Engineered Systems & Bespoke Web Platforms',
   description:
     'Curated showcase of high-performance digital systems, custom AI infrastructure, headless Shopify frontends, and robust n8n workflow automations.',
   keywords: [

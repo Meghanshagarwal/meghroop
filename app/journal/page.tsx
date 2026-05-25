@@ -6,7 +6,7 @@ import JournalCatalog from '@/components/sections/JournalCatalog'
 import { articles } from '@/lib/journal'
 
 export const metadata: Metadata = {
-  title: 'Engineering Journal',
+  title: 'Engineering Journal — AI & Web Architecture',
   description:
     'Deep engineering logs, strategic playbooks, and structural explorations on Generative Engine Optimization, MCP networks, and n8n workflow systems.',
   keywords: [

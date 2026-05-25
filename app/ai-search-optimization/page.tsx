@@ -17,7 +17,7 @@ import AISearchOptimizationFAQ from '@/components/sections/AISearchOptimizationF
 import AISearchOptimizationCTA from '@/components/sections/AISearchOptimizationCTA'
 
 export const metadata: Metadata = {
-  title: 'AI Search & GEO Optimization',
+  title: 'AI Search Optimization & GEO Engine Ranking',
   description: 'Premium AI search optimization & GEO services. Optimize your semantic architecture and entity nodes to cite your brand inside ChatGPT & Perplexity.',
   keywords: [
     'AI search optimization',

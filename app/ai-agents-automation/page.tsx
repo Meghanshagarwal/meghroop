@@ -15,7 +15,7 @@ import AIAgentsAutomationFAQ from '@/components/sections/AIAgentsAutomationFAQ'
 import AIAgentsAutomationCTA from '@/components/sections/AIAgentsAutomationCTA'
 
 export const metadata: Metadata = {
-  title: 'AI Agents & Automation',
+  title: 'Autonomous AI Agents & Workflow Automation',
   description: 'Custom AI agents and autonomous workflow systems. We build agentic AI solutions for operations, sales, and CRMs using n8n and custom MCP servers.',
   keywords: [
     'AI agents',

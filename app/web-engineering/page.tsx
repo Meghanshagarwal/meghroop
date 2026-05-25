@@ -16,7 +16,7 @@ import WebEngineeringFAQ from '@/components/sections/WebEngineeringFAQ'
 import WebEngineeringCTA from '@/components/sections/WebEngineeringCTA'
 
 export const metadata: Metadata = {
-  title: 'Next.js & Web Engineering',
+  title: 'Next.js Frontend & Web Engineering Studio',
   description: 'Premium Next.js web engineering and frontend development services. We build fast, secure React applications and high-fidelity user experiences.',
   keywords: [
     'web engineering',
