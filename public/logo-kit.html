@@ -26,6 +26,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'Space Grotesk';
+      src: url('/SpaceGrotesk-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -409,7 +415,7 @@
       <div class="banner-stack">
         <div class="asset-card">
           <div class="asset-preview">
-            <canvas id="li-banner" width="1584" height="396" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
+            <canvas id="li-banner" width="3168" height="792" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
           </div>
           <div class="asset-meta">
             <div>
@@ -462,7 +468,7 @@
       <div class="banner-stack">
         <div class="asset-card">
           <div class="asset-preview">
-            <canvas id="tw-banner" width="1500" height="500" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
+            <canvas id="tw-banner" width="3000" height="1000" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
           </div>
           <div class="asset-meta">
             <div>
@@ -639,7 +645,7 @@
       <div class="banner-stack">
         <div class="asset-card">
           <div class="asset-preview">
-            <canvas id="fb-cover" width="820" height="312" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
+            <canvas id="fb-cover" width="1640" height="624" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
           </div>
           <div class="asset-meta">
             <div>
@@ -1876,17 +1882,17 @@ let fontReady = false;
   try {
     const f = new FontFace(
       'Space Grotesk',
-      "url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7oUXsrPMBTTA.woff2')",
+      "url('/SpaceGrotesk-Bold.ttf')",
       { weight: '700', style: 'normal' }
     );
     const f400 = new FontFace(
       'Space Grotesk',
-      "url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj42V8s.woff2')",
+      "url('/SpaceGrotesk-Bold.ttf')",
       { weight: '400', style: 'normal' }
     );
     const f500 = new FontFace(
       'Space Grotesk',
-      "url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7-V8s.woff2')",
+      "url('/SpaceGrotesk-Bold.ttf')",
       { weight: '500', style: 'normal' }
     );
     const loaded = await Promise.all([f.load(), f400.load(), f500.load()]);
@@ -1989,6 +1995,8 @@ function drawMarkBadge(ctx, cx, cy, badgeSize, markSize) {
 
 /* Draw the wordmark. Returns total rendered width. */
 function drawWordmark(ctx, x, y, fs) {
+  x = Math.round(x);
+  y = Math.round(y);
   var ls = -0.042 * fs;
   ctx.save();
   ctx.font = '700 ' + fs + 'px "Space Grotesk", sans-serif';
@@ -1998,18 +2006,18 @@ function drawWordmark(ctx, x, y, fs) {
   /* Megh */
   ctx.fillStyle = '#ffffff';
   ctx.fillText('Megh', x, y);
-  var mW = ctx.measureText('Megh').width;
+  var mW = Math.round(ctx.measureText('Megh').width);
 
   /* Roop */
   ctx.fillStyle = 'rgba(255,255,255,0.88)';
   ctx.fillText('Roop', x + mW, y);
-  var rW = ctx.measureText('Roop').width;
+  var rW = Math.round(ctx.measureText('Roop').width);
 
   /* Accent dot */
   var gap = Math.round(fs * 0.10);
   var ds  = Math.max(4, Math.round(fs * 0.18));
-  var dotX = x + mW + rW + gap;
-  var dotY = y - Math.round(fs * 0.62);
+  var dotX = Math.round(x + mW + rW + gap);
+  var dotY = Math.round(y - fs * 0.62);
   var dg = ctx.createLinearGradient(dotX, dotY, dotX + ds, dotY + ds);
   dg.addColorStop(0, C.purp);
   dg.addColorStop(1, C.blue);
@@ -2023,6 +2031,8 @@ function drawWordmark(ctx, x, y, fs) {
 
 /* Draw small MONO label (e.g. "CREATIVE ENGINEERING & AI STUDIO") */
 function drawLabel(ctx, x, y, text, size, color) {
+  x = Math.round(x);
+  y = Math.round(y);
   size  = size  || 11;
   color = color || C.zinc600;
   ctx.save();
@@ -2036,6 +2046,8 @@ function drawLabel(ctx, x, y, text, size, color) {
 
 /* Draw a tagline / subtitle */
 function drawTagline(ctx, x, y, text, size, color) {
+  x = Math.round(x);
+  y = Math.round(y);
   size  = size  || 14;
   color = color || C.zinc500;
   ctx.save();
@@ -2087,7 +2099,9 @@ function drawProfile(canvas) {
 /* ── LINKEDIN BANNER 1584×396 ── */
 function drawLinkedInBanner(canvas) {
   var ctx = canvas.getContext('2d');
-  var w = canvas.width, h = canvas.height;
+  ctx.save();
+  ctx.scale(2, 2);
+  var w = canvas.width / 2, h = canvas.height / 2;
   var cy = h / 2;
 
   ctx.fillStyle = C.bg;
@@ -2112,12 +2126,15 @@ function drawLinkedInBanner(canvas) {
   drawTagline(ctx, px, cy + 62, 'We build things. Useful things. Alive things.', Math.round(h * 0.038), C.zinc500);
 
   drawVignetteEdges(ctx, w, h, 0.35);
+  ctx.restore();
 }
 
 /* ── TWITTER BANNER 1500×500 ── */
 function drawTwitterBanner(canvas) {
   var ctx = canvas.getContext('2d');
-  var w = canvas.width, h = canvas.height;
+  ctx.save();
+  ctx.scale(2, 2);
+  var w = canvas.width / 2, h = canvas.height / 2;
 
   ctx.fillStyle = C.bg;
   ctx.fillRect(0, 0, w, h);
@@ -2133,8 +2150,8 @@ function drawTwitterBanner(canvas) {
   ctx.font = '700 ' + fs + 'px "Space Grotesk", sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = (-0.042 * fs).toFixed(2) + 'px';
   ctx.textBaseline = 'alphabetic';
-  var mW = ctx.measureText('Megh').width;
-  var rW = ctx.measureText('Roop').width;
+  var mW = Math.round(ctx.measureText('Megh').width);
+  var rW = Math.round(ctx.measureText('Roop').width);
   var gap = Math.round(fs * 0.10);
   var ds  = Math.max(4, Math.round(fs * 0.18));
   var totalW = mW + rW + gap + ds;
@@ -2152,7 +2169,7 @@ function drawTwitterBanner(canvas) {
   ctx.fillStyle = C.zinc600;
   ctx.textBaseline = 'middle';
   var lbl = 'CREATIVE ENGINEERING & AI STUDIO';
-  var lw  = ctx.measureText(lbl).width;
+  var lw  = Math.round(ctx.measureText(lbl).width);
   ctx.fillText(lbl, (w - lw) / 2, h * 0.34);
   ctx.restore();
 
@@ -2163,11 +2180,12 @@ function drawTwitterBanner(canvas) {
   ctx.fillStyle = C.zinc500;
   ctx.textBaseline = 'middle';
   var tg = 'We build things. Useful things. Alive things.';
-  var tw2 = ctx.measureText(tg).width;
+  var tw2 = Math.round(ctx.measureText(tg).width);
   ctx.fillText(tg, (w - tw2) / 2, h * 0.70);
   ctx.restore();
 
   drawVignetteEdges(ctx, w, h, 0.40);
+  ctx.restore();
 }
 
 /* ── GITHUB README BANNER 1280×640 ── */
@@ -2388,7 +2406,9 @@ function drawYouTubeChannelArt(canvas) {
 /* ── FACEBOOK COVER 820×312 ── */
 function drawFacebookCover(canvas) {
   var ctx = canvas.getContext('2d');
-  var w = canvas.width, h = canvas.height;
+  ctx.save();
+  ctx.scale(2, 2);
+  var w = canvas.width / 2, h = canvas.height / 2;
   var cx = w / 2, cy = h / 2;
 
   ctx.fillStyle = C.bg;
@@ -2404,8 +2424,8 @@ function drawFacebookCover(canvas) {
   ctx.save();
   ctx.font = '700 ' + fs + 'px "Space Grotesk", sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = (-0.042 * fs).toFixed(2) + 'px';
-  var mW = ctx.measureText('Megh').width;
-  var rW = ctx.measureText('Roop').width;
+  var mW = Math.round(ctx.measureText('Megh').width);
+  var rW = Math.round(ctx.measureText('Roop').width);
   var ds = Math.max(4, Math.round(fs * 0.18));
   var gap = Math.round(fs * 0.10);
   var totalW = mW + rW + gap + ds;
@@ -2418,7 +2438,7 @@ function drawFacebookCover(canvas) {
   ctx.fillStyle = C.zinc600;
   ctx.textBaseline = 'middle';
   var lbl = 'CREATIVE ENGINEERING & AI STUDIO';
-  var lbW = ctx.measureText(lbl).width;
+  var lbW = Math.round(ctx.measureText(lbl).width);
   ctx.fillText(lbl, (w - lbW) / 2, cy - fs * 0.62);
   ctx.restore();
 
@@ -2432,11 +2452,12 @@ function drawFacebookCover(canvas) {
   ctx.fillStyle = C.zinc500;
   ctx.textBaseline = 'middle';
   var tg  = 'We build things. Useful things. Alive things.';
-  var tgW = ctx.measureText(tg).width;
+  var tgW = Math.round(ctx.measureText(tg).width);
   ctx.fillText(tg, (w - tgW) / 2, cy + fs * 0.90);
   ctx.restore();
 
   drawVignetteEdges(ctx, w, h, 0.40);
+  ctx.restore();
 }
 
 /* ═══════════════════════════════════════════════════════════
