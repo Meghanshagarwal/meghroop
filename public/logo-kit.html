@@ -415,7 +415,7 @@
       <div class="banner-stack">
         <div class="asset-card">
           <div class="asset-preview">
-            <canvas id="li-banner" width="3168" height="792" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
+            <canvas id="li-banner" width="1584" height="396" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
           </div>
           <div class="asset-meta">
             <div>
@@ -468,7 +468,7 @@
       <div class="banner-stack">
         <div class="asset-card">
           <div class="asset-preview">
-            <canvas id="tw-banner" width="3000" height="1000" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
+            <canvas id="tw-banner" width="1500" height="500" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
           </div>
           <div class="asset-meta">
             <div>
@@ -645,7 +645,7 @@
       <div class="banner-stack">
         <div class="asset-card">
           <div class="asset-preview">
-            <canvas id="fb-cover" width="1640" height="624" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
+            <canvas id="fb-cover" width="820" height="312" style="width:100%;max-width:680px;height:auto;display:block;"></canvas>
           </div>
           <div class="asset-meta">
             <div>
@@ -2099,9 +2099,7 @@ function drawProfile(canvas) {
 /* ── LINKEDIN BANNER 1584×396 ── */
 function drawLinkedInBanner(canvas) {
   var ctx = canvas.getContext('2d');
-  ctx.save();
-  ctx.scale(2, 2);
-  var w = canvas.width / 2, h = canvas.height / 2;
+  var w = canvas.width, h = canvas.height;
   var cy = h / 2;
 
   ctx.fillStyle = C.bg;
@@ -2126,15 +2124,12 @@ function drawLinkedInBanner(canvas) {
   drawTagline(ctx, px, cy + 62, 'We build things. Useful things. Alive things.', Math.round(h * 0.038), C.zinc500);
 
   drawVignetteEdges(ctx, w, h, 0.35);
-  ctx.restore();
 }
 
 /* ── TWITTER BANNER 1500×500 ── */
 function drawTwitterBanner(canvas) {
   var ctx = canvas.getContext('2d');
-  ctx.save();
-  ctx.scale(2, 2);
-  var w = canvas.width / 2, h = canvas.height / 2;
+  var w = canvas.width, h = canvas.height;
 
   ctx.fillStyle = C.bg;
   ctx.fillRect(0, 0, w, h);
@@ -2185,7 +2180,6 @@ function drawTwitterBanner(canvas) {
   ctx.restore();
 
   drawVignetteEdges(ctx, w, h, 0.40);
-  ctx.restore();
 }
 
 /* ── GITHUB README BANNER 1280×640 ── */
@@ -2406,9 +2400,7 @@ function drawYouTubeChannelArt(canvas) {
 /* ── FACEBOOK COVER 820×312 ── */
 function drawFacebookCover(canvas) {
   var ctx = canvas.getContext('2d');
-  ctx.save();
-  ctx.scale(2, 2);
-  var w = canvas.width / 2, h = canvas.height / 2;
+  var w = canvas.width, h = canvas.height;
   var cx = w / 2, cy = h / 2;
 
   ctx.fillStyle = C.bg;
@@ -2457,7 +2449,6 @@ function drawFacebookCover(canvas) {
   ctx.restore();
 
   drawVignetteEdges(ctx, w, h, 0.40);
-  ctx.restore();
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -3121,6 +3112,41 @@ function drawBizBack(canvas, mode) {
   if (isDark) drawVignetteEdges(ctx, w, h, 0.4);
 }
 
+/* High-performance scalable canvas drawing wrapper.
+   Natively scales all drawings to 3x Ultra-HD while preserving standard DOM layout. */
+function drawWithScale(canvas, drawFn, scale, ...args) {
+  var ctx = canvas.getContext('2d');
+  
+  if (!canvas.dataset.logicalWidth) {
+    canvas.dataset.logicalWidth = canvas.getAttribute('width');
+    canvas.dataset.logicalHeight = canvas.getAttribute('height');
+  }
+  
+  var logicalW = parseInt(canvas.dataset.logicalWidth);
+  var logicalH = parseInt(canvas.dataset.logicalHeight);
+  
+  canvas.width = logicalW * scale;
+  canvas.height = logicalH * scale;
+  
+  ctx.save();
+  ctx.scale(scale, scale);
+  
+  var canvasProxy = new Proxy(canvas, {
+    get(target, prop) {
+      if (prop === 'width') return logicalW;
+      if (prop === 'height') return logicalH;
+      var val = Reflect.get(target, prop);
+      if (typeof val === 'function') {
+        return val.bind(target);
+      }
+      return val;
+    }
+  });
+  
+  drawFn(canvasProxy, ...args);
+  ctx.restore();
+}
+
 function redrawBizCards() {
   var front     = document.getElementById('biz-front');
   var back      = document.getElementById('biz-back');
@@ -3129,8 +3155,8 @@ function redrawBizCards() {
   var bg = bizMode === 'light' ? '#e8e8e8' : '#000000';
   if (frontWrap) frontWrap.style.background = bg;
   if (backWrap)  backWrap.style.background  = bg;
-  if (front) drawBizFront(front, BIZ_PEOPLE[bizIndex], bizMode);
-  if (back)  drawBizBack(back, bizMode);
+  if (front) drawWithScale(front, drawBizFront, 3, BIZ_PEOPLE[bizIndex], bizMode);
+  if (back)  drawWithScale(back, drawBizBack, 3, bizMode);
 }
 
 function switchCard(idx, btn) {
@@ -3190,7 +3216,9 @@ function drawAll() {
   ];
   tasks.forEach(function(t) {
     var el = document.getElementById(t[0]);
-    if (el) t[1](el);
+    if (el) {
+      drawWithScale(el, t[1], 3); // 3x Ultra-HD scaling for absolute razor-sharpness across every single asset!
+    }
   });
 }
 
