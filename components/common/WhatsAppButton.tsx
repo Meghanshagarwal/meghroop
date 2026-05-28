@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { trackEvent } from '@/lib/analytics'
 
 export default function WhatsAppButton() {
-  const [number, setNumber] = useState('919876543210')
+  const [number, setNumber] = useState('918949508264')
 
   useEffect(() => {
     fetch('/api/settings')

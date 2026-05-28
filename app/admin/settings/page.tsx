@@ -93,8 +93,8 @@ export default function SettingsPage() {
           <h2 className="font-heading font-semibold text-sm text-gray-400 uppercase tracking-widest mb-4">Contact</h2>
           <div>
             <label className="text-xs text-gray-500 mb-1.5 block">WhatsApp Number</label>
-            <input name="whatsapp_number" value={settings.whatsapp_number} onChange={handleChange} placeholder="919876543210" className={inputClass} />
-            <p className="text-xs text-gray-600 mt-1.5">Country code + number, no + or spaces (e.g. 919876543210)</p>
+            <input name="whatsapp_number" value={settings.whatsapp_number} onChange={handleChange} placeholder="918949508264" className={inputClass} />
+            <p className="text-xs text-gray-600 mt-1.5">Country code + number, no + or spaces (e.g. 918949508264)</p>
           </div>
         </div>
 

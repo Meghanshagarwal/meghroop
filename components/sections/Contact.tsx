@@ -10,7 +10,7 @@ import { trackEvent } from '@/lib/analytics'
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', projectType: '', message: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [whatsappNumber, setWhatsappNumber] = useState('919876543210')
+  const [whatsappNumber, setWhatsappNumber] = useState('918949508264')
   const formStartedRef = useRef(false)
 
   useEffect(() => {

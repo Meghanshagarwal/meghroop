@@ -9,7 +9,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: `${SITE_URL}/favicon.ico`,
   email: 'hello@meghroop.tech',
-  telephone: '+91 98765 43210',
+  telephone: '+91 89495 08264',
   foundingDate: '2022',
   description:
     'MeghRoop is a creative engineering and AI studio that builds custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences. Founded in 2022, based in India, serving clients worldwide.',
@@ -181,7 +181,7 @@ const localBusinessSchema = {
   name: 'MeghRoop',
   image: `${SITE_URL}/og-image.png`,
   url: SITE_URL,
-  telephone: '+91 98765 43210',
+  telephone: '+91 89495 08264',
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',

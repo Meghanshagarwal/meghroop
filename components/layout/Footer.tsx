@@ -231,7 +231,7 @@ export default function Footer() {
           We specialize in custom AI agent development, agentic AI systems, n8n workflow automation,
           MCP server development, multi-agent systems, full stack web development with React and Next.js,
           and generative engine optimization (GEO) for AI search discoverability.
-          Founded in 2022. Contact: hello@meghroop.tech or +91 98765 43210. Address: Jaipur, Rajasthan, India.
+          Founded in 2022. Contact: hello@meghroop.tech or +91 89495 08264. Address: Jaipur, Rajasthan, India.
         </p>
 
         <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">

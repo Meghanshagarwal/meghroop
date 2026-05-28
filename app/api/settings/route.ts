@@ -10,11 +10,11 @@ export async function GET() {
     const map = Object.fromEntries((data ?? []).map((s: { key: string; value: string }) => [s.key, s.value]))
     
     return NextResponse.json({
-      whatsapp_number: map['whatsapp_number'] || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210',
+      whatsapp_number: map['whatsapp_number'] || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '918949508264',
     })
   } catch {
     return NextResponse.json({
-      whatsapp_number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210',
+      whatsapp_number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '918949508264',
     })
   }
 }

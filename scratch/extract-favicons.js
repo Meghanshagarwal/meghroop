@@ -63,6 +63,26 @@ function createIco(pngBuffers) {
 
 async function main() {
   try {
+    // Helper to trim transparent borders and resize with balanced padding
+    const trimAndResize = async (buffer, size, padRatio = 0.08) => {
+      const pad = Math.max(1, Math.round(size * padRatio));
+      const innerSize = size - pad * 2;
+      return sharp(buffer)
+        .trim()
+        .resize(innerSize, innerSize, {
+          fit: 'contain',
+          background: { r: 0, g: 0, b: 0, alpha: 0 }
+        })
+        .extend({
+          top: pad,
+          bottom: pad,
+          left: pad,
+          right: pad,
+          background: { r: 0, g: 0, b: 0, alpha: 0 }
+        })
+        .toBuffer();
+    };
+
     // Generate various standard sizes directly from high-resolution monogramBuffer
     const sizes = [
       { name: 'favicon-512.png', size: 512 },
@@ -74,9 +94,8 @@ async function main() {
 
     for (const target of sizes) {
       const outputPath = path.join(publicDir, target.name);
-      await sharp(monogramBuffer)
-        .resize(target.size, target.size)
-        .toFile(outputPath);
+      const buf = await trimAndResize(monogramBuffer, target.size, 0.08);
+      fs.writeFileSync(outputPath, buf);
       console.log(`Generated ${target.name} (${target.size}x${target.size})`);
     }
 
@@ -84,7 +103,11 @@ async function main() {
     // Centering a 320x320 monogram inside 512x512 solid black-gray background
     const maskableOutput = path.join(publicDir, 'icon-512-maskable.png');
     const monogramResizedForMaskable = await sharp(monogramBuffer)
-      .resize(320, 320)
+      .trim()
+      .resize(320, 320, {
+        fit: 'contain',
+        background: { r: 0, g: 0, b: 0, alpha: 0 }
+      })
       .toBuffer();
 
     await sharp({
@@ -105,9 +128,8 @@ async function main() {
     const icoBuffers = [];
 
     for (const size of icoSizes) {
-      const buf = await sharp(monogramBuffer)
-        .resize(size, size)
-        .toBuffer();
+      // Use a smaller padding ratio (4%) for tiny sizes to make them look larger/crisper in browser tabs
+      const buf = await trimAndResize(monogramBuffer, size, 0.04);
       icoBuffers.push({ buffer: buf, width: size, height: size });
     }
 
