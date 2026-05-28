@@ -300,40 +300,33 @@ export default function LetterheadEditorPage() {
             display: none !important;
           }
 
-          /* Strip flex layout container spacing and enforce block layout */
-          main, 
-          .min-h-screen,
-          .flex-1,
-          .max-w-7xl,
-          .main-content-wrapper {
-            margin: 0 !important;
-            padding: 0 !important;
-            background: transparent !important;
-            display: block !important;
-            width: auto !important;
-            height: auto !important;
-            min-height: 0 !important;
-            box-shadow: none !important;
-            border: none !important;
-          }
-
+          /* Reset body and html layout */
           body, html {
             background: white !important;
             color: black !important;
             margin: 0 !important;
             padding: 0 !important;
-            width: 210mm !important;
-            height: 297mm !important;
+            width: 100% !important;
+            height: auto !important;
+          }
+
+          /* Decouple structural grid/flex spacing of parent layout */
+          main,
+          .main-content-wrapper {
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block !important;
+            width: auto !important;
+            height: auto !important;
           }
 
           /* Perfect A4 frame overlay */
           .print-sheet {
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
             width: 210mm !important;
             height: 297mm !important;
-            margin: 0 !important;
+            min-height: 297mm !important;
+            max-height: 297mm !important;
+            margin: 0 auto !important;
             padding: 20mm 20mm 20mm 20mm !important;
             border: none !important;
             box-shadow: none !important;
@@ -350,6 +343,7 @@ export default function LetterheadEditorPage() {
             /* Safety layers to prevent overflow breaking into empty page 2 */
             page-break-inside: avoid !important;
             page-break-after: avoid !important;
+            position: relative !important;
           }
 
           .print-sheet input, 
