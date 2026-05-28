@@ -8,9 +8,24 @@ type Settings = {
   meta_pixel_id: string
   clarity_id: string
   whatsapp_number: string
+  gst_number: string
+  bank_name: string
+  bank_holder: string
+  bank_account: string
+  bank_ifsc: string
 }
 
-const BLANK: Settings = { ga_id: '', meta_pixel_id: '', clarity_id: '', whatsapp_number: '' }
+const BLANK: Settings = { 
+  ga_id: '', 
+  meta_pixel_id: '', 
+  clarity_id: '', 
+  whatsapp_number: '',
+  gst_number: '',
+  bank_name: '',
+  bank_holder: '',
+  bank_account: '',
+  bank_ifsc: ''
+}
 
 const inputClass =
   'w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.06] transition-all font-mono'
@@ -95,6 +110,33 @@ export default function SettingsPage() {
             <label className="text-xs text-gray-500 mb-1.5 block">WhatsApp Number</label>
             <input name="whatsapp_number" value={settings.whatsapp_number} onChange={handleChange} placeholder="918949508264" className={inputClass} />
             <p className="text-xs text-gray-600 mt-1.5">Country code + number, no + or spaces (e.g. 918949508264)</p>
+          </div>
+        </div>
+
+        {/* Billing & Bank details */}
+        <div>
+          <h2 className="font-heading font-semibold text-sm text-gray-400 uppercase tracking-widest mb-4">Billing &amp; Bank Details</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs text-gray-500 mb-1.5 block">Studio GSTIN (MeghRoop)</label>
+              <input name="gst_number" value={settings.gst_number} onChange={handleChange} placeholder="08AAAAA1111A1Z1" className={inputClass} />
+            </div>
+            <div>
+              <label className="text-xs text-gray-500 mb-1.5 block">Bank Name</label>
+              <input name="bank_name" value={settings.bank_name} onChange={handleChange} placeholder="HDFC Bank" className={inputClass} />
+            </div>
+            <div>
+              <label className="text-xs text-gray-500 mb-1.5 block">Account Holder Name</label>
+              <input name="bank_holder" value={settings.bank_holder} onChange={handleChange} placeholder="MeghRoop Tech Private Limited" className={inputClass} />
+            </div>
+            <div>
+              <label className="text-xs text-gray-500 mb-1.5 block">Account Number</label>
+              <input name="bank_account" value={settings.bank_account} onChange={handleChange} placeholder="50200089495082" className={inputClass} />
+            </div>
+            <div>
+              <label className="text-xs text-gray-500 mb-1.5 block">IFSC Code</label>
+              <input name="bank_ifsc" value={settings.bank_ifsc} onChange={handleChange} placeholder="HDFC0001234" className={inputClass} />
+            </div>
           </div>
         </div>
 

@@ -26,6 +26,10 @@ interface InvoiceData {
   currency: string
   gstNumber: string
   clientGst: string
+  bankName: string
+  bankHolder: string
+  bankAccount: string
+  bankIfsc: string
 }
 
 const CURRENCIES = [
@@ -72,15 +76,19 @@ export default function LetterheadEditorPage() {
     ],
     taxPercent: 18,
     discountAmount: 500,
-    paymentNotes: 'Payment Method:\nBank Name: HDFC Bank\nAccount Holder: MeghRoop Tech Private Limited\nAccount Number: 50200089495082\nIFSC Code: HDFC0001234\n\nThank you for working with MeghRoop!',
+    paymentNotes: 'Thank you for working with MeghRoop!',
     currency: '₹',
     gstNumber: '08AAAAA1111A1Z1',
-    clientGst: ''
+    clientGst: '',
+    bankName: 'HDFC Bank',
+    bankHolder: 'MeghRoop Tech Private Limited',
+    bankAccount: '50200089495082',
+    bankIfsc: 'HDFC0001234'
   })
 
   const [isSaved, setIsSaved] = useState(true)
 
-  // Load from LocalStorage
+  // Load from LocalStorage and settings API defaults
   useEffect(() => {
     try {
       const savedTab = localStorage.getItem('mr_active_tab') as 'proposal' | 'invoice'
@@ -105,31 +113,58 @@ export default function LetterheadEditorPage() {
         editorRef.current.innerHTML = defaultBody
       }
 
+      let parsedInvoice: Partial<InvoiceData> = {}
       if (savedInvoice) {
-        const parsed = JSON.parse(savedInvoice)
-        
-        // Data Migration: Map items containing quantity/rate to just rate if loading old formats
-        const migratedItems = (parsed.items || []).map((item: { id?: string; description?: string; rate?: number }) => ({
-          id: item.id || Date.now().toString() + Math.random().toString(),
-          description: item.description || 'Deliverable Item',
-          rate: typeof item.rate === 'number' ? item.rate : 1000
-        }))
-
-        setInvoiceData({
-          invoiceNumber: parsed.invoiceNumber || 'MR-2026-001',
-          invoiceDate: parsed.invoiceDate || new Date().toISOString().split('T')[0],
-          dueDate: parsed.dueDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-          clientName: parsed.clientName || '',
-          clientAddress: parsed.clientAddress || '',
-          items: migratedItems,
-          taxPercent: typeof parsed.taxPercent === 'number' ? parsed.taxPercent : 18,
-          discountAmount: typeof parsed.discountAmount === 'number' ? parsed.discountAmount : 0,
-          paymentNotes: parsed.paymentNotes || '',
-          currency: parsed.currency || '₹',
-          gstNumber: parsed.gstNumber || '08AAAAA1111A1Z1',
-          clientGst: parsed.clientGst || ''
-        })
+        parsedInvoice = JSON.parse(savedInvoice)
       }
+
+      // Fetch dynamic defaults from Settings API and merge
+      fetch('/api/admin/settings')
+        .then((res) => res.json())
+        .then((settingsData) => {
+          const migratedItems = (parsedInvoice.items || []).map((item: { id?: string; description?: string; rate?: number }) => ({
+            id: item.id || Date.now().toString() + Math.random().toString(),
+            description: item.description || 'Deliverable Item',
+            rate: typeof item.rate === 'number' ? item.rate : 1000
+          }))
+
+          setInvoiceData({
+            invoiceNumber: parsedInvoice.invoiceNumber || 'MR-2026-001',
+            invoiceDate: parsedInvoice.invoiceDate || new Date().toISOString().split('T')[0],
+            dueDate: parsedInvoice.dueDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            clientName: parsedInvoice.clientName || '',
+            clientAddress: parsedInvoice.clientAddress || '',
+            items: migratedItems.length ? migratedItems : [
+              { id: '1', description: 'Autonomous Outbound Agent System Setup & Training', rate: 4500 },
+              { id: '2', description: 'n8n Workflow Automations & Airtable Sync', rate: 2200 },
+              { id: '3', description: 'Custom Model Context Protocol (MCP) Server Engineering', rate: 3000 }
+            ],
+            taxPercent: typeof parsedInvoice.taxPercent === 'number' ? parsedInvoice.taxPercent : 18,
+            discountAmount: typeof parsedInvoice.discountAmount === 'number' ? parsedInvoice.discountAmount : 500,
+            paymentNotes: parsedInvoice.paymentNotes || 'Thank you for working with MeghRoop!',
+            currency: parsedInvoice.currency || '₹',
+            gstNumber: parsedInvoice.gstNumber || settingsData.gst_number || '08AAAAA1111A1Z1',
+            clientGst: parsedInvoice.clientGst || '',
+            bankName: parsedInvoice.bankName || settingsData.bank_name || 'HDFC Bank',
+            bankHolder: parsedInvoice.bankHolder || settingsData.bank_holder || 'MeghRoop Tech Private Limited',
+            bankAccount: parsedInvoice.bankAccount || settingsData.bank_account || '50200089495082',
+            bankIfsc: parsedInvoice.bankIfsc || settingsData.bank_ifsc || 'HDFC0001234'
+          })
+        })
+        .catch((err) => {
+          console.error('Error fetching settings default:', err)
+          const migratedItems = (parsedInvoice.items || []).map((item: { id?: string; description?: string; rate?: number }) => ({
+            id: item.id || Date.now().toString() + Math.random().toString(),
+            description: item.description || 'Deliverable Item',
+            rate: typeof item.rate === 'number' ? item.rate : 1000
+          }))
+
+          setInvoiceData(prev => ({
+            ...prev,
+            ...parsedInvoice,
+            items: migratedItems.length ? migratedItems : prev.items
+          }))
+        })
     } catch (e) {
       console.error('Error loading stored letterhead data:', e)
     }
@@ -252,10 +287,14 @@ export default function LetterheadEditorPage() {
           ],
           taxPercent: 18,
           discountAmount: 500,
-          paymentNotes: 'Payment Method:\nBank Name: HDFC Bank\nAccount Holder: MeghRoop Tech Private Limited\nAccount Number: 50200089495082\nIFSC Code: HDFC0001234\n\nThank you for working with MeghRoop!',
+          paymentNotes: 'Thank you for working with MeghRoop!',
           currency: '₹',
           gstNumber: '08AAAAA1111A1Z1',
-          clientGst: ''
+          clientGst: '',
+          bankName: 'HDFC Bank',
+          bankHolder: 'MeghRoop Tech Private Limited',
+          bankAccount: '50200089495082',
+          bankIfsc: 'HDFC0001234'
         })
       }
       setIsSaved(false)
@@ -660,6 +699,55 @@ export default function LetterheadEditorPage() {
               </div>
             </div>
 
+            {/* Bank Details Overrides */}
+            <div className="space-y-3">
+              <div className="border-b border-white/[0.06] pb-2">
+                <span className="text-xs font-bold text-white uppercase tracking-wider font-heading">Bank Details (Overrides)</span>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Bank Name</label>
+                  <input
+                    type="text"
+                    value={invoiceData.bankName}
+                    onChange={(e) => handleInvoiceChange('bankName', e.target.value)}
+                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all"
+                    placeholder="HDFC Bank"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Account Holder</label>
+                  <input
+                    type="text"
+                    value={invoiceData.bankHolder}
+                    onChange={(e) => handleInvoiceChange('bankHolder', e.target.value)}
+                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all"
+                    placeholder="MeghRoop Tech Pvt Ltd"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Account Number</label>
+                  <input
+                    type="text"
+                    value={invoiceData.bankAccount}
+                    onChange={(e) => handleInvoiceChange('bankAccount', e.target.value)}
+                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all font-mono"
+                    placeholder="50200089495082"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-400 font-semibold mb-1.5 block">IFSC Code</label>
+                  <input
+                    type="text"
+                    value={invoiceData.bankIfsc}
+                    onChange={(e) => handleInvoiceChange('bankIfsc', e.target.value)}
+                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all font-mono uppercase"
+                    placeholder="HDFC0001234"
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Line Items Framework */}
             <div className="space-y-3">
               <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
@@ -861,22 +949,35 @@ export default function LetterheadEditorPage() {
                     </p>
                   </div>
 
-                  {/* Invoice Metadata Grid */}
-                  <div className="grid grid-cols-2 gap-8 text-xs border-y py-4" style={{ borderColor: tableBorder }}>
+                  {/* Invoice Metadata Grid - Premium 3-column Layout */}
+                  <div className="grid grid-cols-3 gap-6 text-[10px] border-y py-4" style={{ borderColor: tableBorder }}>
                     {/* Billed To client information */}
                     <div className="space-y-1">
-                      <span className="text-[10px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
                         BILLED TO:
                       </span>
-                      <p className="font-bold m-0" style={{ color: nameC }}>{invoiceData.clientName || 'Client Name'}</p>
-                      <p className="whitespace-pre-line m-0 leading-relaxed" style={{ color: bodyC }}>
+                      <p className="font-bold m-0 text-[11px] leading-tight" style={{ color: nameC }}>{invoiceData.clientName || 'Client Name'}</p>
+                      <p className="whitespace-pre-line m-0 leading-relaxed text-[10px] mt-1" style={{ color: bodyC }}>
                         {invoiceData.clientAddress || 'Client Address'}
                       </p>
                       {invoiceData.clientGst && (
-                        <p className="m-0 mt-1.5 text-[11px]" style={{ color: bodyC }}>
-                          <strong>GSTIN:</strong> <span className="font-mono">{invoiceData.clientGst.toUpperCase()}</span>
+                        <p className="m-0 mt-1" style={{ color: bodyC }}>
+                          <strong>GST:</strong> <span className="font-mono text-[9px]">{invoiceData.clientGst.toUpperCase()}</span>
                         </p>
                       )}
+                    </div>
+
+                    {/* Bank Details Column */}
+                    <div className="space-y-1">
+                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                        BANK DETAILS:
+                      </span>
+                      <p className="font-bold m-0 text-[11px] leading-tight" style={{ color: nameC }}>{invoiceData.bankName || 'Bank Name'}</p>
+                      <div className="space-y-0.5 leading-normal text-[10px] mt-1" style={{ color: bodyC }}>
+                        <p className="m-0">A/C: <span className="font-semibold text-white">{invoiceData.bankHolder || 'Holder Name'}</span></p>
+                        <p className="m-0">No: <span className="font-mono text-white">{invoiceData.bankAccount || 'Account Number'}</span></p>
+                        <p className="m-0">IFSC: <span className="font-mono text-white uppercase">{invoiceData.bankIfsc || 'IFSC Code'}</span></p>
+                      </div>
                     </div>
 
                     {/* Billing Metadata details */}
@@ -885,27 +986,27 @@ export default function LetterheadEditorPage() {
                         <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
                           INVOICE NUMBER:
                         </span>
-                        <span className="font-mono font-bold" style={{ color: nameC }}>{invoiceData.invoiceNumber}</span>
+                        <span className="font-mono font-bold text-[11px]" style={{ color: nameC }}>{invoiceData.invoiceNumber}</span>
                       </div>
                       {invoiceData.gstNumber && (
                         <div>
                           <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
                             GSTIN (STUDIO):
                           </span>
-                          <span className="font-mono font-bold" style={{ color: nameC }}>{invoiceData.gstNumber.toUpperCase()}</span>
+                          <span className="font-mono font-bold text-[10px]" style={{ color: nameC }}>{invoiceData.gstNumber.toUpperCase()}</span>
                         </div>
                       )}
                       <div>
                         <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
                           DATE OF ISSUE:
                         </span>
-                        <span className="font-mono font-medium" style={{ color: bodyC }}>{invoiceData.invoiceDate}</span>
+                        <span className="font-mono font-medium text-[10px]" style={{ color: bodyC }}>{invoiceData.invoiceDate}</span>
                       </div>
                       <div>
                         <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
                           DUE DATE:
                         </span>
-                        <span className="font-mono font-bold" style={{ color: nameC }}>{invoiceData.dueDate}</span>
+                        <span className="font-mono font-bold text-[10px]" style={{ color: nameC }}>{invoiceData.dueDate}</span>
                       </div>
                     </div>
                   </div>
