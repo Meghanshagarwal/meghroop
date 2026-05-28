@@ -302,27 +302,27 @@ export default function LetterheadEditorPage() {
             display: none !important;
           }
 
-          /* Reset body and html layout */
-          body, html {
-            background: #ffffff !important;
-            color: #111111 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-            height: auto !important;
-          }
-
-          /* Decouple structural grid/flex spacing of parent layout */
-          main,
+          /* Reset all parent container layouts to be transparent static block elements */
+          main, 
+          body, 
+          html,
+          .min-h-screen,
+          .flex-1,
+          .max-w-7xl,
           .main-content-wrapper {
             margin: 0 !important;
             padding: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
             display: block !important;
-            width: auto !important;
+            position: static !important;
+            width: 100% !important;
             height: auto !important;
+            min-height: 0 !important;
           }
 
-          /* Perfect A4 frame overlay - Force crisp light theme for physical printing & ink safety */
+          /* Perfect A4 frame overlay - Uses dynamic background from active theme */
           .print-sheet {
             width: 210mm !important;
             height: 297mm !important;
@@ -334,8 +334,8 @@ export default function LetterheadEditorPage() {
             box-shadow: none !important;
             border-radius: 0 !important;
             box-sizing: border-box !important;
-            background: #ffffff !important;
-            color: #111111 !important;
+            background: ${bg} !important;
+            color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
             
             /* Align footer beautifully at the bottom of the page print */
@@ -346,32 +346,13 @@ export default function LetterheadEditorPage() {
             /* Safety layers to prevent overflow breaking into empty page 2 */
             page-break-inside: avoid !important;
             page-break-after: avoid !important;
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
-          }
-
-          /* Override text/inline colors inside printed sheet to ensure absolute legibility */
-          .print-sheet p,
-          .print-sheet span,
-          .print-sheet td,
-          .print-sheet th,
-          .print-sheet div,
-          .print-sheet a {
-            color: #374151 !important; /* gray-700 dark text */
-          }
-
-          .print-sheet h2,
-          .print-sheet th,
-          .print-sheet .font-bold,
-          .print-sheet font-bold {
-            color: #111111 !important; /* Bold headings in black */
+            position: relative !important;
           }
 
           .print-sheet input, 
           .print-sheet textarea {
             background: transparent !important;
-            color: #111111 !important;
+            color: ${nameC} !important;
             border: none !important;
           }
 
