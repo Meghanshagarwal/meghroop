@@ -10,7 +10,6 @@ import {
 interface InvoiceItem {
   id: string
   description: string
-  quantity: number
   rate: number
 }
 
@@ -24,7 +23,17 @@ interface InvoiceData {
   taxPercent: number
   discountAmount: number
   paymentNotes: string
+  currency: string
+  gstNumber: string
+  clientGst: string
 }
+
+const CURRENCIES = [
+  { symbol: '₹', label: 'INR (₹)' },
+  { symbol: '$', label: 'USD ($)' },
+  { symbol: '€', label: 'EUR (€)' },
+  { symbol: '£', label: 'GBP (£)' }
+]
 
 // Default rich-text body template for Proposal Mode
 const defaultBody = `
@@ -57,13 +66,16 @@ export default function LetterheadEditorPage() {
     clientName: 'Acme Corporation',
     clientAddress: '123 Innovation Boulevard, Suite 500\nSan Francisco, CA 94107',
     items: [
-      { id: '1', description: 'Autonomous Outbound Agent System Setup & Training', quantity: 1, rate: 4500 },
-      { id: '2', description: 'n8n Workflow Automations & Airtable Sync', quantity: 1, rate: 2200 },
-      { id: '3', description: 'Custom Model Context Protocol (MCP) Server Engineering', quantity: 1, rate: 3000 }
+      { id: '1', description: 'Autonomous Outbound Agent System Setup & Training', rate: 4500 },
+      { id: '2', description: 'n8n Workflow Automations & Airtable Sync', rate: 2200 },
+      { id: '3', description: 'Custom Model Context Protocol (MCP) Server Engineering', rate: 3000 }
     ],
     taxPercent: 18,
     discountAmount: 500,
-    paymentNotes: 'Payment Method:\nBank Name: HDFC Bank\nAccount Holder: MeghRoop Tech Private Limited\nAccount Number: 50200089495082\nIFSC Code: HDFC0001234\n\nThank you for working with MeghRoop!'
+    paymentNotes: 'Payment Method:\nBank Name: HDFC Bank\nAccount Holder: MeghRoop Tech Private Limited\nAccount Number: 50200089495082\nIFSC Code: HDFC0001234\n\nThank you for working with MeghRoop!',
+    currency: '₹',
+    gstNumber: '08AAAAA1111A1Z1',
+    clientGst: ''
   })
 
   const [isSaved, setIsSaved] = useState(true)
@@ -94,7 +106,29 @@ export default function LetterheadEditorPage() {
       }
 
       if (savedInvoice) {
-        setInvoiceData(JSON.parse(savedInvoice))
+        const parsed = JSON.parse(savedInvoice)
+        
+        // Data Migration: Map items containing quantity/rate to just rate if loading old formats
+        const migratedItems = (parsed.items || []).map((item: { id?: string; description?: string; rate?: number }) => ({
+          id: item.id || Date.now().toString() + Math.random().toString(),
+          description: item.description || 'Deliverable Item',
+          rate: typeof item.rate === 'number' ? item.rate : 1000
+        }))
+
+        setInvoiceData({
+          invoiceNumber: parsed.invoiceNumber || 'MR-2026-001',
+          invoiceDate: parsed.invoiceDate || new Date().toISOString().split('T')[0],
+          dueDate: parsed.dueDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          clientName: parsed.clientName || '',
+          clientAddress: parsed.clientAddress || '',
+          items: migratedItems,
+          taxPercent: typeof parsed.taxPercent === 'number' ? parsed.taxPercent : 18,
+          discountAmount: typeof parsed.discountAmount === 'number' ? parsed.discountAmount : 0,
+          paymentNotes: parsed.paymentNotes || '',
+          currency: parsed.currency || '₹',
+          gstNumber: parsed.gstNumber || '08AAAAA1111A1Z1',
+          clientGst: parsed.clientGst || ''
+        })
       }
     } catch (e) {
       console.error('Error loading stored letterhead data:', e)
@@ -157,7 +191,7 @@ export default function LetterheadEditorPage() {
       ...prev,
       items: prev.items.map(item => {
         if (item.id === itemId) {
-          const updatedValue = (field === 'quantity' || field === 'rate') ? Number(value) : value
+          const updatedValue = field === 'rate' ? Number(value) : value
           return { ...item, [field]: updatedValue }
         }
         return item
@@ -170,7 +204,6 @@ export default function LetterheadEditorPage() {
     const newItem: InvoiceItem = {
       id: Date.now().toString(),
       description: 'New Deliverable / Service',
-      quantity: 1,
       rate: 1000
     }
     setInvoiceData(prev => ({
@@ -188,8 +221,8 @@ export default function LetterheadEditorPage() {
     setIsSaved(false)
   }
 
-  // Invoice Math Calculations
-  const subtotal = invoiceData.items.reduce((sum, item) => sum + (item.quantity * item.rate), 0)
+  // Invoice Math Calculations (Removed Quantity dependency)
+  const subtotal = invoiceData.items.reduce((sum, item) => sum + item.rate, 0)
   const taxAmount = Math.round(subtotal * (invoiceData.taxPercent / 100))
   const grandTotal = subtotal + taxAmount - invoiceData.discountAmount
 
@@ -213,13 +246,16 @@ export default function LetterheadEditorPage() {
           clientName: 'Acme Corporation',
           clientAddress: '123 Innovation Boulevard, Suite 500\nSan Francisco, CA 94107',
           items: [
-            { id: '1', description: 'Autonomous Outbound Agent System Setup & Training', quantity: 1, rate: 4500 },
-            { id: '2', description: 'n8n Workflow Automations & Airtable Sync', quantity: 1, rate: 2200 },
-            { id: '3', description: 'Custom Model Context Protocol (MCP) Server Engineering', quantity: 1, rate: 3000 }
+            { id: '1', description: 'Autonomous Outbound Agent System Setup & Training', rate: 4500 },
+            { id: '2', description: 'n8n Workflow Automations & Airtable Sync', rate: 2200 },
+            { id: '3', description: 'Custom Model Context Protocol (MCP) Server Engineering', rate: 3000 }
           ],
           taxPercent: 18,
           discountAmount: 500,
-          paymentNotes: 'Payment Method:\nBank Name: HDFC Bank\nAccount Holder: MeghRoop Tech Private Limited\nAccount Number: 50200089495082\nIFSC Code: HDFC0001234\n\nThank you for working with MeghRoop!'
+          paymentNotes: 'Payment Method:\nBank Name: HDFC Bank\nAccount Holder: MeghRoop Tech Private Limited\nAccount Number: 50200089495082\nIFSC Code: HDFC0001234\n\nThank you for working with MeghRoop!',
+          currency: '₹',
+          gstNumber: '08AAAAA1111A1Z1',
+          clientGst: ''
         })
       }
       setIsSaved(false)
@@ -264,12 +300,21 @@ export default function LetterheadEditorPage() {
             display: none !important;
           }
 
-          /* Strip spacing frameworks to fill printable page */
+          /* Strip flex layout container spacing and enforce block layout */
           main, 
+          .min-h-screen,
+          .flex-1,
+          .max-w-7xl,
           .main-content-wrapper {
-            margin-left: 0 !important;
+            margin: 0 !important;
             padding: 0 !important;
-            background: white !important;
+            background: transparent !important;
+            display: block !important;
+            width: auto !important;
+            height: auto !important;
+            min-height: 0 !important;
+            box-shadow: none !important;
+            border: none !important;
           }
 
           body, html {
@@ -277,20 +322,32 @@ export default function LetterheadEditorPage() {
             color: black !important;
             margin: 0 !important;
             padding: 0 !important;
+            width: 210mm !important;
+            height: 297mm !important;
           }
 
           /* Perfect A4 frame overlay */
           .print-sheet {
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
             width: 210mm !important;
-            min-height: 297mm !important;
-            margin: 0 auto !important;
+            height: 297mm !important;
+            margin: 0 !important;
+            padding: 20mm 20mm 20mm 20mm !important;
             border: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
             box-sizing: border-box !important;
             background: ${bg} !important;
             font-family: 'Space Grotesk', sans-serif !important;
-            /* Extra safety layers to prevent overflow breaking into empty page 2 */
+            
+            /* Align footer beautifully at the bottom of the page print */
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+
+            /* Safety layers to prevent overflow breaking into empty page 2 */
             page-break-inside: avoid !important;
             page-break-after: avoid !important;
           }
@@ -375,7 +432,7 @@ export default function LetterheadEditorPage() {
             )}
           </div>
 
-          {/* Dark/Light Letterhead Sheet Toggle */}
+          {/* Dark/Light Letterhead Toggle */}
           <button
             onClick={() => {
               setLhMode(prev => prev === 'light' ? 'dark' : 'light')
@@ -542,17 +599,57 @@ export default function LetterheadEditorPage() {
               </div>
             </div>
 
-            {/* Billed To / Client details */}
-            <div className="space-y-3">
+            {/* Currency & GSTIN parameters */}
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Client / Business Name</label>
+                <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Currency</label>
+                <select
+                  value={invoiceData.currency}
+                  onChange={(e) => handleInvoiceChange('currency', e.target.value)}
+                  className="w-full bg-[#141414] border border-white/[0.08] rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 transition-all font-semibold"
+                >
+                  {CURRENCIES.map((c) => (
+                    <option key={c.symbol} value={c.symbol}>
+                      {c.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Studio GSTIN (MeghRoop)</label>
                 <input
                   type="text"
-                  value={invoiceData.clientName}
-                  onChange={(e) => handleInvoiceChange('clientName', e.target.value)}
-                  className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all"
-                  placeholder="Acme Corp"
+                  value={invoiceData.gstNumber}
+                  onChange={(e) => handleInvoiceChange('gstNumber', e.target.value)}
+                  className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all font-mono uppercase"
+                  placeholder="Studio GSTIN"
                 />
+              </div>
+            </div>
+
+            {/* Billed To / Client details */}
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2 sm:col-span-1">
+                  <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Client / Business Name</label>
+                  <input
+                    type="text"
+                    value={invoiceData.clientName}
+                    onChange={(e) => handleInvoiceChange('clientName', e.target.value)}
+                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all"
+                    placeholder="Acme Corp"
+                  />
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Client GSTIN (Optional)</label>
+                  <input
+                    type="text"
+                    value={invoiceData.clientGst}
+                    onChange={(e) => handleInvoiceChange('clientGst', e.target.value)}
+                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all font-mono uppercase"
+                    placeholder="Client GSTIN"
+                  />
+                </div>
               </div>
               <div>
                 <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Client Address</label>
@@ -602,25 +699,14 @@ export default function LetterheadEditorPage() {
                       placeholder="Item Description"
                     />
 
-                    <div className="grid grid-cols-2 gap-2">
-                      <div>
-                        <label className="text-[9px] text-gray-500 block mb-1">Qty</label>
-                        <input
-                          type="number"
-                          value={item.quantity}
-                          onChange={(e) => handleItemChange(item.id, 'quantity', e.target.value)}
-                          className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-3 py-1 text-xs text-white focus:outline-none focus:border-purple-500/30 font-mono"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[9px] text-gray-500 block mb-1">Rate ($)</label>
-                        <input
-                          type="number"
-                          value={item.rate}
-                          onChange={(e) => handleItemChange(item.id, 'rate', e.target.value)}
-                          className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-3 py-1 text-xs text-white focus:outline-none focus:border-purple-500/30 font-mono"
-                        />
-                      </div>
+                    <div>
+                      <label className="text-[9px] text-gray-500 block mb-1">Rate / Amount ({invoiceData.currency})</label>
+                      <input
+                        type="number"
+                        value={item.rate}
+                        onChange={(e) => handleItemChange(item.id, 'rate', e.target.value)}
+                        className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-3 py-1 text-xs text-white focus:outline-none focus:border-purple-500/30 font-mono"
+                      />
                     </div>
                   </div>
                 ))}
@@ -630,7 +716,7 @@ export default function LetterheadEditorPage() {
             {/* Calculations Override */}
             <div className="grid grid-cols-2 gap-4 border-t border-white/[0.06] pt-4">
               <div>
-                <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Discount Amount ($)</label>
+                <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Discount Amount ({invoiceData.currency})</label>
                 <input
                   type="number"
                   value={invoiceData.discountAmount}
@@ -640,7 +726,7 @@ export default function LetterheadEditorPage() {
               </div>
               <div className="flex flex-col justify-end text-right">
                 <span className="text-[10px] text-gray-500 font-bold uppercase">Estimated Subtotal</span>
-                <span className="text-md font-bold text-white font-mono">${subtotal.toLocaleString()}</span>
+                <span className="text-md font-bold text-white font-mono">{invoiceData.currency}{subtotal.toLocaleString()}</span>
               </div>
             </div>
           </div>
@@ -649,242 +735,256 @@ export default function LetterheadEditorPage() {
         {/* HIGH-FIDELITY A4 PREVIEW CANVAS PANEL (Right pane / Center pane) */}
         <div className={`flex-1 flex justify-center ${activeTab === 'invoice' ? 'lg:w-[55%]' : 'w-full'}`}>
           <div 
-            className="print-sheet w-full max-w-[680px] rounded-2xl shadow-2xl transition-all duration-300 border overflow-hidden text-left"
+            className="print-sheet w-full max-w-[680px] rounded-2xl shadow-2xl transition-all duration-300 border overflow-hidden text-left flex flex-col justify-between"
             style={{ 
               fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif",
               background: bg,
-              border: border
+              border: border,
+              minHeight: '870px'
             }}
           >
             
-            {/* 1. Header Segment (Brand kit standards matching logo-kit.html) */}
-            <div className="px-12 pt-10 pb-0">
-              <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
-                <tbody>
-                  <tr>
-                    <td valign="middle" className="w-[44px]">
-                      <img 
-                        src="/icon-96.png" 
-                        width="44" 
-                        height="44" 
-                        alt="MeghRoop Monogram" 
-                        className="block rounded-[10px] bg-[#0d0d0d] w-11 h-11"
-                      />
-                    </td>
-                    <td valign="middle" className="px-3.5 w-1">
-                      <div 
-                        className="w-[2px] h-[38px] rounded-[1px]"
-                        style={{ background: gradL }}
-                      ></div>
-                    </td>
-                    <td valign="middle">
-                      <p 
-                        className="m-0 text-xl font-bold tracking-tight"
-                        style={{ color: nameC, letterSpacing: '-0.02em' }}
-                      >
-                        MeghRoop
-                      </p>
-                      <p 
-                        className="m-0 text-[10px] font-semibold tracking-widest uppercase"
-                        style={{ color: subC, letterSpacing: '0.14em' }}
-                      >
-                        Creative Engineering &amp; AI Studio
-                      </p>
-                    </td>
-                    <td valign="middle" className="text-right">
-                      <p 
-                        className="m-0 text-[11px] leading-[1.8] font-medium animate-none"
-                        style={{ color: bodyC }}
-                      >
-                        <a href="https://meghroop.tech" target="_blank" rel="noopener noreferrer" style={{ color: gradL, textDecoration: 'none' }}>
-                          meghroop.tech
-                        </a>
-                        <br />
-                        hello@meghroop.tech
-                        <br />
-                        Rajasthan, India
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            {/* Top Sheet Group wrapper to separate top content from the bottom footer for perfect alignment */}
+            <div className="w-full">
+              
+              {/* 1. Header Segment (Brand kit standards matching logo-kit.html) */}
+              <div className="px-12 pt-10 pb-0">
+                <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
+                  <tbody>
+                    <tr>
+                      <td valign="middle" className="w-[44px]">
+                        <img 
+                          src="/icon-96.png" 
+                          width="44" 
+                          height="44" 
+                          alt="MeghRoop Monogram" 
+                          className="block rounded-[10px] bg-[#0d0d0d] w-11 h-11"
+                        />
+                      </td>
+                      <td valign="middle" className="px-3.5 w-1">
+                        <div 
+                          className="w-[2px] h-[38px] rounded-[1px]"
+                          style={{ background: gradL }}
+                        ></div>
+                      </td>
+                      <td valign="middle">
+                        <p 
+                          className="m-0 text-xl font-bold tracking-tight"
+                          style={{ color: nameC, letterSpacing: '-0.02em' }}
+                        >
+                          MeghRoop
+                        </p>
+                        <p 
+                          className="m-0 text-[10px] font-semibold tracking-widest uppercase"
+                          style={{ color: subC, letterSpacing: '0.14em' }}
+                        >
+                          Creative Engineering &amp; AI Studio
+                        </p>
+                      </td>
+                      <td valign="middle" className="text-right">
+                        <p 
+                          className="m-0 text-[11px] leading-[1.8] font-medium animate-none"
+                          style={{ color: bodyC }}
+                        >
+                          <a href="https://meghroop.tech" target="_blank" rel="noopener noreferrer" style={{ color: gradL, textDecoration: 'none' }}>
+                            meghroop.tech
+                          </a>
+                          <br />
+                          hello@meghroop.tech
+                          <br />
+                          Rajasthan, India
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-            {/* 2. Brand Gradient Divider */}
-            <div className="px-12 pt-4 pb-0">
-              <div 
-                className="h-[2px] rounded-[2px]"
-                style={{ background: `linear-gradient(90deg, ${gradL}, ${gradR}, transparent)` }}
-              ></div>
-            </div>
-
-            {/* 3A. DOCUMENT PREVIEW: PROPOSAL / LETTER MODE */}
-            {activeTab === 'proposal' && (
-              <div className="px-12 py-8">
-                {/* Editable Subtitle */}
-                <input
-                  type="text"
-                  value={documentSub}
-                  onChange={(e) => {
-                    setDocumentSub(e.target.value)
-                    handleContentChange()
-                  }}
-                  className="w-full bg-transparent border-none outline-none font-semibold text-[11px] tracking-widest uppercase mb-3 focus:bg-white/[0.02] p-1 rounded transition-all"
-                  style={{ color: subC, letterSpacing: '0.14em' }}
-                  placeholder="DOCUMENT SUBTITLE / BRIEF"
-                />
-
-                {/* Editable Title */}
-                <input
-                  type="text"
-                  value={documentTitle}
-                  onChange={(e) => {
-                    setDocumentTitle(e.target.value)
-                    handleContentChange()
-                  }}
-                  className="w-full bg-transparent border-none outline-none font-bold text-2xl tracking-tight mb-5 focus:bg-white/[0.02] p-1 rounded transition-all"
-                  style={{ color: nameC, letterSpacing: '-0.02em' }}
-                  placeholder="Proposal / Invoice / Letter"
-                />
-
-                {/* Free-form Body Content */}
-                <div
-                  ref={editorRef}
-                  contentEditable
-                  onInput={handleContentChange}
-                  className="prose max-w-none text-sm outline-none leading-relaxed p-1 rounded focus:bg-white/[0.01] transition-all min-h-[340px]"
-                  style={{ 
-                    color: bodyC,
-                  }}
+              {/* 2. Brand Gradient Divider */}
+              <div className="px-12 pt-4 pb-0">
+                <div 
+                  className="h-[2px] rounded-[2px]"
+                  style={{ background: `linear-gradient(90deg, ${gradL}, ${gradR}, transparent)` }}
                 ></div>
               </div>
-            )}
 
-            {/* 3B. DOCUMENT PREVIEW: DYNAMIC INVOICE MODE */}
-            {activeTab === 'invoice' && (
-              <div className="px-12 py-8 space-y-6">
-                
-                {/* Invoice Title Block */}
-                <div>
-                  <h2 className="font-bold text-2xl tracking-tight m-0" style={{ color: nameC, letterSpacing: '-0.02em' }}>
-                    INVOICE
-                  </h2>
-                  <p className="text-[10px] font-semibold tracking-widest uppercase m-0 mt-1" style={{ color: subC, letterSpacing: '0.14em' }}>
-                    Official Billing Statement
-                  </p>
+              {/* 3A. DOCUMENT PREVIEW: PROPOSAL / LETTER MODE */}
+              {activeTab === 'proposal' && (
+                <div className="px-12 py-8">
+                  {/* Editable Subtitle */}
+                  <input
+                    type="text"
+                    value={documentSub}
+                    onChange={(e) => {
+                      setDocumentSub(e.target.value)
+                      handleContentChange()
+                    }}
+                    className="w-full bg-transparent border-none outline-none font-semibold text-[11px] tracking-widest uppercase mb-3 focus:bg-white/[0.02] p-1 rounded transition-all"
+                    style={{ color: subC, letterSpacing: '0.14em' }}
+                    placeholder="DOCUMENT SUBTITLE / BRIEF"
+                  />
+
+                  {/* Editable Title */}
+                  <input
+                    type="text"
+                    value={documentTitle}
+                    onChange={(e) => {
+                      setDocumentTitle(e.target.value)
+                      handleContentChange()
+                    }}
+                    className="w-full bg-transparent border-none outline-none font-bold text-2xl tracking-tight mb-5 focus:bg-white/[0.02] p-1 rounded transition-all"
+                    style={{ color: nameC, letterSpacing: '-0.02em' }}
+                    placeholder="Proposal / Invoice / Letter"
+                  />
+
+                  {/* Free-form Body Content */}
+                  <div
+                    ref={editorRef}
+                    contentEditable
+                    onInput={handleContentChange}
+                    className="prose max-w-none text-sm outline-none leading-relaxed p-1 rounded focus:bg-white/[0.01] transition-all min-h-[340px]"
+                    style={{ 
+                      color: bodyC,
+                    }}
+                  ></div>
                 </div>
+              )}
 
-                {/* Invoice Metadata Grid */}
-                <div className="grid grid-cols-2 gap-8 text-xs border-y py-4" style={{ borderColor: tableBorder }}>
-                  {/* Billed To client information */}
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                      BILLED TO:
-                    </span>
-                    <p className="font-bold m-0" style={{ color: nameC }}>{invoiceData.clientName || 'Client Name'}</p>
-                    <p className="whitespace-pre-line m-0 leading-relaxed" style={{ color: bodyC }}>
-                      {invoiceData.clientAddress || 'Client Address'}
+              {/* 3B. DOCUMENT PREVIEW: DYNAMIC INVOICE MODE */}
+              {activeTab === 'invoice' && (
+                <div className="px-12 py-8 space-y-6">
+                  
+                  {/* Invoice Title Block */}
+                  <div>
+                    <h2 className="font-bold text-2xl tracking-tight m-0" style={{ color: nameC, letterSpacing: '-0.02em' }}>
+                      INVOICE
+                    </h2>
+                    <p className="text-[10px] font-semibold tracking-widest uppercase m-0 mt-1" style={{ color: subC, letterSpacing: '0.14em' }}>
+                      Official Billing Statement
                     </p>
                   </div>
 
-                  {/* Billing Metadata details */}
-                  <div className="space-y-2 text-right">
-                    <div>
-                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                        INVOICE NUMBER:
+                  {/* Invoice Metadata Grid */}
+                  <div className="grid grid-cols-2 gap-8 text-xs border-y py-4" style={{ borderColor: tableBorder }}>
+                    {/* Billed To client information */}
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                        BILLED TO:
                       </span>
-                      <span className="font-mono font-bold" style={{ color: nameC }}>{invoiceData.invoiceNumber}</span>
+                      <p className="font-bold m-0" style={{ color: nameC }}>{invoiceData.clientName || 'Client Name'}</p>
+                      <p className="whitespace-pre-line m-0 leading-relaxed" style={{ color: bodyC }}>
+                        {invoiceData.clientAddress || 'Client Address'}
+                      </p>
+                      {invoiceData.clientGst && (
+                        <p className="m-0 mt-1.5 text-[11px]" style={{ color: bodyC }}>
+                          <strong>GSTIN:</strong> <span className="font-mono">{invoiceData.clientGst.toUpperCase()}</span>
+                        </p>
+                      )}
                     </div>
-                    <div>
-                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                        DATE OF ISSUE:
-                      </span>
-                      <span className="font-mono font-medium" style={{ color: bodyC }}>{invoiceData.invoiceDate}</span>
-                    </div>
-                    <div>
-                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                        DUE DATE:
-                      </span>
-                      <span className="font-mono font-bold" style={{ color: nameC }}>{invoiceData.dueDate}</span>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Premium Billing Table */}
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs text-left border-collapse">
-                    <thead>
-                      <tr className="border-b" style={{ borderColor: tableBorder }}>
-                        <th className="py-2.5 font-bold tracking-wider" style={{ color: labelC }}>DESCRIPTION</th>
-                        <th className="py-2.5 text-center font-bold tracking-wider w-16" style={{ color: labelC }}>QTY</th>
-                        <th className="py-2.5 text-right font-bold tracking-wider w-24" style={{ color: labelC }}>RATE</th>
-                        <th className="py-2.5 text-right font-bold tracking-wider w-24" style={{ color: labelC }}>TOTAL</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {invoiceData.items.map((item) => (
-                        <tr key={item.id} className="border-b" style={{ borderColor: tableBorder }}>
-                          <td className="py-3 pr-4 font-medium" style={{ color: nameC }}>{item.description}</td>
-                          <td className="py-3 text-center font-mono" style={{ color: bodyC }}>{item.quantity}</td>
-                          <td className="py-3 text-right font-mono" style={{ color: bodyC }}>${item.rate.toLocaleString()}</td>
-                          <td className="py-3 text-right font-mono font-bold" style={{ color: nameC }}>
-                            ${(item.quantity * item.rate).toLocaleString()}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* Summary calculation blocks */}
-                <div className="flex flex-col sm:flex-row justify-between gap-6 pt-4 text-xs">
-                  {/* Bank Details / Custom Payment parameters */}
-                  <div className="flex-1 space-y-1.5">
-                    <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                      PAYMENT INSTRUCTIONS &amp; NOTES:
-                    </span>
-                    <textarea
-                      rows={4}
-                      value={invoiceData.paymentNotes}
-                      onChange={(e) => handleInvoiceChange('paymentNotes', e.target.value)}
-                      className="w-full bg-transparent border-none outline-none resize-none leading-relaxed p-0 text-[11px]"
-                      style={{ color: bodyC }}
-                      placeholder="Add payment methods or terms..."
-                    />
-                  </div>
-
-                  {/* Calculations Subtotal Stack */}
-                  <div className="w-full sm:w-56 space-y-2 text-right">
-                    <div className="flex justify-between">
-                      <span style={{ color: labelC }}>Subtotal:</span>
-                      <span className="font-mono font-semibold" style={{ color: bodyC }}>${subtotal.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span style={{ color: labelC }}>Tax ({invoiceData.taxPercent}%):</span>
-                      <span className="font-mono font-semibold" style={{ color: bodyC }}>+${taxAmount.toLocaleString()}</span>
-                    </div>
-                    {invoiceData.discountAmount > 0 && (
-                      <div className="flex justify-between">
-                        <span style={{ color: labelC }}>Discount:</span>
-                        <span className="font-mono font-semibold text-emerald-500">-${invoiceData.discountAmount.toLocaleString()}</span>
+                    {/* Billing Metadata details */}
+                    <div className="space-y-2 text-right">
+                      <div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                          INVOICE NUMBER:
+                        </span>
+                        <span className="font-mono font-bold" style={{ color: nameC }}>{invoiceData.invoiceNumber}</span>
                       </div>
-                    )}
-                    
-                    {/* Premium Total Due highlighted container */}
-                    <div className="flex justify-between border-t pt-2.5" style={{ borderColor: tableBorder }}>
-                      <span className="font-bold" style={{ color: nameC }}>Total Due:</span>
-                      <span className="font-mono font-bold text-sm bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
-                        ${grandTotal.toLocaleString()}
-                      </span>
+                      {invoiceData.gstNumber && (
+                        <div>
+                          <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                            GSTIN (STUDIO):
+                          </span>
+                          <span className="font-mono font-bold" style={{ color: nameC }}>{invoiceData.gstNumber.toUpperCase()}</span>
+                        </div>
+                      )}
+                      <div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                          DATE OF ISSUE:
+                        </span>
+                        <span className="font-mono font-medium" style={{ color: bodyC }}>{invoiceData.invoiceDate}</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                          DUE DATE:
+                        </span>
+                        <span className="font-mono font-bold" style={{ color: nameC }}>{invoiceData.dueDate}</span>
+                      </div>
                     </div>
                   </div>
+
+                  {/* Premium Invoicing Table (Removed QTY/RATE columns for super clean styling) */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs text-left border-collapse">
+                      <thead>
+                        <tr className="border-b" style={{ borderColor: tableBorder }}>
+                          <th className="py-2.5 font-bold tracking-wider" style={{ color: labelC }}>DESCRIPTION</th>
+                          <th className="py-2.5 text-right font-bold tracking-wider w-32" style={{ color: labelC }}>AMOUNT</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {invoiceData.items.map((item) => (
+                          <tr key={item.id} className="border-b" style={{ borderColor: tableBorder }}>
+                            <td className="py-3 pr-4 font-medium" style={{ color: nameC }}>{item.description}</td>
+                            <td className="py-3 text-right font-mono font-bold" style={{ color: nameC }}>
+                              {invoiceData.currency}{item.rate.toLocaleString()}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Summary calculation blocks */}
+                  <div className="flex flex-col sm:flex-row justify-between gap-6 pt-4 text-xs">
+                    {/* Bank Details / Custom Payment parameters */}
+                    <div className="flex-1 space-y-1.5">
+                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                        PAYMENT INSTRUCTIONS &amp; NOTES:
+                      </span>
+                      <textarea
+                        rows={4}
+                        value={invoiceData.paymentNotes}
+                        onChange={(e) => handleInvoiceChange('paymentNotes', e.target.value)}
+                        className="w-full bg-transparent border-none outline-none resize-none leading-relaxed p-0 text-[11px]"
+                        style={{ color: bodyC }}
+                        placeholder="Add payment methods or terms..."
+                      />
+                    </div>
+
+                    {/* Calculations Subtotal Stack */}
+                    <div className="w-full sm:w-56 space-y-2 text-right">
+                      <div className="flex justify-between">
+                        <span style={{ color: labelC }}>Subtotal:</span>
+                        <span className="font-mono font-semibold" style={{ color: bodyC }}>{invoiceData.currency}{subtotal.toLocaleString()}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span style={{ color: labelC }}>Tax ({invoiceData.taxPercent}%):</span>
+                        <span className="font-mono font-semibold" style={{ color: bodyC }}>+{invoiceData.currency}{taxAmount.toLocaleString()}</span>
+                      </div>
+                      {invoiceData.discountAmount > 0 && (
+                        <div className="flex justify-between">
+                          <span style={{ color: labelC }}>Discount:</span>
+                          <span className="font-mono font-semibold text-emerald-500">-{invoiceData.currency}{invoiceData.discountAmount.toLocaleString()}</span>
+                        </div>
+                      )}
+                      
+                      {/* Premium Total Due highlighted container */}
+                      <div className="flex justify-between border-t pt-2.5" style={{ borderColor: tableBorder }}>
+                        <span className="font-bold" style={{ color: nameC }}>Total Due:</span>
+                        <span className="font-mono font-bold text-sm bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                          {invoiceData.currency}{grandTotal.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
+              )}
+            </div>
 
-              </div>
-            )}
-
-            {/* 4. Footer Segment */}
-            <div className="px-12 pb-8 pt-0 mt-auto">
+            {/* 4. Footer Segment (Stays perfectly at A4 bottom sheet) */}
+            <div className="px-12 pb-8 pt-0 mt-auto w-full">
               <div 
                 className="h-[1px] mb-4"
                 style={{ background: footerBorder }}
