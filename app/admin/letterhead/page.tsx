@@ -291,9 +291,11 @@ export default function LetterheadEditorPage() {
             margin: 0 !important;
           }
 
-          /* Hide sidebar, dashboards, control panels, forms, and background frames */
+          /* Hide sidebar, dashboards, control panels, forms, navigation elements, and background frames */
           aside,
           header,
+          nav,
+          [aria-label="Mobile navigation"],
           .no-print,
           .invoice-form-pane,
           .admin-sidebar {
@@ -302,8 +304,8 @@ export default function LetterheadEditorPage() {
 
           /* Reset body and html layout */
           body, html {
-            background: white !important;
-            color: black !important;
+            background: #ffffff !important;
+            color: #111111 !important;
             margin: 0 !important;
             padding: 0 !important;
             width: 100% !important;
@@ -320,7 +322,7 @@ export default function LetterheadEditorPage() {
             height: auto !important;
           }
 
-          /* Perfect A4 frame overlay */
+          /* Perfect A4 frame overlay - Force crisp light theme for physical printing & ink safety */
           .print-sheet {
             width: 210mm !important;
             height: 297mm !important;
@@ -332,7 +334,8 @@ export default function LetterheadEditorPage() {
             box-shadow: none !important;
             border-radius: 0 !important;
             box-sizing: border-box !important;
-            background: ${bg} !important;
+            background: #ffffff !important;
+            color: #111111 !important;
             font-family: 'Space Grotesk', sans-serif !important;
             
             /* Align footer beautifully at the bottom of the page print */
@@ -343,13 +346,32 @@ export default function LetterheadEditorPage() {
             /* Safety layers to prevent overflow breaking into empty page 2 */
             page-break-inside: avoid !important;
             page-break-after: avoid !important;
-            position: relative !important;
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+          }
+
+          /* Override text/inline colors inside printed sheet to ensure absolute legibility */
+          .print-sheet p,
+          .print-sheet span,
+          .print-sheet td,
+          .print-sheet th,
+          .print-sheet div,
+          .print-sheet a {
+            color: #374151 !important; /* gray-700 dark text */
+          }
+
+          .print-sheet h2,
+          .print-sheet th,
+          .print-sheet .font-bold,
+          .print-sheet font-bold {
+            color: #111111 !important; /* Bold headings in black */
           }
 
           .print-sheet input, 
           .print-sheet textarea {
             background: transparent !important;
-            color: ${nameC} !important;
+            color: #111111 !important;
             border: none !important;
           }
 
