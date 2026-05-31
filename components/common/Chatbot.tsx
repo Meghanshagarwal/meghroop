@@ -290,7 +290,7 @@ export default function Chatbot() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 no-print font-sans">
+    <div className="fixed bottom-6 right-6 z-50 no-print font-sans flex flex-col items-end">
       <AnimatePresence>
         
         {/* CHAT OPEN STATE FLOATING PANEL */}
