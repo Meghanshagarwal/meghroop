@@ -299,7 +299,7 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="mb-4 w-[92vw] sm:w-[420px] h-[550px] sm:h-[600px] bg-[#080808] border border-white/[0.08] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col justify-between"
+            className="mb-4 w-[92vw] sm:w-[420px] h-[calc(100vh-120px)] max-h-[580px] min-h-[380px] bg-[#080808] border border-white/[0.08] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col justify-between"
             style={{
               boxShadow: '0 0 30px rgba(192, 132, 252, 0.05)',
             }}
