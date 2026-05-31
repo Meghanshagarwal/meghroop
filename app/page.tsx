@@ -14,6 +14,7 @@ import Projects from '@/components/sections/Projects'
 import TechStack from '@/components/sections/TechStack'
 import Testimonials from '@/components/sections/Testimonials'
 import FAQ from '@/components/sections/FAQ'
+import HomeJournalFeed from '@/components/sections/HomeJournalFeed'
 import Contact from '@/components/sections/Contact'
 
 
@@ -45,6 +46,7 @@ export default async function Home() {
         <Projects projects={projects} />
         <TechStack />
         <Testimonials />
+        <HomeJournalFeed />
         <FAQ />
         <Contact />
       </main>

@@ -22,28 +22,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticSitemap = staticRoutes.map((route) => {
     let priority = 0.8
-    let changeFrequency: 'weekly' | 'monthly' | 'yearly' = 'weekly'
+    let changeFrequency: 'daily' | 'weekly' | 'monthly' = 'weekly'
 
     if (route === '') {
       priority = 1.0
-      changeFrequency = 'weekly'
-    } else if (route === '/contact') {
-      priority = 0.9
-      changeFrequency = 'monthly'
-    } else if (route === '/about') {
-      priority = 0.85
-      changeFrequency = 'monthly'
+      changeFrequency = 'daily'
     } else if (route === '/journal') {
-      priority = 0.85
-      changeFrequency = 'weekly'
-    } else if (route === '/systems') {
+      priority = 0.95
+      changeFrequency = 'daily'
+    } else if (route === '/contact' || route === '/about') {
+      priority = 0.5
+      changeFrequency = 'monthly'
+    } else if (
+      route.includes('-engineering') || 
+      route === '/mcp-infrastructure' || 
+      route === '/n8n-workflows' || 
+      route === '/ai-agents-automation'
+    ) {
       priority = 0.9
       changeFrequency = 'weekly'
     }
 
     return {
       url: `${SITE_URL}${route}`,
-      lastModified: new Date('2026-05-22'),
+      lastModified: new Date().toISOString(),
       changeFrequency,
       priority,
     }
@@ -52,9 +54,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Dynamic journal articles sitemap
   const dynamicSitemap = articles.map((article) => ({
     url: `${SITE_URL}/journal/${article.slug}`,
-    lastModified: new Date(article.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    lastModified: new Date(article.lastUpdated || article.date).toISOString(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
   }))
 
   return [...staticSitemap, ...dynamicSitemap]

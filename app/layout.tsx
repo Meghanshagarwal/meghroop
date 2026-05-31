@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     images: ['/opengraph-image'],
   },
   alternates: {
-    canonical: '/',
+    canonical: './',
   },
   robots: {
     index: true,
