@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageSquare, X, Send, Bot, Loader2, Sparkles } from 'lucide-react'
+import { MessageSquare, X, Send, Loader2, Sparkles } from 'lucide-react'
+import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 import { 
   CHATBOT_BRAND, 
   QUICK_ACTIONS, 
@@ -110,8 +111,8 @@ export default function Chatbot() {
     // Default fallback response
     addMessage(
       'assistant',
-      "I'm not sure about that details, but our core engineers Meghansh & Roop can absolutely help. Would you like to request a free consultation or chat with us directly on WhatsApp?",
-      ['Book a Call', 'WhatsApp Us', 'Main Menu']
+      "I'm not sure about that details, but our core engineers Meghansh & Roop can absolutely help. Would you like to request a free consultation or book a call directly?",
+      ['Book a Call', 'Main Menu']
     )
   }
 
@@ -176,7 +177,7 @@ export default function Chatbot() {
         addMessage(
           'assistant',
           `${profile.brief}\n\n${profile.consultationPrompt}`,
-          ['Yes, let\'s talk', 'WhatsApp Us', 'Main Menu']
+          ['Yes, let\'s talk', 'Main Menu']
         )
         return
       }
@@ -266,13 +267,13 @@ export default function Chatbot() {
           addMessage(
             'assistant',
             `🎉 Thank you, ${leadData.name}! We have captured your requirements successfully.\n\nExpected response time is within 24 hours. A receipt email has also been sent to ${leadData.email}.`,
-            ['WhatsApp Us 💬', 'Main Menu']
+            ['Main Menu']
           )
         } else {
           addMessage(
             'assistant',
-            'Something went wrong pushing details to our backend. Please connect with us directly on WhatsApp for an immediate response!',
-            ['WhatsApp Us 💬', 'Main Menu']
+            'Something went wrong pushing details to our backend. Please request a callback or write to us at hello@meghroop.tech.',
+            ['Main Menu']
           )
         }
       } catch (err) {
@@ -280,8 +281,8 @@ export default function Chatbot() {
         console.error('[Chatbot Lead Push Error]:', err)
         addMessage(
           'assistant',
-          'A network error occurred. Let\'s continue our conversation directly on WhatsApp!',
-          ['WhatsApp Us 💬', 'Main Menu']
+          'A network error occurred. Please try again or write to us at hello@meghroop.tech.',
+          ['Main Menu']
         )
       }
       setFlowStep('idle')
@@ -307,8 +308,8 @@ export default function Chatbot() {
             {/* Header */}
             <div className="bg-[#0d0d0d] border-b border-white/[0.06] px-5 py-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-300 relative">
-                  <Bot size={18} />
+                <div className="relative">
+                  <MeghRoopLogo variant="favicon" />
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-[#0d0d0d]" />
                 </div>
                 <div>
@@ -334,9 +335,7 @@ export default function Chatbot() {
                 <div key={msg.id} className="space-y-2">
                   <div className={`flex items-start gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {msg.sender === 'assistant' && (
-                      <div className="w-6 h-6 rounded-md bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 flex-shrink-0 mt-0.5">
-                        <Bot size={12} />
-                      </div>
+                      <MeghRoopLogo variant="favicon" className="w-6 h-6 rounded-[5px] !p-0 shrink-0 mt-0.5 bg-transparent border-none" />
                     )}
                     <div
                       className={`max-w-[80%] rounded-2xl px-4 py-3 text-xs leading-relaxed ${

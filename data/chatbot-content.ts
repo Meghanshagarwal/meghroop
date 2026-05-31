@@ -27,8 +27,7 @@ export const QUICK_ACTIONS = [
   'Web Development',
   'n8n Workflows',
   'AI Search Optimization',
-  'Book a Call',
-  'WhatsApp Us'
+  'Book a Call'
 ]
 
 export const SERVICES_PROFILES: Record<string, ServiceProfile> = {
@@ -117,6 +116,6 @@ export const KNOWLEDGE_BASE: Record<string, FAQResponse> = {
   support: {
     keywords: ['support', 'help', 'maintenance', 'contact', 'reach out', 'whatsapp'],
     answer: 'We stand by what we build. Every project we ship comes with 30 days of comprehensive hyper-care support covering bug fixes, speed audits, and workflow tuning. Extended retainers are available for ongoing engineering support.',
-    options: ['WhatsApp Us', 'Book a Call', 'Main Menu']
+    options: ['Book a Call', 'Main Menu']
   }
 }
