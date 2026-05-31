@@ -6,6 +6,11 @@ import { getSupabase } from '@/lib/supabase'
 import JsonLd from '@/components/common/JsonLd'
 import PWAInstallPrompt from '@/components/common/PWAInstallPrompt'
 import MobileNav from '@/components/common/MobileNav'
+import dynamic from 'next/dynamic'
+
+const Chatbot = dynamic(() => import('@/components/common/Chatbot'), {
+  ssr: false,
+})
 
 const inter = Inter({
   subsets: ['latin'],
@@ -233,6 +238,7 @@ export default async function RootLayout({
         {children}
         <MobileNav />
         <PWAInstallPrompt />
+        <Chatbot />
       </body>
     </html>
   )
