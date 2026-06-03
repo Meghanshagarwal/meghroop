@@ -164,104 +164,194 @@ export async function POST(req: NextRequest) {
           from: `"MeghRoop Studio" <${emailUser}>`,
           to: email,
           subject: `We received your message, ${name} — MeghRoop`,
-          html: `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#000;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#000;padding:40px 16px;">
-  <tr><td align="center">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
+          html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We received your message — MeghRoop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+    table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; }
+    img { -ms-interpolation-mode:bicubic; }
+    body { height:100% !important; margin:0 !important; padding:0 !important; width:100% !important; background-color:#080808; }
+    table { border-collapse:collapse !important; }
+    
+    @media only screen and (max-width: 620px) {
+      .wrapper { width: 100% !important; padding: 10px !important; }
+      .column { width: 100% !important; display: block !important; box-sizing: border-box !important; padding: 0 0 20px 0 !important; }
+      .center-mobile { text-align: center !important; }
+      .hide-mobile { display: none !important; }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #080808; font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
 
-    <!-- Logo -->
-    <tr><td style="padding-bottom:24px;" align="center">
-      <table cellpadding="0" cellspacing="0"><tr>
-        <td style="width:32px;height:32px;background:linear-gradient(135deg,#a855f7,#3b82f6);border-radius:8px;text-align:center;line-height:32px;">
-          <span style="color:#fff;font-weight:700;font-size:14px;">M</span>
-        </td>
-        <td style="padding-left:10px;color:#fff;font-size:16px;font-weight:700;">MeghRoop</td>
-      </tr></table>
-    </td></tr>
-
-    <!-- Card -->
-    <tr><td style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;">
-
-      <!-- Header -->
-      <tr><td style="background:linear-gradient(135deg,rgba(168,85,247,0.18),rgba(59,130,246,0.18));padding:32px;text-align:center;">
-        <div style="width:52px;height:52px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);border-radius:50%;margin:0 auto 16px;text-align:center;line-height:52px;color:#34d399;font-size:22px;font-weight:700;">&#10003;</div>
-        <h1 style="margin:0 0 8px;color:#fff;font-size:22px;font-weight:700;">Message received!</h1>
-        <p style="margin:0;color:#9ca3af;font-size:14px;">Thanks for reaching out, ${name}.</p>
-      </td></tr>
-
-      <!-- Body -->
-      <tr><td style="padding:28px 32px;">
-
-        <p style="margin:0 0 22px;color:#d1d5db;font-size:14px;line-height:1.7;">
-          We've received your inquiry and our team will review it shortly. Expect a reply within <strong style="color:#fff;">24 hours</strong>.
-        </p>
-
-        <!-- Summary -->
-        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:18px 20px;margin-bottom:24px;">
-          <p style="margin:0 0 12px;color:#6b7280;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">Your Inquiry Summary</p>
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="color:#6b7280;font-size:13px;padding-bottom:8px;width:110px;vertical-align:top;">Project Type</td>
-              <td style="padding-bottom:8px;">
-                <span style="display:inline-block;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:20px;padding:2px 10px;color:#c4b5fd;font-size:12px;">${projectType || 'Not specified'}</span>
-              </td>
-            </tr>
-            <tr>
-              <td style="color:#6b7280;font-size:13px;vertical-align:top;">Message</td>
-              <td style="color:#e5e7eb;font-size:13px;line-height:1.6;">${message.length > 120 ? message.substring(0, 120).replace(/\n/g, ' ') + '...' : message.replace(/\n/g, '<br>')}</td>
-            </tr>
-          </table>
-        </div>
-
-        <!-- What's next -->
-        <p style="margin:0 0 14px;color:#6b7280;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">What happens next</p>
-        <table width="100%" cellpadding="0" cellspacing="0">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#080808" style="background-color: #080808;">
+    <tr>
+      <td align="center" style="padding: 24px 0 60px 0;">
+        
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="wrapper" style="width: 100%; max-width: 600px; background-color: #080808; border-collapse: collapse;">
+          
+          <!-- BRAND HEADER -->
           <tr>
-            <td style="padding-bottom:14px;vertical-align:top;width:28px;">
-              <div style="width:22px;height:22px;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:50%;text-align:center;line-height:22px;color:#a78bfa;font-size:11px;font-weight:700;">1</div>
-            </td>
-            <td style="padding-bottom:14px;padding-left:10px;vertical-align:top;">
-              <p style="margin:0;color:#fff;font-size:13px;font-weight:600;">Review</p>
-              <p style="margin:2px 0 0;color:#6b7280;font-size:12px;">We'll carefully review your project details</p>
+            <td style="padding: 20px 24px 32px 24px;">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <!-- Logo Badge -->
+                  <td valign="middle" style="width: 44px;">
+                    <img src="https://meghroop.tech/icon-96.png" width="44" height="44" alt="M" style="display: block; border-radius: 10px; background-color: #0d0d0d; border: 1px solid rgba(255,255,255,0.1); width: 44px; height: 44px;" />
+                  </td>
+                  
+                  <!-- Separator -->
+                  <td valign="middle" style="padding: 0 14px; width: 2px; text-align: center;">
+                    <div style="width: 2px; height: 36px; background-color: #c084fc; border-radius: 1px; font-size: 1px; line-height: 1px;">&nbsp;</div>
+                  </td>
+                  
+                  <!-- Brand Name -->
+                  <td valign="middle" align="left">
+                    <p style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #ffffff; line-height: 1.1;">MeghRoop</p>
+                    <p style="margin: 3px 0 0 0; font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #71717a; line-height: 1.0;">Creative Technology Studio</p>
+                  </td>
+                  
+                  <!-- Web Link -->
+                  <td valign="middle" align="right" class="center-mobile">
+                    <a href="https://meghroop.tech" style="font-size: 12px; font-weight: 600; color: #c084fc; text-decoration: none; letter-spacing: 0.05em;">meghroop.tech &rarr;</a>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
+
+          <!-- CARD CONTENT -->
           <tr>
-            <td style="padding-bottom:14px;vertical-align:top;width:28px;">
-              <div style="width:22px;height:22px;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:50%;text-align:center;line-height:22px;color:#a78bfa;font-size:11px;font-weight:700;">2</div>
-            </td>
-            <td style="padding-bottom:14px;padding-left:10px;vertical-align:top;">
-              <p style="margin:0;color:#fff;font-size:13px;font-weight:600;">Response</p>
-              <p style="margin:2px 0 0;color:#6b7280;font-size:12px;">Expect our reply within 24 hours</p>
+            <td style="padding: 0 16px;">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#0d0d0d" style="background-color: #0d0d0d; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; border-collapse: collapse;">
+                
+                <!-- Glow Header Banner -->
+                <tr>
+                  <td style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(59, 130, 246, 0.12)); padding: 40px 32px 32px 32px; text-align: center;">
+                    {/* Glowing Checkmark */}
+                    <div style="width: 48px; height: 48px; line-height: 46px; background-color: rgba(192, 132, 252, 0.08); border: 1px solid rgba(192, 132, 252, 0.2); border-radius: 50%; color: #c084fc; font-size: 20px; font-weight: bold; margin: 0 auto 16px; text-align: center; box-sizing: border-box;">
+                      &#10003;&#65038;
+                    </div>
+                    <h1 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #ffffff; letter-spacing: -0.03em;">Message received!</h1>
+                    <p style="margin: 0; color: #a1a1aa; font-size: 14px; font-weight: 400;">Thanks for reaching out, ${name}.</p>
+                  </td>
+                </tr>
+
+                <!-- Content Body -->
+                <tr>
+                  <td style="padding: 32px 32px 40px 32px;">
+                    <p style="margin: 0 0 24px 0; color: #a1a1aa; font-size: 14px; line-height: 1.7; font-weight: 400;">
+                      We have captured your inquiry in our workspace. Our core studio developers will review the parameters of your project. Expect an engineering response within <strong style="color: #ffffff;">24 hours</strong>.
+                    </p>
+
+                    <!-- Summary Box -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#080808" style="background-color: #080808; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; margin-bottom: 32px; border-collapse: collapse;">
+                      <tr>
+                        <td style="padding: 20px;">
+                          <p style="margin: 0 0 14px 0; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #71717a;">Your Inquiry Summary</p>
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td valign="top" width="110" style="width: 110px; padding-bottom: 12px; font-size: 13px; color: #71717a; font-weight: 500;">Project Type</td>
+                              <td valign="top" style="padding-bottom: 12px;">
+                                <span style="display: inline-block; background-color: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 20px; padding: 2px 10px; color: #c084fc; font-size: 12px; font-weight: 600;">
+                                  ${projectType || 'Not specified'}
+                                </span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td valign="top" style="font-size: 13px; color: #71717a; font-weight: 500;">Message</td>
+                              <td valign="top" style="font-size: 13px; color: #e4e4e7; line-height: 1.6; font-weight: 400;">
+                                ${message.length > 150 ? message.substring(0, 150).replace(/\n/g, ' ') + '...' : message.replace(/\n/g, '<br>')}
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- Next steps -->
+                    <p style="margin: 0 0 16px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #60a5fa;">What happens next</p>
+                    
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <!-- Step 1 -->
+                      <tr>
+                        <td valign="top" style="padding-bottom: 18px;">
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td valign="top" width="24" style="width: 24px;">
+                                <div style="width: 22px; height: 22px; line-height: 20px; background-color: rgba(192, 132, 252, 0.08); border: 1px solid rgba(192, 132, 252, 0.2); border-radius: 50%; text-align: center; color: #c084fc; font-family: monospace; font-size: 11px; font-weight: bold; box-sizing: border-box;">1</div>
+                              </td>
+                              <td valign="top" style="padding-left: 12px;">
+                                <h4 style="margin: 0 0 2px 0; font-size: 14px; font-weight: 700; color: #ffffff;">Review</h4>
+                                <p style="margin: 0; font-size: 12px; color: #71717a; line-height: 1.5;">We will carefully analyze your requirements and tech stack options.</p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      
+                      <!-- Step 2 -->
+                      <tr>
+                        <td valign="top" style="padding-bottom: 18px;">
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td valign="top" width="24" style="width: 24px;">
+                                <div style="width: 22px; height: 22px; line-height: 20px; background-color: rgba(96, 165, 250, 0.08); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 50%; text-align: center; color: #60a5fa; font-family: monospace; font-size: 11px; font-weight: bold; box-sizing: border-box;">2</div>
+                              </td>
+                              <td valign="top" style="padding-left: 12px;">
+                                <h4 style="margin: 0 0 2px 0; font-size: 14px; font-weight: 700; color: #ffffff;">Response</h4>
+                                <p style="margin: 0; font-size: 12px; color: #71717a; line-height: 1.5;">You will receive an engineering brief outlining our proposal within 24 hours.</p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+
+                      <!-- Step 3 -->
+                      <tr>
+                        <td valign="top">
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td valign="top" width="24" style="width: 24px;">
+                                <div style="width: 22px; height: 22px; line-height: 20px; background-color: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 50%; text-align: center; color: #34d399; font-family: monospace; font-size: 11px; font-weight: bold; box-sizing: border-box;">3</div>
+                              </td>
+                              <td valign="top" style="padding-left: 12px;">
+                                <h4 style="margin: 0 0 2px 0; font-size: 14px; font-weight: 700; color: #ffffff;">Kickoff</h4>
+                                <p style="margin: 0; font-size: 12px; color: #71717a; line-height: 1.5;">We will schedule a direct video call to map out implementation details.</p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </td>
+                </tr>
+
+                <!-- Card Footer -->
+                <tr>
+                  <td style="padding: 24px 32px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; background-color: #0c0c0c;">
+                    <p style="margin: 0 0 6px 0; color: #71717a; font-size: 12px;">Explore our systems at <a href="https://meghroop.tech" style="color: #c084fc; text-decoration: none;">meghroop.tech</a></p>
+                    <p style="margin: 0; color: #52525b; font-size: 11px;">— The MeghRoop Founders</p>
+                  </td>
+                </tr>
+
+              </table>
             </td>
           </tr>
-          <tr>
-            <td style="vertical-align:top;width:28px;">
-              <div style="width:22px;height:22px;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:50%;text-align:center;line-height:22px;color:#a78bfa;font-size:11px;font-weight:700;">3</div>
-            </td>
-            <td style="padding-left:10px;vertical-align:top;">
-              <p style="margin:0;color:#fff;font-size:13px;font-weight:600;">Kickoff</p>
-              <p style="margin:2px 0 0;color:#6b7280;font-size:12px;">We'll schedule a discovery call to get started</p>
-            </td>
-          </tr>
+
         </table>
-
-      </td></tr>
-
-      <!-- Footer -->
-      <tr><td style="padding:20px 32px;border-top:1px solid rgba(255,255,255,0.05);text-align:center;">
-        <p style="margin:0 0 6px;color:#4b5563;font-size:12px;">Explore our work at <a href="https://meghroop.tech" style="color:#60a5fa;text-decoration:none;">meghroop.tech</a></p>
-        <p style="margin:0;color:#374151;font-size:11px;">— The MeghRoop Team</p>
-      </td></tr>
-
-    </td></tr>
-
+        
+      </td>
+    </tr>
   </table>
-  </td></tr>
-</table>
-</body></html>`,
+
+</body>
+</html>`,
         })
       } catch (err) {
         console.error('[Contact] Email error:', err)
