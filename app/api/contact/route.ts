@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { getSupabase } from '@/lib/supabase'
 
 export const runtime = 'nodejs'
 
@@ -9,6 +10,43 @@ export async function POST(req: NextRequest) {
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    }
+
+    // 0. Save lead to Supabase database
+    try {
+      const db = getSupabase()
+      const { data: dbData } = await db
+        .from('settings')
+        .select('value')
+        .eq('key', 'client_leads_data')
+        .single()
+      
+      let leads = []
+      if (dbData && dbData.value) {
+        leads = JSON.parse(dbData.value)
+      }
+      if (!Array.isArray(leads)) {
+        leads = []
+      }
+
+      const newLead = {
+        id: 'lead_' + Math.random().toString(36).substring(2, 9),
+        name,
+        email,
+        projectType: projectType || 'Not specified',
+        message,
+        status: 'new',
+        notes: '',
+        createdAt: new Date().toISOString(),
+      }
+
+      leads = [newLead, ...leads]
+
+      await db
+        .from('settings')
+        .upsert({ key: 'client_leads_data', value: JSON.stringify(leads) }, { onConflict: 'key' })
+    } catch (err) {
+      console.error('[Contact] Supabase lead save error:', err)
     }
 
     // 1. Send to Google Sheets via Apps Script
