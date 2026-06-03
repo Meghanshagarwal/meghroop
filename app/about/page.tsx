@@ -13,6 +13,7 @@ import AboutProcess from '@/components/sections/AboutProcess'
 import AboutWhatWeBuild from '@/components/sections/AboutWhatWeBuild'
 import AboutPhilosophy from '@/components/sections/AboutPhilosophy'
 import AboutAtmosphere from '@/components/sections/AboutAtmosphere'
+import AboutFounders from '@/components/sections/AboutFounders'
 import AboutHuman from '@/components/sections/AboutHuman'
 import AboutCTA from '@/components/sections/AboutCTA'
 
@@ -112,6 +113,7 @@ export default function AboutPage() {
         <AboutWhatWeBuild />
         <AboutPhilosophy />
         <AboutAtmosphere />
+        <AboutFounders />
         <AboutHuman />
         <AboutCTA />
       </main>
