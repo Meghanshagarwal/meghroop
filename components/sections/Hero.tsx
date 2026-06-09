@@ -48,11 +48,11 @@ export default function Hero() {
         <h1
           className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-5 sm:mb-6 animate-fade-up [animation-delay:200ms]"
         >
-          We build things.{' '}
+          We build AI agents.{' '}
           <br />
-          <span className="gradient-text">Useful things.</span>
+          <span className="gradient-text">Shopify storefronts.</span>
           <br />
-          Alive things.
+          Alive workflows.
         </h1>
 
         {/* Subtext */}
