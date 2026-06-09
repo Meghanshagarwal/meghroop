@@ -7,7 +7,7 @@ import Image from 'next/image'
 import type { Project } from '@/lib/supabase'
 
 
-const PROJECT_IMAGE = 'https://images.pexels.com/photos/16323434/pexels-photo-16323434.jpeg'
+const PROJECT_IMAGE = '/images/project-hero.jpeg'
 
 const defaultProjects: import('@/lib/supabase').Project[] = [
   {
