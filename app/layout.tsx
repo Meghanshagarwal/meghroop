@@ -155,8 +155,6 @@ export default async function RootLayout({
     <html lang="en" className="dark">
       <head>
         {/* Resource hints */}
-        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://images.pexels.com" />
 
         {/* Service Worker registration */}
         <Script id="sw-register" strategy="afterInteractive">
