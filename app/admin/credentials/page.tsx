@@ -70,6 +70,13 @@ export default function CredentialsPage() {
   const [showAdd, setShowAdd] = useState(false)
   const [showAdvancedAdd, setShowAdvancedAdd] = useState(false)
 
+  // Password Lock
+  const [isUnlocked, setIsUnlocked] = useState(false)
+  const [showLockModal, setShowLockModal] = useState(false)
+  const [lockPassword, setLockPassword] = useState('')
+  const [lockError, setLockError] = useState('')
+  const [pendingAction, setPendingAction] = useState<(() => void) | null>(null)
+
   const load = useCallback(async () => {
     const res = await fetch('/api/admin/credentials')
     const data = await res.json()
@@ -78,6 +85,31 @@ export default function CredentialsPage() {
   }, [])
 
   useEffect(() => { load() }, [load])
+
+  const checkLock = (action: () => void) => {
+    if (isUnlocked) {
+      action()
+    } else {
+      setPendingAction(() => action)
+      setShowLockModal(true)
+      setLockPassword('')
+      setLockError('')
+    }
+  }
+
+  const handleUnlock = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (lockPassword === '2026') {
+      setIsUnlocked(true)
+      setShowLockModal(false)
+      if (pendingAction) {
+        pendingAction()
+        setPendingAction(null)
+      }
+    } else {
+      setLockError('Incorrect password. Access denied.')
+    }
+  }
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -110,45 +142,53 @@ export default function CredentialsPage() {
   }
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Delete this credential?')) return
-    setDeleting(id)
-    await fetch(`/api/admin/credentials?id=${id}`, { method: 'DELETE' })
-    await load()
-    setDeleting(null)
+    checkLock(async () => {
+      if (!confirm('Delete this credential?')) return
+      setDeleting(id)
+      await fetch(`/api/admin/credentials?id=${id}`, { method: 'DELETE' })
+      await load()
+      setDeleting(null)
+    })
   }
 
   const handleCopyField = async (e: React.MouseEvent, key: string, value: string) => {
     e.stopPropagation()
-    await navigator.clipboard.writeText(value)
-    setCopied(key)
-    setTimeout(() => setCopied(null), 2000)
+    checkLock(async () => {
+      await navigator.clipboard.writeText(value)
+      setCopied(key)
+      setTimeout(() => setCopied(null), 2000)
+    })
   }
 
   const toggleVisible = (id: string) => {
-    setVisible((prev) => {
-      const next = new Set(prev)
-      if (next.has(id)) { next.delete(id) } else { next.add(id) }
-      return next
+    checkLock(() => {
+      setVisible((prev) => {
+        const next = new Set(prev)
+        if (next.has(id)) { next.delete(id) } else { next.add(id) }
+        return next
+      })
     })
   }
 
   const startEdit = (c: Credential) => {
-    setEditingId(c.id)
-    setEditForm({
-      label: c.label,
-      category: c.category,
-      value: c.value || '',
-      url: c.url || '',
-      username: c.username || '',
-      password: c.password || '',
-      clientId: c.clientId || '',
-      clientSecret: c.clientSecret || '',
-      hostingProvider: c.hostingProvider || '',
-      domainRegistrar: c.domainRegistrar || '',
-      associatedDomain: c.associatedDomain || '',
-      notes: c.notes || '',
+    checkLock(() => {
+      setEditingId(c.id)
+      setEditForm({
+        label: c.label,
+        category: c.category,
+        value: c.value || '',
+        url: c.url || '',
+        username: c.username || '',
+        password: c.password || '',
+        clientId: c.clientId || '',
+        clientSecret: c.clientSecret || '',
+        hostingProvider: c.hostingProvider || '',
+        domainRegistrar: c.domainRegistrar || '',
+        associatedDomain: c.associatedDomain || '',
+        notes: c.notes || '',
+      })
+      setShowAdvancedEdit(!!(c.url || c.username || c.password || c.clientId || c.clientSecret || c.hostingProvider || c.domainRegistrar || c.associatedDomain || c.notes))
     })
-    setShowAdvancedEdit(!!(c.url || c.username || c.password || c.clientId || c.clientSecret || c.hostingProvider || c.domainRegistrar || c.associatedDomain || c.notes))
   }
 
   const handleEditSave = async (id: string) => {
@@ -181,13 +221,29 @@ export default function CredentialsPage() {
           <h1 className="font-heading font-bold text-2xl text-white">Credentials</h1>
           <p className="text-sm text-gray-500 mt-1">{creds.length} saved credential{creds.length !== 1 ? 's' : ''}</p>
         </div>
-        <button
-          onClick={() => setShowAdd((v) => !v)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-colors"
-        >
-          <Plus size={15} />
-          Add Credential
-        </button>
+        <div className="flex items-center gap-3">
+          {isUnlocked && (
+            <button
+              onClick={() => setIsUnlocked(false)}
+              className="px-3.5 py-2 rounded-xl border border-red-500/20 bg-red-500/5 hover:bg-red-500/10 text-red-400 text-xs font-semibold transition-all"
+            >
+              Lock Panel
+            </button>
+          )}
+          <button
+            onClick={() => {
+              if (showAdd) {
+                setShowAdd(false)
+              } else {
+                checkLock(() => setShowAdd(true))
+              }
+            }}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-colors"
+          >
+            <Plus size={15} />
+            Add Credential
+          </button>
+        </div>
       </div>
 
       {/* Add form */}
@@ -355,7 +411,7 @@ export default function CredentialsPage() {
         <div className="text-center py-20 border border-dashed border-white/[0.08] rounded-2xl">
           <KeyRound size={32} className="mx-auto mb-3 text-gray-700" />
           <p className="text-gray-500 text-sm mb-4">No credentials saved yet</p>
-          <button onClick={() => setShowAdd(true)} className="text-purple-400 hover:text-purple-300 text-sm font-medium">
+          <button onClick={() => checkLock(() => setShowAdd(true))} className="text-purple-400 hover:text-purple-300 text-sm font-medium">
             + Add your first credential
           </button>
         </div>
@@ -732,6 +788,55 @@ export default function CredentialsPage() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Sleek Password Challenge Modal */}
+      {showLockModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#0c0c0c] border border-white/[0.08] rounded-2xl max-w-sm w-full p-6 relative shadow-2xl">
+            <button
+              onClick={() => {
+                setShowLockModal(false);
+                setPendingAction(null);
+              }}
+              className="absolute right-4 top-4 text-gray-500 hover:text-white transition-colors"
+            >
+              <X size={18} />
+            </button>
+            <div className="text-center mb-6">
+              <div className="w-12 h-12 rounded-full bg-purple-600/15 border border-purple-500/20 flex items-center justify-center mx-auto mb-3 text-purple-400">
+                <KeyRound size={20} />
+              </div>
+              <h3 className="font-heading font-bold text-white text-lg">Enter Admin Password</h3>
+              <p className="text-xs text-gray-500 mt-1">Authenticate to manage secure credentials</p>
+            </div>
+            
+            <form onSubmit={handleUnlock} className="space-y-4">
+              <div>
+                <input
+                  type="password"
+                  value={lockPassword}
+                  onChange={(e) => {
+                    setLockPassword(e.target.value)
+                    setLockError('')
+                  }}
+                  placeholder="Enter Password"
+                  className={inputClass + ' text-center'}
+                  autoFocus
+                  required
+                />
+                {lockError && <p className="text-xs text-red-400 mt-2 text-center">{lockError}</p>}
+              </div>
+              
+              <button
+                type="submit"
+                className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-colors"
+              >
+                Unlock
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>
