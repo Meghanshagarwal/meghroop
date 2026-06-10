@@ -153,10 +153,10 @@ export default function Page() {
         
         
 
-    <!-- ==================== HEADER ==================== -->
+    {/* ==================== HEADER ==================== */}
     
 
-    <!-- ==================== HERO ==================== -->
+    {/* ==================== HERO ==================== */}
     <section className="hero">
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
@@ -191,7 +191,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ==================== WHAT THIS IS ==================== -->
+    {/* ==================== WHAT THIS IS ==================== */}
     <section className="section" id="what-this-is">
         <div className="container">
             <div className="fade-up">
@@ -235,16 +235,16 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ==================== HOW WE DO IT ==================== -->
-    <section className="section" id="how-we-do-it" style="border-top: 1px solid rgba(255,255,255,0.06);">
+    {/* ==================== HOW WE DO IT ==================== */}
+    <section className="section" id="how-we-do-it" style={{borderTop: '1px solid rgba(255,255,255,0.06)'}}>
         <div className="container">
-            <div className="fade-up" style="text-align: center; margin-bottom: 64px;">
-                <div className="section-label" style="justify-content: center;">
+            <div className="fade-up" style={{textAlign: 'center', marginBottom: '64px'}}>
+                <div className="section-label" style={{justifyContent: 'center'}}>
                     <span className="section-label-line"></span>
                     How We Do It
                 </div>
-                <h2 className="section-title">From chaotic process<br />to <span style="background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">autonomous agent.</span></h2>
-                <p className="section-subtitle" style="margin-left: auto; margin-right: auto;">Four phases. One process at a time. No big-bang rewrites.</p>
+                <h2 className="section-title">From chaotic process<br />to <span style={{background: 'linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>autonomous agent.</span></h2>
+                <p className="section-subtitle" style={{marginLeft: 'auto', marginRight: 'auto'}}>Four phases. One process at a time. No big-bang rewrites.</p>
             </div>
             <div className="steps-grid">
                 <div className="step-card fade-up">
@@ -271,8 +271,8 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ==================== USE CASES ==================== -->
-    <section className="section" id="use-cases" style="border-top: 1px solid rgba(255,255,255,0.06);">
+    {/* ==================== USE CASES ==================== */}
+    <section className="section" id="use-cases" style={{borderTop: '1px solid rgba(255,255,255,0.06)'}}>
         <div className="container">
             <div className="fade-up">
                 <div className="section-label">
@@ -327,16 +327,16 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ==================== TECH STACK ==================== -->
+    {/* ==================== TECH STACK ==================== */}
     <section className="section stack-section" id="tech-stack">
         <div className="container">
-            <div className="fade-up" style="text-align: center; margin-bottom: 48px;">
-                <div className="section-label" style="justify-content: center;">
+            <div className="fade-up" style={{textAlign: 'center', marginBottom: '48px'}}>
+                <div className="section-label" style={{justifyContent: 'center'}}>
                     <span className="section-label-line"></span>
                     Our Stack
                 </div>
                 <h2 className="section-title">Built with tools<br />that actually scale.</h2>
-                <p className="section-subtitle" style="margin-left: auto; margin-right: auto;">No toy frameworks. No vendor lock-in. Production-grade from day one.</p>
+                <p className="section-subtitle" style={{marginLeft: 'auto', marginRight: 'auto'}}>No toy frameworks. No vendor lock-in. Production-grade from day one.</p>
             </div>
             <div className="stack-pills fade-up">
                 <div className="stack-pill">
@@ -367,11 +367,11 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ==================== FAQ ==================== -->
+    {/* ==================== FAQ ==================== */}
     <section className="section faq-section" id="faq">
         <div className="container">
-            <div className="fade-up" style="text-align: center; margin-bottom: 56px;">
-                <div className="section-label" style="justify-content: center;">
+            <div className="fade-up" style={{textAlign: 'center', marginBottom: '56px'}}>
+                <div className="section-label" style={{justifyContent: 'center'}}>
                     <span className="section-label-line"></span>
                     FAQ
                 </div>
@@ -379,7 +379,7 @@ export default function Page() {
             </div>
             <div className="faq-list fade-up">
                 <div className="faq-item">
-                    <button className="faq-question" onclick="toggleFaq(this)">
+                    <button className="faq-question">
                         <span>What's the difference between this and regular RPA?</span>
                         <span className="faq-toggle">+</span>
                     </button>
@@ -388,7 +388,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item">
-                    <button className="faq-question" onclick="toggleFaq(this)">
+                    <button className="faq-question">
                         <span>Will agents make mistakes with financial data?</span>
                         <span className="faq-toggle">+</span>
                     </button>
@@ -397,7 +397,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item">
-                    <button className="faq-question" onclick="toggleFaq(this)">
+                    <button className="faq-question">
                         <span>How do we measure if it's working?</span>
                         <span className="faq-toggle">+</span>
                     </button>
@@ -406,7 +406,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item">
-                    <button className="faq-question" onclick="toggleFaq(this)">
+                    <button className="faq-question">
                         <span>Does our data train your models?</span>
                         <span className="faq-toggle">+</span>
                     </button>
@@ -415,7 +415,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item">
-                    <button className="faq-question" onclick="toggleFaq(this)">
+                    <button className="faq-question">
                         <span>What if the agent breaks?</span>
                         <span className="faq-toggle">+</span>
                     </button>
@@ -424,7 +424,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item">
-                    <button className="faq-question" onclick="toggleFaq(this)">
+                    <button className="faq-question">
                         <span>How long until the first agent is live?</span>
                         <span className="faq-toggle">+</span>
                     </button>
@@ -433,7 +433,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item">
-                    <button className="faq-question" onclick="toggleFaq(this)">
+                    <button className="faq-question">
                         <span>Can this work with our existing tools?</span>
                         <span className="faq-toggle">+</span>
                     </button>
@@ -445,15 +445,15 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ==================== FINAL CTA ==================== -->
+    {/* ==================== FINAL CTA ==================== */}
     <section className="final-cta" id="cta">
         <div className="final-cta-glow final-cta-glow-1"></div>
         <div className="final-cta-glow final-cta-glow-2"></div>
         <div className="container">
             <div className="final-cta-content fade-up">
-                <h2>Stop babysitting processes.<br /><span style="background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Let agents handle it.</span></h2>
+                <h2>Stop babysitting processes.<br /><span style={{background: 'linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>Let agents handle it.</span></h2>
                 <p>Tell us which process is eating your team's time. We'll show you what an agent can do with it.</p>
-                <a href="/contact" className="btn-primary" style="fontSize: 1.05rem; padding: 16px 40px;">
+                <a href="/contact" className="btn-primary" style={{fontSize: '1.05rem', padding: '16px 40px'}}>
                     Let's Talk
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -461,92 +461,10 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
+    {/* ==================== FOOTER ==================== */}
     
 
-    <!-- ==================== JAVASCRIPT ==================== -->
-    <script>
-        // ===== Mobile Menu Toggle =====
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
-        }
-
-        // ===== FAQ Accordion =====
-        function toggleFaq(button) {
-            const item = button.parentElement;
-            const isActive = item.classList.contains('active');
-
-            // Close all other items
-            document.querySelectorAll('.faq-item').forEach(function(faqItem) {
-                faqItem.classList.remove('active');
-            });
-
-            // Toggle current item
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        }
-
-        // ===== Fade-Up on Scroll (IntersectionObserver) =====
-        document.addEventListener('DOMContentLoaded', function() {
-            var fadeElements = document.querySelectorAll('.fade-up');
-
-            if ('IntersectionObserver' in window) {
-                var observer = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -40px 0px'
-                });
-
-                fadeElements.forEach(function(el) {
-                    observer.observe(el);
-                });
-            } else {
-                // Fallback: just show everything
-                fadeElements.forEach(function(el) {
-                    el.classList.add('visible');
-                });
-            }
-
-            // ===== Header scroll effect =====
-            var header = document.querySelector('.header');
-            var lastScroll = 0;
-
-            window.addEventListener('scroll', function() {
-                var currentScroll = window.pageYOffset;
-
-                if (currentScroll > 80) {
-                    header.style.background = 'rgba(0, 0, 0, 0.85)';
-                } else {
-                    header.style.background = 'rgba(0, 0, 0, 0.6)';
-                }
-
-                lastScroll = currentScroll;
-            });
-
-            // ===== Close mobile menu on link click =====
-            var mobileLinks = document.querySelectorAll('.mobile-menu a');
-            mobileLinks.forEach(function(link) {
-                link.addEventListener('click', function() {
-                    document.getElementById('mobileMenu').classList.remove('active');
-                });
-            });
-
-            // ===== Staggered animation delays =====
-            var cards = document.querySelectorAll('.what-card.fade-up, .step-card.fade-up, .usecase-card.fade-up');
-            cards.forEach(function(card, index) {
-                var delay = (index % 4) * 0.1;
-                card.style.transitionDelay = delay + 's';
-            });
-        });
-    </script>
+    {/* ==================== JAVASCRIPT ==================== */}
 
 
       </main>

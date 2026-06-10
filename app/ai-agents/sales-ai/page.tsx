@@ -208,21 +208,21 @@ export default function Page() {
         
         
 
-    <!-- ========== HEADER ========== -->
+    {/* ========== HEADER ========== */}
     
 
-    <!-- Mobile Menu -->
+    {/* Mobile Menu */}
     <div className="mobile-menu" id="mobileMenu">
-        <a href="/" onclick="closeMobileMenu()">Home</a>
-        <a href="/about" onclick="closeMobileMenu()">About</a>
-        <a href="/ai-agents" onclick="closeMobileMenu()">AI Agents</a>
-        <a href="/systems" onclick="closeMobileMenu()">Systems</a>
-        <a href="/journal" onclick="closeMobileMenu()">Journal</a>
-        <a href="/contact" onclick="closeMobileMenu()">Contact</a>
-        <a href="/contact" className="nav-cta" style="text-align:center;margin-top:16px;" onclick="closeMobileMenu()">Let's Talk</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/ai-agents">AI Agents</a>
+        <a href="/systems">Systems</a>
+        <a href="/journal">Journal</a>
+        <a href="/contact">Contact</a>
+        <a href="/contact" className="nav-cta" style={{textAlign: 'center', marginTop: '16px'}}>Let's Talk</a>
     </div>
 
-    <!-- ========== HERO ========== -->
+    {/* ========== HERO ========== */}
     <section className="hero">
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
@@ -257,7 +257,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== WHAT THIS IS ========== -->
+    {/* ========== WHAT THIS IS ========== */}
     <section className="what-section">
         <div className="container">
             <span className="section-label animate-on-scroll">What This Is</span>
@@ -296,7 +296,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== HOW WE DO IT ========== -->
+    {/* ========== HOW WE DO IT ========== */}
     <section className="process-section" id="how">
         <div className="container">
             <span className="section-label animate-on-scroll">How We Do It</span>
@@ -327,7 +327,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== SIGNAL PLAYS ========== -->
+    {/* ========== SIGNAL PLAYS ========== */}
     <section className="signals-section">
         <div className="container">
             <span className="section-label animate-on-scroll">Signal Plays</span>
@@ -370,7 +370,7 @@ export default function Page() {
             </div>
             <div className="signals-bottom-row">
                 <div className="signal-card animate-on-scroll">
-                    <div className="signal-icon" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);">
+                    <div className="signal-icon" style={{background: 'rgba(16, 185, 129, 0.1)', borderColor: 'rgba(16, 185, 129, 0.2)'}}>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                     </div>
                     <h3>Job Posting Signals</h3>
@@ -381,7 +381,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="signal-card animate-on-scroll">
-                    <div className="signal-icon" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.2);">
+                    <div className="signal-icon" style={{background: 'rgba(245, 158, 11, 0.1)', borderColor: 'rgba(245, 158, 11, 0.2)'}}>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     </div>
                     <h3>Tech Stack Changes</h3>
@@ -395,7 +395,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== USE CASES ========== -->
+    {/* ========== USE CASES ========== */}
     <section className="usecases-section">
         <div className="container">
             <span className="section-label animate-on-scroll">What You Get</span>
@@ -442,7 +442,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== TECH STACK ========== -->
+    {/* ========== TECH STACK ========== */}
     <section className="stack-section">
         <div className="container">
             <span className="section-label animate-on-scroll">Our Stack</span>
@@ -485,7 +485,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== DOMAIN SAFETY ========== -->
+    {/* ========== DOMAIN SAFETY ========== */}
     <section className="safety-section">
         <div className="container">
             <span className="section-label animate-on-scroll">Domain Safety</span>
@@ -543,7 +543,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== FAQ ========== -->
+    {/* ========== FAQ ========== */}
     <section className="faq-section">
         <div className="container">
             <span className="section-label animate-on-scroll">FAQ</span>
@@ -551,7 +551,7 @@ export default function Page() {
             <p className="animate-on-scroll">Straight answers. No marketing speak.</p>
             <div className="faq-list">
                 <div className="faq-item animate-on-scroll">
-                    <div className="faq-question" onclick="toggleFaq(this)">
+                    <div className="faq-question">
                         <h3>Does cold outreach even work anymore?</h3>
                         <span className="faq-toggle">+</span>
                     </div>
@@ -560,7 +560,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item animate-on-scroll">
-                    <div className="faq-question" onclick="toggleFaq(this)">
+                    <div className="faq-question">
                         <h3>Will my domain get blacklisted?</h3>
                         <span className="faq-toggle">+</span>
                     </div>
@@ -569,7 +569,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item animate-on-scroll">
-                    <div className="faq-question" onclick="toggleFaq(this)">
+                    <div className="faq-question">
                         <h3>Who writes the copy — AI or humans?</h3>
                         <span className="faq-toggle">+</span>
                     </div>
@@ -578,7 +578,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item animate-on-scroll">
-                    <div className="faq-question" onclick="toggleFaq(this)">
+                    <div className="faq-question">
                         <h3>How long until we see meetings?</h3>
                         <span className="faq-toggle">+</span>
                     </div>
@@ -587,7 +587,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item animate-on-scroll">
-                    <div className="faq-question" onclick="toggleFaq(this)">
+                    <div className="faq-question">
                         <h3>Will this compete with our existing sales team?</h3>
                         <span className="faq-toggle">+</span>
                     </div>
@@ -596,7 +596,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item animate-on-scroll">
-                    <div className="faq-question" onclick="toggleFaq(this)">
+                    <div className="faq-question">
                         <h3>What about LinkedIn bans?</h3>
                         <span className="faq-toggle">+</span>
                     </div>
@@ -605,7 +605,7 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="faq-item animate-on-scroll">
-                    <div className="faq-question" onclick="toggleFaq(this)">
+                    <div className="faq-question">
                         <h3>Who owns the leads and data?</h3>
                         <span className="faq-toggle">+</span>
                     </div>
@@ -617,7 +617,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== FINAL CTA ========== -->
+    {/* ========== FINAL CTA ========== */}
     <section className="cta-section">
         <div className="container">
             <div className="cta-wrapper animate-on-scroll">
@@ -631,84 +631,10 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== FOOTER ========== -->
+    {/* ========== FOOTER ========== */}
     
 
-    <!-- ========== JAVASCRIPT ========== -->
-    <script>
-        // Intersection Observer for scroll animations
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            },
-            {
-                threshold: 0.1,
-                rootMargin: '0px 0px -40px 0px'
-            }
-        );
-
-        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-            observer.observe(el);
-        });
-
-        // FAQ Accordion
-        function toggleFaq(el) {
-            const item = el.closest('.faq-item');
-            const answer = item.querySelector('.faq-answer');
-            const isActive = item.classList.contains('active');
-
-            // Close all other items
-            document.querySelectorAll('.faq-item.active').forEach((activeItem) => {
-                if (activeItem !== item) {
-                    activeItem.classList.remove('active');
-                    activeItem.querySelector('.faq-answer').style.maxHeight = '0';
-                }
-            });
-
-            // Toggle current
-            if (isActive) {
-                item.classList.remove('active');
-                answer.style.maxHeight = '0';
-            } else {
-                item.classList.add('active');
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            }
-        }
-
-        // Mobile Menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const toggle = document.querySelector('.mobile-toggle');
-            menu.classList.toggle('active');
-            toggle.classList.toggle('active');
-        }
-
-        function closeMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const toggle = document.querySelector('.mobile-toggle');
-            menu.classList.remove('active');
-            toggle.classList.remove('active');
-        }
-
-        // Header scroll effect
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 100) {
-                header.style.background = 'rgba(0, 0, 0, 0.85)';
-            } else {
-                header.style.background = 'rgba(0, 0, 0, 0.6)';
-            }
-
-            lastScroll = currentScroll;
-        });
-    </script>
+    {/* ========== JAVASCRIPT ========== */}
 
       </main>
       <Footer />

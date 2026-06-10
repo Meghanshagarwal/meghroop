@@ -171,10 +171,10 @@ export default function Page() {
         ` }} />
         
         
-    <!-- ==================== HEADER ==================== -->
+    {/* ==================== HEADER ==================== */}
     
 
-    <!-- Mobile Menu -->
+    {/* Mobile Menu */}
     <div className="mobile-menu" id="mobileMenu">
         <a href="/">Home</a>
         <a href="/about">About</a>
@@ -185,7 +185,7 @@ export default function Page() {
         <Link href="/contact" className="nav-cta">Let's Talk</Link>
     </div>
 
-    <!-- ==================== HERO ==================== -->
+    {/* ==================== HERO ==================== */}
     <section className="hero">
         <div className="hero-glow-1"></div>
         <div className="hero-glow-2"></div>
@@ -235,7 +235,7 @@ export default function Page() {
 
     <div className="section-divider"></div>
 
-    <!-- ==================== WHAT THIS IS ==================== -->
+    {/* ==================== WHAT THIS IS ==================== */}
     <section className="section" id="what">
         <div className="container">
             <div className="animate-on-scroll">
@@ -281,7 +281,7 @@ export default function Page() {
 
     <div className="section-divider"></div>
 
-    <!-- ==================== HOW WE DO IT ==================== -->
+    {/* ==================== HOW WE DO IT ==================== */}
     <section className="section how-section" id="how">
         <div className="container">
             <div className="animate-on-scroll">
@@ -319,7 +319,7 @@ export default function Page() {
 
     <div className="section-divider"></div>
 
-    <!-- ==================== USE CASES ==================== -->
+    {/* ==================== USE CASES ==================== */}
     <section className="section" id="usecases">
         <div className="container">
             <div className="animate-on-scroll">
@@ -331,32 +331,32 @@ export default function Page() {
                 <p className="section-subtitle">These aren't hypothetical use cases. These are the exact things our voice agents are doing right now for real businesses.</p>
             </div>
             <div className="usecases-grid">
-                <div className="usecase-card animate-on-scroll delay-1" style="--accent-color: #a855f7;">
+                <div className="usecase-card animate-on-scroll delay-1">
                     <span className="usecase-card-icon">📞</span>
                     <h3>Inbound Support</h3>
                     <p>Answer FAQs, troubleshoot issues, create tickets. 80% of Tier-1 calls handled without a human touching them.</p>
                 </div>
-                <div className="usecase-card animate-on-scroll delay-2" style="--accent-color: #3b82f6;">
+                <div className="usecase-card animate-on-scroll delay-2">
                     <span className="usecase-card-icon">📅</span>
                     <h3>Appointment Booking</h3>
                     <p>Check availability, book slots, send confirmations. For clinics, salons, consultants — anyone tired of phone tag.</p>
                 </div>
-                <div className="usecase-card animate-on-scroll delay-3" style="--accent-color: #06b6d4;">
+                <div className="usecase-card animate-on-scroll delay-3">
                     <span className="usecase-card-icon">🎯</span>
                     <h3>Lead Qualification</h3>
                     <p>Ask the right questions, score leads, route hot prospects to your sales team. Before they cool off.</p>
                 </div>
-                <div className="usecase-card animate-on-scroll delay-4" style="--accent-color: #10b981;">
+                <div className="usecase-card animate-on-scroll delay-4">
                     <span className="usecase-card-icon">💰</span>
                     <h3>Collections</h3>
                     <p>Gentle payment reminders in the customer's language. Compliant, empathetic, effective. No awkwardness required.</p>
                 </div>
-                <div className="usecase-card animate-on-scroll delay-5" style="--accent-color: #f59e0b;">
+                <div className="usecase-card animate-on-scroll delay-5">
                     <span className="usecase-card-icon">📦</span>
                     <h3>Order Status</h3>
                     <p>"Where's my order?" answered in 3 seconds with real-time tracking data. Not "please hold while I look that up."</p>
                 </div>
-                <div className="usecase-card animate-on-scroll delay-6" style="--accent-color: #ef4444;">
+                <div className="usecase-card animate-on-scroll delay-6">
                     <span className="usecase-card-icon">📊</span>
                     <h3>Outbound Surveys</h3>
                     <p>Post-purchase feedback, NPS calls, event follow-ups. At scale. Without hiring a call center.</p>
@@ -367,7 +367,7 @@ export default function Page() {
 
     <div className="section-divider"></div>
 
-    <!-- ==================== TECH STACK ==================== -->
+    {/* ==================== TECH STACK ==================== */}
     <section className="section stack-section" id="stack">
         <div className="container">
             <div className="animate-on-scroll">
@@ -433,16 +433,16 @@ export default function Page() {
 
     <div className="section-divider"></div>
 
-    <!-- ==================== FAQ ==================== -->
+    {/* ==================== FAQ ==================== */}
     <section className="section faq-section" id="faq">
         <div className="container">
-            <div className="animate-on-scroll" style="text-align: center;">
-                <div className="section-label" style="justify-content: center;">
+            <div className="animate-on-scroll" style={{textAlign: 'center'}}>
+                <div className="section-label" style={{justifyContent: 'center'}}>
                     <span className="section-label-line"></span>
                     FAQ
                 </div>
                 <h2 className="section-title">Got questions? <span className="gradient-text">Good.</span></h2>
-                <p className="section-subtitle" style="margin-left: auto; margin-right: auto;">The stuff people actually ask us before they say yes.</p>
+                <p className="section-subtitle" style={{marginLeft: 'auto', marginRight: 'auto'}}>The stuff people actually ask us before they say yes.</p>
             </div>
             <div className="faq-list">
                 <div className="faq-item animate-on-scroll delay-1">
@@ -514,7 +514,7 @@ export default function Page() {
 
     <div className="section-divider"></div>
 
-    <!-- ==================== FINAL CTA ==================== -->
+    {/* ==================== FINAL CTA ==================== */}
     <section className="final-cta">
         <div className="final-cta-glow"></div>
         <div className="container">
@@ -529,85 +529,10 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
+    {/* ==================== FOOTER ==================== */}
     
 
-    <!-- ==================== JAVASCRIPT ==================== -->
-    <script>
-        // Mobile menu toggle
-        const mobileToggle = document.querySelector('.mobile-toggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileToggle.addEventListener('click', () => {
-            mobileToggle.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-
-        // Close mobile menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileToggle.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.parentElement;
-                const isActive = item.classList.contains('active');
-
-                // Close all other FAQ items
-                document.querySelectorAll('.faq-item.active').forEach(openItem => {
-                    if (openItem !== item) {
-                        openItem.classList.remove('active');
-                    }
-                });
-
-                // Toggle current item
-                item.classList.toggle('active', !isActive);
-            });
-        });
-
-        // Scroll animations with IntersectionObserver
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Header background on scroll
-        const header = document.querySelector('.header');
-        let lastScroll = 0;
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 50) {
-                header.style.background = 'rgba(0, 0, 0, 0.85)';
-                header.style.borderBottomColor = 'rgba(255, 255, 255, 0.08)';
-            } else {
-                header.style.background = 'rgba(0, 0, 0, 0.6)';
-                header.style.borderBottomColor = 'rgba(255, 255, 255, 0.06)';
-            }
-
-            lastScroll = currentScroll;
-        }, { passive: true });
-    </script>
+    {/* ==================== JAVASCRIPT ==================== */}
 
       </main>
       <Footer />

@@ -517,13 +517,13 @@ export default function Page() {
         
         
 
-  <!-- ==================== HEADER ==================== -->
+  {/* ==================== HEADER ==================== */}
   
 
-  <!-- Mobile Navigation -->
+  {/* Mobile Navigation */}
   
 
-  <!-- ==================== HERO ==================== -->
+  {/* ==================== HERO ==================== */}
   <section className="hero">
     <div className="hero-glow-1"></div>
     <div className="hero-glow-2"></div>
@@ -553,7 +553,7 @@ export default function Page() {
 
   <div className="section-divider"></div>
 
-  <!-- ==================== WHAT THIS IS ==================== -->
+  {/* ==================== WHAT THIS IS ==================== */}
   <section id="what" className="section">
     <div className="container">
       <div className="animate-on-scroll">
@@ -592,7 +592,7 @@ export default function Page() {
 
   <div className="section-divider"></div>
 
-  <!-- ==================== HOW WE DO IT ==================== -->
+  {/* ==================== HOW WE DO IT ==================== */}
   <section className="section process-section">
     <div className="container">
       <div className="animate-on-scroll">
@@ -631,7 +631,7 @@ export default function Page() {
 
   <div className="section-divider"></div>
 
-  <!-- ==================== USE CASES ==================== -->
+  {/* ==================== USE CASES ==================== */}
   <section className="section">
     <div className="container">
       <div className="animate-on-scroll">
@@ -680,7 +680,7 @@ export default function Page() {
 
   <div className="section-divider"></div>
 
-  <!-- ==================== TECH STACK ==================== -->
+  {/* ==================== TECH STACK ==================== */}
   <section className="section stack-section">
     <div className="container">
       <div className="animate-on-scroll">
@@ -759,7 +759,7 @@ export default function Page() {
 
   <div className="section-divider"></div>
 
-  <!-- ==================== FAQ ==================== -->
+  {/* ==================== FAQ ==================== */}
   <section className="section faq-section">
     <div className="container">
       <div className="animate-on-scroll">
@@ -857,7 +857,7 @@ export default function Page() {
 
   <div className="section-divider"></div>
 
-  <!-- ==================== FINAL CTA ==================== -->
+  {/* ==================== FINAL CTA ==================== */}
   <section className="section final-cta">
     <div className="final-cta-glow"></div>
     <div className="container">
@@ -869,86 +869,10 @@ export default function Page() {
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
+  {/* ==================== FOOTER ==================== */}
   
 
-  <!-- ==================== JAVASCRIPT ==================== -->
-  <script>
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileNav = document.querySelector('.mobile-nav');
-
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenuBtn.classList.toggle('active');
-      mobileNav.classList.toggle('active');
-      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
-    });
-
-    // Close mobile nav on link click
-    document.querySelectorAll('.mobile-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenuBtn.classList.remove('active');
-        mobileNav.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    });
-
-    // FAQ Accordion
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const isActive = item.classList.contains('active');
-
-        // Close all
-        document.querySelectorAll('.faq-item').forEach(i => {
-          i.classList.remove('active');
-          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-        });
-
-        // Open clicked if it wasn't active
-        if (!isActive) {
-          item.classList.add('active');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-
-    // Intersection Observer for fade-up animations
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px 0px -60px 0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Header background on scroll
-    const header = document.querySelector('.header');
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll > 80) {
-        header.style.background = 'rgba(0, 0, 0, 0.9)';
-        header.style.borderBottomColor = 'rgba(255, 255, 255, 0.08)';
-      } else {
-        header.style.background = 'rgba(0, 0, 0, 0.7)';
-        header.style.borderBottomColor = 'rgba(255, 255, 255, 0.06)';
-      }
-      lastScroll = currentScroll;
-    }, { passive: true });
-  </script>
+  {/* ==================== JAVASCRIPT ==================== */}
 
 
       </main>

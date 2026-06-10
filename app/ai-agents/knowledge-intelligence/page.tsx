@@ -574,7 +574,7 @@ export default function Page() {
         .mobile-nav-close {
         ` }} />
         
-        <!-- ======================== HERO ======================== -->
+        {/* ======================== HERO ======================== */}
     <section className="hero">
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
@@ -613,7 +613,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ======================== WHAT THIS IS ======================== -->
+    {/* ======================== WHAT THIS IS ======================== */}
     <div className="section-divider"></div>
     <section className="section" id="what">
         <div className="container">
@@ -660,7 +660,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ======================== HOW WE DO IT ======================== -->
+    {/* ======================== HOW WE DO IT ======================== */}
     <div className="section-divider"></div>
     <section className="section" id="how">
         <div className="container">
@@ -703,7 +703,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ======================== USE CASES ======================== -->
+    {/* ======================== USE CASES ======================== */}
     <div className="section-divider"></div>
     <section className="section" id="usecases">
         <div className="container">
@@ -754,7 +754,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ======================== OUR APPROACH / STACK ======================== -->
+    {/* ======================== OUR APPROACH / STACK ======================== */}
     <section className="section stack-section" id="approach">
         <div className="container">
             <div className="section-label fade-up">
@@ -821,7 +821,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ======================== FAQ ======================== -->
+    {/* ======================== FAQ ======================== */}
     <section className="section" id="faq">
         <div className="container">
             <div className="section-label fade-up">
@@ -855,22 +855,23 @@ export default function Page() {
           </div>
         ))}
       </div>
+        </div>
     </section>
 
-    <!-- ======================== FINAL CTA ======================== -->
+    {/* ======================== FINAL CTA ======================== */}
     <div className="section-divider"></div>
     <section className="final-cta" id="cta">
         <div className="final-cta-glow final-cta-glow-1"></div>
         <div className="final-cta-glow final-cta-glow-2"></div>
 
-        <div className="container" style="position: relative; z-index: 2;">
-            <div className="section-label" style="justify-content: center;">
+        <div className="container" style={{position: 'relative', zIndex: 2}}>
+            <div className="section-label" style={{justifyContent: 'center'}}>
                 <span className="section-label-line"></span>
                 Start Talking to Your Data
             </div>
             <h2 className="section-title fade-up fade-up-d1">Stop digging through folders.<br /><span className="gradient-text">Let's build your enterprise search.</span></h2>
             <p className="section-subtitle fade-up fade-up-d2">Secure, permission-aware, and citation-backed.</p>
-            <a href="/contact" className="btn-primary fade-up fade-up-d3" style="display: inline-flex;">
+            <a href="/contact" className="btn-primary fade-up fade-up-d3" style={{display: 'inline-flex'}}>
                 Let's Talk
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </a>

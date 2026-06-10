@@ -169,10 +169,10 @@ export default function Page() {
         
         
 
-    <!-- ========== HEADER ========== -->
+    {/* ========== HEADER ========== */}
     
 
-    <!-- Mobile Menu -->
+    {/* Mobile Menu */}
     <div className="mobile-menu">
         <a href="/">Home</a>
         <a href="/about">About</a>
@@ -183,7 +183,7 @@ export default function Page() {
         <Link href="/contact" className="mobile-cta">Let's Talk</Link>
     </div>
 
-    <!-- ========== HERO ========== -->
+    {/* ========== HERO ========== */}
     <section className="hero">
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
@@ -217,7 +217,7 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== WHAT THIS IS ========== -->
+    {/* ========== WHAT THIS IS ========== */}
     <section className="section">
         <div className="container">
             <div className="section-header fade-up">
@@ -230,7 +230,7 @@ export default function Page() {
             </div>
 
             <div className="what-grid">
-                <!-- Card 1 -->
+                {/* Card 1 */}
                 <div className="card what-card fade-up fade-up-d1">
                     <div className="what-icon what-icon-1">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -239,7 +239,7 @@ export default function Page() {
                     <p>We work with your existing stack. Additive changes only. Nothing breaks.</p>
                 </div>
 
-                <!-- Card 2 -->
+                {/* Card 2 */}
                 <div className="card what-card fade-up fade-up-d2">
                     <div className="what-icon what-icon-2">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
@@ -248,7 +248,7 @@ export default function Page() {
                     <p>We build Model Context Protocol servers so AI agents can safely access your tools, data, and APIs.</p>
                 </div>
 
-                <!-- Card 3 -->
+                {/* Card 3 */}
                 <div className="card what-card fade-up fade-up-d3">
                     <div className="what-icon what-icon-3">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
@@ -257,7 +257,7 @@ export default function Page() {
                     <p>Salesforce Einstein, HubSpot Breeze, Zoho Zia are fine for basics. We build what they can't.</p>
                 </div>
 
-                <!-- Card 4 -->
+                {/* Card 4 */}
                 <div className="card what-card fade-up fade-up-d4">
                     <div className="what-icon what-icon-4">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -269,9 +269,9 @@ export default function Page() {
         </div>
     </section>
 
-    <hr className="section-divider">
+    <hr className="section-divider" />
 
-    <!-- ========== HOW WE DO IT ========== -->
+    {/* ========== HOW WE DO IT ========== */}
     <section className="section" id="how">
         <div className="container">
             <div className="section-header fade-up">
@@ -311,9 +311,9 @@ export default function Page() {
         </div>
     </section>
 
-    <hr className="section-divider">
+    <hr className="section-divider" />
 
-    <!-- ========== SUPPORTED TOOLS ========== -->
+    {/* ========== SUPPORTED TOOLS ========== */}
     <section className="section tools-section">
         <div className="container">
             <div className="section-header fade-up">
@@ -326,7 +326,7 @@ export default function Page() {
             </div>
 
             <div className="tools-wrapper fade-up">
-                <!-- CRM -->
+                {/* CRM */}
                 <div className="tools-category">
                     <div className="tools-category-label">CRM</div>
                     <div className="tools-pills">
@@ -339,7 +339,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Helpdesk -->
+                {/* Helpdesk */}
                 <div className="tools-category">
                     <div className="tools-category-label">Helpdesk</div>
                     <div className="tools-pills">
@@ -351,7 +351,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- ERP/Accounting -->
+                {/* ERP/Accounting */}
                 <div className="tools-category">
                     <div className="tools-category-label">ERP / Accounting</div>
                     <div className="tools-pills">
@@ -365,7 +365,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Data -->
+                {/* Data */}
                 <div className="tools-category">
                     <div className="tools-category-label">Data</div>
                     <div className="tools-pills">
@@ -377,7 +377,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Collaboration -->
+                {/* Collaboration */}
                 <div className="tools-category">
                     <div className="tools-category-label">Collaboration</div>
                     <div className="tools-pills">
@@ -390,7 +390,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Legacy -->
+                {/* Legacy */}
                 <div className="tools-category">
                     <div className="tools-category-label">Legacy</div>
                     <div className="tools-pills">
@@ -403,9 +403,9 @@ export default function Page() {
         </div>
     </section>
 
-    <hr className="section-divider">
+    <hr className="section-divider" />
 
-    <!-- ========== USE CASES ========== -->
+    {/* ========== USE CASES ========== */}
     <section className="section">
         <div className="container">
             <div className="section-header fade-up">
@@ -418,42 +418,42 @@ export default function Page() {
             </div>
 
             <div className="usecases-grid">
-                <!-- 1 -->
+                {/* 1 */}
                 <div className="card usecase-card fade-up fade-up-d1">
                     <span className="usecase-emoji">🧠</span>
                     <h3>CRM Intelligence</h3>
                     <p>AI that reads your pipeline, scores leads, and drafts follow-ups. Inside your CRM. Not in a separate tab.</p>
                 </div>
 
-                <!-- 2 -->
+                {/* 2 */}
                 <div className="card usecase-card fade-up fade-up-d2">
                     <span className="usecase-emoji">🎫</span>
                     <h3>Helpdesk Automation</h3>
                     <p>Auto-categorize tickets, suggest responses, escalate by urgency. In Zendesk or Freshdesk. Zero context-switching.</p>
                 </div>
 
-                <!-- 3 -->
+                {/* 3 */}
                 <div className="card usecase-card fade-up fade-up-d3">
                     <span className="usecase-emoji">📄</span>
                     <h3>ERP Data Extraction</h3>
                     <p>Pull structured data from invoices, POs, contracts into SAP or NetSuite. No manual entry. No copy-paste.</p>
                 </div>
 
-                <!-- 4 -->
+                {/* 4 */}
                 <div className="card usecase-card fade-up fade-up-d4">
                     <span className="usecase-emoji">💬</span>
                     <h3>Slack/Teams AI Assistant</h3>
                     <p>Ask questions about your business data in natural language. Get answers in your chat. Like a colleague who never sleeps.</p>
                 </div>
 
-                <!-- 5 -->
+                {/* 5 */}
                 <div className="card usecase-card fade-up fade-up-d5">
                     <span className="usecase-emoji">⚡</span>
                     <h3>Cross-Tool Workflows</h3>
                     <p>Trigger AI actions across tools. Lead comes in HubSpot → enriched → task in Asana → email drafted. All automatic.</p>
                 </div>
 
-                <!-- 6 -->
+                {/* 6 */}
                 <div className="card usecase-card fade-up fade-up-d6">
                     <span className="usecase-emoji">🏚️</span>
                     <h3>Legacy System Bridge</h3>
@@ -463,18 +463,18 @@ export default function Page() {
         </div>
     </section>
 
-    <hr className="section-divider">
+    <hr className="section-divider" />
 
-    <!-- ========== TECH STACK ========== -->
+    {/* ========== TECH STACK ========== */}
     <section className="section">
-        <div className="container" style="text-align: center;">
-            <div className="section-header fade-up" style="display: flex; flex-direction: column; align-items: center;">
+        <div className="container" style={{textAlign: 'center'}}>
+            <div className="section-header fade-up" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <span className="section-label">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     Our Stack
                 </span>
                 <h2 className="section-title">Built with <span className="gradient-text">boring, reliable tech</span></h2>
-                <p className="section-subtitle" style="margin-left: auto; margin-right: auto;">No bleeding-edge experiments. Just tools that work at scale.</p>
+                <p className="section-subtitle" style={{marginLeft: 'auto', marginRight: 'auto'}}>No bleeding-edge experiments. Just tools that work at scale.</p>
             </div>
 
             <div className="stack-pills fade-up">
@@ -492,22 +492,22 @@ export default function Page() {
         </div>
     </section>
 
-    <hr className="section-divider">
+    <hr className="section-divider" />
 
-    <!-- ========== FAQ ========== -->
+    {/* ========== FAQ ========== */}
     <section className="section">
         <div className="container">
-            <div className="section-header fade-up" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div className="section-header fade-up" style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <span className="section-label">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
                     FAQ
                 </span>
                 <h2 className="section-title">Questions we hear <span className="gradient-text">a lot</span></h2>
-                <p className="section-subtitle" style="margin-left: auto; margin-right: auto;">Straight answers. No jargon. No hand-waving.</p>
+                <p className="section-subtitle" style={{marginLeft: 'auto', marginRight: 'auto'}}>Straight answers. No jargon. No hand-waving.</p>
             </div>
 
             <div className="faq-list fade-up">
-                <!-- Q1 -->
+                {/* Q1 */}
                 <div className="faq-item">
                     <button className="faq-question" aria-expanded="false">
                         <span>Will this break our existing workflows?</span>
@@ -518,7 +518,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Q2 -->
+                {/* Q2 */}
                 <div className="faq-item">
                     <button className="faq-question" aria-expanded="false">
                         <span>Can AI work with legacy/on-prem systems?</span>
@@ -529,7 +529,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Q3 -->
+                {/* Q3 */}
                 <div className="faq-item">
                     <button className="faq-question" aria-expanded="false">
                         <span>How long does integration take?</span>
@@ -540,7 +540,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Q4 -->
+                {/* Q4 */}
                 <div className="faq-item">
                     <button className="faq-question" aria-expanded="false">
                         <span>What is MCP?</span>
@@ -551,7 +551,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Q5 -->
+                {/* Q5 */}
                 <div className="faq-item">
                     <button className="faq-question" aria-expanded="false">
                         <span>Can we use our existing cloud credits?</span>
@@ -562,7 +562,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Q6 -->
+                {/* Q6 */}
                 <div className="faq-item">
                     <button className="faq-question" aria-expanded="false">
                         <span>Who maintains this when Salesforce updates their API?</span>
@@ -573,7 +573,7 @@ export default function Page() {
                     </div>
                 </div>
 
-                <!-- Q7 -->
+                {/* Q7 */}
                 <div className="faq-item">
                     <button className="faq-question" aria-expanded="false">
                         <span>What about data security?</span>
@@ -587,9 +587,9 @@ export default function Page() {
         </div>
     </section>
 
-    <hr className="section-divider">
+    <hr className="section-divider" />
 
-    <!-- ========== FINAL CTA ========== -->
+    {/* ========== FINAL CTA ========== */}
     <section className="section final-cta">
         <div className="container">
             <div className="final-cta-inner fade-up">
@@ -604,85 +604,10 @@ export default function Page() {
         </div>
     </section>
 
-    <!-- ========== FOOTER ========== -->
+    {/* ========== FOOTER ========== */}
     
 
-    <!-- ========== JAVASCRIPT ========== -->
-    <script>
-        // ===== Mobile Menu Toggle =====
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileMenu = document.querySelector('.mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-
-        // Close mobile menu when a link is clicked
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuBtn.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // ===== FAQ Accordion =====
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const item = button.parentElement;
-                const isActive = item.classList.contains('active');
-
-                // Close all other FAQs
-                document.querySelectorAll('.faq-item.active').forEach(activeItem => {
-                    activeItem.classList.remove('active');
-                    activeItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                });
-
-                // Toggle current
-                if (!isActive) {
-                    item.classList.add('active');
-                    button.setAttribute('aria-expanded', 'true');
-                }
-            });
-        });
-
-        // ===== Fade-Up Intersection Observer =====
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-up').forEach(el => {
-            observer.observe(el);
-        });
-
-        // ===== Header background on scroll =====
-        const header = document.querySelector('.header');
-        let lastScroll = 0;
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll > 50) {
-                header.style.background = 'rgba(0, 0, 0, 0.85)';
-                header.style.borderBottomColor = 'rgba(255, 255, 255, 0.08)';
-            } else {
-                header.style.background = 'rgba(0, 0, 0, 0.6)';
-                header.style.borderBottomColor = 'rgba(255, 255, 255, 0.06)';
-            }
-            lastScroll = currentScroll;
-        }, { passive: true });
-    </script>
+    {/* ========== JAVASCRIPT ========== */}
 
 
       </main>
