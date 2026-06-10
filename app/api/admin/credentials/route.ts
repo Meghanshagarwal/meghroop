@@ -16,6 +16,10 @@ type Credential = {
   password?: string
   clientId?: string
   clientSecret?: string
+  hostingProvider?: string
+  domainRegistrar?: string
+  associatedDomain?: string
+  notes?: string
   createdAt: string
 }
 
@@ -36,8 +40,22 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { label, category, value, url, username, password, clientId, clientSecret } = await req.json()
-  const hasValue = value?.trim() || username?.trim() || password?.trim() || clientId?.trim() || clientSecret?.trim()
+  const { 
+    label, 
+    category, 
+    value, 
+    url, 
+    username, 
+    password, 
+    clientId, 
+    clientSecret,
+    hostingProvider,
+    domainRegistrar,
+    associatedDomain,
+    notes
+  } = await req.json()
+  
+  const hasValue = value?.trim() || username?.trim() || password?.trim() || clientId?.trim() || clientSecret?.trim() || hostingProvider?.trim() || domainRegistrar?.trim() || associatedDomain?.trim() || notes?.trim()
   if (!label?.trim() || !hasValue) {
     return NextResponse.json({ error: 'label and at least one credential field required' }, { status: 400 })
   }
@@ -52,6 +70,10 @@ export async function POST(req: Request) {
     password: password?.trim() || undefined,
     clientId: clientId?.trim() || undefined,
     clientSecret: clientSecret?.trim() || undefined,
+    hostingProvider: hostingProvider?.trim() || undefined,
+    domainRegistrar: domainRegistrar?.trim() || undefined,
+    associatedDomain: associatedDomain?.trim() || undefined,
+    notes: notes?.trim() || undefined,
     createdAt: new Date().toISOString()
   })
   await saveAll(creds)
@@ -68,7 +90,21 @@ export async function DELETE(req: Request) {
 }
 
 export async function PATCH(req: Request) {
-  const { id, label, category, value, url, username, password, clientId, clientSecret } = await req.json()
+  const { 
+    id, 
+    label, 
+    category, 
+    value, 
+    url, 
+    username, 
+    password, 
+    clientId, 
+    clientSecret,
+    hostingProvider,
+    domainRegistrar,
+    associatedDomain,
+    notes
+  } = await req.json()
   if (!id) return NextResponse.json({ error: 'id required' }, { status: 400 })
   const creds = await getAll()
   const idx = creds.findIndex((c) => c.id === id)
@@ -84,6 +120,10 @@ export async function PATCH(req: Request) {
     password: password !== undefined ? (password.trim() || undefined) : creds[idx].password,
     clientId: clientId !== undefined ? (clientId.trim() || undefined) : creds[idx].clientId,
     clientSecret: clientSecret !== undefined ? (clientSecret.trim() || undefined) : creds[idx].clientSecret,
+    hostingProvider: hostingProvider !== undefined ? (hostingProvider.trim() || undefined) : creds[idx].hostingProvider,
+    domainRegistrar: domainRegistrar !== undefined ? (domainRegistrar.trim() || undefined) : creds[idx].domainRegistrar,
+    associatedDomain: associatedDomain !== undefined ? (associatedDomain.trim() || undefined) : creds[idx].associatedDomain,
+    notes: notes !== undefined ? (notes.trim() || undefined) : creds[idx].notes,
   }
   
   await saveAll(creds)

@@ -6,7 +6,6 @@ import { Plus, Copy, Trash2, Check, Download, Loader2, Cpu, Pencil, X, Search, A
 type Workflow = {
   id: string
   name: string
-  category: string
   description: string
   json: string
   createdAt: string
@@ -15,11 +14,6 @@ type Workflow = {
 const inputClass =
   'w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.06] transition-all font-mono'
 
-const selectClass =
-  'w-full bg-[#1a1a1a] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500/50 transition-all cursor-pointer'
-
-const CATEGORIES = ['Lead Router', 'Marketing & Ads', 'AI Orchestration', 'E-commerce & Shopify', 'Backups & DBs', 'Alerts & Comms', 'Other']
-
 export default function WorkflowsPage() {
   const [workflows, setWorkflows] = useState<Workflow[]>([])
   const [loading, setLoading] = useState(true)
@@ -27,16 +21,15 @@ export default function WorkflowsPage() {
   const [deleting, setDeleting] = useState<string | null>(null)
   const [copied, setCopied] = useState<string | null>(null)
   const [search, setSearch] = useState('')
-  const [filterCategory, setFilterCategory] = useState('All')
   
   // Add form
   const [showAdd, setShowAdd] = useState(false)
-  const [form, setForm] = useState({ name: '', category: 'Other', description: '', json: '' })
+  const [form, setForm] = useState({ name: '', description: '', json: '' })
   const [validationResult, setValidationResult] = useState<{ isValid: boolean; nodeCount: number } | null>(null)
   
   // Edit form
   const [editingId, setEditingId] = useState<string | null>(null)
-  const [editForm, setEditForm] = useState({ name: '', category: '', description: '', json: '' })
+  const [editForm, setEditForm] = useState({ name: '', description: '', json: '' })
   const [editValidationResult, setEditValidationResult] = useState<{ isValid: boolean; nodeCount: number } | null>(null)
 
   const load = useCallback(async () => {
@@ -123,7 +116,7 @@ export default function WorkflowsPage() {
     })
 
     if (res.ok) {
-      setForm({ name: '', category: 'Other', description: '', json: '' })
+      setForm({ name: '', description: '', json: '' })
       setValidationResult(null)
       setShowAdd(false)
       await load()
@@ -144,7 +137,7 @@ export default function WorkflowsPage() {
 
   const startEdit = (w: Workflow) => {
     setEditingId(w.id)
-    setEditForm({ name: w.name, category: w.category, description: w.description, json: w.json })
+    setEditForm({ name: w.name, description: w.description, json: w.json })
     // Run validation immediately on edit start
     runValidation(w.json, true)
   }
@@ -197,13 +190,10 @@ export default function WorkflowsPage() {
     }
   }
 
-  // Filter workflows
+  // Filter workflows by search term
   const filtered = workflows.filter((w) => {
-    const matchesSearch =
-      w.name.toLowerCase().includes(search.toLowerCase()) ||
+    return w.name.toLowerCase().includes(search.toLowerCase()) ||
       w.description.toLowerCase().includes(search.toLowerCase())
-    const matchesCategory = filterCategory === 'All' || w.category === filterCategory
-    return matchesSearch && matchesCategory
   })
 
   return (
@@ -232,27 +222,15 @@ export default function WorkflowsPage() {
             </button>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="text-xs text-gray-500 mb-1.5 block">Workflow Name</label>
-              <input
-                value={form.name}
-                onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-                placeholder="e.g. Lead Router to Slack"
-                className={inputClass}
-                required
-              />
-            </div>
-            <div>
-              <label className="text-xs text-gray-500 mb-1.5 block">Category</label>
-              <select
-                value={form.category}
-                onChange={(e) => setForm((p) => ({ ...p, category: e.target.value }))}
-                className={selectClass}
-              >
-                {CATEGORIES.map((c) => <option key={c} value={c} className="bg-[#1a1a1a] text-white">{c}</option>)}
-              </select>
-            </div>
+          <div className="mb-4">
+            <label className="text-xs text-gray-500 mb-1.5 block">Workflow Name</label>
+            <input
+              value={form.name}
+              onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+              placeholder="e.g. Lead Router to Slack"
+              className={inputClass}
+              required
+            />
           </div>
 
           <div className="mb-4">
@@ -320,8 +298,8 @@ export default function WorkflowsPage() {
       )}
 
       {/* Filter and Search controls */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-6">
-        <div className="relative flex-1">
+      <div className="mb-6">
+        <div className="relative">
           <Search className="absolute left-3.5 top-3 text-gray-500" size={16} />
           <input
             value={search}
@@ -329,31 +307,6 @@ export default function WorkflowsPage() {
             placeholder="Search workflows by name or description..."
             className={`${inputClass} pl-10`}
           />
-        </div>
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
-          <button
-            onClick={() => setFilterCategory('All')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors border ${
-              filterCategory === 'All'
-                ? 'bg-purple-600/20 text-purple-300 border-purple-500/30'
-                : 'text-gray-400 bg-white/[0.02] border-white/[0.04] hover:text-white'
-            }`}
-          >
-            All Categories
-          </button>
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilterCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors border ${
-                filterCategory === cat
-                  ? 'bg-purple-600/20 text-purple-300 border-purple-500/30'
-                  : 'text-gray-400 bg-white/[0.02] border-white/[0.04] hover:text-white'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -398,16 +351,6 @@ export default function WorkflowsPage() {
                           onChange={(e) => setEditForm((p) => ({ ...p, name: e.target.value }))}
                           className={inputClass}
                         />
-                      </div>
-                      <div>
-                        <label className="text-[10px] text-gray-500 mb-1 block">Category</label>
-                        <select
-                          value={editForm.category}
-                          onChange={(e) => setEditForm((p) => ({ ...p, category: e.target.value }))}
-                          className={selectClass}
-                        >
-                          {CATEGORIES.map((cat) => <option key={cat} value={cat} className="bg-[#1a1a1a] text-white">{cat}</option>)}
-                        </select>
                       </div>
                       <div>
                         <label className="text-[10px] text-gray-500 mb-1 block">Description</label>
@@ -467,9 +410,10 @@ export default function WorkflowsPage() {
                     {/* Top Row */}
                     <div>
                       <div className="flex items-start justify-between gap-2">
-                        <span className="inline-block px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20 text-[10px] font-semibold tracking-wide uppercase">
-                          {w.category}
-                        </span>
+                        <div className="flex items-center gap-1.5 text-purple-400">
+                          <Cpu size={12} />
+                          <span className="text-[10px] font-semibold tracking-wide uppercase">n8n Template</span>
+                        </div>
                         <span className="text-[10px] text-gray-600 font-mono">
                           {parsedNodes} node{parsedNodes !== 1 ? 's' : ''}
                         </span>

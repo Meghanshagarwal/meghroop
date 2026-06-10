@@ -13,6 +13,10 @@ type Credential = {
   password?: string
   clientId?: string
   clientSecret?: string
+  hostingProvider?: string
+  domainRegistrar?: string
+  associatedDomain?: string
+  notes?: string
   createdAt: string
 }
 
@@ -41,6 +45,10 @@ export default function CredentialsPage() {
     password: '',
     clientId: '',
     clientSecret: '',
+    hostingProvider: '',
+    domainRegistrar: '',
+    associatedDomain: '',
+    notes: '',
   })
   const [showAdvancedEdit, setShowAdvancedEdit] = useState(false)
 
@@ -54,6 +62,10 @@ export default function CredentialsPage() {
     password: '',
     clientId: '',
     clientSecret: '',
+    hostingProvider: '',
+    domainRegistrar: '',
+    associatedDomain: '',
+    notes: '',
   })
   const [showAdd, setShowAdd] = useState(false)
   const [showAdvancedAdd, setShowAdvancedAdd] = useState(false)
@@ -69,7 +81,7 @@ export default function CredentialsPage() {
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
-    const hasValue = form.value.trim() || form.username.trim() || form.password.trim() || form.clientId.trim() || form.clientSecret.trim()
+    const hasValue = form.value.trim() || form.username.trim() || form.password.trim() || form.clientId.trim() || form.clientSecret.trim() || form.hostingProvider.trim() || form.domainRegistrar.trim() || form.associatedDomain.trim() || form.notes.trim()
     if (!form.label.trim() || !hasValue) return
     setSaving(true)
     await fetch('/api/admin/credentials', {
@@ -86,6 +98,10 @@ export default function CredentialsPage() {
       password: '',
       clientId: '',
       clientSecret: '',
+      hostingProvider: '',
+      domainRegistrar: '',
+      associatedDomain: '',
+      notes: '',
     })
     setShowAdd(false)
     setShowAdvancedAdd(false)
@@ -127,8 +143,12 @@ export default function CredentialsPage() {
       password: c.password || '',
       clientId: c.clientId || '',
       clientSecret: c.clientSecret || '',
+      hostingProvider: c.hostingProvider || '',
+      domainRegistrar: c.domainRegistrar || '',
+      associatedDomain: c.associatedDomain || '',
+      notes: c.notes || '',
     })
-    setShowAdvancedEdit(!!(c.url || c.username || c.password || c.clientId || c.clientSecret))
+    setShowAdvancedEdit(!!(c.url || c.username || c.password || c.clientId || c.clientSecret || c.hostingProvider || c.domainRegistrar || c.associatedDomain || c.notes))
   }
 
   const handleEditSave = async (id: string) => {
@@ -175,7 +195,7 @@ export default function CredentialsPage() {
         <form onSubmit={handleAdd} className="mb-8 p-5 rounded-2xl border border-purple-500/20 bg-purple-500/[0.04]">
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-semibold text-white">New Credential</span>
-            <button type="button" onClick={() => setShowAdd(false)} className="text-gray-500 hover:text-white transition-colors">
+            <button type="button" onClick={() => { setShowAdd(false); setShowAdvancedAdd(false); }} className="text-gray-500 hover:text-white transition-colors">
               <X size={16} />
             </button>
           </div>
@@ -218,7 +238,7 @@ export default function CredentialsPage() {
               className="text-xs text-purple-400 hover:text-purple-300 font-medium flex items-center gap-1.5 transition-colors py-1 focus:outline-none"
             >
               {showAdvancedAdd ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-              {showAdvancedAdd ? 'Hide' : 'Add'} Username, Password, URL, Client ID & Secret
+              {showAdvancedAdd ? 'Hide' : 'Add'} Username, Password, URL, Hosting & Domain mappings
             </button>
 
             {showAdvancedAdd && (
@@ -233,11 +253,11 @@ export default function CredentialsPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-gray-500 mb-1.5 block">Username</label>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Username / Account Email</label>
                   <input
                     value={form.username}
                     onChange={(e) => setForm((p) => ({ ...p, username: e.target.value }))}
-                    placeholder="e.g. admin"
+                    placeholder="e.g. admin@meghroop.tech"
                     className={inputClass}
                   />
                 </div>
@@ -268,6 +288,48 @@ export default function CredentialsPage() {
                     onChange={(e) => setForm((p) => ({ ...p, clientSecret: e.target.value }))}
                     placeholder="••••••••"
                     className={inputClass}
+                  />
+                </div>
+
+                {/* Infrastructure mapping */}
+                <div className="sm:col-span-2 border-t border-white/[0.04] pt-3 mt-1">
+                  <span className="text-xs font-semibold text-gray-400 block mb-1">Infrastructure &amp; Hosting details</span>
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Hosting Provider / Account</label>
+                  <input
+                    value={form.hostingProvider}
+                    onChange={(e) => setForm((p) => ({ ...p, hostingProvider: e.target.value }))}
+                    placeholder="e.g. Vercel, Hostinger, AWS"
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Domain Registrar / Account</label>
+                  <input
+                    value={form.domainRegistrar}
+                    onChange={(e) => setForm((p) => ({ ...p, domainRegistrar: e.target.value }))}
+                    placeholder="e.g. Cloudflare, GoDaddy, Namecheap"
+                    className={inputClass}
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="text-xs text-gray-500 mb-1.5 block">Associated Domain / Live Site</label>
+                  <input
+                    value={form.associatedDomain}
+                    onChange={(e) => setForm((p) => ({ ...p, associatedDomain: e.target.value }))}
+                    placeholder="e.g. meghroop.tech"
+                    className={inputClass}
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="text-xs text-gray-500 mb-1.5 block">Account notes, logins, or recovery info</label>
+                  <textarea
+                    value={form.notes}
+                    onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))}
+                    placeholder="Enter registration details, billing dates, backup codes, or account owners here..."
+                    rows={3}
+                    className={`${inputClass} font-sans resize-y`}
                   />
                 </div>
               </div>
@@ -349,7 +411,7 @@ export default function CredentialsPage() {
                             className="text-xs text-purple-400 hover:text-purple-300 font-medium flex items-center gap-1.5 transition-colors py-1 focus:outline-none"
                           >
                             {showAdvancedEdit ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                            {showAdvancedEdit ? 'Hide' : 'Edit'} Username, Password, URL, Client ID & Secret
+                            {showAdvancedEdit ? 'Hide' : 'Edit'} Username, Password, URL, Hosting & Domain mappings
                           </button>
 
                           {showAdvancedEdit && (
@@ -364,7 +426,7 @@ export default function CredentialsPage() {
                                 />
                               </div>
                               <div>
-                                <label className="text-xs text-gray-500 mb-1.5 block">Username</label>
+                                <label className="text-xs text-gray-500 mb-1.5 block">Username / Account Email</label>
                                 <input
                                   value={editForm.username || ''}
                                   onChange={(e) => setEditForm((p) => ({ ...p, username: e.target.value }))}
@@ -399,6 +461,48 @@ export default function CredentialsPage() {
                                   onChange={(e) => setEditForm((p) => ({ ...p, clientSecret: e.target.value }))}
                                   className={inputClass}
                                   placeholder="Client Secret"
+                                />
+                              </div>
+
+                              {/* Infrastructure mapping */}
+                              <div className="sm:col-span-2 border-t border-white/[0.04] pt-3 mt-1">
+                                <span className="text-xs font-semibold text-gray-400 block mb-1">Infrastructure &amp; Hosting details</span>
+                              </div>
+                              <div>
+                                <label className="text-xs text-gray-500 mb-1.5 block">Hosting Provider / Account</label>
+                                <input
+                                  value={editForm.hostingProvider || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, hostingProvider: e.target.value }))}
+                                  placeholder="e.g. Vercel, Hostinger, AWS"
+                                  className={inputClass}
+                                />
+                              </div>
+                              <div>
+                                <label className="text-xs text-gray-500 mb-1.5 block">Domain Registrar / Account</label>
+                                <input
+                                  value={editForm.domainRegistrar || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, domainRegistrar: e.target.value }))}
+                                  placeholder="e.g. Cloudflare, GoDaddy, Namecheap"
+                                  className={inputClass}
+                                />
+                              </div>
+                              <div className="sm:col-span-2">
+                                <label className="text-xs text-gray-500 mb-1.5 block">Associated Domain / Live Site</label>
+                                <input
+                                  value={editForm.associatedDomain || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, associatedDomain: e.target.value }))}
+                                  placeholder="e.g. meghroop.tech"
+                                  className={inputClass}
+                                />
+                              </div>
+                              <div className="sm:col-span-2">
+                                <label className="text-xs text-gray-500 mb-1.5 block">Account notes, logins, or recovery info</label>
+                                <textarea
+                                  value={editForm.notes || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, notes: e.target.value }))}
+                                  placeholder="Enter registration details, billing dates, backup codes, or account owners here..."
+                                  rows={3}
+                                  className={`${inputClass} font-sans resize-y`}
                                 />
                               </div>
                             </div>
@@ -520,6 +624,78 @@ export default function CredentialsPage() {
                                   title="Copy Secret"
                                 >
                                   {copied === `${c.id}-clientSecret` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Associated Domain */}
+                            {c.associatedDomain && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Domain:</span>
+                                  <a href={`https://${c.associatedDomain}`} target="_blank" rel="noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors truncate">{c.associatedDomain}</a>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-associatedDomain`, c.associatedDomain || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy Domain"
+                                >
+                                  {copied === `${c.id}-associatedDomain` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Hosting Provider */}
+                            {c.hostingProvider && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Hosting:</span>
+                                  <span className="truncate text-gray-300">{c.hostingProvider}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-hostingProvider`, c.hostingProvider || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy Hosting"
+                                >
+                                  {copied === `${c.id}-hostingProvider` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Domain Registrar */}
+                            {c.domainRegistrar && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Registrar:</span>
+                                  <span className="truncate text-gray-300">{c.domainRegistrar}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-domainRegistrar`, c.domainRegistrar || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy Registrar"
+                                >
+                                  {copied === `${c.id}-domainRegistrar` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Notes / Details */}
+                            {c.notes && (
+                              <div className="text-xs font-mono text-gray-400 flex items-start justify-between group/field py-1 border-t border-white/[0.03] mt-1">
+                                <div className="flex gap-2 min-w-0">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0 pt-0.5">Details:</span>
+                                  <span className="text-gray-400 whitespace-pre-wrap font-sans text-xs max-w-md">{c.notes}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-notes`, c.notes || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0 self-start"
+                                  title="Copy Details"
+                                >
+                                  {copied === `${c.id}-notes` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
                                 </button>
                               </div>
                             )}
