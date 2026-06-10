@@ -57,6 +57,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Next.js Web Engineering & Frontend Development Studio | MeghRoop',
     description: 'Premium web engineering. Fast, beautiful, scalable websites built with Next.js, React, and modern systems.',
+    images: ['https://meghroop.tech/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/web-engineering',

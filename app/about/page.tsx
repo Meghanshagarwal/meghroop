@@ -61,6 +61,7 @@ export const metadata: Metadata = {
     title: 'About MeghRoop | AI & Custom Web Engineering Studio',
     description:
       'We design interfaces that feel inevitable, workflows that govern operational logic, and high-performance custom digital systems built to scale.',
+    images: ['https://meghroop.tech/og-image-about.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/about',

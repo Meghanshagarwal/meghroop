@@ -59,6 +59,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'WordPress Development & Headless CMS Engineering | MeghRoop',
     description: 'Expert WordPress engineering. Custom publishing systems, headless CMS, high-performance content infrastructure.',
+    images: ['https://meghroop.tech/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/wordpress-engineering',

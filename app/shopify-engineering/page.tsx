@@ -61,6 +61,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Shopify Development & E-commerce Engineering Studio | MeghRoop',
     description: 'Custom Shopify storefronts built for conversion. Fast, modern, automation-ready ecommerce systems.',
+    images: ['https://meghroop.tech/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/shopify-engineering',

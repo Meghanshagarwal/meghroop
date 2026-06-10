@@ -63,6 +63,7 @@ export const metadata: Metadata = {
     title: 'n8n Workflows & AI Automation Engineering | MeghRoop',
     description:
       'Premium automation infrastructure. Custom n8n workflows, AI-enhanced automation, API orchestration, and intelligent backend automation for your business.',
+    images: ['https://meghroop.tech/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/n8n-workflows',

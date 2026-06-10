@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Engineering Journal | AI & Web Architectures | MeghRoop',
     description: 'Deep technical articles exploring MCP grounded layers, Generative Engine Optimization, headless shopify, and self-healing n8n automations.',
+    images: ['https://meghroop.tech/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/journal',

@@ -55,6 +55,7 @@ export const metadata: Metadata = {
     title: 'Contact MeghRoop | Intelligent AI & Web Operations',
     description:
       'Connect directly with our engineering duo to blueprint custom web frontends and automated operations.',
+    images: ['https://meghroop.tech/og-image-contact.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/contact',

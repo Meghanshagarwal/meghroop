@@ -57,6 +57,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Bespoke AI Workflows & Digital Systems | MeghRoop',
     description: 'A curated archive of automated pipelines, high-performance interfaces, and systems built to quietly scale on the modern internet.',
+    images: ['https://meghroop.tech/og-image-systems.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/systems',

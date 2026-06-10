@@ -59,6 +59,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MCP Infrastructure & AI Agent Integration | Model Context Protocol | MeghRoop',
     description: 'We build the secure, resilient context gateways that let AI talk directly to your databases, APIs, and tools.',
+    images: ['https://meghroop.tech/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/mcp-infrastructure',

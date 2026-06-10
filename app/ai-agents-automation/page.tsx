@@ -53,6 +53,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AI Agents & Automation Systems | Autonomous Workflow Studio | MeghRoop',
     description: 'Build custom AI agents that reason, plan, and execute. Autonomous workflows for any business process.',
+    images: ['https://meghroop.tech/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/ai-agents-automation',

@@ -59,6 +59,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AI Search Optimization & GEO (Generative Engine Optimization) | MeghRoop',
     description: 'Premium AI search optimization. Semantic SEO, structured data, and AI discoverability for modern search systems.',
+    images: ['https://meghroop.tech/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://meghroop.tech/ai-search-optimization',
