@@ -11,6 +11,11 @@ type Credential = {
   label: string
   category: string
   value: string
+  url?: string
+  username?: string
+  password?: string
+  clientId?: string
+  clientSecret?: string
   createdAt: string
 }
 
@@ -31,12 +36,24 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { label, category, value } = await req.json()
-  if (!label?.trim() || !value?.trim()) {
-    return NextResponse.json({ error: 'label and value required' }, { status: 400 })
+  const { label, category, value, url, username, password, clientId, clientSecret } = await req.json()
+  const hasValue = value?.trim() || username?.trim() || password?.trim() || clientId?.trim() || clientSecret?.trim()
+  if (!label?.trim() || !hasValue) {
+    return NextResponse.json({ error: 'label and at least one credential field required' }, { status: 400 })
   }
   const creds = await getAll()
-  creds.push({ id: randomUUID(), label: label.trim(), category: (category || 'General').trim(), value: value.trim(), createdAt: new Date().toISOString() })
+  creds.push({
+    id: randomUUID(),
+    label: label.trim(),
+    category: (category || 'General').trim(),
+    value: (value || '').trim(),
+    url: url?.trim() || undefined,
+    username: username?.trim() || undefined,
+    password: password?.trim() || undefined,
+    clientId: clientId?.trim() || undefined,
+    clientSecret: clientSecret?.trim() || undefined,
+    createdAt: new Date().toISOString()
+  })
   await saveAll(creds)
   return NextResponse.json({ ok: true })
 }
@@ -51,12 +68,25 @@ export async function DELETE(req: Request) {
 }
 
 export async function PATCH(req: Request) {
-  const { id, label, category, value } = await req.json()
+  const { id, label, category, value, url, username, password, clientId, clientSecret } = await req.json()
   if (!id) return NextResponse.json({ error: 'id required' }, { status: 400 })
   const creds = await getAll()
   const idx = creds.findIndex((c) => c.id === id)
   if (idx === -1) return NextResponse.json({ error: 'not found' }, { status: 404 })
-  creds[idx] = { ...creds[idx], label: label ?? creds[idx].label, category: category ?? creds[idx].category, value: value ?? creds[idx].value }
+  
+  creds[idx] = {
+    ...creds[idx],
+    label: label ?? creds[idx].label,
+    category: category ?? creds[idx].category,
+    value: value !== undefined ? value.trim() : creds[idx].value,
+    url: url !== undefined ? (url.trim() || undefined) : creds[idx].url,
+    username: username !== undefined ? (username.trim() || undefined) : creds[idx].username,
+    password: password !== undefined ? (password.trim() || undefined) : creds[idx].password,
+    clientId: clientId !== undefined ? (clientId.trim() || undefined) : creds[idx].clientId,
+    clientSecret: clientSecret !== undefined ? (clientSecret.trim() || undefined) : creds[idx].clientSecret,
+  }
+  
   await saveAll(creds)
   return NextResponse.json({ ok: true })
 }
+

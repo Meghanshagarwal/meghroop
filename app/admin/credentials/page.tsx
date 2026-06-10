@@ -1,13 +1,18 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import { Plus, Copy, Trash2, Check, Eye, EyeOff, Loader2, KeyRound, Pencil, X } from 'lucide-react'
+import { Plus, Copy, Trash2, Check, Eye, EyeOff, Loader2, KeyRound, Pencil, X, ChevronDown, ChevronUp } from 'lucide-react'
 
 type Credential = {
   id: string
   label: string
   category: string
   value: string
+  url?: string
+  username?: string
+  password?: string
+  clientId?: string
+  clientSecret?: string
   createdAt: string
 }
 
@@ -27,11 +32,31 @@ export default function CredentialsPage() {
   const [copied, setCopied] = useState<string | null>(null)
   const [visible, setVisible] = useState<Set<string>>(new Set())
   const [editingId, setEditingId] = useState<string | null>(null)
-  const [editForm, setEditForm] = useState({ label: '', category: '', value: '' })
+  const [editForm, setEditForm] = useState({
+    label: '',
+    category: '',
+    value: '',
+    url: '',
+    username: '',
+    password: '',
+    clientId: '',
+    clientSecret: '',
+  })
+  const [showAdvancedEdit, setShowAdvancedEdit] = useState(false)
 
   // Add form
-  const [form, setForm] = useState({ label: '', category: 'General', value: '' })
+  const [form, setForm] = useState({
+    label: '',
+    category: 'General',
+    value: '',
+    url: '',
+    username: '',
+    password: '',
+    clientId: '',
+    clientSecret: '',
+  })
   const [showAdd, setShowAdd] = useState(false)
+  const [showAdvancedAdd, setShowAdvancedAdd] = useState(false)
 
   const load = useCallback(async () => {
     const res = await fetch('/api/admin/credentials')
@@ -44,15 +69,26 @@ export default function CredentialsPage() {
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!form.label.trim() || !form.value.trim()) return
+    const hasValue = form.value.trim() || form.username.trim() || form.password.trim() || form.clientId.trim() || form.clientSecret.trim()
+    if (!form.label.trim() || !hasValue) return
     setSaving(true)
     await fetch('/api/admin/credentials', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     })
-    setForm({ label: '', category: 'General', value: '' })
+    setForm({
+      label: '',
+      category: 'General',
+      value: '',
+      url: '',
+      username: '',
+      password: '',
+      clientId: '',
+      clientSecret: '',
+    })
     setShowAdd(false)
+    setShowAdvancedAdd(false)
     await load()
     setSaving(false)
   }
@@ -65,9 +101,10 @@ export default function CredentialsPage() {
     setDeleting(null)
   }
 
-  const handleCopy = async (id: string, value: string) => {
+  const handleCopyField = async (e: React.MouseEvent, key: string, value: string) => {
+    e.stopPropagation()
     await navigator.clipboard.writeText(value)
-    setCopied(id)
+    setCopied(key)
     setTimeout(() => setCopied(null), 2000)
   }
 
@@ -81,7 +118,17 @@ export default function CredentialsPage() {
 
   const startEdit = (c: Credential) => {
     setEditingId(c.id)
-    setEditForm({ label: c.label, category: c.category, value: c.value })
+    setEditForm({
+      label: c.label,
+      category: c.category,
+      value: c.value || '',
+      url: c.url || '',
+      username: c.username || '',
+      password: c.password || '',
+      clientId: c.clientId || '',
+      clientSecret: c.clientSecret || '',
+    })
+    setShowAdvancedEdit(!!(c.url || c.username || c.password || c.clientId || c.clientSecret))
   }
 
   const handleEditSave = async (id: string) => {
@@ -102,6 +149,7 @@ export default function CredentialsPage() {
   }, {})
 
   const maskValue = (val: string) => {
+    if (!val) return ''
     if (val.length <= 8) return '•'.repeat(val.length)
     return val.slice(0, 4) + '•'.repeat(Math.min(val.length - 8, 24)) + val.slice(-4)
   }
@@ -111,7 +159,7 @@ export default function CredentialsPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-heading font-bold text-2xl text-white">Credentials</h1>
-          <p className="text-sm text-gray-500 mt-1">{creds.length} saved token{creds.length !== 1 ? 's' : ''}</p>
+          <p className="text-sm text-gray-500 mt-1">{creds.length} saved credential{creds.length !== 1 ? 's' : ''}</p>
         </div>
         <button
           onClick={() => setShowAdd((v) => !v)}
@@ -137,7 +185,7 @@ export default function CredentialsPage() {
               <input
                 value={form.label}
                 onChange={(e) => setForm((p) => ({ ...p, label: e.target.value }))}
-                placeholder="e.g. GitHub Personal Token"
+                placeholder="e.g. GitHub OAuth"
                 className={inputClass}
                 required
               />
@@ -153,16 +201,79 @@ export default function CredentialsPage() {
               </select>
             </div>
           </div>
-          <div className="mb-4">
-            <label className="text-xs text-gray-500 mb-1.5 block">Token / Value</label>
+          <div className="mb-3">
+            <label className="text-xs text-gray-500 mb-1.5 block">Token / Main Value</label>
             <input
               value={form.value}
               onChange={(e) => setForm((p) => ({ ...p, value: e.target.value }))}
-              placeholder="Paste token or secret here"
+              placeholder="Paste token or main secret here"
               className={inputClass}
-              required
             />
           </div>
+
+          <div className="mb-4">
+            <button
+              type="button"
+              onClick={() => setShowAdvancedAdd(!showAdvancedAdd)}
+              className="text-xs text-purple-400 hover:text-purple-300 font-medium flex items-center gap-1.5 transition-colors py-1 focus:outline-none"
+            >
+              {showAdvancedAdd ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+              {showAdvancedAdd ? 'Hide' : 'Add'} Username, Password, URL, Client ID & Secret
+            </button>
+
+            {showAdvancedAdd && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 p-4 rounded-xl border border-white/[0.04] bg-white/[0.01] transition-all">
+                <div className="sm:col-span-2">
+                  <label className="text-xs text-gray-500 mb-1.5 block">Host / API URL</label>
+                  <input
+                    value={form.url}
+                    onChange={(e) => setForm((p) => ({ ...p, url: e.target.value }))}
+                    placeholder="e.g. https://api.github.com"
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Username</label>
+                  <input
+                    value={form.username}
+                    onChange={(e) => setForm((p) => ({ ...p, username: e.target.value }))}
+                    placeholder="e.g. admin"
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Password</label>
+                  <input
+                    type="password"
+                    value={form.password}
+                    onChange={(e) => setForm((p) => ({ ...p, password: e.target.value }))}
+                    placeholder="••••••••"
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Client ID</label>
+                  <input
+                    value={form.clientId}
+                    onChange={(e) => setForm((p) => ({ ...p, clientId: e.target.value }))}
+                    placeholder="e.g. client_abc123"
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Client Secret</label>
+                  <input
+                    type="password"
+                    value={form.clientSecret}
+                    onChange={(e) => setForm((p) => ({ ...p, clientSecret: e.target.value }))}
+                    placeholder="••••••••"
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
           <button
             type="submit"
             disabled={saving}
@@ -199,55 +310,228 @@ export default function CredentialsPage() {
                 {items.map((c) => (
                   <div key={c.id} className="rounded-2xl border border-white/[0.06] bg-white/[0.02]">
                     {editingId === c.id ? (
-                      <div className="p-4 space-y-3">
+                      <div className="p-5 space-y-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <input
-                            value={editForm.label}
-                            onChange={(e) => setEditForm((p) => ({ ...p, label: e.target.value }))}
-                            className={inputClass}
-                            placeholder="Label"
-                          />
-                          <select
-                            value={editForm.category}
-                            onChange={(e) => setEditForm((p) => ({ ...p, category: e.target.value }))}
-                            className={inputClass + ' cursor-pointer'}
-                          >
-                            {CATEGORIES.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
-                          </select>
+                          <div>
+                            <label className="text-xs text-gray-500 mb-1.5 block">Label</label>
+                            <input
+                              value={editForm.label}
+                              onChange={(e) => setEditForm((p) => ({ ...p, label: e.target.value }))}
+                              className={inputClass}
+                              placeholder="Label"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-gray-500 mb-1.5 block">Category</label>
+                            <select
+                              value={editForm.category}
+                              onChange={(e) => setEditForm((p) => ({ ...p, category: e.target.value }))}
+                              className={selectClass}
+                            >
+                              {CATEGORIES.map((cat) => <option key={cat} value={cat} className="bg-[#1a1a1a] text-white">{cat}</option>)}
+                            </select>
+                          </div>
                         </div>
-                        <input
-                          value={editForm.value}
-                          onChange={(e) => setEditForm((p) => ({ ...p, value: e.target.value }))}
-                          className={inputClass}
-                          placeholder="Token / Value"
-                        />
-                        <div className="flex gap-2">
+                        <div>
+                          <label className="text-xs text-gray-500 mb-1.5 block">Token / Main Value</label>
+                          <input
+                            value={editForm.value}
+                            onChange={(e) => setEditForm((p) => ({ ...p, value: e.target.value }))}
+                            className={inputClass}
+                            placeholder="Token / Value"
+                          />
+                        </div>
+                        
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() => setShowAdvancedEdit(!showAdvancedEdit)}
+                            className="text-xs text-purple-400 hover:text-purple-300 font-medium flex items-center gap-1.5 transition-colors py-1 focus:outline-none"
+                          >
+                            {showAdvancedEdit ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                            {showAdvancedEdit ? 'Hide' : 'Edit'} Username, Password, URL, Client ID & Secret
+                          </button>
+
+                          {showAdvancedEdit && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 p-4 rounded-xl border border-white/[0.04] bg-white/[0.01]">
+                              <div className="sm:col-span-2">
+                                <label className="text-xs text-gray-500 mb-1.5 block">Host / API URL</label>
+                                <input
+                                  value={editForm.url || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, url: e.target.value }))}
+                                  className={inputClass}
+                                  placeholder="API / Host URL"
+                                />
+                              </div>
+                              <div>
+                                <label className="text-xs text-gray-500 mb-1.5 block">Username</label>
+                                <input
+                                  value={editForm.username || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, username: e.target.value }))}
+                                  className={inputClass}
+                                  placeholder="Username"
+                                />
+                              </div>
+                              <div>
+                                <label className="text-xs text-gray-500 mb-1.5 block">Password</label>
+                                <input
+                                  type="password"
+                                  value={editForm.password || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, password: e.target.value }))}
+                                  className={inputClass}
+                                  placeholder="Password"
+                                />
+                              </div>
+                              <div>
+                                <label className="text-xs text-gray-500 mb-1.5 block">Client ID</label>
+                                <input
+                                  value={editForm.clientId || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, clientId: e.target.value }))}
+                                  className={inputClass}
+                                  placeholder="Client ID"
+                                />
+                              </div>
+                              <div>
+                                <label className="text-xs text-gray-500 mb-1.5 block">Client Secret</label>
+                                <input
+                                  type="password"
+                                  value={editForm.clientSecret || ''}
+                                  onChange={(e) => setEditForm((p) => ({ ...p, clientSecret: e.target.value }))}
+                                  className={inputClass}
+                                  placeholder="Client Secret"
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex gap-2 pt-2">
                           <button onClick={() => handleEditSave(c.id)} className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold transition-colors">Save</button>
                           <button onClick={() => setEditingId(null)} className="px-4 py-2 rounded-xl border border-white/[0.08] text-gray-400 hover:text-white text-sm transition-colors">Cancel</button>
                         </div>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-3 px-4 py-3">
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium text-white truncate">{c.label}</div>
-                          <div className="text-xs font-mono text-gray-500 mt-0.5 truncate">
-                            {visible.has(c.id) ? c.value : maskValue(c.value)}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4">
+                        <div className="flex-1 min-w-0 space-y-2">
+                          <div className="text-sm font-semibold text-white tracking-wide">{c.label}</div>
+                          
+                          <div className="grid grid-cols-1 gap-1.5 max-w-xl">
+                            {/* Token / Value */}
+                            {c.value && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Token:</span>
+                                  <span className="truncate text-purple-200">{visible.has(c.id) ? c.value : maskValue(c.value)}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-value`, c.value)}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy Token"
+                                >
+                                  {copied === `${c.id}-value` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* URL */}
+                            {c.url && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Host URL:</span>
+                                  <a href={c.url} target="_blank" rel="noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors truncate">{c.url}</a>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-url`, c.url || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy URL"
+                                >
+                                  {copied === `${c.id}-url` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Username */}
+                            {c.username && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Username:</span>
+                                  <span className="truncate text-gray-300">{c.username}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-username`, c.username || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy Username"
+                                >
+                                  {copied === `${c.id}-username` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Password */}
+                            {c.password && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Password:</span>
+                                  <span className="truncate text-gray-300">{visible.has(c.id) ? c.password : maskValue(c.password)}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-password`, c.password || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy Password"
+                                >
+                                  {copied === `${c.id}-password` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Client ID */}
+                            {c.clientId && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Client ID:</span>
+                                  <span className="truncate text-gray-300">{c.clientId}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-clientId`, c.clientId || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy Client ID"
+                                >
+                                  {copied === `${c.id}-clientId` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
+
+                            {/* Client Secret */}
+                            {c.clientSecret && (
+                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
+                                <div className="flex items-center gap-2 truncate">
+                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Secret:</span>
+                                  <span className="truncate text-gray-300">{visible.has(c.id) ? c.clientSecret : maskValue(c.clientSecret)}</span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleCopyField(e, `${c.id}-clientSecret`, c.clientSecret || '')}
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  title="Copy Secret"
+                                >
+                                  {copied === `${c.id}-clientSecret` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                </button>
+                              </div>
+                            )}
                           </div>
                         </div>
-                        <div className="flex items-center gap-1.5 flex-shrink-0">
+                        <div className="flex items-center gap-1.5 self-end sm:self-center flex-shrink-0">
                           <button
                             onClick={() => toggleVisible(c.id)}
                             className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/[0.08] text-gray-500 hover:text-white hover:bg-white/[0.06] transition-colors"
                             title={visible.has(c.id) ? 'Hide' : 'Show'}
                           >
                             {visible.has(c.id) ? <EyeOff size={13} /> : <Eye size={13} />}
-                          </button>
-                          <button
-                            onClick={() => handleCopy(c.id, c.value)}
-                            className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/[0.08] text-gray-500 hover:text-emerald-400 hover:bg-emerald-500/[0.06] hover:border-emerald-500/20 transition-colors"
-                            title="Copy"
-                          >
-                            {copied === c.id ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
                           </button>
                           <button
                             onClick={() => startEdit(c)}
