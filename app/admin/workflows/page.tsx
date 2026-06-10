@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import { Plus, Copy, Trash2, Check, Download, Loader2, Cpu, Pencil, X, Search, AlertCircle, CheckCircle2 } from 'lucide-react'
+import { Plus, Copy, Trash2, Check, Download, Loader2, Cpu, Pencil, X, Search, AlertCircle, CheckCircle2, Upload } from 'lucide-react'
 
 type Workflow = {
   id: string
@@ -76,6 +76,31 @@ export default function WorkflowsPage() {
         setValidationResult(result)
       }
     }
+  }
+
+  // Handle file upload
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, isEdit: boolean) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      const text = event.target?.result as string
+      if (isEdit) {
+        setEditForm((p) => ({ ...p, json: text }))
+        runValidation(text, true)
+      } else {
+        const cleanName = file.name.replace(/\.[^/.]+$/, '').replace(/[_-]/g, ' ')
+        // Capitalize words
+        const formattedName = cleanName.replace(/\b\w/g, (char) => char.toUpperCase())
+        setForm((p) => ({
+          ...p,
+          name: p.name.trim() ? p.name : formattedName,
+          json: text
+        }))
+        runValidation(text, false)
+      }
+    }
+    reader.readAsText(file)
   }
 
   const handleAdd = async (e: React.FormEvent) => {
@@ -242,15 +267,27 @@ export default function WorkflowsPage() {
 
           <div className="mb-4">
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs text-gray-500 block">Pasted n8n Workflow JSON</label>
+              <div className="flex items-center gap-3">
+                <label className="text-xs text-gray-500 block">Workflow JSON</label>
+                <label className="cursor-pointer text-xs text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1.5 transition-colors py-0.5 px-2 rounded-lg bg-purple-500/10 border border-purple-500/20 hover:bg-purple-500/20">
+                  <Upload size={12} />
+                  Upload JSON File
+                  <input
+                    type="file"
+                    accept=".json"
+                    onChange={(e) => handleFileUpload(e, false)}
+                    className="hidden"
+                  />
+                </label>
+              </div>
               {validationResult && (
                 <div className="flex items-center gap-1 text-xs">
                   {validationResult.isValid ? (
-                    <span className="text-emerald-400 flex items-center gap-1">
+                    <span className="text-emerald-400 flex items-center gap-1 font-medium">
                       <CheckCircle2 size={13} /> Valid n8n Workflow ({validationResult.nodeCount} nodes)
                     </span>
                   ) : (
-                    <span className="text-red-400 flex items-center gap-1">
+                    <span className="text-red-400 flex items-center gap-1 font-medium">
                       <AlertCircle size={13} /> Invalid JSON format
                     </span>
                   )}
@@ -264,7 +301,7 @@ export default function WorkflowsPage() {
                 setForm((p) => ({ ...p, json: val }))
                 runValidation(val, false)
               }}
-              placeholder="Paste the workflow JSON here..."
+              placeholder="Paste workflow JSON or upload a file using the button above..."
               rows={8}
               className={`${inputClass} font-mono resize-y`}
               required
@@ -381,10 +418,22 @@ export default function WorkflowsPage() {
                         />
                       </div>
                       <div>
-                        <div className="flex items-center justify-between mb-1">
-                          <label className="text-[10px] text-gray-500 block">Workflow JSON</label>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <div className="flex items-center gap-2">
+                            <label className="text-[10px] text-gray-500 block">Workflow JSON</label>
+                            <label className="cursor-pointer text-[10px] text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1 transition-colors px-1.5 py-0.5 rounded bg-purple-500/10 border border-purple-500/15">
+                              <Upload size={10} />
+                              Upload
+                              <input
+                                type="file"
+                                accept=".json"
+                                onChange={(e) => handleFileUpload(e, true)}
+                                className="hidden"
+                              />
+                            </label>
+                          </div>
                           {editValidationResult && (
-                            <span className={editValidationResult.isValid ? 'text-[10px] text-emerald-400' : 'text-[10px] text-red-400'}>
+                            <span className={editValidationResult.isValid ? 'text-[10px] text-emerald-400 font-medium' : 'text-[10px] text-red-400 font-medium'}>
                               {editValidationResult.isValid ? `✓ Valid JSON (${editValidationResult.nodeCount} nodes)` : '✗ Invalid JSON'}
                             </span>
                           )}
