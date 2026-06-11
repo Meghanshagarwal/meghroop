@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Mail } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
+import { aiAgentLinks } from '@/data/aiAgents'
 
 type IconProps = { size?: number }
 
@@ -95,7 +96,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-black" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 mb-10 sm:mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
@@ -143,6 +144,23 @@ export default function Footer() {
                 { label: 'Initiate Conversation', href: '/contact' },
               ].map((item) => (
                 <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* AI Agents */}
+          <nav aria-label="Footer AI agents directory">
+            <h3 className="text-sm font-semibold text-white mb-4 font-heading">AI Agents</h3>
+            <ul className="space-y-2">
+              {aiAgentLinks.map((item) => (
+                <li key={item.href}>
                   <Link
                     href={item.href}
                     className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
