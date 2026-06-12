@@ -153,11 +153,10 @@ export default function CredentialsPage() {
 
   const handleCopyField = async (e: React.MouseEvent, key: string, value: string) => {
     e.stopPropagation()
-    checkLock(async () => {
-      await navigator.clipboard.writeText(value)
-      setCopied(key)
-      setTimeout(() => setCopied(null), 2000)
-    })
+    // Copy is allowed without the password gate — only editing requires unlocking.
+    await navigator.clipboard.writeText(value)
+    setCopied(key)
+    setTimeout(() => setCopied(null), 2000)
   }
 
   const toggleVisible = (id: string) => {
