@@ -98,6 +98,16 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
           <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/60 pointer-events-none" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-6 text-center py-24">
+            {/* Visible breadcrumb (matches BreadcrumbList schema) */}
+            <nav aria-label="Breadcrumb" className="flex justify-center mb-5">
+              <ol className="flex flex-wrap items-center justify-center gap-1.5 text-xs text-gray-500">
+                <li><Link href="/" className="hover:text-gray-300 transition-colors">Home</Link></li>
+                <li className="text-white/20">/</li>
+                <li><Link href="/agentic-ai" className="hover:text-gray-300 transition-colors">Agentic AI</Link></li>
+                <li className="text-white/20">/</li>
+                <li className="text-gray-300" aria-current="page">{content.eyebrow}</li>
+              </ol>
+            </nav>
             <motion.div {...fadeUp(0)} className="flex justify-center mb-6 sm:mb-8">
               <div className="inline-flex flex-wrap justify-center items-center gap-x-2 gap-y-1 px-3 sm:px-4 py-2 rounded-full glass text-xs sm:text-sm text-gray-300">
                 <Sparkles size={13} className={`${a.icon} flex-shrink-0`} />

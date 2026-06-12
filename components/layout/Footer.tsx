@@ -139,6 +139,7 @@ export default function Footer() {
               {[
                 { label: 'Home', href: '/' },
                 { label: 'About Studio', href: '/about' },
+                { label: 'AI Services', href: '/agentic-ai' },
                 { label: 'Systems & Showcases', href: '/systems' },
                 { label: 'Engineering Journal', href: '/journal' },
                 { label: 'Initiate Conversation', href: '/contact' },
