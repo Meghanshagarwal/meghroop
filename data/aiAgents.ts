@@ -44,4 +44,9 @@ export const aiAgentLinks: AIAgentLink[] = [
     href: '/ai-agents/ai-strategy-audit',
     description: 'Find where AI actually moves the needle first',
   },
+  {
+    label: 'AI for SMBs',
+    href: '/ai-agents/ai-for-smb',
+    description: 'Big-company AI, built for small and mid-sized teams',
+  },
 ]
