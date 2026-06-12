@@ -10,6 +10,7 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'AI Agents', href: '/#agentic-ai', dropdown: true },
+  { label: 'Services', href: '/services' },
   { label: 'Systems', href: '/systems' },
   { label: 'Journal', href: '/journal' },
   { label: 'Contact', href: '/contact' },
