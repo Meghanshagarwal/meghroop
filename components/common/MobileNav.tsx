@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 const NAV_ITEMS = [
   { id: 'home',       label: 'Home',     href: '/',            Icon: Home },
   { id: 'about',      label: 'About',    href: '/about',       Icon: User },
-  { id: 'agentic-ai', label: 'AI',       href: '/#agentic-ai', Icon: BrainCircuit },
+  { id: 'agentic-ai', label: 'AI',       href: '/agentic-ai',  Icon: BrainCircuit },
   { id: 'systems',    label: 'Systems',  href: '/systems',     Icon: Layers },
   { id: 'journal',    label: 'Journal',  href: '/journal',     Icon: BookOpen },
   { id: 'contact',    label: 'Contact',  href: '/contact',     Icon: Mail },

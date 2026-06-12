@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Core static routes
   const staticRoutes = [
     '',
-    '/services',
+    '/agentic-ai',
     '/ai-agents-automation',
     '/web-engineering',
     '/shopify-engineering',

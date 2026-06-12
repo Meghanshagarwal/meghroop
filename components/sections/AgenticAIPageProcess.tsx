@@ -44,7 +44,7 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
-export default function ServicesPageProcess() {
+export default function AgenticAIPageProcess() {
   return (
     <section id="how-we-work" className="section-padding" aria-label="How we work">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">

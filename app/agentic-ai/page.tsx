@@ -3,19 +3,19 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 
-import ServicesPageHero from '@/components/sections/ServicesPageHero'
-import ServicesPageWhatAre from '@/components/sections/ServicesPageWhatAre'
-import ServicesPageGrid from '@/components/sections/ServicesPageGrid'
-import ServicesPageProcess from '@/components/sections/ServicesPageProcess'
-import ServicesPageWhy from '@/components/sections/ServicesPageWhy'
-import ServicesPageAudience from '@/components/sections/ServicesPageAudience'
-import ServicesPageFAQ from '@/components/sections/ServicesPageFAQ'
-import ServicesPageCTA from '@/components/sections/ServicesPageCTA'
+import AgenticAIPageHero from '@/components/sections/AgenticAIPageHero'
+import AgenticAIPageWhatAre from '@/components/sections/AgenticAIPageWhatAre'
+import AgenticAIPageGrid from '@/components/sections/AgenticAIPageGrid'
+import AgenticAIPageProcess from '@/components/sections/AgenticAIPageProcess'
+import AgenticAIPageWhy from '@/components/sections/AgenticAIPageWhy'
+import AgenticAIPageAudience from '@/components/sections/AgenticAIPageAudience'
+import AgenticAIPageFAQ from '@/components/sections/AgenticAIPageFAQ'
+import AgenticAIPageCTA from '@/components/sections/AgenticAIPageCTA'
 
 const SITE_URL = 'https://meghroop.tech'
 
 export const metadata: Metadata = {
-  title: 'AI Services Company: Agents, Automation & Voice | MeghRoop',
+  title: 'Agentic AI Services: Agents, Automation & Voice | MeghRoop',
   description:
     'End-to-end AI services: strategy audits, agent development, voice bots, integrations, and knowledge AI. Fixed-fee, shipped in weeks. Book a free call.',
   keywords: [
@@ -32,21 +32,21 @@ export const metadata: Metadata = {
     'MeghRoop',
   ],
   openGraph: {
-    title: 'AI Services Company: Agents, Automation & Voice | MeghRoop',
+    title: 'Agentic AI Services: Agents, Automation & Voice | MeghRoop',
     description:
       'End-to-end AI services: strategy audits, agent development, voice bots, integrations, and knowledge AI. Fixed-fee, shipped in weeks. Book a free call.',
-    url: `${SITE_URL}/services`,
+    url: `${SITE_URL}/agentic-ai`,
     siteName: 'MeghRoop',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Services Company: Agents, Automation & Voice | MeghRoop',
+    title: 'Agentic AI Services: Agents, Automation & Voice | MeghRoop',
     description:
       'End-to-end AI services: strategy audits, agent development, voice bots, integrations, and knowledge AI. Fixed-fee, shipped in weeks.',
   },
   alternates: {
-    canonical: `${SITE_URL}/services`,
+    canonical: `${SITE_URL}/agentic-ai`,
   },
 }
 
@@ -137,7 +137,7 @@ const schema = {
       '@type': 'ProfessionalService',
       '@id': `${SITE_URL}/#professionalservice`,
       name: 'MeghRoop',
-      url: `${SITE_URL}/services`,
+      url: `${SITE_URL}/agentic-ai`,
       description:
         'End-to-end AI services: strategy audits, agent development, voice bots, integrations, and knowledge AI. Fixed-fee, shipped in weeks.',
       serviceType: 'AI services for business',
@@ -163,7 +163,7 @@ const schema = {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-        { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+        { '@type': 'ListItem', position: 2, name: 'Agentic AI', item: `${SITE_URL}/agentic-ai` },
       ],
     },
     {
@@ -177,7 +177,7 @@ const schema = {
   ],
 }
 
-export default function ServicesPage() {
+export default function AgenticAIPage() {
   return (
     <>
       <script
@@ -186,14 +186,14 @@ export default function ServicesPage() {
       />
       <Navbar />
       <main id="main-content">
-        <ServicesPageHero />
-        <ServicesPageWhatAre />
-        <ServicesPageGrid />
-        <ServicesPageProcess />
-        <ServicesPageWhy />
-        <ServicesPageAudience />
-        <ServicesPageFAQ />
-        <ServicesPageCTA />
+        <AgenticAIPageHero />
+        <AgenticAIPageWhatAre />
+        <AgenticAIPageGrid />
+        <AgenticAIPageProcess />
+        <AgenticAIPageWhy />
+        <AgenticAIPageAudience />
+        <AgenticAIPageFAQ />
+        <AgenticAIPageCTA />
       </main>
       <Footer />
       <WhatsAppButton />

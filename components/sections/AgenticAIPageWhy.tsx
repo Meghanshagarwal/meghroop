@@ -46,7 +46,7 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
-export default function ServicesPageWhy() {
+export default function AgenticAIPageWhy() {
   return (
     <section id="why-meghroop" className="section-padding" aria-label="Why MeghRoop">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">

@@ -39,7 +39,7 @@ const faqs = [
   },
 ]
 
-export default function ServicesPageFAQ() {
+export default function AgenticAIPageFAQ() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (

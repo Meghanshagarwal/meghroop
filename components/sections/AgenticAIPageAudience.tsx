@@ -10,7 +10,7 @@ const audiences = [
   'B2B SaaS, services, D2C, BFSI, healthcare, education, real estate, and manufacturing',
 ]
 
-export default function ServicesPageAudience() {
+export default function AgenticAIPageAudience() {
   return (
     <section id="who-we-work-with" className="section-padding" aria-label="Who we work with">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">

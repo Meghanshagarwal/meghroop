@@ -11,7 +11,7 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.7, delay, ease: 'easeOut' as const },
 })
 
-export default function ServicesPageCTA() {
+export default function AgenticAIPageCTA() {
   return (
     <section
       id="contact"

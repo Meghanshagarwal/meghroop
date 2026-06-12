@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 
-export default function ServicesPageWhatAre() {
+export default function AgenticAIPageWhatAre() {
   return (
     <section id="what-are-ai-services" className="section-padding" aria-label="What are AI services">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
