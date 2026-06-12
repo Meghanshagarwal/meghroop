@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import AISearchOptimizationHero from '@/components/sections/AISearchOptimizationHero'
@@ -70,6 +71,7 @@ export default function AISearchOptimizationPage() {
   return (
     <>
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'AI Search Optimization', path: '/ai-search-optimization' }]} />
       <main id="main-content">
         <AISearchOptimizationHero />
         <AISearchOptimizationWhatItMeans />

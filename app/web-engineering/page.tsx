@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import WebEngineeringHero from '@/components/sections/WebEngineeringHero'
@@ -68,6 +69,7 @@ export default function WebEngineeringPage() {
   return (
     <>
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'Web Engineering', path: '/web-engineering' }]} />
       <main id="main-content">
         <WebEngineeringHero />
         <WebEngineeringWhatWeBuild />

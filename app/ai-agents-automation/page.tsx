@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import AIAgentsAutomationHero from '@/components/sections/AIAgentsAutomationHero'
@@ -64,6 +65,7 @@ export default function AIAgentsAutomationPage() {
   return (
     <>
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'AI Agents & Automation', path: '/ai-agents-automation' }]} />
       <main id="main-content">
         <AIAgentsAutomationHero />
         <WhatWeBuild />

@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import WordPressEngineeringHero from '@/components/sections/WordPressEngineeringHero'
@@ -70,6 +71,7 @@ export default function WordPressEngineeringPage() {
   return (
     <>
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'WordPress Engineering', path: '/wordpress-engineering' }]} />
       <main id="main-content">
         <WordPressEngineeringHero />
         <WordPressWhatWeBuild />

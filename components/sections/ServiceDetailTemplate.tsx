@@ -54,12 +54,38 @@ function SectionHeader({ accent, eyebrow, heading, subtitle }: { accent: typeof 
   )
 }
 
-export default function ServiceDetailTemplate({ content }: { content: ServiceContent }) {
+const SITE_URL = 'https://meghroop.tech'
+
+export default function ServiceDetailTemplate({ content, slug }: { content: ServiceContent; slug: string }) {
   const a = ACCENTS[content.accent]
   const [open, setOpen] = useState<number | null>(null)
 
+  const pageUrl = `${SITE_URL}/ai-agents/${slug}`
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Agentic AI', item: `${SITE_URL}/agentic-ai` },
+          { '@type': 'ListItem', position: 3, name: content.eyebrow, item: pageUrl },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: content.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+    ],
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <Navbar />
       <main id="main-content">
         {/* HERO */}

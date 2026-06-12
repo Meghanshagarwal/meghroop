@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 
@@ -94,6 +95,7 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'Contact', path: '/contact' }]} />
       <main id="main-content">
         <ContactHero />
         <ContactExperience />

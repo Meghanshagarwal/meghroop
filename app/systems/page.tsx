@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 
@@ -68,6 +69,7 @@ export default function SystemsShowcasePage() {
   return (
     <>
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'Systems', path: '/systems' }]} />
       <main id="main-content">
         <SystemsHero />
         <SystemsFeaturedGrid />

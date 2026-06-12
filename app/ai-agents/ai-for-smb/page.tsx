@@ -38,5 +38,5 @@ export const metadata: Metadata = {
 }
 
 export default function AIForSMBPage() {
-  return <ServiceDetailTemplate content={content} />
+  return <ServiceDetailTemplate content={content} slug="ai-for-smb" />
 }

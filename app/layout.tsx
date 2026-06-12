@@ -101,6 +101,13 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
+  // Search Console / Webmaster verification — set the token(s) in env to emit the meta tag.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : {},
+  },
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },

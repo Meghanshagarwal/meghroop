@@ -34,6 +34,21 @@ MeghRoop is a high-performance cognitive systems and custom software engineering
 
 ---
 
+## AI Services (detailed service pages)
+
+The full AI services overview lives at `/agentic-ai` (https://meghroop.tech/agentic-ai). Each service below has a dedicated page:
+
+- **AI Strategy & Readiness Audit** — `/ai-agents/ai-strategy-audit` — Fixed-fee 3-week audit that maps highest-ROI AI use cases and delivers a 90-day roadmap.
+- **Agentic Systems & Process Automation** — `/ai-agents/agentic-automation` — Productized AI agents for back-office processes (invoice-to-pay, ticket triage, reconciliation, vendor onboarding). First agent live in 30 days.
+- **AI Voice Agents** — `/ai-agents/ai-voice-agents` — Human-sounding multilingual voice bots (Hindi, English, regional Indian languages, Spanish) for inbound support, qualification, booking, and collections.
+- **Custom AI Agent Development** — `/ai-agents/custom-ai-agents` — Bespoke agents for unique workflows; you own the code, data, and IP.
+- **AI Integration Services** — `/ai-agents/ai-integration` — Wire AI into existing CRM/ERP/helpdesk (Salesforce, HubSpot, Zoho, Zendesk, SAP, Tally) plus MCP servers. No rip-and-replace.
+- **Document & Knowledge Intelligence** — `/ai-agents/knowledge-intelligence` — Permission-aware RAG assistants that answer with citations, deployed in your cloud or on-prem.
+- **Sales Intelligence & Outreach Automation** — `/ai-agents/sales-ai` — Signal-triggered B2B outbound (email + LinkedIn + voice), pay-per-qualified-meeting pilots.
+- **AI for SMBs** — `/ai-agents/ai-for-smb` — Affordable, fixed-fee AI services for small and mid-sized businesses.
+
+---
+
 ## Studio Telemetry & Social Entities
 
 - **Brand Name**: MeghRoop

@@ -14,6 +14,24 @@ const organizationSchema = {
   description:
     'MeghRoop is a creative engineering and AI studio that builds custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences. Founded in 2022, based in India, serving clients worldwide.',
   numberOfEmployees: { '@type': 'QuantitativeValue', value: 2 },
+  founder: [
+    {
+      '@type': 'Person',
+      name: 'Meghansh',
+      jobTitle: 'Co-Founder & AI Engineer',
+      worksFor: { '@id': `${SITE_URL}/#organization` },
+      url: SITE_URL,
+      sameAs: ['https://linkedin.com/company/meghroop'],
+    },
+    {
+      '@type': 'Person',
+      name: 'Roop',
+      jobTitle: 'Co-Founder & Engineer',
+      worksFor: { '@id': `${SITE_URL}/#organization` },
+      url: SITE_URL,
+      sameAs: ['https://linkedin.com/company/meghroop'],
+    },
+  ],
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Jaipur Road',

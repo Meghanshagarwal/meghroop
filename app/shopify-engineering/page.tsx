@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import ShopifyEngineeringHero from '@/components/sections/ShopifyEngineeringHero'
@@ -72,6 +73,7 @@ export default function ShopifyEngineeringPage() {
   return (
     <>
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'Shopify Engineering', path: '/shopify-engineering' }]} />
       <main id="main-content">
         <ShopifyEngineeringHero />
         <ShopifyEngineeringWhatWeBuild />

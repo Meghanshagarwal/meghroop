@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import N8nWorkflowsHero from '@/components/sections/N8nWorkflowsHero'
@@ -74,6 +75,7 @@ export default function N8nWorkflowsPage() {
   return (
     <>
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'n8n Workflows', path: '/n8n-workflows' }]} />
       <main id="main-content">
         <N8nWorkflowsHero />
         <N8nWhatWeAutomate />

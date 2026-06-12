@@ -19,6 +19,12 @@ const nextConfig = {
         destination: 'https://meghroop.tech/:path*',
         permanent: true,
       },
+      // Page moved: /services -> /agentic-ai (preserve link equity)
+      {
+        source: '/services',
+        destination: '/agentic-ai',
+        permanent: true,
+      },
     ]
   },
 };

@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Navbar from '@/components/layout/Navbar'
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import MCPInfrastructureHero from '@/components/sections/MCPInfrastructureHero'
@@ -70,6 +71,7 @@ export default function MCPInfrastructurePage() {
   return (
     <>
       <Navbar />
+      <BreadcrumbJsonLd items={[{ name: 'MCP Infrastructure', path: '/mcp-infrastructure' }]} />
       <main id="main-content">
         <MCPInfrastructureHero />
         <MCPWhatItMeans />
