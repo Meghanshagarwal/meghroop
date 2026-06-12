@@ -578,15 +578,13 @@ export default function CredentialsPage() {
                           <div className="grid grid-cols-1 gap-1.5 max-w-xl">
                             {/* Token / Value */}
                             {c.value && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Token:</span>
-                                  <span className="truncate text-purple-200">{visible.has(c.id) ? c.value : maskValue(c.value)}</span>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Token:</span>
+                                <span className="truncate text-purple-200">{visible.has(c.id) ? c.value : maskValue(c.value)}</span>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-value`, c.value)}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy Token"
                                 >
                                   {copied === `${c.id}-value` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -596,15 +594,13 @@ export default function CredentialsPage() {
 
                             {/* URL */}
                             {c.url && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Host URL:</span>
-                                  <a href={c.url} target="_blank" rel="noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors truncate">{c.url}</a>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Host URL:</span>
+                                <a href={c.url} target="_blank" rel="noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors truncate">{c.url}</a>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-url`, c.url || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy URL"
                                 >
                                   {copied === `${c.id}-url` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -614,15 +610,13 @@ export default function CredentialsPage() {
 
                             {/* Username */}
                             {c.username && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Username:</span>
-                                  <span className="truncate text-gray-300">{c.username}</span>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Username:</span>
+                                <span className="truncate text-gray-300">{c.username}</span>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-username`, c.username || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy Username"
                                 >
                                   {copied === `${c.id}-username` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -632,15 +626,13 @@ export default function CredentialsPage() {
 
                             {/* Password */}
                             {c.password && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Password:</span>
-                                  <span className="truncate text-gray-300">{visible.has(c.id) ? c.password : maskValue(c.password)}</span>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Password:</span>
+                                <span className="truncate text-gray-300">{visible.has(c.id) ? c.password : maskValue(c.password)}</span>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-password`, c.password || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy Password"
                                 >
                                   {copied === `${c.id}-password` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -650,15 +642,13 @@ export default function CredentialsPage() {
 
                             {/* Client ID */}
                             {c.clientId && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Client ID:</span>
-                                  <span className="truncate text-gray-300">{c.clientId}</span>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Client ID:</span>
+                                <span className="truncate text-gray-300">{c.clientId}</span>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-clientId`, c.clientId || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy Client ID"
                                 >
                                   {copied === `${c.id}-clientId` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -668,15 +658,13 @@ export default function CredentialsPage() {
 
                             {/* Client Secret */}
                             {c.clientSecret && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Secret:</span>
-                                  <span className="truncate text-gray-300">{visible.has(c.id) ? c.clientSecret : maskValue(c.clientSecret)}</span>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Secret:</span>
+                                <span className="truncate text-gray-300">{visible.has(c.id) ? c.clientSecret : maskValue(c.clientSecret)}</span>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-clientSecret`, c.clientSecret || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy Secret"
                                 >
                                   {copied === `${c.id}-clientSecret` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -686,15 +674,13 @@ export default function CredentialsPage() {
 
                             {/* Associated Domain */}
                             {c.associatedDomain && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Domain:</span>
-                                  <a href={`https://${c.associatedDomain}`} target="_blank" rel="noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors truncate">{c.associatedDomain}</a>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Domain:</span>
+                                <a href={`https://${c.associatedDomain}`} target="_blank" rel="noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors truncate">{c.associatedDomain}</a>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-associatedDomain`, c.associatedDomain || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy Domain"
                                 >
                                   {copied === `${c.id}-associatedDomain` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -704,15 +690,13 @@ export default function CredentialsPage() {
 
                             {/* Hosting Provider */}
                             {c.hostingProvider && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Hosting:</span>
-                                  <span className="truncate text-gray-300">{c.hostingProvider}</span>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Hosting:</span>
+                                <span className="truncate text-gray-300">{c.hostingProvider}</span>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-hostingProvider`, c.hostingProvider || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy Hosting"
                                 >
                                   {copied === `${c.id}-hostingProvider` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -722,15 +706,13 @@ export default function CredentialsPage() {
 
                             {/* Domain Registrar */}
                             {c.domainRegistrar && (
-                              <div className="text-xs font-mono text-gray-400 flex items-center justify-between group/field py-0.5">
-                                <div className="flex items-center gap-2 truncate">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Registrar:</span>
-                                  <span className="truncate text-gray-300">{c.domainRegistrar}</span>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-center gap-2 group/field py-0.5">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0">Registrar:</span>
+                                <span className="truncate text-gray-300">{c.domainRegistrar}</span>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-domainRegistrar`, c.domainRegistrar || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0"
                                   title="Copy Registrar"
                                 >
                                   {copied === `${c.id}-domainRegistrar` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
@@ -740,15 +722,13 @@ export default function CredentialsPage() {
 
                             {/* Notes / Details */}
                             {c.notes && (
-                              <div className="text-xs font-mono text-gray-400 flex items-start justify-between group/field py-1 border-t border-white/[0.03] mt-1">
-                                <div className="flex gap-2 min-w-0">
-                                  <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0 pt-0.5">Details:</span>
-                                  <span className="text-gray-400 whitespace-pre-wrap font-sans text-xs max-w-md">{c.notes}</span>
-                                </div>
+                              <div className="text-xs font-mono text-gray-400 flex items-start gap-2 group/field py-1 border-t border-white/[0.03] mt-1">
+                                <span className="text-[10px] text-gray-600 uppercase font-sans tracking-wider font-semibold select-none w-20 flex-shrink-0 pt-0.5">Details:</span>
+                                <span className="text-gray-400 whitespace-pre-wrap font-sans text-xs max-w-md">{c.notes}</span>
                                 <button
                                   type="button"
                                   onClick={(e) => handleCopyField(e, `${c.id}-notes`, c.notes || '')}
-                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all ml-2 flex-shrink-0 self-start"
+                                  className="text-gray-500 hover:text-white p-1 rounded hover:bg-white/[0.04] opacity-0 group-hover/field:opacity-100 transition-all flex-shrink-0 self-start"
                                   title="Copy Details"
                                 >
                                   {copied === `${c.id}-notes` ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
