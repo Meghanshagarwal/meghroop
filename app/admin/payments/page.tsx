@@ -88,17 +88,29 @@ export default function PaymentsPage() {
     loadDeals()
   }, [loadDeals])
 
-  const saveDealsToDb = async (updatedList: Deal[]) => {
+  const saveDealsToDb = async (updatedList: Deal[]): Promise<boolean> => {
     setSaving(true)
+    const previousDeals = [...deals]
     try {
-      await fetch('/api/admin/payments', {
+      const res = await fetch('/api/admin/payments', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedList)
       })
+      
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}))
+        throw new Error(errData.error || `HTTP error! Status: ${res.status}`)
+      }
+      
       setDeals(updatedList)
+      return true
     } catch (err) {
       console.error('Failed to save deals:', err)
+      // Rollback UI to previous state
+      setDeals(previousDeals)
+      alert(err instanceof Error ? `Failed to save changes: ${err.message}` : 'Failed to save changes. Please check your connection and try again.')
+      return false
     } finally {
       setSaving(false)
     }
@@ -171,8 +183,10 @@ export default function PaymentsPage() {
       updatedList = [newDeal, ...deals]
     }
 
-    await saveDealsToDb(updatedList)
-    setDealModalOpen(false)
+    const success = await saveDealsToDb(updatedList)
+    if (success) {
+      setDealModalOpen(false)
+    }
   }
 
   const handleDeleteDeal = async (dealId: string) => {
@@ -300,7 +314,8 @@ export default function PaymentsPage() {
       return d
     })
 
-    await saveDealsToDb(updatedList)
+    const success = await saveDealsToDb(updatedList)
+    if (!success) return
     
     // Refresh modal active deal state
     const refreshedActive = updatedList.find(d => d.id === activeDeal.id)
@@ -326,7 +341,8 @@ export default function PaymentsPage() {
       return d
     })
 
-    await saveDealsToDb(updatedList)
+    const success = await saveDealsToDb(updatedList)
+    if (!success) return
 
     // Refresh modal active deal state
     const refreshedActive = updatedList.find(d => d.id === activeDeal.id)
