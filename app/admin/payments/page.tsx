@@ -19,6 +19,8 @@ interface Payment {
   amount: number
   date: string
   notes: string
+  commission?: number
+  commissionPercent?: number
 }
 
 interface Deal {
@@ -63,6 +65,8 @@ export default function PaymentsPage() {
   const [paymentAmount, setPaymentAmount] = useState('')
   const [paymentDate, setPaymentDate] = useState('')
   const [paymentNotes, setPaymentNotes] = useState('')
+  const [commissionAmount, setCommissionAmount] = useState('')
+  const [commissionPercent, setCommissionPercent] = useState('')
 
   const loadDeals = useCallback(async () => {
     try {
@@ -168,7 +172,31 @@ export default function PaymentsPage() {
     setPaymentAmount('')
     setPaymentDate(new Date().toISOString().split('T')[0])
     setPaymentNotes('')
+    setCommissionAmount('')
+    setCommissionPercent('')
     setPaymentModalOpen(true)
+  }
+
+  const handlePercentChange = (val: string, dealValue: number) => {
+    setCommissionPercent(val)
+    if (!val || isNaN(parseFloat(val)) || !dealValue) {
+      setCommissionAmount('')
+      return
+    }
+    const percent = parseFloat(val)
+    const amount = (percent / 100) * dealValue
+    setCommissionAmount(amount.toFixed(2).replace(/\.00$/, ''))
+  }
+
+  const handleAmountChange = (val: string, dealValue: number) => {
+    setCommissionAmount(val)
+    if (!val || isNaN(parseFloat(val)) || !dealValue) {
+      setCommissionPercent('')
+      return
+    }
+    const amount = parseFloat(val)
+    const percent = (amount / dealValue) * 100
+    setCommissionPercent(percent.toFixed(2).replace(/\.00$/, ''))
   }
 
   const handleAddPayment = async (e: React.FormEvent) => {
@@ -178,11 +206,16 @@ export default function PaymentsPage() {
     const parsedAmount = parseFloat(paymentAmount)
     if (isNaN(parsedAmount) || parsedAmount <= 0) return
 
+    const parsedCommission = parseFloat(commissionAmount)
+    const parsedCommissionPercent = parseFloat(commissionPercent)
+
     const newPayment: Payment = {
       id: 'pay_' + Math.random().toString(36).substring(2, 9),
       amount: parsedAmount,
       date: paymentDate,
-      notes: paymentNotes.trim() || 'Milestone payment'
+      notes: paymentNotes.trim() || 'Milestone payment',
+      commission: isNaN(parsedCommission) ? undefined : parsedCommission,
+      commissionPercent: isNaN(parsedCommissionPercent) ? undefined : parsedCommissionPercent
     }
 
     const updatedList = deals.map(d => {
@@ -205,6 +238,8 @@ export default function PaymentsPage() {
     // Clear inputs
     setPaymentAmount('')
     setPaymentNotes('')
+    setCommissionAmount('')
+    setCommissionPercent('')
   }
 
   const handleDeletePayment = async (paymentId: string) => {
@@ -643,35 +678,39 @@ export default function PaymentsPage() {
 
               <div className="overflow-y-auto flex-1 p-6 space-y-6">
                 {/* Math Breakdown Row */}
-                <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center">
-                  <div>
-                    <div className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Total Contract</div>
-                    <div className="text-sm font-bold font-mono text-white mt-1">
-                      {formatCurrency(activeDeal.dealAmount, activeDeal.currency)}
+                {(() => {
+                  const col = activeDeal.payments.reduce((s, p) => s + p.amount, 0)
+                  const rem = activeDeal.dealAmount - col
+                  const totalCommission = activeDeal.payments.reduce((s, p) => s + (p.commission || 0), 0)
+                  return (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center">
+                      <div>
+                        <div className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Total Contract</div>
+                        <div className="text-sm font-bold font-mono text-white mt-1">
+                          {formatCurrency(activeDeal.dealAmount, activeDeal.currency)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[10px] text-emerald-500/75 font-semibold uppercase tracking-wider">Collected</div>
+                        <div className="text-sm font-bold font-mono text-emerald-400 mt-1">
+                          {formatCurrency(col, activeDeal.currency)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[10px] text-purple-400 font-semibold uppercase tracking-wider">Outstanding</div>
+                        <div className={`text-sm font-bold font-mono mt-1 ${rem > 0 ? 'text-purple-400' : 'text-gray-600'}`}>
+                          {formatCurrency(rem, activeDeal.currency)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[10px] text-red-400/80 font-semibold uppercase tracking-wider">Commissions</div>
+                        <div className="text-sm font-bold font-mono text-red-400 mt-1">
+                          {formatCurrency(totalCommission, activeDeal.currency)}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-emerald-500/75 font-semibold uppercase tracking-wider">Collected</div>
-                    <div className="text-sm font-bold font-mono text-emerald-400 mt-1">
-                      {formatCurrency(activeDeal.payments.reduce((s, p) => s + p.amount, 0), activeDeal.currency)}
-                    </div>
-                  </div>
-                  <div>
-                    {/* Remaining Outstading */}
-                    {(() => {
-                      const col = activeDeal.payments.reduce((s, p) => s + p.amount, 0)
-                      const rem = activeDeal.dealAmount - col
-                      return (
-                        <>
-                          <div className="text-[10px] text-purple-400 font-semibold uppercase tracking-wider">Outstanding</div>
-                          <div className={`text-sm font-bold font-mono mt-1 ${rem > 0 ? 'text-purple-400' : 'text-gray-600'}`}>
-                            {formatCurrency(rem, activeDeal.currency)}
-                          </div>
-                        </>
-                      )
-                    })()}
-                  </div>
-                </div>
+                  )
+                })()}
 
                 {/* Form to Add Milestone */}
                 {activeDeal.payments.reduce((s, p) => s + p.amount, 0) < activeDeal.dealAmount && (
@@ -698,6 +737,34 @@ export default function PaymentsPage() {
                           placeholder="e.g. 1500"
                           required
                           min="1"
+                          step="any"
+                          className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 transition-all font-mono"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 border-t border-white/[0.04] pt-3 mt-1">
+                      <div>
+                        <label className="text-[10px] text-gray-500 mb-1 block">Commission (%)</label>
+                        <input
+                          type="number"
+                          value={commissionPercent}
+                          onChange={(e) => handlePercentChange(e.target.value, activeDeal.dealAmount)}
+                          placeholder="e.g. 5"
+                          min="0"
+                          max="100"
+                          step="any"
+                          className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 transition-all font-mono"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] text-gray-500 mb-1 block">Commission Amount ({activeDeal.currency})</label>
+                        <input
+                          type="number"
+                          value={commissionAmount}
+                          onChange={(e) => handleAmountChange(e.target.value, activeDeal.dealAmount)}
+                          placeholder="e.g. 250"
+                          min="0"
                           step="any"
                           className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 transition-all font-mono"
                         />
@@ -752,9 +819,16 @@ export default function PaymentsPage() {
                           </div>
 
                           <div className="flex items-center gap-3">
-                            <span className="font-mono text-emerald-400 text-xs font-semibold">
-                              +{formatCurrency(p.amount, activeDeal.currency)}
-                            </span>
+                            <div className="text-right">
+                              <span className="font-mono text-emerald-400 text-xs font-semibold block">
+                                +{formatCurrency(p.amount, activeDeal.currency)}
+                              </span>
+                              {p.commission && p.commission > 0 ? (
+                                <span className="text-[9px] text-red-400/80 font-semibold block mt-0.5 font-mono">
+                                  Comm: -{formatCurrency(p.commission, activeDeal.currency)} ({p.commissionPercent}%)
+                                </span>
+                              ) : null}
+                            </div>
                             <button
                               onClick={() => handleDeletePayment(p.id)}
                               className="w-7 h-7 rounded-lg flex items-center justify-center border border-white/[0.08] hover:border-red-500/20 text-gray-500 hover:text-red-400 hover:bg-red-500/[0.06] transition-colors cursor-pointer"
