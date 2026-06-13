@@ -3,7 +3,10 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import JournalCatalog from '@/components/sections/JournalCatalog'
-import { articles } from '@/lib/journal'
+import { getAllArticles } from '@/lib/journal'
+
+// Revalidate the catalog every 60s so auto-published articles appear without a redeploy
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Engineering Journal — AI & Web Architecture',
@@ -49,7 +52,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function JournalPage() {
+export default async function JournalPage() {
+  const articles = await getAllArticles()
   return (
     <>
       <Navbar />

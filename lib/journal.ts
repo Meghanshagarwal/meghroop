@@ -570,3 +570,75 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ]
   }
 ]
+
+// ─────────────────────────────────────────────────────────────
+// Supabase-backed articles (auto-published via /api/journal)
+// The curated `articles` above stay hardcoded; DB articles are
+// merged in at request time with ISR so new posts appear without
+// a redeploy. getSupabase is imported dynamically so this module
+// stays safe to import from client components.
+// ─────────────────────────────────────────────────────────────
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function mapRowToArticle(r: any): Article {
+  return {
+    slug: r.slug,
+    title: r.title,
+    subtitle: r.subtitle ?? '',
+    description: r.description ?? '',
+    date: r.date,
+    lastUpdated: r.last_updated ?? r.date,
+    readTime: r.read_time ?? '5 min read',
+    category: r.category ?? 'AI Infrastructure',
+    author: r.author ?? { name: 'MeghRoop', role: 'AI Engineering Studio', avatar: '/favicon.svg' },
+    heroImage: r.hero_image ?? '',
+    blocks: Array.isArray(r.blocks) ? r.blocks : [],
+    seo: r.seo ?? { title: r.title, description: r.description ?? '', keywords: [] },
+    faqs: Array.isArray(r.faqs) ? r.faqs : [],
+  }
+}
+
+async function fetchDbArticles(): Promise<Article[]> {
+  try {
+    const { getSupabase } = await import('@/lib/supabase')
+    const db = getSupabase()
+    const { data, error } = await db
+      .from('journal_articles')
+      .select('*')
+      .order('date', { ascending: false })
+    if (error || !data) return []
+    return data.map(mapRowToArticle)
+  } catch {
+    // Supabase not configured / unreachable — fall back to static articles only
+    return []
+  }
+}
+
+/** All articles: curated (hardcoded) + auto-published (Supabase), newest first. */
+export async function getAllArticles(): Promise<Article[]> {
+  const dbArticles = await fetchDbArticles()
+  const curatedSlugs = new Set(articles.map((a) => a.slug))
+  const merged = [...articles, ...dbArticles.filter((a) => !curatedSlugs.has(a.slug))]
+  return merged.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+}
+
+/** Single article by slug — curated first, then Supabase. */
+export async function getArticleBySlug(slug: string): Promise<Article | null> {
+  const curated = articles.find((a) => a.slug === slug)
+  if (curated) return curated
+  try {
+    const { getSupabase } = await import('@/lib/supabase')
+    const db = getSupabase()
+    const { data, error } = await db
+      .from('journal_articles')
+      .select('*')
+      .eq('slug', slug)
+      .single()
+    if (error || !data) return null
+    return mapRowToArticle(data)
+  } catch {
+    return null
+  }
+}

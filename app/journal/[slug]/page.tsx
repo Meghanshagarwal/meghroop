@@ -6,7 +6,7 @@ import { ArrowLeft, Calendar, Clock, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
-import { articles } from '@/lib/journal'
+import { articles, getAllArticles, getArticleBySlug } from '@/lib/journal'
 import CodeBuiltVisual from '@/components/common/CodeBuiltVisual'
 
 interface ArticlePageProps {
@@ -15,7 +15,10 @@ interface ArticlePageProps {
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
-// Compile static params at build time
+// Revalidate every 60s; new (Supabase) slugs render on-demand via ISR
+export const revalidate = 60
+
+// Prerender curated articles at build time; auto-published ones render on first request
 export async function generateStaticParams() {
   return articles.map((article) => ({
     slug: article.slug,
@@ -24,7 +27,7 @@ export async function generateStaticParams() {
 
 // Generate dynamic page metadata
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const article = articles.find((a) => a.slug === params.slug)
+  const article = await getArticleBySlug(params.slug)
   if (!article) return {}
 
   const fullUrl = `${SITE_URL}/journal/${article.slug}`
@@ -93,10 +96,11 @@ function getRelatedServices(category: string) {
   }
 }
 
-export default function ArticleDetail({ params }: ArticlePageProps) {
-  const article = articles.find((a) => a.slug === params.slug)
+export default async function ArticleDetail({ params }: ArticlePageProps) {
+  const article = await getArticleBySlug(params.slug)
   if (!article) notFound()
 
+  const allArticles = await getAllArticles()
   const fullUrl = `${SITE_URL}/journal/${article.slug}`
   const relatedServices = getRelatedServices(article.category)
 
@@ -437,7 +441,7 @@ export default function ArticleDetail({ params }: ArticlePageProps) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {articles
+              {allArticles
                 .filter((a) => a.slug !== article.slug)
                 .slice(0, 3)
                 .map((relatedArticle) => (
