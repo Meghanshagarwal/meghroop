@@ -3,6 +3,7 @@ import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { getSupabase, type Project } from '@/lib/supabase'
+import { getAllArticles } from '@/lib/journal'
 
 // Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
 import About from '@/components/sections/About'
@@ -32,6 +33,7 @@ async function getProjects(): Promise<Project[]> {
 
 export default async function Home() {
   const projects = await getProjects()
+  const articles = await getAllArticles()
 
   return (
     <>
@@ -46,7 +48,7 @@ export default async function Home() {
         <Projects projects={projects} />
         <TechStack />
         <Testimonials />
-        <HomeJournalFeed />
+        <HomeJournalFeed articles={articles} />
         <FAQ />
         <Contact />
       </main>

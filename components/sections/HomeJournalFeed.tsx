@@ -3,9 +3,9 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight, Clock } from 'lucide-react'
-import { articles } from '@/lib/journal'
+import { articles as staticArticles, type Article } from '@/lib/journal'
 
-export default function HomeJournalFeed() {
+export default function HomeJournalFeed({ articles = staticArticles }: { articles?: Article[] }) {
   // Take the 3 latest technical logs for clean PageRank distribution
   const latestArticles = articles.slice(0, 3)
 

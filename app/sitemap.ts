@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next'
-import { articles } from '@/lib/journal'
+import { getAllArticles } from '@/lib/journal'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const articles = await getAllArticles()
   // Core static routes
   const staticRoutes = [
     '',
