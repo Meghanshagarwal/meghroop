@@ -74,7 +74,7 @@ export default function PaymentsPage() {
 
   const loadDeals = useCallback(async () => {
     try {
-      const res = await fetch('/api/admin/payments')
+      const res = await fetch(`/api/admin/payments?t=${Date.now()}`)
       const data = await res.json()
       setDeals(Array.isArray(data) ? data : [])
     } catch {
