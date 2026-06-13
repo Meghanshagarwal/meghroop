@@ -31,6 +31,8 @@ interface Deal {
   currency: 'INR' | 'USD'
   payments: Payment[]
   createdAt: string
+  commissionPercent?: number
+  commissionAmount?: number
 }
 
 const inputClass =
@@ -58,6 +60,8 @@ export default function PaymentsPage() {
   const [projectTitle, setProjectTitle] = useState('')
   const [dealAmount, setDealAmount] = useState('')
   const [currency, setCurrency] = useState<'INR' | 'USD'>('INR')
+  const [dealCommissionPercent, setDealCommissionPercent] = useState('')
+  const [dealCommissionAmount, setDealCommissionAmount] = useState('')
 
   // Payments/Milestone Modal States
   const [paymentModalOpen, setPaymentModalOpen] = useState(false)
@@ -107,6 +111,8 @@ export default function PaymentsPage() {
     setProjectTitle('')
     setDealAmount('')
     setCurrency('INR')
+    setDealCommissionPercent('')
+    setDealCommissionAmount('')
     setDealModalOpen(true)
   }
 
@@ -116,6 +122,8 @@ export default function PaymentsPage() {
     setProjectTitle(deal.projectTitle)
     setDealAmount(deal.dealAmount.toString())
     setCurrency(deal.currency)
+    setDealCommissionPercent(deal.commissionPercent?.toString() || '')
+    setDealCommissionAmount(deal.commissionAmount?.toString() || '')
     setDealModalOpen(true)
   }
 
@@ -125,6 +133,9 @@ export default function PaymentsPage() {
 
     const parsedAmount = parseFloat(dealAmount)
     if (isNaN(parsedAmount) || parsedAmount <= 0) return
+
+    const parsedDealCommission = parseFloat(dealCommissionAmount)
+    const parsedDealCommissionPercent = parseFloat(dealCommissionPercent)
 
     let updatedList: Deal[] = []
 
@@ -137,7 +148,9 @@ export default function PaymentsPage() {
             clientName: clientName.trim(),
             projectTitle: projectTitle.trim(),
             dealAmount: parsedAmount,
-            currency: currency
+            currency: currency,
+            commissionPercent: isNaN(parsedDealCommissionPercent) ? undefined : parsedDealCommissionPercent,
+            commissionAmount: isNaN(parsedDealCommission) ? undefined : parsedDealCommission
           }
         }
         return d
@@ -151,7 +164,9 @@ export default function PaymentsPage() {
         dealAmount: parsedAmount,
         currency: currency,
         payments: [],
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        commissionPercent: isNaN(parsedDealCommissionPercent) ? undefined : parsedDealCommissionPercent,
+        commissionAmount: isNaN(parsedDealCommission) ? undefined : parsedDealCommission
       }
       updatedList = [newDeal, ...deals]
     }
@@ -197,6 +212,62 @@ export default function PaymentsPage() {
     const amount = parseFloat(val)
     const percent = (amount / dealValue) * 100
     setCommissionPercent(percent.toFixed(2).replace(/\.00$/, ''))
+  }
+
+  const handlePaymentAmountValueChange = (val: string) => {
+    setPaymentAmount(val)
+    const parsedPayAmount = parseFloat(val)
+    if (isNaN(parsedPayAmount) || parsedPayAmount <= 0) {
+      return
+    }
+    if (commissionPercent && !isNaN(parseFloat(commissionPercent))) {
+      const pct = parseFloat(commissionPercent)
+      const amt = (pct / 100) * parsedPayAmount
+      setCommissionAmount(amt.toFixed(2).replace(/\.00$/, ''))
+    } else if (commissionAmount && !isNaN(parseFloat(commissionAmount))) {
+      const amt = parseFloat(commissionAmount)
+      const pct = (amt / parsedPayAmount) * 100
+      setCommissionPercent(pct.toFixed(2).replace(/\.00$/, ''))
+    }
+  }
+
+  const handleDealPercentChange = (val: string, baseValue: number) => {
+    setDealCommissionPercent(val)
+    if (!val || isNaN(parseFloat(val)) || !baseValue) {
+      setDealCommissionAmount('')
+      return
+    }
+    const percent = parseFloat(val)
+    const amount = (percent / 100) * baseValue
+    setDealCommissionAmount(amount.toFixed(2).replace(/\.00$/, ''))
+  }
+
+  const handleDealAmountChange = (val: string, baseValue: number) => {
+    setDealCommissionAmount(val)
+    if (!val || isNaN(parseFloat(val)) || !baseValue) {
+      setDealCommissionPercent('')
+      return
+    }
+    const amount = parseFloat(val)
+    const percent = (amount / baseValue) * 100
+    setDealCommissionPercent(percent.toFixed(2).replace(/\.00$/, ''))
+  }
+
+  const handleDealAmountValueChange = (val: string) => {
+    setDealAmount(val)
+    const parsedDealAmount = parseFloat(val)
+    if (isNaN(parsedDealAmount) || parsedDealAmount <= 0) {
+      return
+    }
+    if (dealCommissionPercent && !isNaN(parseFloat(dealCommissionPercent))) {
+      const pct = parseFloat(dealCommissionPercent)
+      const amt = (pct / 100) * parsedDealAmount
+      setDealCommissionAmount(amt.toFixed(2).replace(/\.00$/, ''))
+    } else if (dealCommissionAmount && !isNaN(parseFloat(dealCommissionAmount))) {
+      const amt = parseFloat(dealCommissionAmount)
+      const pct = (amt / parsedDealAmount) * 100
+      setDealCommissionPercent(pct.toFixed(2).replace(/\.00$/, ''))
+    }
   }
 
   const handleAddPayment = async (e: React.FormEvent) => {
@@ -617,10 +688,39 @@ export default function PaymentsPage() {
                     <input
                       type="number"
                       value={dealAmount}
-                      onChange={(e) => setDealAmount(e.target.value)}
+                      onChange={(e) => handleDealAmountValueChange(e.target.value)}
                       placeholder="e.g. 5000"
                       required
                       min="1"
+                      step="any"
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 border-t border-white/[0.04] pt-4 mt-2">
+                  <div>
+                    <label className="text-xs text-gray-500 mb-1.5 block font-semibold uppercase tracking-wider">Decided Commission (%)</label>
+                    <input
+                      type="number"
+                      value={dealCommissionPercent}
+                      onChange={(e) => handleDealPercentChange(e.target.value, parseFloat(dealAmount) || 0)}
+                      placeholder="e.g. 10"
+                      min="0"
+                      max="100"
+                      step="any"
+                      className={inputClass}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-gray-500 mb-1.5 block font-semibold uppercase tracking-wider">Decided Commission ({currency})</label>
+                    <input
+                      type="number"
+                      value={dealCommissionAmount}
+                      onChange={(e) => handleDealAmountChange(e.target.value, parseFloat(dealAmount) || 0)}
+                      placeholder="e.g. 500"
+                      min="0"
                       step="any"
                       className={inputClass}
                     />
@@ -712,6 +812,74 @@ export default function PaymentsPage() {
                   )
                 })()}
 
+                {/* Commission Tracker Panel */}
+                {(() => {
+                  const decidedAmount = activeDeal.commissionAmount || 0
+                  const decidedPercent = activeDeal.commissionPercent || 0
+                  const paidCommission = activeDeal.payments.reduce((s, p) => s + (p.commission || 0), 0)
+                  const remainingCommission = decidedAmount - paidCommission
+                  const percentPaid = decidedAmount > 0 ? Math.min(100, Math.max(0, (paidCommission / decidedAmount) * 100)) : 0
+
+                  return (
+                    <div className="p-4 rounded-2xl border border-purple-500/10 bg-purple-500/[0.02] space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 text-xs text-purple-400 font-semibold uppercase tracking-wider">
+                          <Receipt size={14} />
+                          Commission Calculations
+                        </div>
+                        {decidedAmount > 0 && (
+                          <span className="text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full font-semibold font-mono">
+                            {percentPaid.toFixed(0)}% Realized
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2 text-center pt-1">
+                        <div>
+                          <div className="text-[9px] text-gray-500 font-medium uppercase tracking-wider">Decided Commission</div>
+                          <div className="text-sm font-bold font-mono text-white mt-0.5">
+                            {decidedAmount > 0 ? (
+                              <>
+                                {formatCurrency(decidedAmount, activeDeal.currency)}
+                                {decidedPercent > 0 && <span className="text-[10px] text-gray-500 font-normal ml-1">({decidedPercent}%)</span>}
+                              </>
+                            ) : (
+                              <span className="text-gray-600 italic font-normal text-xs">Not Set</span>
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-[9px] text-emerald-500/70 font-medium uppercase tracking-wider">Paid Commission</div>
+                          <div className="text-sm font-bold font-mono text-emerald-400 mt-0.5">
+                            {formatCurrency(paidCommission, activeDeal.currency)}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-[9px] text-purple-400/80 font-medium uppercase tracking-wider">Remaining Due</div>
+                          <div className={`text-sm font-bold font-mono mt-0.5 ${remainingCommission > 0 ? 'text-purple-300' : 'text-gray-600'}`}>
+                            {decidedAmount > 0 ? formatCurrency(remainingCommission, activeDeal.currency) : formatCurrency(0, activeDeal.currency)}
+                          </div>
+                        </div>
+                      </div>
+
+                      {decidedAmount > 0 && (
+                        <div className="pt-1">
+                          <div className="w-full bg-white/[0.04] rounded-full h-1.5 overflow-hidden">
+                            <div 
+                              className="bg-purple-500 h-1.5 rounded-full transition-all duration-500" 
+                              style={{ width: `${percentPaid}%` }}
+                            />
+                          </div>
+                          <div className="flex justify-between items-center text-[9px] text-gray-500 mt-1 font-mono">
+                            <span>{formatCurrency(paidCommission, activeDeal.currency)} Paid</span>
+                            <span>{formatCurrency(decidedAmount, activeDeal.currency)} Decided</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })()}
+
                 {/* Form to Add Milestone */}
                 {activeDeal.payments.reduce((s, p) => s + p.amount, 0) < activeDeal.dealAmount && (
                   <form onSubmit={handleAddPayment} className="p-4 border border-white/[0.06] bg-white/[0.01] rounded-2xl space-y-4">
@@ -733,7 +901,7 @@ export default function PaymentsPage() {
                         <input
                           type="number"
                           value={paymentAmount}
-                          onChange={(e) => setPaymentAmount(e.target.value)}
+                          onChange={(e) => handlePaymentAmountValueChange(e.target.value)}
                           placeholder="e.g. 1500"
                           required
                           min="1"
@@ -749,7 +917,7 @@ export default function PaymentsPage() {
                         <input
                           type="number"
                           value={commissionPercent}
-                          onChange={(e) => handlePercentChange(e.target.value, activeDeal.dealAmount)}
+                          onChange={(e) => handlePercentChange(e.target.value, parseFloat(paymentAmount) || 0)}
                           placeholder="e.g. 5"
                           min="0"
                           max="100"
@@ -762,7 +930,7 @@ export default function PaymentsPage() {
                         <input
                           type="number"
                           value={commissionAmount}
-                          onChange={(e) => handleAmountChange(e.target.value, activeDeal.dealAmount)}
+                          onChange={(e) => handleAmountChange(e.target.value, parseFloat(paymentAmount) || 0)}
                           placeholder="e.g. 250"
                           min="0"
                           step="any"
