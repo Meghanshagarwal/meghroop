@@ -591,7 +591,8 @@ function mapRowToArticle(r: any): Article {
     readTime: r.read_time ?? '5 min read',
     category: r.category ?? 'AI Infrastructure',
     author: r.author ?? { name: 'MeghRoop', role: 'AI Engineering Studio', avatar: '/favicon.svg' },
-    heroImage: r.hero_image ?? '',
+    // Fall back to the branded site OG image so every shared link has a preview
+    heroImage: r.hero_image || `${process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'}/og-image.jpg`,
     blocks: Array.isArray(r.blocks) ? r.blocks : [],
     seo: r.seo ?? { title: r.title, description: r.description ?? '', keywords: [] },
     faqs: Array.isArray(r.faqs) ? r.faqs : [],
