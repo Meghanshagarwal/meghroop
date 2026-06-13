@@ -642,3 +642,103 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     return null
   }
 }
+
+// ─────────────────────────────────────────────────────────────
+// Markdown <-> structured blocks (shared by /api/journal + admin)
+// Pure functions — safe to import anywhere.
+// ─────────────────────────────────────────────────────────────
+
+/** Convert a markdown article body into the journal's structured blocks. */
+export function markdownToBlocks(md: string): ArticleBlock[] {
+  const blocks: ArticleBlock[] = []
+  const lines = md.replace(/\r\n/g, '\n').split('\n')
+  let i = 0
+  let para: string[] = []
+  let list: string[] = []
+
+  const flushPara = () => {
+    const text = para.join(' ').trim()
+    if (text) blocks.push({ type: 'paragraph', content: text })
+    para = []
+  }
+  const flushList = () => {
+    if (list.length) blocks.push({ type: 'list', content: list.slice() })
+    list = []
+  }
+
+  while (i < lines.length) {
+    const trimmed = lines[i].trim()
+
+    if (trimmed.startsWith('```')) {
+      flushPara(); flushList()
+      const language = trimmed.slice(3).trim() || 'typescript'
+      const code: string[] = []
+      i++
+      while (i < lines.length && !lines[i].trim().startsWith('```')) { code.push(lines[i]); i++ }
+      i++
+      blocks.push({ type: 'code', language, content: code.join('\n') })
+      continue
+    }
+
+    if (trimmed === '') { flushPara(); flushList(); i++; continue }
+
+    const h = trimmed.match(/^(#{1,4})\s+(.*)$/)
+    if (h) {
+      flushPara(); flushList()
+      const level = h[1].length
+      if (level > 1) blocks.push({ type: 'heading', level: Math.min(level, 4) as 2 | 3 | 4, content: h[2].trim() })
+      i++; continue
+    }
+
+    if (trimmed.startsWith('>')) {
+      flushPara(); flushList()
+      const quote: string[] = []
+      while (i < lines.length && lines[i].trim().startsWith('>')) { quote.push(lines[i].trim().replace(/^>\s?/, '')); i++ }
+      blocks.push({ type: 'quote', content: quote.join(' ').trim() })
+      continue
+    }
+
+    const li = trimmed.match(/^(?:[-*]|\d+\.)\s+(.*)$/)
+    if (li) { flushPara(); list.push(li[1].trim()); i++; continue }
+
+    flushList()
+    para.push(trimmed)
+    i++
+  }
+  flushPara(); flushList()
+  return blocks
+}
+
+/** Serialize structured blocks back to markdown (for the admin edit form). */
+export function blocksToMarkdown(blocks: ArticleBlock[]): string {
+  return blocks
+    .map((b) => {
+      switch (b.type) {
+        case 'heading':
+          return '#'.repeat(b.level ?? 2) + ' ' + (b.content as string)
+        case 'paragraph':
+          return b.content as string
+        case 'quote':
+          return '> ' + (b.content as string)
+        case 'code':
+          return '```' + (b.language ?? '') + '\n' + (b.content as string) + '\n```'
+        case 'list':
+          return (b.content as string[]).map((item) => '- ' + item).join('\n')
+        default:
+          return ''
+      }
+    })
+    .filter(Boolean)
+    .join('\n\n')
+}
+
+export function slugifyTitle(s: string): string {
+  return s
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 80)
+}

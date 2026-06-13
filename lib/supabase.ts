@@ -27,6 +27,31 @@ export type Setting = {
   value: string
 }
 
+export type JournalRow = {
+  id: string
+  slug: string
+  title: string
+  subtitle: string
+  description: string
+  date: string
+  last_updated: string
+  read_time: string
+  category: string
+  author: { name: string; role: string; avatar: string }
+  hero_image: string
+  blocks: { type: string; content: string | string[]; level?: number; language?: string }[]
+  seo: { title: string; description: string; keywords: string[] }
+  faqs: { question: string; answer: string }[]
+  created_at: string
+}
+
+export const JOURNAL_CATEGORIES = [
+  'AI Infrastructure',
+  'AI Search Optimization',
+  'Web Engineering',
+  'Automation',
+]
+
 export const GRADIENT_PRESETS = [
   { label: 'Purple / Blue',   value: 'from-purple-600 via-violet-600 to-blue-600' },
   { label: 'Blue / Cyan',     value: 'from-blue-600 via-cyan-600 to-teal-600' },
