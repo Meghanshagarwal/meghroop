@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { LayoutDashboard, FolderKanban, Settings, LogOut, ExternalLink, KeyRound, FileText, Wallet, Inbox, GitFork, ListTodo } from 'lucide-react'
+import { LayoutDashboard, FolderKanban, Settings, LogOut, ExternalLink, KeyRound, FileText, Wallet, Inbox, GitFork, ListTodo, FolderClosed } from 'lucide-react'
 
 const navLinks = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -10,6 +10,7 @@ const navLinks = [
   { href: '/admin/payments', label: 'Payments', icon: Wallet },
   { href: '/admin/projects', label: 'Projects', icon: FolderKanban },
   { href: '/admin/tasks', label: 'Task Manager', icon: ListTodo },
+  { href: '/admin/documents', label: 'Document Vault', icon: FolderClosed },
   { href: '/admin/credentials', label: 'Credentials', icon: KeyRound },
   { href: '/admin/letterhead', label: 'Document Editor', icon: FileText },
   { href: '/admin/workflows', label: 'n8n Workflows', icon: GitFork },

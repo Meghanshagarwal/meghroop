@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { FolderKanban, Settings, Plus, BarChart3, ListTodo } from 'lucide-react'
+import { FolderKanban, Settings, Plus, BarChart3, ListTodo, FolderClosed } from 'lucide-react'
 
 export default function Dashboard() {
   const [projectCount, setProjectCount] = useState<number | null>(null)
   const [analyticsConfigured, setAnalyticsConfigured] = useState(0)
   const [activeTasksCount, setActiveTasksCount] = useState<number | null>(null)
+  const [documentsCount, setDocumentsCount] = useState<number | null>(null)
 
   useEffect(() => {
     fetch('/api/admin/projects').then((r) => r.json()).then((data) => {
@@ -27,11 +28,17 @@ export default function Dashboard() {
     }).catch(() => {
       setActiveTasksCount(0)
     })
+    fetch('/api/admin/documents').then((r) => r.json()).then((data) => {
+      setDocumentsCount(Array.isArray(data) ? data.length : 0)
+    }).catch(() => {
+      setDocumentsCount(0)
+    })
   }, [])
 
   const stats = [
     { label: 'Projects', value: projectCount ?? '—', icon: FolderKanban, color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
     { label: 'Active Tasks', value: activeTasksCount ?? '—', icon: ListTodo, color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+    { label: 'Vault Documents', value: documentsCount ?? '—', icon: FolderClosed, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
     { label: 'Analytics Configured', value: `${analyticsConfigured} / 3`, icon: BarChart3, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' },
   ]
 
@@ -43,7 +50,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map(({ label, value, icon: Icon, color, bg }) => (
           <div key={label} className={`flex items-center gap-4 p-5 rounded-2xl border ${bg} bg-white/[0.02]`}>
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${bg}`}>
@@ -59,7 +66,7 @@ export default function Dashboard() {
 
       {/* Quick actions */}
       <h2 className="font-heading font-semibold text-sm text-gray-400 uppercase tracking-widest mb-4">Quick Actions</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
         <Link href="/admin/projects/new" className="flex items-center gap-3 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
           <Plus size={16} className="text-purple-400" />
           <span className="text-sm text-white font-medium">Add Project</span>
@@ -71,6 +78,10 @@ export default function Dashboard() {
         <Link href="/admin/tasks" className="flex items-center gap-3 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
           <ListTodo size={16} className="text-indigo-400" />
           <span className="text-sm text-white font-medium">Task Manager</span>
+        </Link>
+        <Link href="/admin/documents" className="flex items-center gap-3 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+          <FolderClosed size={16} className="text-amber-400" />
+          <span className="text-sm text-white font-medium">Document Vault</span>
         </Link>
         <Link href="/admin/settings" className="flex items-center gap-3 p-4 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
           <Settings size={16} className="text-emerald-400" />
