@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageSquare, X, Send, Loader2, Sparkles } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
@@ -30,10 +31,14 @@ type FlowStep =
   | 'submitting'
 
 export default function Chatbot() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [inputVal, setInputVal] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+
+  // Hide chatbot on all admin routes
+  if (pathname?.startsWith('/admin')) return null
   
   // Lead Capture State
   const [flowStep, setFlowStep] = useState<FlowStep>('idle')
