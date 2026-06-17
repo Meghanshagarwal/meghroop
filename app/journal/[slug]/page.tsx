@@ -276,7 +276,7 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
 
           {/* Pure Code-built Editorial Visual Hero instead of AI/stock image */}
           <div className="relative w-full h-[300px] sm:h-[480px] rounded-3xl overflow-hidden mb-16 border border-white/[0.08] bg-black">
-            <CodeBuiltVisual category={article.category} slug={article.slug} />
+            <CodeBuiltVisual category={article.category} slug={article.slug} title={article.title} />
           </div>
 
           {/* Article Grid Layout: Content vs Sidebar */}
@@ -455,7 +455,7 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
                     <div>
                       {/* Code-built Editorial Visual */}
                       <div className="relative w-full h-32 rounded-xl overflow-hidden mb-4 border border-white/[0.06] bg-black">
-                        <CodeBuiltVisual category={relatedArticle.category} slug={relatedArticle.slug} />
+                        <CodeBuiltVisual category={relatedArticle.category} slug={relatedArticle.slug} title={relatedArticle.title} />
                       </div>
 
                       <span className="inline-block text-[10px] tracking-wider uppercase font-medium font-heading text-purple-400 mb-2">

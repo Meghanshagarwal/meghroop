@@ -126,7 +126,7 @@ export default function JournalCatalog({ articles }: JournalCatalogProps) {
                       <div className="flex flex-col md:flex-row">
                         {/* Visual / Thumbnail */}
                         <div className="relative w-full md:w-80 lg:w-96 shrink-0 h-56 md:h-auto min-h-[220px] overflow-hidden border-b md:border-b-0 md:border-r border-white/[0.06] bg-black">
-                          <CodeBuiltVisual category={article.category} slug={article.slug} />
+                          <CodeBuiltVisual category={article.category} slug={article.slug} title={article.title} />
                         </div>
 
                         {/* Content */}
