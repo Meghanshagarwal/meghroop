@@ -36,9 +36,6 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([])
   const [inputVal, setInputVal] = useState('')
   const [isTyping, setIsTyping] = useState(false)
-
-  // Hide chatbot on all admin routes
-  if (pathname?.startsWith('/admin')) return null
   
   // Lead Capture State
   const [flowStep, setFlowStep] = useState<FlowStep>('idle')
@@ -70,6 +67,9 @@ export default function Chatbot() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, isTyping])
+
+  // Hide chatbot on all admin routes (placed after all hooks)
+  if (pathname?.startsWith('/admin')) return null
 
   const addMessage = (sender: 'assistant' | 'user', text: string, options?: string[]) => {
     const newMsg: Message = {

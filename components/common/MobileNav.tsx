@@ -25,9 +25,6 @@ export default function MobileNav() {
   const ticking = useRef(false);
   const navRef = useRef<HTMLDivElement>(null);
 
-  // Hide mobile nav on all admin routes
-  if (pathname?.startsWith('/admin')) return null;
-
   // Scroll spy + hide-on-scroll-down (active only on Homepage)
   const handleScroll = useCallback(() => {
     if (ticking.current) return;
@@ -111,6 +108,9 @@ export default function MobileNav() {
       }
     }
   }, [pathname]);
+
+  // Hide mobile nav on all admin routes (placed after all hooks)
+  if (pathname?.startsWith('/admin')) return null;
 
   return (
     <>
