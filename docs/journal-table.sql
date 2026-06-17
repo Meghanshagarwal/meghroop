@@ -28,3 +28,7 @@ create index if not exists journal_articles_date_idx on public.journal_articles 
 -- The app reads/writes with the service-role key (server-side only), which
 -- bypasses RLS. Enable RLS so the table is locked down to everyone else.
 alter table public.journal_articles enable row level security;
+
+-- If adding the `faq` column to an existing table, run:
+-- ALTER TABLE public.journal_articles ADD COLUMN IF NOT EXISTS faq jsonb not null default '[]'::jsonb;
+-- NOTIFY pgrst, 'reload schema';
