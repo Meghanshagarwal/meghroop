@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { Calendar, Clock, ArrowUpRight, Search, BookOpen, ArrowRight } from 'lucide-react'
 import { Article } from '@/lib/journal'
 import CodeBuiltVisual from '@/components/common/CodeBuiltVisual'
+import AuthorAvatar from '@/components/common/AuthorAvatar'
 
 interface JournalCatalogProps {
   articles: Article[]
@@ -167,14 +168,7 @@ export default function JournalCatalog({ articles }: JournalCatalogProps) {
                           {/* Footer: Author + Read Link */}
                           <div className="flex items-center justify-between pt-5 mt-5 border-t border-white/[0.06]">
                             <div className="flex items-center gap-3">
-                              <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/[0.1] bg-white/[0.05]">
-                                <Image
-                                  src={article.author.avatar}
-                                  alt={article.author.name}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
+                              <AuthorAvatar name={article.author.name} className="w-8 h-8" />
                               <div>
                                 <div className="text-sm font-medium text-white">{article.author.name}</div>
                                 <div className="text-[10px] text-gray-500 font-heading tracking-wide uppercase">

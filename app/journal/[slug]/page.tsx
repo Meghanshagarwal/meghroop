@@ -8,6 +8,7 @@ import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { articles, getAllArticles, getArticleBySlug } from '@/lib/journal'
 import CodeBuiltVisual from '@/components/common/CodeBuiltVisual'
+import AuthorAvatar from '@/components/common/AuthorAvatar'
 
 interface ArticlePageProps {
   params: { slug: string }
@@ -233,14 +234,7 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
             {/* Telemetry bar */}
             <div className="flex flex-wrap items-center justify-between gap-6 border-y border-white/[0.08] py-5">
               <div className="flex items-center gap-4">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/[0.1] bg-white/[0.05]">
-                  <Image
-                    src={article.author.avatar}
-                    alt={article.author.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <AuthorAvatar name={article.author.name} className="w-10 h-10" />
                 <div>
                   <div className="text-sm font-medium text-white">{article.author.name}</div>
                   <div className="text-xs text-gray-500">{article.author.role}</div>
@@ -474,14 +468,7 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
 
                     <div className="flex items-center justify-between pt-4 border-t border-white/[0.06] mt-4">
                       <div className="flex items-center gap-2">
-                        <div className="relative w-6 h-6 rounded-full overflow-hidden border border-white/[0.1] bg-white/[0.05]">
-                          <Image
-                            src={relatedArticle.author.avatar}
-                            alt={relatedArticle.author.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
+                        <AuthorAvatar name={relatedArticle.author.name} className="w-6 h-6" />
                         <div>
                           <div className="text-xs font-medium text-white">{relatedArticle.author.name}</div>
                         </div>

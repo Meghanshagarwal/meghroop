@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight, Clock } from 'lucide-react'
 import { articles as staticArticles, type Article } from '@/lib/journal'
+import AuthorAvatar from '@/components/common/AuthorAvatar'
 
 export default function HomeJournalFeed({ articles = staticArticles }: { articles?: Article[] }) {
   // Take the 3 latest technical logs for clean PageRank distribution
@@ -76,13 +77,7 @@ export default function HomeJournalFeed({ articles = staticArticles }: { article
               {/* Author & Read Time Telemetry */}
               <div className="flex items-center justify-between pt-5 border-t border-white/[0.06] mt-auto">
                 <div className="flex items-center gap-2.5">
-                  <div className="relative w-7 h-7 rounded-full overflow-hidden border border-white/[0.1] bg-white/[0.05]">
-                    <img
-                      src={article.author.avatar}
-                      alt={article.author.name}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
+                  <AuthorAvatar name={article.author.name} className="w-7 h-7" />
                   <div>
                     <div className="text-xs font-semibold text-white">{article.author.name}</div>
                     <div className="text-[10px] text-gray-500">{article.author.role}</div>
