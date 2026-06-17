@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Loader2, Save } from 'lucide-react'
+import { Loader2, Save, Plus, Trash2 } from 'lucide-react'
 import { JOURNAL_CATEGORIES, type JournalRow } from '@/lib/supabase'
 import { blocksToMarkdown, type ArticleBlock } from '@/lib/journal'
 
@@ -30,6 +30,24 @@ export default function JournalForm({ article }: Props) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
+  const [faq, setFaq] = useState<{ question: string; answer: string }[]>(
+    article?.faq ?? article?.faqs ?? []
+  )
+
+  const addFaqRow = () => {
+    setFaq([...faq, { question: '', answer: '' }])
+  }
+
+  const removeFaqRow = (index: number) => {
+    setFaq(faq.filter((_, i) => i !== index))
+  }
+
+  const handleFaqChange = (index: number, field: 'question' | 'answer', value: string) => {
+    const updated = [...faq]
+    updated[index] = { ...updated[index], [field]: value }
+    setFaq(updated)
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
@@ -44,6 +62,7 @@ export default function JournalForm({ article }: Props) {
       heroImage,
       date,
       markdown,
+      faq,
     }
 
     const url = isEdit ? `/api/admin/journal/${article.id}` : '/api/admin/journal'
@@ -105,6 +124,68 @@ export default function JournalForm({ article }: Props) {
       <div>
         <label className="text-xs text-gray-500 mb-1.5 block">Hero Image URL</label>
         <input value={heroImage} onChange={(e) => setHeroImage(e.target.value)} placeholder="https://… (optional)" className={inputClass} />
+      </div>
+
+      {/* Repeatable FAQs */}
+      <div className="border border-white/[0.08] rounded-xl p-5 bg-white/[0.01] space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-sm font-semibold text-white">FAQ Insights</h3>
+            <p className="text-[11px] text-gray-500 mt-0.5">Add structured Q&A cards that will render on the post page.</p>
+          </div>
+          <button
+            type="button"
+            onClick={addFaqRow}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-purple-500/30 bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 text-xs font-semibold transition-all"
+          >
+            <Plus size={14} />
+            Add FAQ Row
+          </button>
+        </div>
+
+        {faq.length === 0 ? (
+          <p className="text-xs text-gray-600 italic">No FAQs added yet.</p>
+        ) : (
+          <div className="space-y-3">
+            {faq.map((item, index) => (
+              <div key={index} className="flex gap-4 p-4 rounded-xl border border-white/[0.04] bg-white/[0.02] relative group">
+                <div className="flex-1 space-y-3">
+                  <div>
+                    <label className="text-[10px] text-gray-500 mb-1 block">Question {index + 1}</label>
+                    <input
+                      value={item.question}
+                      onChange={(e) => handleFaqChange(index, 'question', e.target.value)}
+                      required
+                      placeholder="e.g. Is MCP secure for production?"
+                      className={inputClass}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] text-gray-500 mb-1 block">Answer {index + 1}</label>
+                    <textarea
+                      value={item.answer}
+                      onChange={(e) => handleFaqChange(index, 'answer', e.target.value)}
+                      required
+                      rows={2}
+                      placeholder="Answer text..."
+                      className={`${inputClass} resize-none`}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-start pt-5">
+                  <button
+                    type="button"
+                    onClick={() => removeFaqRow(index)}
+                    className="p-2 rounded-lg border border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
+                    title="Remove FAQ"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div>

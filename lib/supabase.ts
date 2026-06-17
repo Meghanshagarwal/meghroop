@@ -42,6 +42,7 @@ export type JournalRow = {
   blocks: { type: string; content: string | string[]; level?: number; language?: string }[]
   seo: { title: string; description: string; keywords: string[] }
   faqs: { question: string; answer: string }[]
+  faq?: { question: string; answer: string }[]
   created_at: string
 }
 

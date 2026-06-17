@@ -164,18 +164,20 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
   }
 
   // JSON-LD FAQ schema for dynamic answers
-  const faqSchema = {
+  const faq = article.faq || article.faqs || []
+  const hasFaq = faq.length > 0
+  const faqSchema = hasFaq ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: article.faqs.map((faq) => ({
+    mainEntity: faq.map((item) => ({
       '@type': 'Question',
-      name: faq.question,
+      name: item.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: faq.answer,
+        text: item.answer,
       },
     })),
-  }
+  } : null
 
   return (
     <>
@@ -188,10 +190,12 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <Navbar />
 
@@ -350,22 +354,24 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
               </div>
 
               {/* Dynamic crawlable FAQs inside DOM to secure maximum semantic GEO/SEO points */}
-              <section className="mt-16 pt-12 border-t border-white/[0.08]" aria-label="Frequently Asked Questions">
-                <h2 className="text-2xl font-bold font-heading text-white mb-8">FAQ Insights</h2>
-                <div className="space-y-6">
-                  {article.faqs.map((faq, index) => (
-                    <div key={index} className="bg-white/[0.01] border border-white/[0.04] rounded-2xl p-6">
-                      <h3 className="text-base sm:text-lg font-medium text-white mb-3 flex items-start gap-3">
-                        <span className="w-5 h-5 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center text-xs flex-shrink-0 mt-0.5 font-bold font-heading">Q</span>
-                        {faq.question}
-                      </h3>
-                      <p className="text-gray-400 text-sm sm:text-base leading-relaxed font-light pl-8">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </section>
+              {hasFaq && (
+                <section className="mt-16 pt-12 border-t border-white/[0.08]" aria-label="Frequently Asked Questions">
+                  <h2 className="text-2xl font-bold font-heading text-white mb-8">FAQ Insights</h2>
+                  <div className="space-y-6">
+                    {faq.map((item, index) => (
+                      <div key={index} className="bg-white/[0.01] border border-white/[0.04] rounded-2xl p-6">
+                        <h3 className="text-base sm:text-lg font-medium text-white mb-3 flex items-start gap-3">
+                          <span className="w-5 h-5 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center text-xs flex-shrink-0 mt-0.5 font-bold font-heading">Q</span>
+                          {item.question}
+                        </h3>
+                        <p className="text-gray-400 text-sm sm:text-base leading-relaxed font-light pl-8">
+                          {item.answer}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             {/* Sidebar Column: Cluster Services & CTA */}

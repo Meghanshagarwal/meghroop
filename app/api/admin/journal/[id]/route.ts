@@ -42,6 +42,14 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   const tags = normalizeTags(body.tags)
   const description = (body.description || '').toString().trim()
 
+  const faq = Array.isArray(body.faq)
+    ? body.faq
+        .filter((item: any) => item && typeof item.question === 'string' && typeof item.answer === 'string')
+        .map((item: any) => ({ question: item.question.trim(), answer: item.answer.trim() }))
+        .filter((item: any) => item.question && item.answer)
+        .slice(0, 10)
+    : []
+
   // Slug (URL) stays stable on edit
   const update = {
     title,
@@ -53,6 +61,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     hero_image: (body.heroImage || body.hero_image || '').toString(),
     blocks,
     seo: { title, description: description || title, keywords: tags },
+    faqs: faq,
+    faq,
     ...(body.date ? { date: body.date.toString() } : {}),
   }
 

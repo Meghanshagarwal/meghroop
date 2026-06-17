@@ -27,6 +27,7 @@ export interface Article {
     keywords: string[]
   }
   faqs: { question: string; answer: string }[]
+  faq?: { question: string; answer: string }[]
 }
 
 export const articles: Article[] = [
@@ -581,6 +582,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function mapRowToArticle(r: any): Article {
+  const faq = Array.isArray(r.faq) ? r.faq : (Array.isArray(r.faqs) ? r.faqs : [])
   return {
     slug: r.slug,
     title: r.title,
@@ -595,7 +597,8 @@ function mapRowToArticle(r: any): Article {
     heroImage: r.hero_image || `${process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'}/og-image.jpg`,
     blocks: Array.isArray(r.blocks) ? r.blocks : [],
     seo: r.seo ?? { title: r.title, description: r.description ?? '', keywords: [] },
-    faqs: Array.isArray(r.faqs) ? r.faqs : [],
+    faqs: faq,
+    faq: faq,
   }
 }
 

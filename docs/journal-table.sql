@@ -19,6 +19,7 @@ create table if not exists public.journal_articles (
   blocks        jsonb not null default '[]'::jsonb,
   seo           jsonb not null default '{}'::jsonb,
   faqs          jsonb not null default '[]'::jsonb,
+  faq           jsonb not null default '[]'::jsonb,
   created_at    timestamptz not null default now()
 );
 

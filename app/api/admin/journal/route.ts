@@ -50,6 +50,14 @@ export async function POST(req: Request) {
   const description = (body.description || '').toString().trim()
   const date = (body.date || new Date().toISOString().slice(0, 10)).toString()
 
+  const faq = Array.isArray(body.faq)
+    ? body.faq
+        .filter((item: any) => item && typeof item.question === 'string' && typeof item.answer === 'string')
+        .map((item: any) => ({ question: item.question.trim(), answer: item.answer.trim() }))
+        .filter((item: any) => item.question && item.answer)
+        .slice(0, 10)
+    : []
+
   const row = {
     slug,
     title,
@@ -63,7 +71,8 @@ export async function POST(req: Request) {
     hero_image: (body.heroImage || body.hero_image || '').toString(),
     blocks,
     seo: { title, description: description || title, keywords: tags },
-    faqs: Array.isArray(body.faqs) ? body.faqs : [],
+    faqs: faq,
+    faq,
   }
 
   const { data, error } = await db.from('journal_articles').insert(row).select().single()
