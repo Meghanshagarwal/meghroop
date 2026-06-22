@@ -1,7 +1,8 @@
 'use client'
 
-import { motion, type Variants } from 'framer-motion'
-import { Quote } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import { motion } from 'framer-motion'
+import { Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const testimonials = [
   {
@@ -42,17 +43,34 @@ const testimonials = [
   },
 ]
 
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-}
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-}
-
 export default function Testimonials() {
+  const [perView, setPerView] = useState(1)
+  const [current, setCurrent] = useState(0)
+  const [paused, setPaused] = useState(false)
+
+  // 1 card on mobile, 2 on laptop/desktop
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const apply = () => setPerView(mq.matches ? 2 : 1)
+    apply()
+    mq.addEventListener('change', apply)
+    return () => mq.removeEventListener('change', apply)
+  }, [])
+
+  const maxIndex = Math.max(0, testimonials.length - perView)
+
+  // Clamp when perView changes
+  useEffect(() => { setCurrent((c) => Math.min(c, maxIndex)) }, [maxIndex])
+
+  const next = useCallback(() => setCurrent((c) => (c >= maxIndex ? 0 : c + 1)), [maxIndex])
+  const prev = useCallback(() => setCurrent((c) => (c <= 0 ? maxIndex : c - 1)), [maxIndex])
+
+  useEffect(() => {
+    if (paused) return
+    const id = setInterval(next, 5000)
+    return () => clearInterval(id)
+  }, [paused, next])
+
   return (
     <section id="testimonials" className="section-padding" aria-label="Client testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -62,78 +80,103 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10 sm:mb-16"
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-white/50 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            Clients
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-white/50 mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              Clients
+            </div>
+            <h2 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl text-white leading-[1.05] tracking-tight">
+              Growth they{' '}
+              <span className="gradient-text">can feel.</span>
+            </h2>
+            <p className="text-white/[0.55] text-base sm:text-lg mt-4 max-w-xl">
+              Partners who stayed — because the work kept paying off.
+            </p>
           </div>
-          <h2 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl text-white mb-4 leading-[1.05] tracking-tight">
-            Growth they{' '}
-            <span className="gradient-text">can feel.</span>
-          </h2>
-          <p className="text-white/[0.55] text-lg max-w-2xl mx-auto">
-            Partners who stayed — because the work kept paying off.
-          </p>
+
+          {/* Nav controls */}
+          <div className="flex gap-2 flex-shrink-0">
+            <button
+              onClick={prev}
+              className="w-11 h-11 rounded-xl border border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/20 flex items-center justify-center text-white/60 hover:text-white transition-all duration-200"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={next}
+              className="w-11 h-11 rounded-xl border border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/20 flex items-center justify-center text-white/60 hover:text-white transition-all duration-200"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </motion.div>
 
-        {/* Testimonials Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+        {/* Carousel viewport */}
+        <div
+          className="overflow-hidden"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
         >
-          {testimonials.map((t) => (
-            <motion.div
-              key={t.author}
-              variants={item}
-              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-              className="relative rounded-2xl border border-white/[0.08] overflow-hidden group cursor-default"
-            >
-              {/* Glass background */}
-              <div className="absolute inset-0 glass" />
-              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent" />
+          <div
+            className="flex transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] -mx-2.5"
+            style={{ transform: `translateX(-${current * (100 / perView)}%)` }}
+          >
+            {testimonials.map((t) => (
+              <div key={t.author} className="w-full md:w-1/2 flex-shrink-0 px-2.5">
+                <div className="relative h-full rounded-2xl border border-white/[0.08] overflow-hidden">
+                  <div className="absolute inset-0 glass" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent" />
+                  <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-600/10 rounded-full blur-3xl" />
 
-              {/* Hover glow */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="relative z-10 p-5 sm:p-7">
-                {/* Quote icon */}
-                <div className="w-9 h-9 rounded-xl bg-white/[0.06] flex items-center justify-center mb-5">
-                  <Quote size={16} className="text-purple-400" />
-                </div>
-
-                {/* Stars */}
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-amber-400 text-sm">★</span>
-                  ))}
-                </div>
-
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center`}>
-                    <span className="text-xs font-bold text-white font-heading" aria-hidden="true">{t.avatar}</span>
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-white">{t.author}</div>
-                    <div className="text-xs text-gray-500">
-                      <span>{t.role}</span>
-                      {' @ '}
-                      <span>{t.company}</span>
+                  <div className="relative z-10 p-6 sm:p-8">
+                    <div className="w-9 h-9 rounded-xl bg-white/[0.06] flex items-center justify-center mb-5">
+                      <Quote size={16} className="text-purple-400" />
+                    </div>
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="text-amber-400 text-sm">★</span>
+                      ))}
+                    </div>
+                    <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-6 italic">
+                      &ldquo;{t.quote}&rdquo;
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center`}>
+                        <span className="text-xs font-bold text-white font-heading" aria-hidden="true">{t.avatar}</span>
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold text-white">{t.author}</div>
+                        <div className="text-xs text-gray-500">
+                          <span>{t.role}</span>{' @ '}<span>{t.company}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dots */}
+        <div className="flex items-center justify-center gap-1 mt-7">
+          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className="p-2.5 flex items-center justify-center"
+            >
+              <span className={`block h-1.5 rounded-full transition-all duration-300 ${
+                i === current ? 'w-6 bg-white' : 'w-1.5 bg-white/20 hover:bg-white/40'
+              }`} />
+            </button>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
