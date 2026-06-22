@@ -1,14 +1,9 @@
 import Link from 'next/link'
+import { Mail } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 import { serviceLinks } from '@/data/services'
 
 type IconProps = { size?: number }
-
-const Github = ({ size = 16 }: IconProps) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-  </svg>
-)
 
 const LinkedinIcon = ({ size = 16 }: IconProps) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
@@ -28,11 +23,73 @@ const XIcon = ({ size = 16 }: IconProps) => (
   </svg>
 )
 
+const YoutubeIcon = ({ size = 16 }: IconProps) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11C6.483 20.455 12 20.455 12 20.455s7.517 0 9.387-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+)
+
+const FacebookIcon = ({ size = 16 }: IconProps) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.8c0-.05 0-.1 0-.15z" />
+  </svg>
+)
+
 const socialLinks = [
-  { icon: LinkedinIcon, href: 'https://linkedin.com/company/meghroop', label: 'LinkedIn' },
-  { icon: InstagramIcon, href: 'https://www.instagram.com/meghroop.tech', label: 'Instagram' },
-  { icon: Github, href: 'https://github.com/Meghanshagarwal', label: 'GitHub' },
-  { icon: XIcon, href: 'https://x.com/meghroop_tech', label: 'X' },
+  {
+    icon: Mail,
+    href: 'mailto:hello@meghroop.tech',
+    label: 'Email',
+    hoverColor: 'hover:text-purple-400',
+    glowColor: 'rgba(139,92,246,0.25)',
+    borderHover: 'hover:border-purple-500/40',
+    bgHover: 'hover:bg-purple-500/[0.08]',
+  },
+  {
+    icon: LinkedinIcon,
+    href: 'https://linkedin.com/company/meghroop',
+    label: 'LinkedIn',
+    hoverColor: 'hover:text-blue-400',
+    glowColor: 'rgba(59,130,246,0.25)',
+    borderHover: 'hover:border-blue-500/40',
+    bgHover: 'hover:bg-blue-500/[0.08]',
+  },
+  {
+    icon: XIcon,
+    href: 'https://x.com/meghroop_tech',
+    label: 'Twitter',
+    hoverColor: 'hover:text-sky-400',
+    glowColor: 'rgba(56,189,248,0.25)',
+    borderHover: 'hover:border-sky-500/40',
+    bgHover: 'hover:bg-sky-500/[0.08]',
+  },
+  {
+    icon: YoutubeIcon,
+    href: 'https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ',
+    label: 'YouTube',
+    hoverColor: 'hover:text-red-500',
+    glowColor: 'rgba(239,68,68,0.25)',
+    borderHover: 'hover:border-red-500/40',
+    bgHover: 'hover:bg-red-500/[0.08]',
+  },
+  {
+    icon: InstagramIcon,
+    href: 'https://www.instagram.com/meghroop.tech',
+    label: 'Instagram',
+    hoverColor: 'hover:text-pink-400',
+    glowColor: 'rgba(236,72,153,0.25)',
+    borderHover: 'hover:border-pink-500/40',
+    bgHover: 'hover:bg-pink-500/[0.08]',
+  },
+  {
+    icon: FacebookIcon,
+    href: 'https://www.facebook.com/meghroop.tech',
+    label: 'Facebook',
+    hoverColor: 'hover:text-blue-500',
+    glowColor: 'rgba(59,130,246,0.25)',
+    borderHover: 'hover:border-blue-500/40',
+    bgHover: 'hover:bg-blue-500/[0.08]',
+  },
 ]
 
 const companyLinks = [
@@ -78,18 +135,22 @@ export default function Footer() {
               <MeghRoopLogo variant="primary" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs mb-6">
-              Software, AI, branding and growth systems for modern businesses.
+              Software, AI, branding and growth systems for modern businesses. Made in India. Built for everywhere.
             </p>
             <div className="flex items-center gap-2.5">
-              {socialLinks.map(({ icon: Icon, href, label }) => (
+              {socialLinks.map(({ icon: Icon, href, label, hoverColor, glowColor, borderHover, bgHover }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-xl border border-white/[0.08] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.05] transition-all duration-200"
+                  className={`relative w-9 h-9 rounded-xl border border-white/[0.08] flex items-center justify-center text-gray-400 transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95 ${hoverColor} ${borderHover} ${bgHover} group`}
                 >
+                  <span
+                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{ boxShadow: `0 0 16px ${glowColor}, 0 0 4px ${glowColor}` }}
+                  />
                   <Icon size={15} />
                 </a>
               ))}
