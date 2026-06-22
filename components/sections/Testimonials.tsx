@@ -64,16 +64,16 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 sm:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-white/50 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            The honest part.
+            Clients
           </div>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-            Words from people{' '}
-            <span className="gradient-text">who didn&apos;t have to say them.</span>
+          <h2 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl text-white mb-4 leading-[1.05] tracking-tight">
+            Growth they{' '}
+            <span className="gradient-text">can feel.</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Real words. Real clients. We don&apos;t write these — we just try to deserve them.
+          <p className="text-white/[0.55] text-lg max-w-2xl mx-auto">
+            Partners who stayed — because the work kept paying off.
           </p>
         </motion.div>
 

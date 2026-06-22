@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
+  /* MeghRoop premium brand tokens */
+  --background: #080808;
+  --card: #0d0d0d;
   --foreground: #ffffff;
+  --foreground-secondary: rgba(255, 255, 255, 0.88);
+  --muted: #71717a;
+  --subtle: #52525b;
+  --accent-purple: #c084fc;
+  --accent-blue: #60a5fa;
+  --grid: rgba(255, 255, 255, 0.025);
 }
 
 * {
@@ -18,9 +26,10 @@ html {
 }
 
 body {
-  background: #000000;
+  background: #080808;
   color: #ffffff;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  letter-spacing: -0.011em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -29,7 +38,7 @@ body {
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #080808;
 }
 ::-webkit-scrollbar-thumb {
   background: #222;
@@ -41,14 +50,14 @@ body {
 
 @layer utilities {
   .gradient-text {
-    background: linear-gradient(135deg, #ffffff 0%, #a78bfa 40%, #60a5fa 80%, #22d3ee 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #c084fc 50%, #60a5fa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-purple {
-    background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+    background: linear-gradient(135deg, #c084fc 0%, #60a5fa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -66,7 +75,12 @@ body {
   }
 
   .card-bg {
-    background: rgba(10, 10, 10, 0.8);
+    background: #0d0d0d;
+  }
+
+  .card-premium {
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .glass {
@@ -91,19 +105,20 @@ body {
     background-size: 50px 50px;
   }
 
+  /* More breathing room — premium spacing */
   .section-padding {
-    padding: 48px 0;
+    padding: 72px 0;
   }
 
   @media (min-width: 640px) {
     .section-padding {
-      padding: 64px 0;
+      padding: 100px 0;
     }
   }
 
   @media (min-width: 768px) {
     .section-padding {
-      padding: 100px 0;
+      padding: 160px 0;
     }
   }
 

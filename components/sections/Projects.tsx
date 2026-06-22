@@ -108,7 +108,7 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
   const project = projects[current]
 
   return (
-    <section id="projects" className="section-padding overflow-hidden" aria-label="Featured projects by MeghRoop">
+    <section id="case-studies" className="section-padding overflow-hidden" aria-label="Case studies by MeghRoop">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
@@ -119,13 +119,13 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
           className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12"
         >
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-4 sm:mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-white/50 mb-4 sm:mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              The Work
+              Case studies
             </div>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white">
-              Some things we built.{' '}
-              <span className="gradient-text">A few we almost broke building.</span>
+            <h2 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl text-white leading-[1.05] tracking-tight">
+              Real work.{' '}
+              <span className="gradient-text">Real results.</span>
             </h2>
           </div>
 

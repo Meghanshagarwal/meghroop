@@ -6,40 +6,36 @@ import { Plus, Minus } from 'lucide-react'
 
 const faqs = [
   {
-    q: 'What exactly does MeghRoop build?',
-    a: 'AI agents, autonomous workflow systems, MCP servers, and modern web experiences. We work with startups and businesses that want things built properly — not just launched. Full stack web development, AI integrations, n8n automation, and the infrastructure underneath all of it.',
+    q: 'What kind of agency is MeghRoop?',
+    a: 'A premium Software + AI + Growth agency. We bring performance marketing, AI automation, custom software, branding, and content under one roof — so the team that builds your product is the same team that grows it. No handoffs, no finger-pointing between vendors.',
   },
   {
-    q: 'Do you build custom AI agents?',
-    a: 'Yep. Custom agents that reason, plan, and execute — wired into your real tools and data. Not chatbot wrappers. Not demos. Actual autonomous systems that handle customer support, sales outreach, research, data processing, and internal operations without a human in the loop.',
+    q: 'Do you only do marketing, or development too?',
+    a: 'Both — and that\'s the point. Most businesses juggle a dev shop, a marketing agency, and a creative freelancer. We do all three together: we build the software, run the ads, automate the operations, and design the brand. One partner, every lever of growth.',
   },
   {
-    q: 'What is n8n automation and how does it help?',
-    a: "n8n is an open-source automation platform. We use it to build AI-powered workflows that handle the repetitive work your team does manually — lead generation, email campaigns, CRM updates, data pipelines. Once it's running, it runs. Most clients save 10–15 hours a week. Which sounds small until it's your 15 hours.",
+    q: 'What does "performance marketing" actually mean here?',
+    a: 'Marketing we hold accountable to numbers. Meta Ads, Google Ads, SEO, funnels, and landing pages — all optimised for qualified leads, cost per acquisition, and revenue. Not impressions and likes. We report on the metrics that move your business.',
   },
   {
-    q: 'What are MCP servers?',
-    a: "MCP stands for Model Context Protocol. It's the standard that lets AI models access your real data, tools, and systems — instead of guessing. We build custom MCP servers that expose your databases, CRMs, and APIs to AI in a structured, grounded way. The difference between an AI that hallucinates your product and one that actually knows it.",
+    q: 'How do AI agents and automation help my business?',
+    a: 'They remove the repetitive work that slows your team down. AI agents qualify leads, send follow-ups, and answer customers. n8n and CRM/WhatsApp automations connect your tools so things happen on their own. Most clients reclaim 10–15 hours a week and stop losing leads in the gaps.',
   },
   {
-    q: "What's GEO — Generative Engine Optimization?",
-    a: "People don't just search anymore. They ask. ChatGPT, Perplexity, Claude, Google AI Overviews — these systems generate answers, and they pull from content they can understand and trust. GEO is the practice of structuring your content and website so AI systems actually cite you in those answers. Traditional SEO gets you ranked in search results. GEO gets you mentioned inside the answer itself.",
+    q: 'Can you build a custom product or SaaS?',
+    a: 'Yes. Web apps, SaaS products, dashboards, mobile apps, and APIs — engineered properly to ship fast and scale under real users. We own it end to end, from database to deployment.',
   },
   {
-    q: 'Do you build Shopify stores?',
-    a: "Yes — but we call it Shopify engineering, not 'store building'. We build custom Shopify storefronts, headless Shopify experiences, and AI-powered commerce systems. Abandoned cart automations, inventory workflows, AI customer support agents wired into your Shopify backend, Shopify SEO. If you sell online and want your store to actually perform — technically and commercially — that's what we do.",
-  },
-  {
-    q: 'How is MeghRoop different from a web agency?',
-    a: "Two people. No account managers. No handoffs. You talk directly to the engineers building your product. We're not a massive agency and not trying to be one. We specialize in AI-first systems and modern web — not templates, not no-code tools. If we build it, we built all of it.",
+    q: 'Do you handle Shopify and WordPress?',
+    a: 'Absolutely. Shopify stores, custom Shopify apps, headless commerce, WordPress websites, and deep performance optimization. Fast stores convert better — we make sure yours does, technically and commercially.',
   },
   {
     q: 'Do you work with clients outside India?',
-    a: 'Yes. Based in India, working everywhere. US, UK, Europe, Southeast Asia — we work async across time zones and keep communication direct. Sometimes a timezone difference means you wake up to finished work. Not the worst thing.',
+    a: 'Yes. Based in India, working worldwide — US, UK, Europe, the Middle East, and Southeast Asia. We work async across time zones and keep communication direct and fast.',
   },
   {
-    q: 'How do I get started?',
-    a: "Just reach out. Email hello@meghroop.tech or use the contact form. Tell us what you're building or what's broken. We reply within 24 hours — usually much sooner. No discovery calls before a discovery call. Just a real conversation.",
+    q: 'How do we get started?',
+    a: 'Book a discovery call or email hello@meghroop.tech. Tell us where you want to grow and what\'s in the way. We reply within 24 hours and come back with a clear plan across software, AI, and marketing.',
   },
 ]
 

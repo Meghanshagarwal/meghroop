@@ -3,20 +3,16 @@ import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { getSupabase, type Project } from '@/lib/supabase'
-import { getAllArticles } from '@/lib/journal'
 
 // Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
-import About from '@/components/sections/About'
-import AgenticAI from '@/components/sections/AgenticAI'
-import MCPServers from '@/components/sections/MCPServers'
-import AIWorkflows from '@/components/sections/AIWorkflows'
 import Services from '@/components/sections/Services'
+import WhyMeghRoop from '@/components/sections/WhyMeghRoop'
 import Projects from '@/components/sections/Projects'
+import Process from '@/components/sections/Process'
 import TechStack from '@/components/sections/TechStack'
 import Testimonials from '@/components/sections/Testimonials'
 import FAQ from '@/components/sections/FAQ'
-import HomeJournalFeed from '@/components/sections/HomeJournalFeed'
-import Contact from '@/components/sections/Contact'
+import FinalCTA from '@/components/sections/FinalCTA'
 
 
 export const revalidate = 86400
@@ -33,24 +29,29 @@ async function getProjects(): Promise<Project[]> {
 
 export default async function Home() {
   const projects = await getProjects()
-  const articles = await getAllArticles()
 
   return (
     <>
       <Navbar />
       <main id="main-content">
+        {/* 1. Hero — Growth. AI. Software. */}
         <Hero />
-        <About />
-        <AgenticAI />
-        <MCPServers />
-        <AIWorkflows />
+        {/* 2. Services — 5 expandable categories, outcome-first */}
         <Services />
+        {/* 3. Why MeghRoop */}
+        <WhyMeghRoop />
+        {/* 4. Case Studies */}
         <Projects projects={projects} />
+        {/* 5. Process — Discover → Scale */}
+        <Process />
+        {/* 6. Tech Stack */}
         <TechStack />
+        {/* 7. Testimonials */}
         <Testimonials />
-        <HomeJournalFeed articles={articles} />
+        {/* 8. FAQ */}
         <FAQ />
-        <Contact />
+        {/* 9. Final CTA */}
+        <FinalCTA />
       </main>
       <Footer />
       <WhatsAppButton />
