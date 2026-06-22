@@ -11,8 +11,9 @@ const organizationSchema = {
   email: 'hello@meghroop.tech',
   telephone: '+91 89495 08264',
   foundingDate: '2022',
+  slogan: 'From awareness to automation. From code to customers.',
   description:
-    'MeghRoop is a creative engineering and AI studio that builds custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences. Founded in 2022, based in India, serving clients worldwide.',
+    'MeghRoop is a Growth, AI and Software agency. We help businesses grow through performance marketing (Meta Ads, Google Ads, SEO, social media, content), AI agents and automation (n8n, WhatsApp, CRM), custom software and SaaS development, Shopify and WordPress development, and branding and creative. Founded in 2022, based in India, serving clients worldwide.',
   numberOfEmployees: { '@type': 'QuantitativeValue', value: 2 },
   founder: [
     {
@@ -42,21 +43,45 @@ const organizationSchema = {
   },
   areaServed: 'Worldwide',
   knowsAbout: [
+    // Growth & Marketing
+    'Performance Marketing',
+    'Meta Ads',
+    'Google Ads',
+    'Search Engine Optimization',
+    'Social Media Management',
+    'Content Marketing',
+    'Lead Generation',
+    'Conversion Rate Optimization',
+    // AI & Automation
     'AI Agent Development',
     'Agentic AI Systems',
+    'AI Automation',
     'n8n Workflow Automation',
+    'WhatsApp Automation',
+    'CRM Automation',
+    'Workflow Automation',
     'MCP Server Development',
-    'Multi-Agent Systems',
-    'LangChain',
-    'Generative Engine Optimization',
-    'AI Search Optimization',
+    'RAG Systems',
+    'AI Integration',
+    // Software & Web
+    'Custom Software Development',
+    'SaaS Development',
+    'Web Application Development',
+    'Mobile App Development',
+    'API Development',
     'Next.js Development',
     'React Development',
-    'Full Stack Web Development',
-    'AI Integration',
-    'Autonomous AI Workflows',
-    'Vector Databases',
-    'RAG Systems',
+    'Shopify Development',
+    'Headless Commerce',
+    'WordPress Development',
+    // Brand & Creative
+    'Branding',
+    'Brand Identity Design',
+    'Video Editing',
+    'Motion Graphics',
+    // Discovery
+    'Generative Engine Optimization',
+    'AI Search Optimization',
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -66,36 +91,66 @@ const organizationSchema = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'AI Agent Development',
+          name: 'Growth & Performance Marketing',
+          url: `${SITE_URL}/growth-marketing`,
+          serviceType: 'Performance Marketing',
           description:
-            'Custom AI agents that reason, plan, and execute end-to-end — wired into your tools, data, and real workflows.',
+            'Meta Ads, Google Ads, SEO, social media management, content creation, and lead-generation funnels engineered for qualified leads and measurable revenue.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'n8n Workflow Automation',
+          name: 'AI Agents & Automation',
+          url: `${SITE_URL}/ai-automation`,
+          serviceType: 'AI Automation',
           description:
-            'AI-powered automation workflows built on n8n, LangChain, and custom agents. Leads, emails, data, and internal ops — handled automatically.',
+            'Custom AI agents, n8n workflow automation, WhatsApp and CRM automation, and lead-generation systems that run repetitive work 24/7 without a human in the loop.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'MCP Server Development',
+          name: 'Software Development',
+          url: `${SITE_URL}/software-development`,
+          serviceType: 'Custom Software Development',
           description:
-            'Custom Model Context Protocol servers that expose your real data and APIs to AI models — so they stop guessing and start being genuinely useful.',
+            'Custom software, web apps, mobile apps, dashboards, APIs, and SaaS products — engineered end to end with React, Next.js, Node.js, and TypeScript.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Full Stack Web Development',
+          name: 'Shopify Development',
+          url: `${SITE_URL}/shopify-development`,
+          serviceType: 'Shopify Development',
           description:
-            'Database to deployment — React, Next.js, Node.js, and everything in between. One team, one product, shipped properly.',
+            'Custom Shopify storefronts, headless commerce, Shopify apps, performance optimization, and commerce automation built to load fast and convert.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'WordPress Development',
+          url: `${SITE_URL}/wordpress-development`,
+          serviceType: 'WordPress Development',
+          description:
+            'Custom WordPress websites, headless WordPress, custom themes and blocks, and deep performance optimization — fast, clean, and easy to manage.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Branding & Creative',
+          url: `${SITE_URL}/branding-creative`,
+          serviceType: 'Branding',
+          description:
+            'Brand identity, social media design, video editing, motion graphics, and creative direction that make a brand people remember.',
         },
       },
       {
@@ -103,8 +158,10 @@ const organizationSchema = {
         itemOffered: {
           '@type': 'Service',
           name: 'GEO & AI Search Optimization',
+          url: `${SITE_URL}/ai-search-optimization`,
+          serviceType: 'Generative Engine Optimization',
           description:
-            'Generative Engine Optimization to help brands appear inside AI-generated answers from ChatGPT, Perplexity, Claude, and Google AI Overviews.',
+            'Generative Engine Optimization to help brands appear inside AI-generated answers from ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews.',
         },
       },
     ],
@@ -254,10 +311,34 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What does MeghRoop build?',
+      name: 'What does MeghRoop do?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'MeghRoop is a creative engineering and AI studio. We build custom AI agents, autonomous workflow systems, MCP servers, and premium web experiences using React, Next.js, and modern AI infrastructure. We work with startups and businesses that need things done properly — from a blank repo to a shipped product.',
+        text: 'MeghRoop is a Growth, AI and Software agency. We help businesses grow across five areas: (1) Growth & marketing — Meta Ads, Google Ads, SEO, social media, and content; (2) AI & automation — AI agents, n8n, WhatsApp and CRM automation; (3) Software development — custom software, web and mobile apps, and SaaS; (4) Shopify and WordPress development; and (5) Branding & creative. From awareness to automation. From code to customers.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What does MeghRoop do for growth and performance marketing?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'We run growth as a system: Meta Ads and Google Ads, SEO, social media management, content creation, and conversion-optimized landing pages and lead-gen funnels. Everything is wired to clean tracking so every rupee of spend has a number attached to it — qualified leads and revenue you can trace, not vanity metrics. Clients typically see ROAS around 6×.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does MeghRoop build custom software and SaaS products?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. We build custom software, web applications, mobile apps, internal dashboards, APIs, and full SaaS products end to end — from MVP to production. Our stack is React, Next.js, Node.js, TypeScript, and PostgreSQL/MongoDB. You own the code, with a clean, documented handover.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does MeghRoop do Shopify and WordPress development?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. We build custom Shopify storefronts, headless commerce on Next.js, Shopify apps, and commerce automation engineered to convert. For WordPress we build custom themes and blocks, headless WordPress, and deep performance optimization — no page-builder bloat, fast load times, and SEO baked in from the structure up.',
       },
     },
     {
@@ -297,7 +378,7 @@ const faqSchema = {
       name: 'How is MeghRoop different from a regular web agency?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'MeghRoop is two people — Meghansh and Roop. No account managers, no handoffs, no middlemen. You talk directly to the engineers actually building your product. We specialize in AI-first systems and modern web development, not templates. Most agencies outsource or use no-code tools. We write the code, design the systems, and ship the whole thing ourselves.',
+        text: 'Most agencies do one thing — ads, or websites, or branding — and make you stitch the rest together. MeghRoop runs growth, AI automation, software, and branding under one roof, so your ads, your site, your automation, and your brand actually reinforce each other. And you work directly with the people building it (Meghansh and Roop) — no account managers, no handoffs, no outsourcing. From awareness to automation, from code to customers.',
       },
     },
     {

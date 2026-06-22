@@ -11,11 +11,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Primary service architecture
     '/services',
     '/growth-marketing',
+    '/ai-automation',
     '/agentic-ai',
     '/software-development',
     '/shopify-development',
     '/wordpress-development',
     '/branding-creative',
+    '/ai-search-optimization',
     // Core pages
     '/work',
     '/about',
@@ -44,11 +46,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency = 'monthly'
     } else if (
       route === '/growth-marketing' ||
+      route === '/ai-automation' ||
       route === '/agentic-ai' ||
       route === '/software-development' ||
       route === '/shopify-development' ||
       route === '/wordpress-development' ||
       route === '/branding-creative' ||
+      route === '/ai-search-optimization' ||
       route === '/work'
     ) {
       priority = 0.9

@@ -3,6 +3,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import ServicePageTemplate from '@/components/sections/ServicePageTemplate'
+import ServiceJsonLd from '@/components/common/ServiceJsonLd'
 import { servicePages } from '@/data/services'
 
 const data = servicePages['wordpress-development']
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
+      <ServiceJsonLd data={data} />
       <Navbar />
       <ServicePageTemplate data={data} />
       <Footer />

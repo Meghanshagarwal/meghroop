@@ -80,6 +80,9 @@ export type ServicePage = {
   process: { title: string; desc: string }[]
   stack: string[]
   faqs: { q: string; a: string }[]
+  // Contextual internal links — semantic relationships to sibling services.
+  // `note` explains *why* the two services connect (reinforces the entity graph).
+  related: { label: string; href: string; note: string }[]
   ctaHeadline: string
   ctaAccent: string
   ctaButton: string
@@ -123,6 +126,12 @@ export const servicePages: Record<string, ServicePage> = {
       { q: 'What budget do I need to start?', a: 'We work with brands at different stages. What matters more than a big budget is clean tracking and a product people want — we’ll tell you honestly if paid is the right lever yet.' },
       { q: 'How soon will I see results?', a: 'Paid channels can show signal in weeks; SEO and content compound over months. We set expectations per channel up front and report on real metrics throughout.' },
       { q: 'Do you handle creative too?', a: 'Yes. Ad creative, copy, and landing pages are part of the engine — great targeting can’t save weak creative.' },
+    ],
+    related: [
+      { label: 'AI Automation', href: '/ai-automation', note: 'Automate lead capture, qualification, and follow-up so paid traffic never goes cold.' },
+      { label: 'Branding & Creative', href: '/branding-creative', note: 'Scroll-stopping creative and content — great targeting can’t save weak ads.' },
+      { label: 'Shopify Development', href: '/shopify-development', note: 'Pair paid + SEO with a store engineered to convert the traffic you send it.' },
+      { label: 'Software Development', href: '/software-development', note: 'Custom landing pages, funnels, and tracking built around your real data.' },
     ],
     ctaHeadline: 'Ready to',
     ctaAccent: 'grow better?',
@@ -168,6 +177,12 @@ export const servicePages: Record<string, ServicePage> = {
       { q: 'Will it work with my existing tools?', a: 'Almost certainly. We integrate with CRMs, WhatsApp, email, sheets, and most APIs. If it has an endpoint, we can wire it.' },
       { q: 'Is it reliable enough to trust?', a: 'We build with guardrails, logging, and human-in-the-loop where it matters — so you can trust it and still stay in control.' },
     ],
+    related: [
+      { label: 'Growth & Marketing', href: '/growth-marketing', note: 'Feed qualified, automated leads straight into paid and lead-gen funnels.' },
+      { label: 'AI Agents', href: '/agentic-ai', note: 'Go deeper with bespoke autonomous agents for complex, multi-step workflows.' },
+      { label: 'Software Development', href: '/software-development', note: 'Custom systems and APIs for automation that off-the-shelf tools can’t reach.' },
+      { label: 'Shopify Development', href: '/shopify-development', note: 'Wire in commerce automation — abandoned-cart flows, inventory, and order ops.' },
+    ],
     ctaHeadline: 'Ready to',
     ctaAccent: 'automate smarter?',
     ctaButton: 'Book a Call',
@@ -211,6 +226,12 @@ export const servicePages: Record<string, ServicePage> = {
       { q: 'Can you build an MVP fast?', a: 'Yes — we scope tightly to ship a real, usable MVP quickly, then iterate based on what users actually do.' },
       { q: 'Do you maintain what you build?', a: 'We do. We’re long-term partners, not a build-and-vanish shop. Most clients keep working with us well past launch.' },
       { q: 'Who owns the code?', a: 'You do. Full ownership, clean handover, documented.' },
+    ],
+    related: [
+      { label: 'AI Automation', href: '/ai-automation', note: 'Layer AI agents and automation on top of the software we build.' },
+      { label: 'Shopify Development', href: '/shopify-development', note: 'Custom Shopify apps and headless storefronts on the same modern stack.' },
+      { label: 'WordPress Development', href: '/wordpress-development', note: 'Headless WordPress as a CMS behind a custom Next.js front end.' },
+      { label: 'Growth & Marketing', href: '/growth-marketing', note: 'Launch with clean tracking, funnels, and paid to drive real usage.' },
     ],
     ctaHeadline: 'Ready to',
     ctaAccent: 'build it right?',
@@ -256,6 +277,12 @@ export const servicePages: Record<string, ServicePage> = {
       { q: 'Can you fix my slow store?', a: 'Yes. Performance work is one of our most requested services — we profile, fix, and measure real gains.' },
       { q: 'Do you handle marketing too?', a: 'We do — paid, SEO, and automation under one roof, so your store and its growth aren’t two separate vendors.' },
     ],
+    related: [
+      { label: 'Growth & Marketing', href: '/growth-marketing', note: 'Drive traffic with Meta/Google Ads and SEO built for ecommerce.' },
+      { label: 'Branding & Creative', href: '/branding-creative', note: 'A premium brand and product creative that makes the store actually sell.' },
+      { label: 'AI Automation', href: '/ai-automation', note: 'Commerce automation — abandoned-cart flows, inventory, and order ops.' },
+      { label: 'WordPress Development', href: '/wordpress-development', note: 'Need content + commerce? Pair Shopify with a fast WordPress blog.' },
+    ],
     ctaHeadline: 'Ready to',
     ctaAccent: 'sell more?',
     ctaButton: 'Book a Call',
@@ -300,6 +327,12 @@ export const servicePages: Record<string, ServicePage> = {
       { q: 'Can you make my WordPress site faster?', a: 'Yes. Performance optimization is a core service — most sites have a lot of easy wins we can unlock.' },
       { q: 'Will I be able to edit content myself?', a: 'Absolutely. We build editing experiences your team can actually use, without breaking the design.' },
     ],
+    related: [
+      { label: 'Growth & Marketing', href: '/growth-marketing', note: 'Technical + content SEO that compounds on a fast WordPress base.' },
+      { label: 'Software Development', href: '/software-development', note: 'Headless WordPress behind a custom Next.js app when you outgrow themes.' },
+      { label: 'Branding & Creative', href: '/branding-creative', note: 'Brand identity and design that make the site unmistakably yours.' },
+      { label: 'Shopify Development', href: '/shopify-development', note: 'Adding a store? We build Shopify alongside your WordPress site.' },
+    ],
     ctaHeadline: 'Ready for a',
     ctaAccent: 'site that performs?',
     ctaButton: 'Book a Call',
@@ -343,6 +376,12 @@ export const servicePages: Record<string, ServicePage> = {
       { q: 'Do you do one-off projects or ongoing?', a: 'Both. We’ll build your identity as a project, and many clients keep us on for ongoing content and creative.' },
       { q: 'Can branding tie into my marketing?', a: 'That’s the point. Branding, content, and paid all live under one roof here — so your creative actually drives growth.' },
       { q: 'Do you handle video too?', a: 'Yes — editing, motion graphics, and short-form social video are all part of the offering.' },
+    ],
+    related: [
+      { label: 'Growth & Marketing', href: '/growth-marketing', note: 'Turn brand and content into reach with paid and social.' },
+      { label: 'Shopify Development', href: '/shopify-development', note: 'Bring the brand to life in a storefront engineered to convert.' },
+      { label: 'WordPress Development', href: '/wordpress-development', note: 'Express the identity in a fast, custom WordPress site.' },
+      { label: 'Software Development', href: '/software-development', note: 'Carry the design system into product and app interfaces.' },
     ],
     ctaHeadline: 'Ready to',
     ctaAccent: 'stand out?',

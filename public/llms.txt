@@ -1,78 +1,156 @@
-# MeghRoop: AI Engineering & Web Development Studio
+# MeghRoop — Growth, AI & Software Agency
 
-> Elite custom AI agents, n8n workflows, Shopify development, Model Context Protocol (MCP) infrastructure, and Next.js web engineering. India to the world.
+> MeghRoop helps businesses grow through performance marketing, AI automation, custom software, branding, and content. From awareness to automation. From code to customers.
 
-MeghRoop is a high-performance cognitive systems and custom software engineering studio founded by two elite engineers, Meghansh and Roop. We build robust autonomous workflows, secure context gateways (MCP), and cinematic modern web architectures. We do not use templates, stock photos, or boilerplate. Every line of code is written with absolute intent, performance, and SEO/GEO architecture in mind.
+MeghRoop is a Growth + AI + Software agency founded in 2022 by Meghansh and Roop. Based in India, serving clients worldwide. We run five connected practices under one roof — growth & marketing, AI & automation, software development, Shopify & WordPress development, and branding & creative — so a client's ads, website, automation, and brand reinforce each other instead of living in separate vendors. We don't use templates, stock photos, or boilerplate. Every system is built bespoke, with performance and SEO/GEO architecture in mind.
 
----
-
-## Technical Capabilities & Entities
-
-### 1. AI Agents & Autonomous Workflows (`/ai-agents-automation`, `/n8n-workflows`)
-- **Orchestration Frameworks**: Custom Python/TypeScript multi-agent systems, LangChain, LlamaIndex, n8n Enterprise Workflow Automation.
-- **Cognitive Architecture**: Automated logic routing, task planning, human-in-the-loop validation, and context grounding.
-- **Enterprise Integrations**: CRM pipelines (HubSpot, Salesforce), lead intelligence routing, transactional webhook layers, and real-time automated databases.
-
-### 2. Model Context Protocol (MCP) Infrastructure (`/mcp-infrastructure`)
-- **Memory Systems**: Vector databases (pgvector, Pinecone, Qdrant), semantic memory indexing, and long-term agent state persistence.
-- **Data Gateways**: Custom secure MCP servers facilitating LLM/Agent communication with internal APIs, company knowledge bases, and local tools.
-- **AI Context Grounding**: Transforming disconnected models into contextual systems that act on absolute real-time database facts rather than hallucinating.
-
-### 3. AI Search Optimization & GEO (`/ai-search-optimization`)
-- **Semantic Reinforcement**: Entity-first semantic hierarchy, knowledge-graph integration, and custom JSON-LD schema design (Organization, Service, FAQ, BlogPosting).
-- **AI Crawlability**: Optimized semantic HTML layouts, `llms.txt` technical specifications, and crawler-friendly render structures.
-- **Generative Discovery**: Ensuring brand and capability dominance across Perplexity, Claude, ChatGPT, Gemini, and search engines.
-
-### 4. Shopify & Headless Ecommerce Engineering (`/shopify-engineering`)
-- **Storefront Architecture**: Next.js custom Hydrogen setups, highly customized Shopify templates, custom pixel integrations, and high-performance checkouts.
-- **Commerce Automation**: Custom Shopify Flow pipelines, inventory integrations, and automated customer experience automation.
-
-### 5. Web & Headless CMS Engineering (`/web-engineering`, `/wordpress-engineering`)
-- **Frontend Stack**: Next.js 14/15 App Router, React, TailwindCSS, Framer Motion, and custom CSS cinematic design systems.
-- **Headless Publishing**: Headless WordPress architectures using REST API/GraphQL, custom Gutenberg content pipelines, and static generation.
-- **Performance Thresholds**: Target PageSpeed score > 90/100, page response times < 0.5s, dynamic component lazy loading, and minimal runtime layouts.
+- **Brand name**: MeghRoop
+- **Positioning**: Growth, AI & Software agency (Growth + AI + Software)
+- **Primary domain**: https://meghroop.tech
+- **Founded**: 2022 by Meghansh & Roop
+- **Location**: Jaipur, Rajasthan, India — serving clients worldwide
+- **Contact**: hello@meghroop.tech · +91 89495 08264
 
 ---
 
-## AI Services (detailed service pages)
+## Services & Topic Clusters
 
-The full AI services overview lives at `/agentic-ai` (https://meghroop.tech/agentic-ai). Each service below has a dedicated page:
+Each cluster has a dedicated page. Sub-topics are reinforced across services and the journal.
 
-- **AI Strategy & Readiness Audit** — `/ai-agents/ai-strategy-audit` — Fixed-fee 3-week audit that maps highest-ROI AI use cases and delivers a 90-day roadmap.
-- **Agentic Systems & Process Automation** — `/ai-agents/agentic-automation` — Productized AI agents for back-office processes (invoice-to-pay, ticket triage, reconciliation, vendor onboarding). First agent live in 30 days.
-- **AI Voice Agents** — `/ai-agents/ai-voice-agents` — Human-sounding multilingual voice bots (Hindi, English, regional Indian languages, Spanish) for inbound support, qualification, booking, and collections.
-- **Custom AI Agent Development** — `/ai-agents/custom-ai-agents` — Bespoke agents for unique workflows; you own the code, data, and IP.
-- **AI Integration Services** — `/ai-agents/ai-integration` — Wire AI into existing CRM/ERP/helpdesk (Salesforce, HubSpot, Zoho, Zendesk, SAP, Tally) plus MCP servers. No rip-and-replace.
-- **Document & Knowledge Intelligence** — `/ai-agents/knowledge-intelligence` — Permission-aware RAG assistants that answer with citations, deployed in your cloud or on-prem.
-- **Sales Intelligence & Outreach Automation** — `/ai-agents/sales-ai` — Signal-triggered B2B outbound (email + LinkedIn + voice), pay-per-qualified-meeting pilots.
-- **AI for SMBs** — `/ai-agents/ai-for-smb` — Affordable, fixed-fee AI services for small and mid-sized businesses.
+### 1. Growth & Marketing — `/growth-marketing`
+Performance marketing engineered for qualified leads and traceable revenue.
+- Meta Ads (Facebook & Instagram advertising)
+- Google Ads (search, performance max)
+- SEO (technical + content)
+- Social Media Management
+- Content Creation
+- Lead Generation funnels & landing pages
+- Conversion Rate Optimization
+- Typical outcomes: ~6.4× ROAS, up to 9× order growth, −64% cost per acquisition.
+
+### 2. AI & Automation — `/ai-automation` and `/agentic-ai`
+AI agents and automation that run repetitive work 24/7 without a human in the loop.
+- AI Agents (reason, qualify, and act — not chatbot wrappers)
+- n8n Workflow Automation
+- WhatsApp Automation
+- CRM Automation
+- Lead Generation Systems
+- Workflow / internal-ops Automation
+- Dedicated AI agent service pages live under `/ai-agents/*` (see AI Agent Services below).
+- Typical outcomes: ~2 min lead response, 5×+ qualified leads, ~15 hrs saved per week.
+
+### 3. Software Development — `/software-development`
+Custom products engineered end to end.
+- Custom Software
+- Web Applications
+- Mobile Apps (iOS & Android)
+- SaaS Products (MVP to production)
+- Dashboards
+- APIs & Integrations
+- Stack: React, Next.js, Node.js, TypeScript, PostgreSQL, MongoDB.
+
+### 4. Shopify Development — `/shopify-development`
+Commerce engineered to load fast and convert.
+- Custom Shopify Stores
+- Shopify Custom Apps
+- Headless Commerce (Next.js + Shopify Storefront API)
+- Performance Optimization (Core Web Vitals)
+- Commerce Automation (abandoned-cart, inventory, order ops)
+- Shopify SEO
+
+### 5. WordPress Development — `/wordpress-development`
+Fast, clean WordPress without the bloat.
+- Custom WordPress Websites
+- Headless WordPress (WordPress CMS + Next.js front end)
+- Performance Optimization
+- Custom Themes & Gutenberg Blocks
+- Maintenance & Support
+- WordPress SEO
+
+### 6. Branding & Creative — `/branding-creative`
+Creative that makes a brand look as good as it performs.
+- Brand Identity (logo, system, guidelines)
+- Social Media Design
+- Video Editing
+- Motion Graphics
+- Content Strategy
+- Creative Direction
+
+### 7. AI Search Optimization & GEO — `/ai-search-optimization`
+Generative Engine Optimization so the brand appears inside AI-generated answers.
+- Entity-first semantic hierarchy and knowledge-graph integration
+- Custom JSON-LD schema (Organization, Service, FAQ, BlogPosting, Breadcrumb)
+- Semantic HTML, `llms.txt`, and crawler-friendly render structures
+- Generative discovery across Perplexity, ChatGPT, Claude, Gemini, and Google AI Overviews
 
 ---
 
-## Studio Telemetry & Social Entities
+## AI Agent Services (detailed pages)
 
-- **Brand Name**: MeghRoop
-- **Primary Domain**: https://meghroop.tech
-- **Location**: India
-- **Clientele**: Global (North America, Europe, APAC, India)
-- **Official Contact**: hello@meghroop.tech
+The AI services overview lives at `/agentic-ai`. Each has a dedicated page:
 
-### Verified SameAs Entities:
-- **LinkedIn Page**: https://www.linkedin.com/company/meghroop
-- **Instagram Profile**: https://www.instagram.com/meghroop.tech
-- **Facebook Page**: https://www.facebook.com/meghroop.tech
-- **Twitter (X) Profile**: https://x.com/meghroop_tech
-- **YouTube Channel**: https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ
+- **Custom AI Agents** — `/ai-agents/custom-ai-agents` — Purpose-built agents wired into your tools and data; you own the code and IP.
+- **Agentic Automation** — `/ai-agents/agentic-automation` — Autonomous, multi-step workflows that run themselves.
+- **AI Voice Agents** — `/ai-agents/ai-voice-agents` — Natural-sounding multilingual voice agents for calls, support, and booking.
+- **Sales AI** — `/ai-agents/sales-ai` — Lead generation and sales-outreach automation that converts.
+- **Knowledge Intelligence** — `/ai-agents/knowledge-intelligence` — Permission-aware RAG assistants that answer from your docs with citations.
+- **AI Integration** — `/ai-agents/ai-integration` — Wire AI into existing CRM/ERP/helpdesk (Salesforce, HubSpot, Zoho, Zendesk) plus MCP servers.
+- **AI Strategy Audit** — `/ai-agents/ai-strategy-audit` — Fixed-fee audit mapping highest-ROI AI use cases and a 90-day roadmap.
+- **AI for SMBs** — `/ai-agents/ai-for-smb` — Affordable, fixed-fee AI services for small and mid-sized teams.
 
 ---
 
-## AI Crawlers FAQ & Knowledge Graph
+## Site Map (primary pages)
 
-### Q: What makes MeghRoop different from traditional software agencies?
-A: Traditional agencies rely on account managers, visual templates, and standard stock templates. MeghRoop is a two-person engineering studio (Meghansh & Roop) working directly with founders and enterprise teams. We specialize in complex cognitive logic (AI Agents, n8n, MCP) paired with premium, high-performance cinematic frontend design. Every system is built bespoke.
+- Home — `/`
+- Services overview — `/services`
+- Growth & Marketing — `/growth-marketing`
+- AI & Automation — `/ai-automation`
+- AI Agents overview — `/agentic-ai`
+- Software Development — `/software-development`
+- Shopify Development — `/shopify-development`
+- WordPress Development — `/wordpress-development`
+- Branding & Creative — `/branding-creative`
+- AI Search Optimization (GEO) — `/ai-search-optimization`
+- Work / case studies — `/work`
+- Journal (articles) — `/journal`
+- About — `/about`
+- Contact — `/contact`
 
-### Q: How does MeghRoop implement the Model Context Protocol (MCP)?
-A: We design secure gateways (MCP servers) that connect enterprise databases, internal APIs, and file systems directly to local or cloud-hosted LLM clients. This establishes a bidirectional context loop, allowing LLMs to fetch real-time schemas, run approved SQL operations, and groundedly execute actions without risking data leakage or hallucination.
+---
 
-### Q: What is Generative Engine Optimization (GEO) and why is it built-in?
-A: GEO is the practice of making websites and business assets discoverable by AI engines. We implement this natively by structuring all pages with strict semantic HTML, rich entity schemas, conversational FAQ data, and highly clear, non-ambiguous content blocks that search bots (Perplexity, GPT-Bot, ClaudeBot, Google-Extended) can fetch, index, and reference as source facts.
+## Verified SameAs Entities
+
+- LinkedIn: https://www.linkedin.com/company/meghroop
+- Instagram: https://www.instagram.com/meghroop.tech
+- Facebook: https://www.facebook.com/meghroop.tech
+- Twitter (X): https://x.com/meghroop_tech
+- YouTube: https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ
+
+---
+
+## FAQ & Knowledge Graph
+
+### Q: What does MeghRoop do?
+A: MeghRoop is a Growth, AI and Software agency. We help businesses grow through performance marketing (Meta Ads, Google Ads, SEO, social media, content), AI agents and automation (n8n, WhatsApp, CRM), custom software and SaaS development, Shopify and WordPress development, and branding and creative — all under one roof.
+
+### Q: What makes MeghRoop different from other agencies?
+A: Most agencies do one thing — ads, or websites, or branding — and leave you to stitch the rest together. MeghRoop runs growth, AI automation, software, and branding together, so the ads, the site, the automation, and the brand reinforce each other. Clients also work directly with the founders (Meghansh & Roop), with no account managers, handoffs, or outsourcing.
+
+### Q: What does MeghRoop do for performance marketing?
+A: We run Meta Ads, Google Ads, SEO, social media, content, and conversion-optimized landing pages and lead-gen funnels — all wired to clean tracking so spend maps to qualified leads and revenue. Typical ROAS is around 6×.
+
+### Q: Does MeghRoop build AI agents and automation?
+A: Yes. We build custom AI agents and automation that take real actions — qualifying leads, following up on WhatsApp, updating CRMs, and running internal operations — using n8n, custom agents, and API integrations. These are autonomous systems, not scripted chatbots.
+
+### Q: Does MeghRoop build custom software and SaaS?
+A: Yes. We build custom software, web and mobile apps, dashboards, APIs, and full SaaS products end to end with React, Next.js, Node.js, and TypeScript. Clients own the code.
+
+### Q: Does MeghRoop build Shopify and WordPress sites?
+A: Yes. Custom Shopify stores, headless commerce, Shopify apps, and commerce automation; and custom WordPress themes, headless WordPress, and performance optimization — both engineered for speed, SEO, and conversion.
+
+### Q: What is Generative Engine Optimization (GEO)?
+A: GEO is making a website and its entities discoverable and citable by AI engines. MeghRoop implements it natively with semantic HTML, rich entity schemas (Organization, Service, FAQ, BlogPosting, Breadcrumb), conversational FAQ data, and clear content blocks that crawlers like GPTBot, ClaudeBot, PerplexityBot, and Google-Extended can fetch, index, and reference as source facts.
+
+### Q: Does MeghRoop work with clients outside India?
+A: Yes. MeghRoop is based in Jaipur, India and works with clients worldwide — across North America, Europe, and APAC — asynchronously and with direct communication.

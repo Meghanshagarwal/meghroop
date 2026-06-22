@@ -9,7 +9,15 @@ import { serviceLinks, type ServicePage } from '@/data/services'
 
 export default function ServicePageTemplate({ data }: { data: ServicePage }) {
   const [open, setOpen] = useState<number | null>(0)
-  const related = serviceLinks.filter((s) => s.href !== `/${data.slug}`).slice(0, 5)
+  // Contextual, curated cross-links reinforce the entity graph; fall back to the
+  // flat service list (without a note) only if a page hasn't defined `related`.
+  const related =
+    data.related?.length
+      ? data.related
+      : serviceLinks
+          .filter((s) => s.href !== `/${data.slug}`)
+          .slice(0, 4)
+          .map((s) => ({ ...s, note: '' }))
 
   return (
     <main id="main-content" className="pt-28 sm:pt-32">
@@ -164,19 +172,29 @@ export default function ServicePageTemplate({ data }: { data: ServicePage }) {
         </div>
       </section>
 
-      {/* ── Related services (internal linking) ── */}
+      {/* ── Related services (contextual internal linking / entity graph) ── */}
       <section className="border-t border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-16 sm:py-20">
-          <div className="text-xs uppercase tracking-[0.2em] text-[#52525b] mb-7">Explore more</div>
-          <div className="flex flex-wrap gap-3">
+          <h2 className="font-heading font-bold text-2xl sm:text-3xl text-white tracking-tight mb-3">
+            Works better <span className="gradient-text">together</span>
+          </h2>
+          <p className="text-white/[0.55] text-sm sm:text-base max-w-2xl mb-10">
+            {data.eyebrow} rarely works alone. Here&apos;s how it connects to the rest of what we do.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.06]">
             {related.map((s) => (
               <Link
                 key={s.href}
                 href={s.href}
-                className="group inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-white/[0.08] bg-[#0d0d0d] text-sm text-white/70 hover:text-white hover:border-white/20 transition-all"
+                className="group bg-[#0d0d0d] p-6 hover:bg-[#101010] transition-colors"
               >
-                {s.label}
-                <ArrowRight size={14} className="text-white/30 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <span className="font-heading font-bold text-lg text-white group-hover:text-white">{s.label}</span>
+                  <ArrowRight size={16} className="flex-shrink-0 text-white/30 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+                </div>
+                {'note' in s && s.note && (
+                  <p className="text-sm text-white/[0.55] leading-relaxed">{s.note}</p>
+                )}
               </Link>
             ))}
           </div>

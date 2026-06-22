@@ -66,35 +66,58 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   }
 }
 
-// Map slug to related services for topical authority clusters
+// Map an article category to related service pages for topical-authority clusters.
+// Always points at the current service architecture so the journal feeds the
+// entity graph (no orphan / legacy links). Falls through to a sensible default.
 function getRelatedServices(category: string) {
-  switch (category) {
-    case 'AI Infrastructure':
-      return [
-        { name: 'MCP Infrastructure', href: '/mcp-infrastructure', description: 'Grounded Model Context Protocol server ecosystems' },
-        { name: 'AI Agents & Automation', href: '/ai-agents-automation', description: 'Bespoke operational reasoning agents' },
-      ]
-    case 'AI Search Optimization':
-      return [
-        { name: 'AI Search Optimization', href: '/ai-search-optimization', description: 'Generative Engine Optimization (GEO) engineering' },
-        { name: 'Web Engineering', href: '/web-engineering', description: 'Premium high-performance Next.js architectures' },
-      ]
-    case 'Web Engineering':
-      return [
-        { name: 'Shopify Engineering', href: '/shopify-engineering', description: 'Ultra-fast sub-400ms headless storefronts' },
-        { name: 'Web Engineering', href: '/web-engineering', description: 'Premium high-performance web systems' },
-      ]
-    case 'Automation':
-      return [
-        { name: 'n8n Workflows', href: '/n8n-workflows', description: 'Self-healing, enterprise-grade AI automation pipelines' },
-        { name: 'AI Agents & Automation', href: '/ai-agents-automation', description: 'Bespoke reasoning and operational tools' },
-      ]
-    default:
-      return [
-        { name: 'AI Agents & Automation', href: '/ai-agents-automation', description: 'Custom reasoning AI systems' },
-        { name: 'Web Engineering', href: '/web-engineering', description: 'High-performance bespoke engineering' },
-      ]
+  const c = category.toLowerCase()
+
+  if (c.includes('growth') || c.includes('marketing') || c.includes('seo') || c.includes('ads')) {
+    return [
+      { name: 'Growth & Marketing', href: '/growth-marketing', description: 'Meta Ads, Google Ads, SEO, social, and content built for revenue' },
+      { name: 'AI Automation', href: '/ai-automation', description: 'Automated lead capture, qualification, and follow-up systems' },
+    ]
   }
+  if (c.includes('automation') || c.includes('n8n') || c.includes('agent') || c.includes('ai infrastructure') || c.includes('mcp')) {
+    return [
+      { name: 'AI Automation', href: '/ai-automation', description: 'n8n, WhatsApp, and CRM automation that runs 24/7' },
+      { name: 'AI Agents', href: '/agentic-ai', description: 'Custom autonomous agents wired into your tools and data' },
+    ]
+  }
+  if (c.includes('search') || c.includes('geo')) {
+    return [
+      { name: 'AI Search Optimization', href: '/ai-search-optimization', description: 'Generative Engine Optimization (GEO) engineering' },
+      { name: 'Growth & Marketing', href: '/growth-marketing', description: 'SEO and content that compounds across search and AI answers' },
+    ]
+  }
+  if (c.includes('shopify') || c.includes('commerce') || c.includes('ecommerce')) {
+    return [
+      { name: 'Shopify Development', href: '/shopify-development', description: 'Custom and headless storefronts engineered to convert' },
+      { name: 'Growth & Marketing', href: '/growth-marketing', description: 'Paid + SEO to drive traffic to the store' },
+    ]
+  }
+  if (c.includes('wordpress') || c.includes('cms')) {
+    return [
+      { name: 'WordPress Development', href: '/wordpress-development', description: 'Fast, custom WordPress without the page-builder bloat' },
+      { name: 'Software Development', href: '/software-development', description: 'Headless builds and custom apps when you outgrow themes' },
+    ]
+  }
+  if (c.includes('brand') || c.includes('creative') || c.includes('design') || c.includes('content')) {
+    return [
+      { name: 'Branding & Creative', href: '/branding-creative', description: 'Brand identity, social design, video, and motion' },
+      { name: 'Growth & Marketing', href: '/growth-marketing', description: 'Turn brand and content into reach with paid and social' },
+    ]
+  }
+  if (c.includes('software') || c.includes('web') || c.includes('saas') || c.includes('engineering') || c.includes('app')) {
+    return [
+      { name: 'Software Development', href: '/software-development', description: 'Custom software, web and mobile apps, and SaaS' },
+      { name: 'AI Automation', href: '/ai-automation', description: 'Add AI agents and automation on top of what we build' },
+    ]
+  }
+  return [
+    { name: 'AI Automation', href: '/ai-automation', description: 'AI agents and automation that run your repetitive work' },
+    { name: 'Software Development', href: '/software-development', description: 'Custom software, web apps, and SaaS — built end to end' },
+  ]
 }
 
 export default async function ArticleDetail({ params }: ArticlePageProps) {
