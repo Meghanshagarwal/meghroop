@@ -26,7 +26,7 @@ export default function Hero() {
             Software + AI + Growth Agency
           </div>
 
-          <h1 className="font-heading font-bold text-6xl sm:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-tight mb-7 animate-fade-up [animation-delay:100ms]">
+          <h1 className="font-heading font-bold text-5xl sm:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-tight mb-7 animate-fade-up [animation-delay:100ms]">
             Growth.
             <br />
             <span className="gradient-text-purple">AI.</span>

@@ -90,29 +90,22 @@ export default function Services() {
               <div key={cat.title} className="border-b border-white/[0.06]">
                 <button
                   onClick={() => setOpen(isOpen ? -1 : i)}
-                  className="w-full flex items-center gap-5 py-7 sm:py-8 text-left group"
+                  className="w-full flex items-center gap-3 sm:gap-5 py-6 sm:py-8 text-left group"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-heading text-sm text-[#52525b] tabular-nums w-8 flex-shrink-0">
+                  <span className="font-heading text-xs sm:text-sm text-[#52525b] tabular-nums w-5 sm:w-8 flex-shrink-0">
                     0{i + 1}
                   </span>
-                  <span className={`w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-white/[0.07]`}>
-                    <Icon size={20} className={cat.accent} />
+                  <span className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-white/[0.07]`}>
+                    <Icon size={18} className={cat.accent} />
                   </span>
                   <span className="flex-1 min-w-0">
-                    <span className="flex items-center gap-2.5">
-                      <span className="font-heading font-bold text-2xl sm:text-3xl text-white tracking-tight">
-                        {cat.title}
-                      </span>
-                      {cat.star && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#c084fc]/15 text-[#c084fc] font-medium uppercase tracking-wider">
-                          Priority
-                        </span>
-                      )}
+                    <span className="font-heading font-bold text-lg sm:text-2xl md:text-3xl text-white tracking-tight">
+                      {cat.title}
                     </span>
                   </span>
                   <Plus
-                    size={22}
+                    size={20}
                     className={`text-white/40 flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-45 text-white' : ''}`}
                   />
                 </button>
@@ -126,8 +119,8 @@ export default function Services() {
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="pl-[5.25rem] pr-8 pb-9 -mt-1">
-                        <p className="text-lg text-white/[0.7] max-w-xl mb-6 leading-relaxed">
+                      <div className="pl-8 sm:pl-[5.25rem] pr-2 sm:pr-8 pb-8 -mt-1">
+                        <p className="text-base sm:text-lg text-white/[0.7] max-w-xl mb-5 sm:mb-6 leading-relaxed">
                           {cat.outcome}
                         </p>
                         <div className="flex flex-wrap gap-2">
