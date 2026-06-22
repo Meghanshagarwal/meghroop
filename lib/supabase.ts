@@ -29,6 +29,7 @@ export type Project = {
   outcome?: string
   deliverables?: string[]
   results?: { label: string; before: string; after: string }[]
+  gallery?: string[]
 }
 
 // Stable slug for a project — falls back to id when slug not yet set

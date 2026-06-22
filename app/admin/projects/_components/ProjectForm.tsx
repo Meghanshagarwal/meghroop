@@ -69,6 +69,7 @@ export default function ProjectForm({ project }: Props) {
   const [resultsInput, setResultsInput] = useState(
     (project?.results ?? []).map((r) => `${r.label} | ${r.before} | ${r.after}`).join('\n')
   )
+  const [galleryInput, setGalleryInput] = useState((project?.gallery ?? []).join('\n'))
   const [slugTouched, setSlugTouched] = useState(!!project?.slug)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -102,6 +103,7 @@ export default function ProjectForm({ project }: Props) {
         .map((line) => line.split('|').map((s) => s.trim()))
         .filter((parts) => parts.length === 3 && parts.every(Boolean))
         .map(([label, before, after]) => ({ label, before, after })),
+      gallery: galleryInput.split('\n').map((s) => s.trim()).filter(Boolean),
     }
 
     const url = isEdit ? `/api/admin/projects/${project.id}` : '/api/admin/projects'
@@ -261,6 +263,15 @@ export default function ProjectForm({ project }: Props) {
         <label className="text-xs text-gray-500 mb-1.5 block">Deliverables (comma-separated)</label>
         <input value={deliverablesInput} onChange={(e) => setDeliverablesInput(e.target.value)}
           placeholder="Content, Website, Photoshoot, Paid Ads, Influencer Marketing" className={inputClass} />
+      </div>
+
+      {/* Gallery images */}
+      <div>
+        <label className="text-xs text-gray-500 mb-1.5 block">Gallery Images — one URL per line</label>
+        <textarea value={galleryInput} onChange={(e) => setGalleryInput(e.target.value)} rows={4}
+          placeholder={'https://images.unsplash.com/photo-...\nhttps://your-cdn.com/screenshot-2.jpg'}
+          className={`${inputClass} resize-none font-mono text-xs`} />
+        <p className="text-[11px] text-gray-600 mt-1">First image shows wide; the rest in a 2-column grid. Click-to-zoom on the page.</p>
       </div>
 
       {/* Results (before/after) */}

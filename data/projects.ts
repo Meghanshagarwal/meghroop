@@ -33,6 +33,7 @@ export const defaultProjects: Project[] = [
       { label: 'Monthly Orders', before: '210', after: '1,940' },
       { label: 'Cost per Acquisition', before: '₹640', after: '₹230' },
     ],
+    gallery: [img('photo-1556228453-efd6c1ff04f6'), img('photo-1570194065650-d99fb4bedf0a'), img('photo-1598440947619-2c35fc9aa908'), img('photo-1522335789203-aabd1fc54bc9')],
   },
   {
     id: 'fleetiq',
@@ -62,6 +63,7 @@ export const defaultProjects: Project[] = [
       { label: 'On-time Deliveries', before: '71%', after: '96%' },
       { label: 'Dispatch Time', before: '~3 hrs', after: '12 min' },
     ],
+    gallery: [img('photo-1460925895917-afdab827c52f'), img('photo-1486312338219-ce68d2c6f44d'), img('photo-1551434678-e076c223a692'), img('photo-1517245386807-bb43f82c33c4')],
   },
   {
     id: 'nexa',
@@ -91,6 +93,7 @@ export const defaultProjects: Project[] = [
       { label: 'Qualified Leads / mo', before: '120', after: '640' },
       { label: 'Team Hours Saved', before: '0', after: '15 / wk' },
     ],
+    gallery: [img('photo-1531973576160-7125cd663d86'), img('photo-1522071820081-009f0129c71c'), img('photo-1498050108023-c5249f4df085'), img('photo-1504384308090-c894fdcc538d')],
   },
   {
     id: 'maison-olea',
@@ -120,5 +123,6 @@ export const defaultProjects: Project[] = [
       { label: 'Average Order Value', before: '₹1,450', after: '₹2,000' },
       { label: 'Instagram Following', before: '4.1K', after: '48K' },
     ],
+    gallery: [img('photo-1441986300917-64674bd600d8'), img('photo-1556905055-8f358a7a47b2'), img('photo-1607082348824-0a96f2a4b9da'), img('photo-1472851294608-062f824d29cc')],
   },
 ]
