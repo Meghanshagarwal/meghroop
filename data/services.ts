@@ -23,17 +23,6 @@ export const serviceNav: NavGroup[] = [
     ],
   },
   {
-    label: 'AI & Automation',
-    href: '/ai-automation',
-    dot: 'bg-[#60a5fa]',
-    links: [
-      { label: 'AI Agents', href: '/ai-automation' },
-      { label: 'n8n Automation', href: '/ai-automation' },
-      { label: 'WhatsApp Automation', href: '/ai-automation' },
-      { label: 'CRM Automation', href: '/ai-automation' },
-    ],
-  },
-  {
     label: 'Software Development',
     href: '/software-development',
     dot: 'bg-emerald-400',
@@ -68,7 +57,7 @@ export const serviceNav: NavGroup[] = [
 // Flat list of service pages (footer column 2, sitemap)
 export const serviceLinks = [
   { label: 'Growth & Marketing', href: '/growth-marketing' },
-  { label: 'AI Automation', href: '/ai-automation' },
+  { label: 'AI Agents', href: '/agentic-ai' },
   { label: 'Software Development', href: '/software-development' },
   { label: 'Shopify Development', href: '/shopify-development' },
   { label: 'WordPress Development', href: '/wordpress-development' },

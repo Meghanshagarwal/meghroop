@@ -25,11 +25,11 @@ const nextConfig = {
       },
       // ── Consolidate legacy software-era routes into the new
       //    Growth + AI + Software service architecture ──
-      { source: '/agentic-ai', destination: '/ai-automation', permanent: true },
-      { source: '/ai-agents-automation', destination: '/ai-automation', permanent: true },
-      { source: '/ai-agents/:path*', destination: '/ai-automation', permanent: true },
-      { source: '/n8n-workflows', destination: '/ai-automation', permanent: true },
-      { source: '/mcp-infrastructure', destination: '/ai-automation', permanent: true },
+      // NOTE: /agentic-ai and /ai-agents/* are kept live — they power the
+      // dedicated "AI Agents" nav section.
+      { source: '/ai-agents-automation', destination: '/agentic-ai', permanent: true },
+      { source: '/n8n-workflows', destination: '/agentic-ai', permanent: true },
+      { source: '/mcp-infrastructure', destination: '/agentic-ai', permanent: true },
       { source: '/web-engineering', destination: '/software-development', permanent: true },
       { source: '/shopify-engineering', destination: '/shopify-development', permanent: true },
       { source: '/wordpress-engineering', destination: '/wordpress-development', permanent: true },

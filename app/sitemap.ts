@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Primary service architecture
     '/services',
     '/growth-marketing',
-    '/ai-automation',
+    '/agentic-ai',
     '/software-development',
     '/shopify-development',
     '/wordpress-development',
@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency = 'monthly'
     } else if (
       route === '/growth-marketing' ||
-      route === '/ai-automation' ||
+      route === '/agentic-ai' ||
       route === '/software-development' ||
       route === '/shopify-development' ||
       route === '/wordpress-development' ||

@@ -37,14 +37,22 @@ export default function ServicesIndex() {
 
         <section className="border-t border-white/[0.06]">
           <div className="max-w-7xl mx-auto px-6 py-20 sm:py-24 grid grid-cols-1 md:grid-cols-2 gap-px bg-white/[0.06] border border-white/[0.06] rounded-2xl overflow-hidden">
-            {serviceNav.flatMap((group) =>
-              group.links.length && group.label === 'Shopify & WordPress'
-                ? [
-                    { label: 'Shopify Development', href: '/shopify-development', dot: group.dot },
-                    { label: 'WordPress Development', href: '/wordpress-development', dot: group.dot },
-                  ]
-                : [{ label: group.label, href: group.href, dot: group.dot }]
-            ).map((s) => {
+            {[
+              ...serviceNav.flatMap((group) =>
+                group.label === 'Shopify & WordPress'
+                  ? [
+                      { label: 'Shopify Development', href: '/shopify-development', dot: group.dot, sub: '' },
+                      { label: 'WordPress Development', href: '/wordpress-development', dot: group.dot, sub: '' },
+                    ]
+                  : [{ label: group.label, href: group.href, dot: group.dot, sub: '' }]
+              ),
+              {
+                label: 'AI Agents',
+                href: '/agentic-ai',
+                dot: 'bg-[#60a5fa]',
+                sub: 'Custom AI agents, automation, and intelligent systems wired into your tools and data.',
+              },
+            ].map((s) => {
               const page = servicePages[s.href.replace('/', '')]
               return (
                 <Link
@@ -57,7 +65,7 @@ export default function ServicesIndex() {
                     {s.label}
                     <ArrowRight size={18} className="text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all" />
                   </h2>
-                  <p className="text-[15px] text-white/[0.55] leading-relaxed">{page?.sub}</p>
+                  <p className="text-[15px] text-white/[0.55] leading-relaxed">{page?.sub ?? s.sub}</p>
                 </Link>
               )
             })}

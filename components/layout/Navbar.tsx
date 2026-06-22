@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ChevronDown, ArrowRight } from 'lucide-react'
+import { ChevronDown, ArrowRight, Bot } from 'lucide-react'
 import Link from 'next/link'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 import { serviceNav } from '@/data/services'
+import { aiAgentLinks } from '@/data/aiAgents'
 
 const navLinks = [
   { label: 'Work', href: '/work' },
@@ -16,6 +17,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [agentsOpen, setAgentsOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -94,6 +96,45 @@ export default function Navbar() {
                     View Work <ArrowRight size={13} className="group-hover/cta:translate-x-0.5 transition-transform" />
                   </span>
                 </Link>
+              </div>
+            </div>
+          </li>
+
+          {/* AI Agents dropdown */}
+          <li
+            className="relative"
+            onMouseEnter={() => setAgentsOpen(true)}
+            onMouseLeave={() => setAgentsOpen(false)}
+          >
+            <Link
+              href="/agentic-ai"
+              aria-haspopup="menu"
+              aria-expanded={agentsOpen}
+              className="flex items-center px-4 py-2 text-sm rounded-lg text-purple-300 hover:text-purple-200 hover:bg-purple-500/10 transition-all duration-200"
+            >
+              <Bot size={13} className="mr-1.5" />
+              AI Agents
+              <ChevronDown size={13} className={`ml-1 transition-transform duration-200 ${agentsOpen ? 'rotate-180' : ''}`} />
+            </Link>
+
+            <div
+              role="menu"
+              className={`absolute left-1/2 top-full -translate-x-1/2 pt-3 w-[21rem] transition-all duration-200 ${
+                agentsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1 pointer-events-none'
+              }`}
+            >
+              <div className="rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/95 backdrop-blur-xl p-2 shadow-2xl shadow-black/60">
+                {aiAgentLinks.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    role="menuitem"
+                    className="block px-3 py-2.5 rounded-xl hover:bg-purple-500/10 transition-colors duration-150 group/item"
+                  >
+                    <span className="block text-sm font-medium text-gray-200 group-hover/item:text-purple-200">{item.label}</span>
+                    <span className="block text-xs text-gray-500 mt-0.5 leading-snug">{item.description}</span>
+                  </Link>
+                ))}
               </div>
             </div>
           </li>
