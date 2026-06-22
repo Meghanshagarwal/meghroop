@@ -57,7 +57,7 @@ export default function Navbar() {
 
             <div
               role="menu"
-              className={`absolute left-0 top-full pt-3 w-[min(92vw,920px)] transition-all duration-200 ${
+              className={`fixed left-1/2 top-16 -translate-x-1/2 pt-3 w-[min(92vw,920px)] transition-all duration-200 ${
                 servicesOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1 pointer-events-none'
               }`}
             >
