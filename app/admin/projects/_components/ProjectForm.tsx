@@ -17,7 +17,17 @@ const BLANK: FormData = {
   github_url: '',
   year: String(new Date().getFullYear()),
   category: '',
+  slug: '',
+  client_intro: '',
+  services: [],
+  project_types: [],
+  timeline: '',
+  outcome: '',
+  deliverables: [],
 }
+
+const slugify = (s: string) =>
+  s.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-')
 
 interface Props {
   project?: Project
@@ -42,15 +52,34 @@ export default function ProjectForm({ project }: Props) {
           github_url: project.github_url,
           year: project.year,
           category: project.category,
+          slug: project.slug ?? '',
+          client_intro: project.client_intro ?? '',
+          services: project.services ?? [],
+          project_types: project.project_types ?? [],
+          timeline: project.timeline ?? '',
+          outcome: project.outcome ?? '',
+          deliverables: project.deliverables ?? [],
         }
       : BLANK
   )
   const [tagsInput, setTagsInput] = useState((project?.tags ?? []).join(', '))
+  const [servicesInput, setServicesInput] = useState((project?.services ?? []).join(', '))
+  const [typesInput, setTypesInput] = useState((project?.project_types ?? []).join(', '))
+  const [deliverablesInput, setDeliverablesInput] = useState((project?.deliverables ?? []).join(', '))
+  const [slugTouched, setSlugTouched] = useState(!!project?.slug)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
+  const csv = (s: string) => s.split(',').map((t) => t.trim()).filter(Boolean)
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    const { name, value } = e.target
+    setForm((prev) => {
+      const next = { ...prev, [name]: value }
+      // Auto-derive slug from title until the user edits the slug manually
+      if (name === 'title' && !slugTouched) next.slug = slugify(value)
+      return next
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,7 +89,11 @@ export default function ProjectForm({ project }: Props) {
 
     const payload = {
       ...form,
-      tags: tagsInput.split(',').map((t) => t.trim()).filter(Boolean),
+      slug: (form.slug && form.slug.trim()) ? slugify(form.slug) : slugify(form.title),
+      tags: csv(tagsInput),
+      services: csv(servicesInput),
+      project_types: csv(typesInput),
+      deliverables: csv(deliverablesInput),
     }
 
     const url = isEdit ? `/api/admin/projects/${project.id}` : '/api/admin/projects'
@@ -87,7 +120,20 @@ export default function ProjectForm({ project }: Props) {
       {/* Title */}
       <div>
         <label className="text-xs text-gray-500 mb-1.5 block">Project Title *</label>
-        <input name="title" value={form.title} onChange={handleChange} required placeholder="e.g. Corporate Business Website" className={inputClass} />
+        <input name="title" value={form.title} onChange={handleChange} required placeholder="e.g. The Digital Overhaul of The Kapas" className={inputClass} />
+      </div>
+
+      {/* Slug */}
+      <div>
+        <label className="text-xs text-gray-500 mb-1.5 block">URL Slug</label>
+        <input
+          name="slug"
+          value={form.slug ?? ''}
+          onChange={(e) => { setSlugTouched(true); handleChange(e) }}
+          placeholder="the-kapas"
+          className={inputClass}
+        />
+        <p className="text-[11px] text-gray-600 mt-1">Page: /work/{form.slug || 'auto-from-title'}</p>
       </div>
 
       {/* Description */}
@@ -160,6 +206,53 @@ export default function ProjectForm({ project }: Props) {
           <label className="text-xs text-gray-500 mb-1.5 block">GitHub URL</label>
           <input name="github_url" value={form.github_url} onChange={handleChange} placeholder="https://github.com/…" className={inputClass} />
         </div>
+      </div>
+
+      {/* ── Case study detail page ─────────────────────────── */}
+      <div className="pt-2 border-t border-white/[0.08]">
+        <p className="text-sm font-semibold text-white mt-4 mb-1">Case Study Page</p>
+        <p className="text-xs text-gray-500 mb-4">Powers the single portfolio page at /work/{form.slug || 'slug'}</p>
+      </div>
+
+      {/* Client intro */}
+      <div>
+        <label className="text-xs text-gray-500 mb-1.5 block">Intro / About the brand</label>
+        <textarea name="client_intro" value={form.client_intro ?? ''} onChange={handleChange} rows={4}
+          placeholder="The Kapas is a women's apparel brand from Jaipur… (use a blank line between paragraphs)" className={`${inputClass} resize-none`} />
+      </div>
+
+      {/* Services + Project Types */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="text-xs text-gray-500 mb-1.5 block">Services (comma-separated)</label>
+          <input value={servicesInput} onChange={(e) => setServicesInput(e.target.value)}
+            placeholder="Social Media Marketing, Paid Media, Web Maintenance" className={inputClass} />
+        </div>
+        <div>
+          <label className="text-xs text-gray-500 mb-1.5 block">Project Types (comma-separated)</label>
+          <input value={typesInput} onChange={(e) => setTypesInput(e.target.value)}
+            placeholder="Online Presence & Sales" className={inputClass} />
+        </div>
+      </div>
+
+      {/* Timeline */}
+      <div>
+        <label className="text-xs text-gray-500 mb-1.5 block">Timeline</label>
+        <input name="timeline" value={form.timeline ?? ''} onChange={handleChange} placeholder="1 Year" className={inputClass} />
+      </div>
+
+      {/* Outcome */}
+      <div>
+        <label className="text-xs text-gray-500 mb-1.5 block">The Outcome</label>
+        <textarea name="outcome" value={form.outcome ?? ''} onChange={handleChange} rows={5}
+          placeholder="Describe the results, numbers, growth… (blank line between paragraphs)" className={`${inputClass} resize-none`} />
+      </div>
+
+      {/* Deliverables */}
+      <div>
+        <label className="text-xs text-gray-500 mb-1.5 block">Deliverables (comma-separated)</label>
+        <input value={deliverablesInput} onChange={(e) => setDeliverablesInput(e.target.value)}
+          placeholder="Content, Website, Photoshoot, Paid Ads, Influencer Marketing" className={inputClass} />
       </div>
 
       {error && <p className="text-sm text-red-400">{error}</p>}

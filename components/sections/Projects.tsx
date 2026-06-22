@@ -2,9 +2,10 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ExternalLink, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
-import type { Project } from '@/lib/supabase'
+import Link from 'next/link'
+import { projectSlug, type Project } from '@/lib/supabase'
 
 
 const PROJECT_IMAGE = '/images/project-hero.jpeg'
@@ -232,16 +233,26 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
                   </div>
 
                   <div className="flex flex-wrap gap-3">
-                    <a
-                      href={project.live_url && project.live_url !== '#' ? project.live_url : '/contact'}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href={`/work/${projectSlug(project)}`}
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-semibold hover:bg-gray-100 transition-colors"
                       onClick={(e) => dragging && e.preventDefault()}
                     >
-                      <ExternalLink size={13} />
-                      Live Preview
-                    </a>
+                      View Case Study
+                      <ArrowRight size={13} />
+                    </Link>
+                    {project.live_url && project.live_url !== '#' && (
+                      <a
+                        href={project.live_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/[0.12] text-white text-xs font-semibold hover:bg-white/[0.06] transition-colors"
+                        onClick={(e) => dragging && e.preventDefault()}
+                      >
+                        <ExternalLink size={13} />
+                        Visit Site
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

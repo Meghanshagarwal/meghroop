@@ -20,6 +20,32 @@ export type Project = {
   category: string
   display_order: number
   created_at: string
+  // Case-study detail fields (single portfolio page)
+  slug?: string | null
+  client_intro?: string
+  services?: string[]
+  project_types?: string[]
+  timeline?: string
+  outcome?: string
+  deliverables?: string[]
+}
+
+// Stable slug for a project — falls back to id when slug not yet set
+export function projectSlug(p: Pick<Project, 'id' | 'slug'>): string {
+  return p.slug && p.slug.trim() ? p.slug.trim() : p.id
+}
+
+// Fetch a single project by slug, falling back to id (for legacy rows)
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  try {
+    const db = getSupabase()
+    const bySlug = await db.from('projects').select('*').eq('slug', slug).maybeSingle()
+    if (bySlug.data) return bySlug.data as Project
+    const byId = await db.from('projects').select('*').eq('id', slug).maybeSingle()
+    return (byId.data as Project) ?? null
+  } catch {
+    return null
+  }
 }
 
 export type Setting = {

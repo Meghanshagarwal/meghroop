@@ -22,6 +22,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     .single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   revalidatePath('/')
+  revalidatePath('/work/[slug]', 'page')
   return NextResponse.json(data)
 }
 
@@ -30,6 +31,7 @@ export async function DELETE(_: Request, { params }: { params: { id: string } })
   const { error } = await db.from('projects').delete().eq('id', params.id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   revalidatePath('/')
+  revalidatePath('/work/[slug]', 'page')
   return NextResponse.json({ ok: true })
 }
 
@@ -52,5 +54,6 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   await db.from('projects').update({ display_order: a.display_order }).eq('id', b.id)
 
   revalidatePath('/')
+  revalidatePath('/work/[slug]', 'page')
   return NextResponse.json({ ok: true })
 }
