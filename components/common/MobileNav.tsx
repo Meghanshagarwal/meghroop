@@ -3,16 +3,15 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Home, User, BrainCircuit, Layers, BookOpen, Mail } from 'lucide-react';
+import { Home, LayoutGrid, Briefcase, BookOpen, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
-  { id: 'home',       label: 'Home',     href: '/',            Icon: Home },
-  { id: 'about',      label: 'About',    href: '/about',       Icon: User },
-  { id: 'agentic-ai', label: 'AI',       href: '/agentic-ai',  Icon: BrainCircuit },
-  { id: 'systems',    label: 'Systems',  href: '/systems',     Icon: Layers },
-  { id: 'journal',    label: 'Journal',  href: '/journal',     Icon: BookOpen },
-  { id: 'contact',    label: 'Contact',  href: '/contact',     Icon: Mail },
+  { id: 'home',     label: 'Home',     href: '/',         Icon: Home },
+  { id: 'services', label: 'Services', href: '/services', Icon: LayoutGrid },
+  { id: 'work',     label: 'Work',     href: '/work',     Icon: Briefcase },
+  { id: 'journal',  label: 'Journal',  href: '/journal',  Icon: BookOpen },
+  { id: 'contact',  label: 'Contact',  href: '/contact',  Icon: Mail },
 ] as const;
 
 type NavId = (typeof NAV_ITEMS)[number]['id'];

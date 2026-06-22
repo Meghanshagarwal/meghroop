@@ -75,10 +75,15 @@ export type JournalRow = {
 }
 
 export const JOURNAL_CATEGORIES = [
-  'AI Infrastructure',
-  'AI Search Optimization',
-  'Web Engineering',
-  'Automation',
+  'AI Automation',
+  'SEO',
+  'Meta Ads',
+  'Content Marketing',
+  'Branding',
+  'Software Engineering',
+  'Shopify',
+  'WordPress',
+  'Growth',
 ]
 
 export const GRADIENT_PRESETS = [

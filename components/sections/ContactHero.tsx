@@ -26,7 +26,7 @@ export default function ContactHero() {
         <h1
           className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mb-6 max-w-5xl animate-fade-up [animation-delay:100ms]"
         >
-          Good systems usually start <br className="hidden sm:inline" />
+          Growth usually starts <br className="hidden sm:inline" />
           <span className="gradient-text">with a conversation.</span>
         </h1>
 
@@ -34,7 +34,7 @@ export default function ContactHero() {
         <p
           className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-8 animate-fade-up [animation-delay:200ms]"
         >
-          Tell us what you&apos;re building, what needs optimization, or just what&apos;s on your mind. We read every message. Even the unnecessarily long ones.
+          Tell us where you want to grow — performance marketing, AI automation, software, Shopify, WordPress, or branding. We read every message and reply within 24 hours.
         </p>
 
         {/* Gateway Telemetry Stats */}

@@ -8,26 +8,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Core static routes
   const staticRoutes = [
     '',
-    '/agentic-ai',
-    '/ai-agents/ai-strategy-audit',
-    '/ai-agents/agentic-automation',
-    '/ai-agents/ai-voice-agents',
-    '/ai-agents/custom-ai-agents',
-    '/ai-agents/ai-integration',
-    '/ai-agents/knowledge-intelligence',
-    '/ai-agents/sales-ai',
-    '/ai-agents/ai-for-smb',
-    '/ai-agents-automation',
-    '/web-engineering',
-    '/shopify-engineering',
-    '/wordpress-engineering',
-    '/n8n-workflows',
-    '/ai-search-optimization',
-    '/mcp-infrastructure',
-    '/systems',
+    // Primary service architecture
+    '/services',
+    '/growth-marketing',
+    '/ai-automation',
+    '/software-development',
+    '/shopify-development',
+    '/wordpress-development',
+    '/branding-creative',
+    // Core pages
+    '/work',
     '/about',
     '/contact',
     '/journal',
+    // Legal
+    '/privacy',
+    '/terms',
   ]
 
   const staticSitemap = staticRoutes.map((route) => {
@@ -43,11 +39,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } else if (route === '/contact' || route === '/about') {
       priority = 0.5
       changeFrequency = 'monthly'
+    } else if (route === '/privacy' || route === '/terms') {
+      priority = 0.3
+      changeFrequency = 'monthly'
     } else if (
-      route.includes('-engineering') || 
-      route === '/mcp-infrastructure' || 
-      route === '/n8n-workflows' || 
-      route === '/ai-agents-automation'
+      route === '/growth-marketing' ||
+      route === '/ai-automation' ||
+      route === '/software-development' ||
+      route === '/shopify-development' ||
+      route === '/wordpress-development' ||
+      route === '/branding-creative' ||
+      route === '/work'
     ) {
       priority = 0.9
       changeFrequency = 'weekly'

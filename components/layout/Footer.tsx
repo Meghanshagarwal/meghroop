@@ -1,9 +1,14 @@
 import Link from 'next/link'
-import { Mail } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
-import { aiAgentLinks } from '@/data/aiAgents'
+import { serviceLinks } from '@/data/services'
 
 type IconProps = { size?: number }
+
+const Github = ({ size = 16 }: IconProps) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+  </svg>
+)
 
 const LinkedinIcon = ({ size = 16 }: IconProps) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
@@ -17,249 +22,104 @@ const InstagramIcon = ({ size = 16 }: IconProps) => (
   </svg>
 )
 
-const FacebookIcon = ({ size = 16 }: IconProps) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.8c0-.05 0-.1 0-.15z" />
-  </svg>
-)
-
 const XIcon = ({ size = 16 }: IconProps) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 )
 
-const YoutubeIcon = ({ size = 16 }: IconProps) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11C6.483 20.455 12 20.455 12 20.455s7.517 0 9.387-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-  </svg>
-)
-
 const socialLinks = [
-  {
-    icon: Mail,
-    href: 'mailto:hello@meghroop.tech',
-    label: 'Email',
-    hoverColor: 'hover:text-purple-400',
-    glowColor: 'rgba(139,92,246,0.25)',
-    borderHover: 'hover:border-purple-500/40',
-    bgHover: 'hover:bg-purple-500/[0.08]',
-  },
-  {
-    icon: LinkedinIcon,
-    href: 'https://linkedin.com/company/meghroop',
-    label: 'LinkedIn',
-    hoverColor: 'hover:text-blue-400',
-    glowColor: 'rgba(59,130,246,0.25)',
-    borderHover: 'hover:border-blue-500/40',
-    bgHover: 'hover:bg-blue-500/[0.08]',
-  },
-  {
-    icon: XIcon,
-    href: 'https://x.com/meghroop_tech',
-    label: 'Twitter',
-    hoverColor: 'hover:text-sky-400',
-    glowColor: 'rgba(56,189,248,0.25)',
-    borderHover: 'hover:border-sky-500/40',
-    bgHover: 'hover:bg-sky-500/[0.08]',
-  },
-  {
-    icon: YoutubeIcon,
-    href: 'https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ',
-    label: 'YouTube',
-    hoverColor: 'hover:text-red-500',
-    glowColor: 'rgba(239,68,68,0.25)',
-    borderHover: 'hover:border-red-500/40',
-    bgHover: 'hover:bg-red-500/[0.08]',
-  },
-  {
-    icon: InstagramIcon,
-    href: 'https://www.instagram.com/meghroop.tech',
-    label: 'Instagram',
-    hoverColor: 'hover:text-pink-400',
-    glowColor: 'rgba(236,72,153,0.25)',
-    borderHover: 'hover:border-pink-500/40',
-    bgHover: 'hover:bg-pink-500/[0.08]',
-  },
-  {
-    icon: FacebookIcon,
-    href: 'https://www.facebook.com/meghroop.tech',
-    label: 'Facebook',
-    hoverColor: 'hover:text-blue-500',
-    glowColor: 'rgba(59,130,246,0.25)',
-    borderHover: 'hover:border-blue-500/40',
-    bgHover: 'hover:bg-blue-500/[0.08]',
-  },
+  { icon: LinkedinIcon, href: 'https://linkedin.com/company/meghroop', label: 'LinkedIn' },
+  { icon: InstagramIcon, href: 'https://www.instagram.com/meghroop.tech', label: 'Instagram' },
+  { icon: Github, href: 'https://github.com/Meghanshagarwal', label: 'GitHub' },
+  { icon: XIcon, href: 'https://x.com/meghroop_tech', label: 'X' },
 ]
+
+const companyLinks = [
+  { label: 'About', href: '/about' },
+  { label: 'Work', href: '/work' },
+  { label: 'Journal', href: '/journal' },
+  { label: 'Contact', href: '/contact' },
+]
+
+const resourceLinks = [
+  { label: 'Case Studies', href: '/work' },
+  { label: 'FAQs', href: '/#faq' },
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms', href: '/terms' },
+]
+
+function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+  return (
+    <nav aria-label={`Footer ${title}`}>
+      <h3 className="text-sm font-semibold text-white mb-4 font-heading">{title}</h3>
+      <ul className="space-y-2.5">
+        {links.map((item) => (
+          <li key={item.label}>
+            <Link href={item.href} className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-black" role="contentinfo">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 sm:gap-10 mb-10 sm:mb-12">
-          {/* Brand */}
-          <div className="md:col-span-2">
+    <footer className="border-t border-white/[0.06] bg-[#080808]" role="contentinfo">
+      <div className="max-w-7xl mx-auto px-6 py-16 sm:py-20">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 sm:gap-12 mb-14">
+          {/* Column 1 — Brand */}
+          <div className="col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
               <MeghRoopLogo variant="favicon" />
               <MeghRoopLogo variant="primary" />
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-              Not a massive agency. Not trying to be one. Two people, one obsession — AI systems, web experiences, and intelligent infrastructure that quietly does its job. Made in India. Built for everywhere.
+            <p className="text-gray-400 text-sm leading-relaxed max-w-xs mb-6">
+              Software, AI, branding and growth systems for modern businesses.
             </p>
-
-            {/* Social icons */}
-            <div className="flex items-center gap-2.5 mt-6">
-              {socialLinks.map(({ icon: Icon, href, label, hoverColor, glowColor, borderHover, bgHover }) => (
+            <div className="flex items-center gap-2.5">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className={`relative w-9 h-9 rounded-xl border border-white/[0.08] flex items-center justify-center text-gray-400 transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95 ${hoverColor} ${borderHover} ${bgHover} group`}
-                  style={{
-                    ['--glow' as string]: glowColor,
-                  }}
+                  className="w-9 h-9 rounded-xl border border-white/[0.08] flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/[0.05] transition-all duration-200"
                 >
-                  {/* Glow on hover */}
-                  <span
-                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{ boxShadow: `0 0 16px ${glowColor}, 0 0 4px ${glowColor}` }}
-                  />
                   <Icon size={15} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <nav aria-label="Footer navigation">
-            <h3 className="text-sm font-semibold text-white mb-4 font-heading">Navigation</h3>
-            <ul className="space-y-2">
-              {[
-                { label: 'Home', href: '/' },
-                { label: 'About Studio', href: '/about' },
-                { label: 'AI Services', href: '/agentic-ai' },
-                { label: 'Systems & Showcases', href: '/systems' },
-                { label: 'Engineering Journal', href: '/journal' },
-                { label: 'Initiate Conversation', href: '/contact' },
-              ].map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {/* Column 2 — Services */}
+          <FooterCol title="Services" links={serviceLinks} />
 
-          {/* AI Agents */}
-          <nav aria-label="Footer AI agents directory">
-            <h3 className="text-sm font-semibold text-white mb-4 font-heading">AI Agents</h3>
-            <ul className="space-y-2">
-              {aiAgentLinks.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {/* Column 3 — Company */}
+          <FooterCol title="Company" links={companyLinks} />
 
-          {/* Services */}
-          <nav aria-label="Footer capabilities directory">
-            <h3 className="text-sm font-semibold text-white mb-4 font-heading">Capabilities</h3>
-            <ul className="space-y-2">
-              {[
-                { label: 'AI Agents & Automation', href: '/ai-agents-automation' },
-                { label: 'Model Context Infrastructure', href: '/mcp-infrastructure' },
-                { label: 'n8n Workflow Automation', href: '/n8n-workflows' },
-                { label: 'AI Search Optimization (GEO)', href: '/ai-search-optimization' },
-                { label: 'Headless Shopify Engineering', href: '/shopify-engineering' },
-                { label: 'High-Performance Web Engineering', href: '/web-engineering' },
-                { label: 'WordPress Engineering', href: '/wordpress-engineering' },
-              ].map((service) => (
-                <li key={service.href}>
-                  <Link
-                    href={service.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
-                  >
-                    {service.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {/* Column 4 — Resources */}
+          <FooterCol title="Resources" links={resourceLinks} />
         </div>
 
-        {/* India badge */}
-        <div className="flex justify-center mb-6">
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.06] bg-white/[0.02] group hover:border-white/[0.12] hover:bg-white/[0.04] transition-all duration-300"
-          >
-            {/* India flag SVG */}
-            <svg
-              width="20"
-              height="14"
-              viewBox="0 0 20 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="rounded-[2px] flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-              aria-label="India flag"
-            >
-              {/* Saffron */}
-              <rect width="20" height="4.67" y="0" fill="#FF9933" />
-              {/* White */}
-              <rect width="20" height="4.67" y="4.67" fill="#FFFFFF" />
-              {/* Green */}
-              <rect width="20" height="4.67" y="9.33" fill="#138808" />
-              {/* Ashoka Chakra */}
-              <circle cx="10" cy="7" r="1.8" stroke="#000080" strokeWidth="0.5" fill="none" />
-              <circle cx="10" cy="7" r="0.3" fill="#000080" />
-              {/* 24 spokes */}
-              {Array.from({ length: 24 }).map((_, i) => {
-                const angle = (i * 360) / 24
-                const rad = (angle * Math.PI) / 180
-                const x1 = 10 + 0.3 * Math.cos(rad)
-                const y1 = 7 + 0.3 * Math.sin(rad)
-                const x2 = 10 + 1.8 * Math.cos(rad)
-                const y2 = 7 + 1.8 * Math.sin(rad)
-                return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#000080" strokeWidth="0.3" />
-              })}
-            </svg>
-            <span className="font-heading text-[11px] tracking-[0.18em] uppercase text-gray-600 group-hover:text-gray-400 transition-colors duration-300 select-none">
-              Made in India
-            </span>
-            <span className="text-white/20 text-[10px] group-hover:text-white/30 transition-colors duration-300">•</span>
-            <span className="font-heading text-[11px] tracking-[0.18em] uppercase text-gray-600 group-hover:text-gray-400 transition-colors duration-300 select-none">
-              For Everywhere
-            </span>
-          </div>
-        </div>
-
-        {/* Crawlable GEO + semantic positioning — invisible to users, clear to AI */}
+        {/* GEO / semantic positioning — crawlable */}
         <p className="sr-only">
-          MeghRoop is a creative engineering and AI studio based in India, working with clients worldwide.
-          We specialize in custom AI agent development, agentic AI systems, n8n workflow automation,
-          MCP server development, multi-agent systems, full stack web development with React and Next.js,
-          and generative engine optimization (GEO) for AI search discoverability.
-          Founded in 2022. Contact: hello@meghroop.tech or +91 89495 08264. Address: Jaipur, Rajasthan, India.
+          MeghRoop is a premium Software, AI and Growth agency. We help businesses grow through
+          performance marketing (Meta Ads, Google Ads, SEO, social media, content), AI agents and
+          automation (n8n, WhatsApp, CRM), custom software and SaaS development, Shopify and WordPress
+          development, and branding and creative. From awareness to automation. From code to customers.
+          Contact: hello@meghroop.tech.
         </p>
 
-        <div className="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-400">
-            © {new Date().getFullYear()} MeghRoop Studio. All rights reserved.
-          </p>
-          <p className="text-sm text-gray-400">
-            Handbuilt. Slightly overthought.{' '}
-            <span className="gradient-text-purple font-medium">Shipped anyway.</span>
+        <div className="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <p className="text-sm text-gray-500">© {new Date().getFullYear()} MeghRoop. All rights reserved.</p>
+          <p className="text-sm text-gray-500">
+            From awareness to automation.{' '}
+            <span className="gradient-text-purple font-medium">From code to customers.</span>
           </p>
         </div>
       </div>

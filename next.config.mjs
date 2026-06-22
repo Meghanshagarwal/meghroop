@@ -23,12 +23,18 @@ const nextConfig = {
         destination: 'https://meghroop.tech/:path*',
         permanent: true,
       },
-      // Page moved: /services -> /agentic-ai (preserve link equity)
-      {
-        source: '/services',
-        destination: '/agentic-ai',
-        permanent: true,
-      },
+      // ── Consolidate legacy software-era routes into the new
+      //    Growth + AI + Software service architecture ──
+      { source: '/agentic-ai', destination: '/ai-automation', permanent: true },
+      { source: '/ai-agents-automation', destination: '/ai-automation', permanent: true },
+      { source: '/ai-agents/:path*', destination: '/ai-automation', permanent: true },
+      { source: '/n8n-workflows', destination: '/ai-automation', permanent: true },
+      { source: '/mcp-infrastructure', destination: '/ai-automation', permanent: true },
+      { source: '/web-engineering', destination: '/software-development', permanent: true },
+      { source: '/shopify-engineering', destination: '/shopify-development', permanent: true },
+      { source: '/wordpress-engineering', destination: '/wordpress-development', permanent: true },
+      { source: '/ai-search-optimization', destination: '/growth-marketing', permanent: true },
+      { source: '/systems', destination: '/work', permanent: true },
     ]
   },
 };

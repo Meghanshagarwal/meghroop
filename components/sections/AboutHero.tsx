@@ -34,7 +34,7 @@ export default function AboutHero() {
         <p
           className="text-gray-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-12 animate-fade-up [animation-delay:200ms]"
         >
-          MeghRoop is a modern AI engineering and creative technology studio. We design high-conversion storefronts, secure automated operations, and internet-native systems built to scale.
+          MeghRoop is a premium Software, AI and Growth agency. We help businesses grow through performance marketing, AI automation, custom software, branding, and content — from awareness to automation, from code to customers.
         </p>
 
         {/* Telemetry card for the founders */}
