@@ -28,6 +28,7 @@ export type Project = {
   timeline?: string
   outcome?: string
   deliverables?: string[]
+  results?: { label: string; before: string; after: string }[]
 }
 
 // Stable slug for a project — falls back to id when slug not yet set

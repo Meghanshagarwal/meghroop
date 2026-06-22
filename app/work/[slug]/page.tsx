@@ -6,22 +6,31 @@ import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
-import { getSupabase, getProjectBySlug, projectSlug } from '@/lib/supabase'
+import { getSupabase, getProjectBySlug, projectSlug, type Project } from '@/lib/supabase'
+import { defaultProjects } from '@/data/projects'
 
 export const revalidate = 60
 
+async function resolveProject(slug: string): Promise<Project | null> {
+  const fromDb = await getProjectBySlug(slug)
+  if (fromDb) return fromDb
+  return defaultProjects.find((p) => projectSlug(p) === slug) ?? null
+}
+
 export async function generateStaticParams() {
+  const slugs = new Set(defaultProjects.map((p) => projectSlug(p)))
   try {
     const db = getSupabase()
     const { data } = await db.from('projects').select('id, slug')
-    return (data ?? []).map((p) => ({ slug: projectSlug(p) }))
+    ;(data ?? []).forEach((p) => slugs.add(projectSlug(p)))
   } catch {
-    return []
+    /* DB unavailable at build — showcase slugs still render */
   }
+  return Array.from(slugs).map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const project = await getProjectBySlug(params.slug)
+  const project = await resolveProject(params.slug)
   if (!project) return { title: 'Case Study Not Found' }
   return {
     title: `${project.title} — Case Study`,
@@ -40,9 +49,10 @@ function splitParas(text?: string): string[] {
 }
 
 export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const project = await getProjectBySlug(params.slug)
+  const project = await resolveProject(params.slug)
   if (!project) notFound()
 
+  const results = project.results ?? []
   const intro = splitParas(project.client_intro)
   const outcome = splitParas(project.outcome)
   const services = project.services ?? []
@@ -125,6 +135,33 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
             </div>
           </aside>
         </section>
+
+        {/* Results — before / after */}
+        {results.length > 0 && (
+          <section className="border-t border-white/[0.06]">
+            <div className="max-w-5xl mx-auto px-6 py-16 sm:py-20">
+              <div className="text-xs uppercase tracking-wider text-[#52525b] mb-8">Results</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {results.map((r) => (
+                  <div key={r.label} className="rounded-2xl border border-white/[0.08] bg-[#0d0d0d] p-6">
+                    <div className="text-sm text-white/50 mb-5">{r.label}</div>
+                    <div className="flex items-end gap-3">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-wider text-[#52525b] mb-1">Before</div>
+                        <div className="font-heading font-semibold text-xl text-white/40 line-through decoration-white/20">{r.before}</div>
+                      </div>
+                      <ArrowRight size={18} className="text-[#c084fc] mb-1.5 flex-shrink-0" />
+                      <div>
+                        <div className="text-[10px] uppercase tracking-wider text-[#52525b] mb-1">After</div>
+                        <div className="font-heading font-bold text-3xl gradient-text-purple leading-none">{r.after}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* The Outcome */}
         {outcome.length > 0 && (

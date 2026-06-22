@@ -6,48 +6,8 @@ import { ExternalLink, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-reac
 import Image from 'next/image'
 import Link from 'next/link'
 import { projectSlug, type Project } from '@/lib/supabase'
+import { defaultProjects } from '@/data/projects'
 
-
-const PROJECT_IMAGE = '/images/project-hero.jpeg'
-
-const defaultProjects: import('@/lib/supabase').Project[] = [
-  {
-    id: '1', created_at: '', display_order: 0,
-    title: 'Aetherius: Autonomous Sales Agent',
-    description: 'Designed and engineered an autonomous outbound agent that researches target organizations, crawls technical codebases, and drafts contextual outbound briefs. Saved the client 40+ manual research hours weekly.',
-    gradient: 'from-purple-600 via-indigo-600 to-blue-600',
-    image: PROJECT_IMAGE,
-    tags: ['Next.js', 'TypeScript', 'n8n Automation', 'OpenAI SDK'],
-    live_url: '/contact', github_url: '/contact', year: '2024', category: 'Agentic AI',
-  },
-  {
-    id: '2', created_at: '', display_order: 1,
-    title: 'Nexus: High-Scale Financial MCP Gateway',
-    description: 'Built a high-performance Model Context Protocol (MCP) server providing LLMs with real-time stock metrics, market sentiment, and secure vector database indexing. Exposes live custom tools directly to Claude & ChatGPT.',
-    gradient: 'from-cyan-600 via-blue-600 to-emerald-600',
-    image: PROJECT_IMAGE,
-    tags: ['TypeScript', 'Node.js', 'MCP SDK', 'Supabase Vector'],
-    live_url: '/contact', github_url: '/contact', year: '2024', category: 'MCP Infrastructure',
-  },
-  {
-    id: '3', created_at: '', display_order: 2,
-    title: 'Veloce: Headless Next.js Shopify System',
-    description: 'A lightning-fast headless Shopify storefront optimized for 99+ Core Web Vitals. Features dynamic product configuration, instant edge cart routing, and full automated n8n order tracking.',
-    gradient: 'from-emerald-600 via-teal-600 to-cyan-600',
-    image: PROJECT_IMAGE,
-    tags: ['Next.js', 'Shopify Storefront API', 'Tailwind CSS', 'n8n'],
-    live_url: '/contact', github_url: '/contact', year: '2024', category: 'Headless Commerce',
-  },
-  {
-    id: '4', created_at: '', display_order: 3,
-    title: 'Vertex: Generative Engine Citation Index',
-    description: 'Directed a Generative Engine Optimization (GEO) strategy for an enterprise B2B SaaS platform. Restructured schema models, entity nodes, and public Knowledge Graphs to boost AI model citations on ChatGPT & Perplexity by 280%.',
-    gradient: 'from-amber-600 via-orange-600 to-rose-600',
-    image: PROJECT_IMAGE,
-    tags: ['JSON-LD Schema', 'Knowledge Graph', 'GEO Strategy', 'Edge Cache'],
-    live_url: '/contact', github_url: '/contact', year: '2023', category: 'GEO / SEO',
-  },
-]
 
 // Spring-based slide — feels natural on both desktop and mobile touch
 const slideVariants = {

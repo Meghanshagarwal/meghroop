@@ -66,6 +66,9 @@ export default function ProjectForm({ project }: Props) {
   const [servicesInput, setServicesInput] = useState((project?.services ?? []).join(', '))
   const [typesInput, setTypesInput] = useState((project?.project_types ?? []).join(', '))
   const [deliverablesInput, setDeliverablesInput] = useState((project?.deliverables ?? []).join(', '))
+  const [resultsInput, setResultsInput] = useState(
+    (project?.results ?? []).map((r) => `${r.label} | ${r.before} | ${r.after}`).join('\n')
+  )
   const [slugTouched, setSlugTouched] = useState(!!project?.slug)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -94,6 +97,11 @@ export default function ProjectForm({ project }: Props) {
       services: csv(servicesInput),
       project_types: csv(typesInput),
       deliverables: csv(deliverablesInput),
+      results: resultsInput
+        .split('\n')
+        .map((line) => line.split('|').map((s) => s.trim()))
+        .filter((parts) => parts.length === 3 && parts.every(Boolean))
+        .map(([label, before, after]) => ({ label, before, after })),
     }
 
     const url = isEdit ? `/api/admin/projects/${project.id}` : '/api/admin/projects'
@@ -253,6 +261,14 @@ export default function ProjectForm({ project }: Props) {
         <label className="text-xs text-gray-500 mb-1.5 block">Deliverables (comma-separated)</label>
         <input value={deliverablesInput} onChange={(e) => setDeliverablesInput(e.target.value)}
           placeholder="Content, Website, Photoshoot, Paid Ads, Influencer Marketing" className={inputClass} />
+      </div>
+
+      {/* Results (before/after) */}
+      <div>
+        <label className="text-xs text-gray-500 mb-1.5 block">Results — one per line: <span className="text-gray-400">Label | Before | After</span></label>
+        <textarea value={resultsInput} onChange={(e) => setResultsInput(e.target.value)} rows={4}
+          placeholder={'ROAS | 1.8× | 6.4×\nMonthly Orders | 210 | 1,940\nCAC | ₹640 | ₹230'}
+          className={`${inputClass} resize-none font-mono text-xs`} />
       </div>
 
       {error && <p className="text-sm text-red-400">{error}</p>}
