@@ -64,12 +64,12 @@ export default function TechStack() {
             <motion.div
               key={tech.name}
               variants={item}
-              className="flex items-center gap-3 rounded-2xl border border-white/[0.06] bg-[#0d0d0d] px-5 py-5 group hover:border-white/[0.14] transition-colors duration-300"
+              className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2.5 sm:gap-3 rounded-2xl border border-white/[0.06] bg-[#0d0d0d] px-3 py-5 sm:px-5 group hover:border-white/[0.14] transition-colors duration-300"
             >
               <span className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center flex-shrink-0">
                 <Icon tech={tech} />
               </span>
-              <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+              <span className="text-[13px] sm:text-sm font-medium text-white/70 group-hover:text-white transition-colors leading-tight">
                 {tech.name}
               </span>
             </motion.div>
