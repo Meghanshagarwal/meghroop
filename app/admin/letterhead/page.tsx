@@ -487,6 +487,7 @@ export default function LetterheadEditorPage() {
           /* Perfect A4 frame overlay - Uses dynamic background from active theme */
           .print-sheet {
             width: 210mm !important;
+            max-width: none !important;
             min-height: 297mm !important;
             height: auto !important;
             max-height: none !important;
