@@ -1,8 +1,17 @@
 'use client'
 
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, TrendingUp, Users, Zap, IndianRupee } from 'lucide-react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/analytics'
+
+const pills = ['Meta & Google Ads', 'SEO', 'AI Agents', 'Automation', 'Shopify & WordPress', 'Branding']
+
+const stats = [
+  { icon: TrendingUp, value: '6.4×', label: 'Avg ROAS', tint: 'text-emerald-400' },
+  { icon: Users, value: '1,284', label: 'Leads generated', tint: 'text-[#60a5fa]' },
+  { icon: Zap, value: '92%', label: 'Work automated', tint: 'text-[#c084fc]' },
+  { icon: IndianRupee, value: '2.4Cr+', label: 'Revenue driven', tint: 'text-amber-400' },
+]
 
 export default function Hero() {
   return (
@@ -14,7 +23,7 @@ export default function Hero() {
       {/* Ambient glow — subtle, single-source, premium */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[80vw] h-[60vh] bg-[#c084fc]/[0.07] rounded-full blur-[160px]" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[50vw] h-[40vh] bg-[#60a5fa]/[0.06] rounded-full blur-[160px] animate-float-slow" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[55vw] h-[40vh] bg-[#60a5fa]/[0.06] rounded-full blur-[160px] animate-float-slow" />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#080808] pointer-events-none" />
 
@@ -32,10 +41,22 @@ export default function Hero() {
           Software.
         </h1>
 
-        <p className="text-lg sm:text-xl text-white/[0.65] max-w-xl mx-auto leading-relaxed mb-10 animate-fade-up [animation-delay:200ms]">
+        <p className="text-lg sm:text-xl text-white/[0.65] max-w-xl mx-auto leading-relaxed mb-8 animate-fade-up [animation-delay:200ms]">
           We help businesses scale through performance marketing, AI automation,
           custom software, branding, and content.
         </p>
+
+        {/* Service pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-10 animate-fade-up [animation-delay:250ms]">
+          {pills.map((pill) => (
+            <span
+              key={pill}
+              className="text-xs sm:text-[13px] px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-white/60"
+            >
+              {pill}
+            </span>
+          ))}
+        </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 animate-fade-up [animation-delay:300ms]">
           <Link
@@ -56,10 +77,21 @@ export default function Hero() {
         </div>
 
         {/* Tagline */}
-        <p className="mt-10 text-sm text-[#71717a] animate-fade-up [animation-delay:400ms]">
+        <p className="mt-9 text-sm text-[#71717a] animate-fade-up [animation-delay:400ms]">
           From awareness to automation.{' '}
           <span className="text-white/50">From code to customers.</span>
         </p>
+
+        {/* Stats strip */}
+        <div className="w-full max-w-2xl mt-12 pt-8 border-t border-white/[0.06] grid grid-cols-2 sm:grid-cols-4 gap-6 animate-fade-up [animation-delay:500ms]">
+          {stats.map(({ icon: Icon, value, label, tint }) => (
+            <div key={label} className="flex flex-col items-center gap-1.5">
+              <Icon size={16} className={tint} />
+              <span className="font-heading font-bold text-2xl sm:text-3xl text-white tabular-nums">{value}</span>
+              <span className="text-[11px] text-[#52525b] uppercase tracking-wider">{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
