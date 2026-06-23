@@ -484,11 +484,12 @@ export default function LetterheadEditorPage() {
             min-height: 0 !important;
           }
 
-          /* Paint every printed page (incl. continuation + the last half-empty
-             page) with the document's theme colour — kills dark-mode white areas */
+          /* Paint every printed page with the document's theme colour */
           html, body { background: ${bg} !important; }
 
-          /* Perfect A4 frame overlay - Uses dynamic background from active theme */
+          /* WYSIWYG A4 sheet — display:block so all Tailwind padding (px-12,
+             pt-10, pb-8 etc.) works identically in print as on screen.
+             Previous display:table approach killed child padding. */
           .print-sheet {
             width: 210mm !important;
             max-width: none !important;
@@ -504,18 +505,20 @@ export default function LetterheadEditorPage() {
             background: ${bg} !important;
             color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
-
-            /* table layout makes the header/footer GROUPS repeat on every printed
-               page (top margin + footer on each page) without browser chrome */
-            display: table !important;
+            display: block !important;
             overflow: visible !important;
             position: static !important;
           }
 
-          .print-sheet .sheet-body { display: table-row-group !important; }
-          .print-sheet .print-header { display: table-header-group !important; }
-          .print-sheet .print-footer { display: table-footer-group !important; }
-          .print-sheet .print-header > div { background: ${bg} !important; }
+          /* Print-only footer — fixed positioning repeats it on every page */
+          .print-footer {
+            display: block !important;
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: ${bg} !important;
+          }
 
           /* Keep sections together so a heading never sits alone at a page bottom,
              and lists / tables don't split across pages */
@@ -985,13 +988,10 @@ export default function LetterheadEditorPage() {
               minHeight: '870px'
             }}
           >
-            {/* Print-only top spacer — repeats on every page (table-header-group) for a consistent top margin */}
-            <div className="print-header" style={{ display: 'none' }} aria-hidden="true">
-              <div style={{ height: '14mm' }} />
-            </div>
+            {/* Content body — padding on inner divs (px-12, pt-10 etc.)
+                provides margins in both screen and print (WYSIWYG) */}
 
-            {/* Top Sheet Group wrapper to separate top content from the bottom footer for perfect alignment */}
-            <div className="w-full sheet-body">
+            <div className="w-full">
               
               {/* 1. Header Segment (Brand kit standards matching logo-kit.html) */}
               <div className="px-12 pt-10 pb-0">
@@ -1242,8 +1242,8 @@ export default function LetterheadEditorPage() {
               )}
             </div>
 
-            {/* 4. Footer Segment — screen preview only; print uses the repeating .print-footer */}
-            <div className="px-12 pb-8 pt-0 mt-auto w-full no-print">
+            {/* 4. Footer Segment — visible on both screen and print */}
+            <div className="px-12 pb-8 pt-0 mt-auto w-full">
               <div 
                 className="h-[1px] mb-4"
                 style={{ background: footerBorder }}
@@ -1252,27 +1252,27 @@ export default function LetterheadEditorPage() {
                 <tbody>
                   <tr>
                     <td className="text-[10px] font-medium" style={{ color: footC }}>
-                      MeghRoop · Growth, AI &amp; Software Agency
+                      MeghRoop &middot; Growth, AI &amp; Software Agency
                     </td>
                     <td className="text-right text-[10px] font-medium" style={{ color: footC }}>
-                      meghroop.tech · Rajasthan, India
+                      meghroop.tech &middot; Rajasthan, India
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            {/* Print-only repeating footer — table-footer-group prints on every page */}
+            {/* Print-only repeating footer — position:fixed prints on every page */}
             <div className="print-footer" style={{ display: 'none' }}>
-              <div style={{ borderTop: `1px solid ${footerBorder}`, padding: '6px 48px 0' }}>
+              <div style={{ borderTop: `1px solid ${footerBorder}`, padding: '6px 48px 12px', background: bg }}>
                 <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
                   <tbody>
                     <tr>
                       <td className="text-[10px] font-medium" style={{ color: footC }}>
-                        MeghRoop · Growth, AI &amp; Software Agency
+                        MeghRoop &middot; Growth, AI &amp; Software Agency
                       </td>
                       <td className="text-right text-[10px] font-medium" style={{ color: footC }}>
-                        meghroop.tech · Rajasthan, India
+                        meghroop.tech &middot; Rajasthan, India
                       </td>
                     </tr>
                   </tbody>
