@@ -450,9 +450,9 @@ export default function LetterheadEditorPage() {
           /* Remove browser margin/headers/footers completely */
           @page {
             size: A4 portrait;
-            /* Light: real per-page margins on every page (white-on-white = invisible).
-               Dark: full-bleed so there are no white bands around the dark sheet. */
-            margin: ${isDark ? '0' : '14mm 12mm'} !important;
+            /* Real margins on EVERY page — top breathing room + bottom room for the
+               repeating footer. Applies to continuation pages too. */
+            margin: 16mm 14mm 18mm 14mm !important;
           }
 
           /* Hide sidebar, dashboards, control panels, forms, navigation elements, and background frames */
@@ -492,25 +492,38 @@ export default function LetterheadEditorPage() {
 
           /* Perfect A4 frame overlay - Uses dynamic background from active theme */
           .print-sheet {
-            width: ${isDark ? '210mm' : 'auto'} !important;
+            width: auto !important;
             max-width: none !important;
-            min-height: ${isDark ? '297mm' : 'auto'} !important;
+            min-height: auto !important;
             height: auto !important;
             max-height: none !important;
-            margin: 0 auto !important;
-            padding: ${isDark ? '14mm 12mm' : '0'} !important;
+            margin: 0 !important;
+            padding: 0 !important;
             border: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
             box-sizing: border-box !important;
-            background: ${bg} !important;
+            background: transparent !important;
             color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
 
             /* Block (not flex) paginates far more reliably across pages */
             display: block !important;
             overflow: visible !important;
-            position: relative !important;
+            position: static !important;
+          }
+
+          /* Repeating footer — prints in the bottom margin of EVERY page */
+          .print-footer {
+            display: block !important;
+            position: fixed !important;
+            bottom: 7mm !important;
+            left: 14mm !important;
+            right: 14mm !important;
+            padding-top: 5px !important;
+            border-top: 1px solid ${footerBorder} !important;
+            color: ${footC} !important;
+            font-family: 'Space Grotesk', sans-serif !important;
           }
 
           /* Keep sections together so a heading never sits alone at a page bottom,
@@ -1234,8 +1247,8 @@ export default function LetterheadEditorPage() {
               )}
             </div>
 
-            {/* 4. Footer Segment (Stays perfectly at A4 bottom sheet) */}
-            <div className="px-12 pb-8 pt-0 mt-auto w-full">
+            {/* 4. Footer Segment — screen preview only; print uses the repeating .print-footer */}
+            <div className="px-12 pb-8 pt-0 mt-auto w-full no-print">
               <div 
                 className="h-[1px] mb-4"
                 style={{ background: footerBorder }}
@@ -1258,7 +1271,23 @@ export default function LetterheadEditorPage() {
         </div>
 
       </div>
-      
+
+      {/* Repeating footer — hidden on screen, printed in the bottom margin of every page */}
+      <div className="print-footer" style={{ display: 'none' }}>
+        <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
+          <tbody>
+            <tr>
+              <td className="text-[10px] font-medium" style={{ color: footC }}>
+                MeghRoop · Growth, AI &amp; Software Agency
+              </td>
+              <td className="text-right text-[10px] font-medium" style={{ color: footC }}>
+                meghroop.tech · Rajasthan, India
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   )
 }
