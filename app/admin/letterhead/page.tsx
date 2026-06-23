@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react'
 import { useEditor, EditorContent, Editor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import { Underline } from '@tiptap/extension-underline'
@@ -15,10 +15,12 @@ import {
   Plus, Trash2, FileText, Receipt, Quote, Minus, Pencil, Layers
 } from 'lucide-react'
 
-// Usable content height (px) per A4 page at the 680px sheet scale.
-// Page 1 is shorter because it also carries the brand header + title block.
-const PAGE1_LIMIT = 600
-const PAGE2_LIMIT = 815
+// A4 at 96dpi — the on-screen sheet is sized to the EXACT physical page so the
+// preview and the printed PDF paginate identically (no end-of-page gaps).
+const A4_W = 794   // 210mm
+const A4_H = 1123  // 297mm
+const PROSE_W = A4_W - 96 // minus px-12 (48px) padding on each side
+const CONTENT_PAD_Y = 64  // py-8 (32px top + 32px bottom)
 
 interface InvoiceItem {
   id: string
@@ -222,6 +224,10 @@ export default function LetterheadEditorPage() {
   const [activeTab, setActiveTab] = useState<'proposal' | 'invoice'>('proposal')
   const [pageView, setPageView] = useState(false)
   const [pages, setPages] = useState<string[]>([])
+  // Usable prose height per page — measured from the real rendered first card.
+  const [limits, setLimits] = useState({ p1: 760, p2: 980 })
+  const c0ContentRef = useRef<HTMLDivElement | null>(null)
+  const c0ChromeRef = useRef<HTMLDivElement | null>(null)
   const [lhMode, setLhMode] = useState<'light' | 'dark'>('light')
   const [documentTitle, setDocumentTitle] = useState('PROPOSAL')
   const [documentSub, setDocumentSub] = useState('PREPARED FOR — CLIENT NAME')
@@ -318,11 +324,23 @@ export default function LetterheadEditorPage() {
   // so there's no caret tracking and none of the old pagination bugs.
   useEffect(() => {
     if (!editor || activeTab !== 'proposal' || !pageView) return
-    const recompute = () => setPages(paginateForDisplay(editor.getHTML(), PAGE1_LIMIT, PAGE2_LIMIT))
+    const recompute = () => setPages(paginateForDisplay(editor.getHTML(), limits.p1, limits.p2, PROSE_W))
     recompute()
     editor.on('update', recompute)
     return () => { editor.off('update', recompute) }
-  }, [editor, activeTab, pageView, documentTitle, documentSub])
+  }, [editor, activeTab, pageView, documentTitle, documentSub, limits])
+
+  // Measure the real usable content height from the first rendered card, so the
+  // page limits exactly match the printed A4 page (prevents bottom-of-page gaps).
+  useLayoutEffect(() => {
+    if (!pageView || activeTab !== 'proposal') return
+    const content = c0ContentRef.current
+    if (!content) return
+    const p1 = Math.max(200, content.clientHeight - CONTENT_PAD_Y)
+    const chromeH = c0ChromeRef.current ? c0ChromeRef.current.offsetHeight : 0
+    const p2 = Math.max(200, p1 + chromeH)
+    if (Math.abs(p1 - limits.p1) > 2 || Math.abs(p2 - limits.p2) > 2) setLimits({ p1, p2 })
+  }, [pageView, activeTab, pages, lhMode, documentTitle, documentSub, limits])
 
   const touch = useCallback(() => setIsSaved(false), [])
 
@@ -609,18 +627,18 @@ export default function LetterheadEditorPage() {
             pageView ? (
               /* Paginated A4 preview — what the PDF will look like, page by page. */
               pages.map((html, idx) => (
-                <div key={idx} className="print-sheet proposal-page relative w-full max-w-[680px] rounded-2xl shadow-2xl border text-left flex flex-col" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, width: '680px', height: '962px', boxSizing: 'border-box', overflow: 'hidden' }}>
+                <div key={idx} className="print-sheet proposal-page relative rounded-2xl shadow-2xl border text-left flex flex-col" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, width: `${A4_W}px`, height: `${A4_H}px`, maxWidth: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
                   <div style={{ height: '12mm' }} />
                   {idx === 0 && (
-                    <>
+                    <div ref={c0ChromeRef}>
                       <BrandHeader />
                       <div className="px-12 pt-8 pb-0">
                         <p className="m-0 font-semibold text-[11px] tracking-widest uppercase mb-3" style={{ color: subC, letterSpacing: '0.14em' }}>{documentSub}</p>
                         <p className="m-0 font-bold text-2xl tracking-tight mb-2" style={{ color: nameC, letterSpacing: '-0.02em' }}>{documentTitle}</p>
                       </div>
-                    </>
+                    </div>
                   )}
-                  <div className="px-12 py-8 flex-1 overflow-hidden">
+                  <div ref={idx === 0 ? c0ContentRef : undefined} className="px-12 py-8 flex-1 overflow-hidden min-h-0">
                     <div className="mr-prose" style={{ color: bodyC }} dangerouslySetInnerHTML={{ __html: html }} />
                   </div>
                   <BrandFooter />
@@ -628,7 +646,7 @@ export default function LetterheadEditorPage() {
                 </div>
               ))
             ) : (
-            <div className="print-sheet relative w-full max-w-[680px] rounded-2xl shadow-2xl border text-left" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, width: '680px', minHeight: '962px', boxSizing: 'border-box' }}>
+            <div className="print-sheet relative rounded-2xl shadow-2xl border text-left" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, width: `${A4_W}px`, maxWidth: '100%', minHeight: `${A4_H}px`, boxSizing: 'border-box' }}>
               <div style={{ height: '12mm' }} />
               <BrandHeader />
               <div className="px-12 py-8">
@@ -642,7 +660,7 @@ export default function LetterheadEditorPage() {
             </div>
             )
           ) : (
-            <div className="print-sheet invoice-page relative w-full max-w-[680px] rounded-2xl shadow-2xl border text-left flex flex-col justify-between" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, minHeight: '962px', boxSizing: 'border-box' }}>
+            <div className="print-sheet invoice-page relative rounded-2xl shadow-2xl border text-left flex flex-col justify-between" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, width: `${A4_W}px`, maxWidth: '100%', minHeight: `${A4_H}px`, boxSizing: 'border-box' }}>
               <div style={{ height: '12mm' }} />
               <BrandHeader />
               <div className="px-12 py-8 space-y-6 flex-1">
@@ -676,7 +694,7 @@ export default function LetterheadEditorPage() {
    Splits the proposal HTML into A4-sized page chunks for the read-only Page
    view + print. No caret/selection handling (editing happens in the single
    sheet), so none of the old paginate bugs apply. */
-function paginateForDisplay(html: string, page1Max: number, page2Max: number): string[] {
+function paginateForDisplay(html: string, page1Max: number, page2Max: number, proseWidth: number): string[] {
   if (typeof document === 'undefined') return [html || '<p><br></p>']
 
   const source = document.createElement('div')
@@ -685,7 +703,7 @@ function paginateForDisplay(html: string, page1Max: number, page2Max: number): s
   const pages: string[] = []
   const measure = document.createElement('div')
   measure.className = 'mr-prose'
-  measure.style.cssText = 'width:584px;position:absolute;visibility:hidden;left:-9999px;top:0;'
+  measure.style.cssText = `width:${proseWidth}px;position:absolute;visibility:hidden;left:-9999px;top:0;`
   document.body.appendChild(measure)
 
   const limit = () => (pages.length === 0 ? page1Max : page2Max)
