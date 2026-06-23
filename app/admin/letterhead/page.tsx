@@ -39,8 +39,31 @@ const CURRENCIES = [
   { symbol: '£', label: 'GBP (£)' }
 ]
 
-// Default rich-text body template for Proposal Mode
+// Generic, reusable proposal template — this is the DEFAULT (safe for any client).
 const defaultBody = `
+  <p>Dear <strong>[Client Name]</strong>,</p>
+  <p>Thank you for the opportunity. We are pleased to share this proposal from <strong>MeghRoop</strong> — a Growth, AI and Software agency. We bring performance marketing, AI automation, custom software, Shopify &amp; WordPress, and branding under one roof, so one accountable team takes your project from idea to results.</p>
+  <h3>1. Scope of Work</h3>
+  <ul>
+    <li><strong>Item one</strong> — short description of the deliverable.</li>
+    <li><strong>Item two</strong> — short description of the deliverable.</li>
+    <li><strong>Item three</strong> — short description of the deliverable.</li>
+  </ul>
+  <h3>2. Commercial</h3>
+  <p>Professional fee: <strong>₹[amount]</strong> + 18% GST. Media spend, printing, and any third-party production are billed at actuals, separately.</p>
+  <h3>3. Payment Milestones</h3>
+  <ul>
+    <li>[e.g. 50% advance on signing]</li>
+    <li>[e.g. balance on delivery, or quarterly-in-advance for retainers]</li>
+  </ul>
+  <h3>4. Why MeghRoop</h3>
+  <p>One team, no handoffs — the people who build it are the people who grow it. Direct founder access and fast turnarounds.</p>
+  <p>Looking forward to working together.</p>
+  <p>Sincerely,<br><strong>Meghansh Agarwal</strong><br>Founder, MeghRoop<br>hello@meghroop.tech · +91 89495 08264</p>
+`.trim()
+
+// Pre-built template: Navkar Buildcon RFP (load it on demand from the Templates menu).
+const navkarBody = `
   <p>To,<br><strong>Navkar Buildcon</strong><br>Jaipur, Rajasthan</p>
   <p><strong>Re: End-to-End Design &amp; Advertising Partnership — Premium Serviced Apartment Project, Jaipur</strong></p>
   <p>Dear Team,</p>
@@ -120,13 +143,19 @@ const defaultBody = `
   <p>Sincerely,<br><strong>Meghansh Agarwal</strong><br>Founder, MeghRoop<br>hello@meghroop.tech · +91 89495 08264</p>
 `.trim()
 
+// Selectable proposal templates (default stays generic; load others on demand)
+const PROPOSAL_TEMPLATES: Record<string, { label: string; title: string; sub: string; body: string }> = {
+  generic: { label: 'Generic Proposal', title: 'PROPOSAL', sub: 'PREPARED FOR — CLIENT NAME', body: defaultBody },
+  navkar: { label: 'Navkar Buildcon (RFP)', title: 'COMMERCIAL PROPOSAL', sub: 'NAVKAR BUILDCON · PREMIUM SERVICED APARTMENTS, JAIPUR', body: navkarBody },
+}
+
 export default function LetterheadEditorPage() {
   const [activeTab, setActiveTab] = useState<'proposal' | 'invoice'>('proposal')
   const [lhMode, setLhMode] = useState<'light' | 'dark'>('light')
   
   // Proposal State
-  const [documentTitle, setDocumentTitle] = useState('COMMERCIAL PROPOSAL')
-  const [documentSub, setDocumentSub] = useState('NAVKAR BUILDCON · PREMIUM SERVICED APARTMENTS, JAIPUR')
+  const [documentTitle, setDocumentTitle] = useState('PROPOSAL')
+  const [documentSub, setDocumentSub] = useState('PREPARED FOR — CLIENT NAME')
   const editorRef = useRef<HTMLDivElement>(null)
 
   // Invoice State
@@ -332,11 +361,22 @@ export default function LetterheadEditorPage() {
     window.print()
   }
 
+  const loadTemplate = (key: string) => {
+    const t = PROPOSAL_TEMPLATES[key]
+    if (!t) return
+    if (!confirm(`Load the "${t.label}" template? This replaces the current proposal content.`)) return
+    setActiveTab('proposal')
+    setDocumentTitle(t.title)
+    setDocumentSub(t.sub)
+    if (editorRef.current) editorRef.current.innerHTML = t.body
+    handleContentChange()
+  }
+
   const handleReset = () => {
     if (confirm('Are you sure you want to reset this template to the default values? Your edits will be lost.')) {
       if (activeTab === 'proposal') {
-        setDocumentTitle('COMMERCIAL PROPOSAL')
-        setDocumentSub('NAVKAR BUILDCON · PREMIUM SERVICED APARTMENTS, JAIPUR')
+        setDocumentTitle('PROPOSAL')
+        setDocumentSub('PREPARED FOR — CLIENT NAME')
         if (editorRef.current) {
           editorRef.current.innerHTML = defaultBody
         }
@@ -390,6 +430,20 @@ export default function LetterheadEditorPage() {
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
+        /* Proposal body typography (screen + print) — restores headings / lists /
+           tables that Tailwind's preflight strips inside the contenteditable editor */
+        .print-sheet .prose h2 { font-size: 17px; font-weight: 700; margin: 22px 0 8px; letter-spacing: -0.01em; }
+        .print-sheet .prose h3 { font-size: 14px; font-weight: 700; margin: 18px 0 7px; }
+        .print-sheet .prose h2:first-child, .print-sheet .prose h3:first-child { margin-top: 0; }
+        .print-sheet .prose p { margin: 0 0 10px; line-height: 1.6; }
+        .print-sheet .prose ul, .print-sheet .prose ol { margin: 0 0 12px; padding-left: 20px; }
+        .print-sheet .prose ul { list-style: disc; }
+        .print-sheet .prose ol { list-style: decimal; }
+        .print-sheet .prose li { margin: 0 0 5px; line-height: 1.55; }
+        .print-sheet .prose table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; }
+        .print-sheet .prose th, .print-sheet .prose td { padding: 7px 9px; text-align: left; vertical-align: top; }
+        .print-sheet .prose strong { font-weight: 700; }
+
         @media print {
           /* Remove browser margin/headers/footers completely */
           @page {
@@ -431,11 +485,11 @@ export default function LetterheadEditorPage() {
           /* Perfect A4 frame overlay - Uses dynamic background from active theme */
           .print-sheet {
             width: 210mm !important;
-            height: 297mm !important;
             min-height: 297mm !important;
-            max-height: 297mm !important;
+            height: auto !important;
+            max-height: none !important;
             margin: 0 auto !important;
-            padding: 20mm 20mm 20mm 20mm !important;
+            padding: 18mm 20mm !important;
             border: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
@@ -443,17 +497,18 @@ export default function LetterheadEditorPage() {
             background: ${bg} !important;
             color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
-            
-            /* Align footer beautifully at the bottom of the page print */
+
+            /* Let long proposals flow naturally onto additional pages */
             display: flex !important;
             flex-direction: column !important;
-            justify-content: space-between !important;
-
-            /* Safety layers to prevent overflow breaking into empty page 2 */
-            page-break-inside: avoid !important;
-            page-break-after: avoid !important;
+            overflow: visible !important;
             position: relative !important;
           }
+
+          /* Keep blocks intact across page breaks; don't orphan headings */
+          .print-sheet h2, .print-sheet h3 { break-after: avoid !important; page-break-after: avoid !important; }
+          .print-sheet li, .print-sheet tr, .print-sheet img { break-inside: avoid !important; page-break-inside: avoid !important; }
+          .print-sheet p { orphans: 2; widows: 2; }
 
           .print-sheet input, 
           .print-sheet textarea {
@@ -648,6 +703,22 @@ export default function LetterheadEditorPage() {
           >
             <Redo size={15} />
           </button>
+
+          {/* Load a pre-built proposal template (default stays generic) */}
+          <div className="ml-auto flex items-center gap-2">
+            <span className="text-[11px] text-gray-500 hidden sm:inline">Template</span>
+            <select
+              defaultValue=""
+              onChange={(e) => { const v = e.target.value; e.currentTarget.value = ''; if (v) loadTemplate(v) }}
+              className="bg-[#141414] border border-white/[0.08] rounded-lg px-3 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-purple-500/50 cursor-pointer"
+              title="Load a pre-built template"
+            >
+              <option value="">Load template…</option>
+              {Object.entries(PROPOSAL_TEMPLATES).map(([key, t]) => (
+                <option key={key} value={key}>{t.label}</option>
+              ))}
+            </select>
+          </div>
         </div>
       )}
 
@@ -887,7 +958,7 @@ export default function LetterheadEditorPage() {
         {/* HIGH-FIDELITY A4 PREVIEW CANVAS PANEL (Right pane / Center pane) */}
         <div className={`flex-1 flex justify-center ${activeTab === 'invoice' ? 'lg:w-[55%]' : 'w-full'}`}>
           <div 
-            className="print-sheet w-full max-w-[680px] rounded-2xl shadow-2xl transition-all duration-300 border overflow-hidden text-left flex flex-col justify-between"
+            className="print-sheet w-full max-w-[680px] rounded-2xl shadow-2xl transition-all duration-300 border text-left flex flex-col justify-between"
             style={{ 
               fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif",
               background: bg,
@@ -930,7 +1001,7 @@ export default function LetterheadEditorPage() {
                           className="m-0 text-[10px] font-semibold tracking-widest uppercase"
                           style={{ color: subC, letterSpacing: '0.14em' }}
                         >
-                          Creative Engineering &amp; AI Studio
+                          Growth · AI · Software Agency
                         </p>
                       </td>
                       <td valign="middle" className="text-right">
@@ -1158,7 +1229,7 @@ export default function LetterheadEditorPage() {
                 <tbody>
                   <tr>
                     <td className="text-[10px] font-medium" style={{ color: footC }}>
-                      MeghRoop · Creative Engineering &amp; AI Studio
+                      MeghRoop · Growth, AI &amp; Software Agency
                     </td>
                     <td className="text-right text-[10px] font-medium" style={{ color: footC }}>
                       meghroop.tech · Rajasthan, India
