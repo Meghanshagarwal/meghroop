@@ -301,6 +301,47 @@ export default function LetterheadEditorPage() {
   const [proposalPages, setProposalPages] = useState<string[]>([])
   const editorRefs = useRef<HTMLDivElement[]>([])
 
+  const getLimits = () => {
+    let p1 = 620
+    let p2 = 800
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const page0Editor = editorRefs.current[0]
+      if (page0Editor && page0Editor.parentElement) {
+        const parent = page0Editor.parentElement
+        const parentHeight = parent.clientHeight > 100 ? parent.clientHeight : 779
+        const titleBlock = parent.querySelector('.mr-title-block')
+        const titleHeight = titleBlock ? (titleBlock as HTMLElement).offsetHeight : 0
+        
+        const style = window.getComputedStyle(parent)
+        const paddingTop = parseFloat(style.paddingTop) || 32
+        const paddingBottom = parseFloat(style.paddingBottom) || 32
+        
+        p1 = Math.max(200, parentHeight - paddingTop - paddingBottom - titleHeight - 4)
+      }
+      
+      const page1Editor = editorRefs.current[1]
+      if (page1Editor && page1Editor.parentElement) {
+        const parent = page1Editor.parentElement
+        const parentHeight = parent.clientHeight > 100 ? parent.clientHeight : 881
+        
+        const style = window.getComputedStyle(parent)
+        const paddingTop = parseFloat(style.paddingTop) || 32
+        const paddingBottom = parseFloat(style.paddingBottom) || 32
+        
+        p2 = Math.max(200, parentHeight - paddingTop - paddingBottom - 4)
+      } else if (page0Editor && page0Editor.parentElement) {
+        const parent = page0Editor.parentElement
+        const parentHeight = parent.clientHeight > 100 ? parent.clientHeight : 779
+        const style = window.getComputedStyle(parent)
+        const paddingTop = parseFloat(style.paddingTop) || 32
+        const paddingBottom = parseFloat(style.paddingBottom) || 32
+        
+        p2 = Math.max(200, (parentHeight + 102) - paddingTop - paddingBottom - 4)
+      }
+    }
+    return { p1, p2 }
+  }
+
   const [invoiceData, setInvoiceData] = useState<InvoiceData>({
     invoiceNumber: 'MR-2026-001',
     invoiceDate: new Date().toISOString().split('T')[0],
@@ -341,7 +382,8 @@ export default function LetterheadEditorPage() {
       if (savedSub) setDocumentSub(savedSub)
       
       const initialBody = savedBody || defaultBody
-      const initialPages = paginateContent(initialBody, 620, 800)
+      const { p1, p2 } = getLimits()
+      const initialPages = paginateContent(initialBody, p1, p2)
       setProposalPages(initialPages)
 
       let parsedInvoice: Partial<InvoiceData> = {}
@@ -403,18 +445,31 @@ export default function LetterheadEditorPage() {
   useEffect(() => {
     if (activeTab === 'proposal' && proposalPages.length === 0) {
       const savedBody = localStorage.getItem('mr_lh_body') || defaultBody
-      const initialPages = paginateContent(savedBody, 620, 800)
+      const { p1, p2 } = getLimits()
+      const initialPages = paginateContent(savedBody, p1, p2)
       setProposalPages(initialPages)
     }
   }, [activeTab, proposalPages.length])
+
+  useEffect(() => {
+    if (proposalPages.length > 0) {
+      const { p1, p2 } = getLimits()
+      const fullHtml = proposalPages.join('')
+      const paginated = paginateContent(fullHtml, p1, p2)
+      if (!arraysEqual(paginated, proposalPages)) {
+        setProposalPages(paginated)
+      }
+    }
+  }, [proposalPages.length, documentTitle, documentSub])
 
   const handleContentChange = () => {
     setIsSaved(false)
   }
 
   const handlePageBlur = () => {
+    const { p1, p2 } = getLimits()
     const fullHtml = proposalPages.join('')
-    const newPages = paginateContent(fullHtml, 620, 800)
+    const newPages = paginateContent(fullHtml, p1, p2)
     setProposalPages(newPages)
   }
 
@@ -434,7 +489,8 @@ export default function LetterheadEditorPage() {
       editor.parentElement.scrollTop = 0
     }
 
-    const limit = idx === 0 ? 620 : 800
+    const { p1, p2 } = getLimits()
+    const limit = idx === 0 ? p1 : p2
     const isOverflow = editor.scrollHeight > limit
     const hasMorePages = proposalPages.length > idx + 1
     const isUnderflow = editor.scrollHeight < limit && hasMorePages
@@ -455,7 +511,7 @@ export default function LetterheadEditorPage() {
       currentHtmls[idx] = html
 
       const fullHtml = currentHtmls.join('')
-      const newPages = paginateContent(fullHtml, 620, 800)
+      const newPages = paginateContent(fullHtml, p1, p2)
 
       if (!arraysEqual(newPages, currentHtmls)) {
         setProposalPages(newPages)
@@ -486,6 +542,14 @@ export default function LetterheadEditorPage() {
           if (targetEditor) {
             targetEditor.focus()
             setCaretOffset(targetEditor, targetRelativeOffset)
+          } else {
+            setTimeout(() => {
+              const retryEditor = editorRefs.current[targetPageIdx]
+              if (retryEditor) {
+                retryEditor.focus()
+                setCaretOffset(retryEditor, targetRelativeOffset)
+              }
+            }, 50)
           }
         }, 0)
       }
@@ -515,7 +579,8 @@ export default function LetterheadEditorPage() {
           currentHtmls.splice(idx, 1)
 
           const fullHtml = currentHtmls.join('')
-          const newPages = paginateContent(fullHtml, 620, 800)
+          const { p1, p2 } = getLimits()
+          const newPages = paginateContent(fullHtml, p1, p2)
 
           setProposalPages(newPages)
 
@@ -545,6 +610,14 @@ export default function LetterheadEditorPage() {
             if (targetEditor) {
               targetEditor.focus()
               setCaretOffset(targetEditor, targetRelativeOffset)
+            } else {
+              setTimeout(() => {
+                const retryEditor = editorRefs.current[targetPageIdx]
+                if (retryEditor) {
+                  retryEditor.focus()
+                  setCaretOffset(retryEditor, targetRelativeOffset)
+                }
+              }, 50)
             }
           }, 0)
         }
@@ -574,7 +647,8 @@ export default function LetterheadEditorPage() {
           currentHtmls.splice(idx + 1, 1)
 
           const fullHtml = currentHtmls.join('')
-          const newPages = paginateContent(fullHtml, 620, 800)
+          const { p1, p2 } = getLimits()
+          const newPages = paginateContent(fullHtml, p1, p2)
 
           setProposalPages(newPages)
 
@@ -604,6 +678,14 @@ export default function LetterheadEditorPage() {
             if (targetEditor) {
               targetEditor.focus()
               setCaretOffset(targetEditor, targetRelativeOffset)
+            } else {
+              setTimeout(() => {
+                const retryEditor = editorRefs.current[targetPageIdx]
+                if (retryEditor) {
+                  retryEditor.focus()
+                  setCaretOffset(retryEditor, targetRelativeOffset)
+                }
+              }, 50)
             }
           }, 0)
         }
@@ -703,8 +785,9 @@ export default function LetterheadEditorPage() {
   const grandTotal = subtotal + taxAmount - invoiceData.discountAmount
 
   const handlePrint = () => {
+    const { p1, p2 } = getLimits()
     const fullHtml = proposalPages.join('')
-    const newPages = paginateContent(fullHtml, 620, 800)
+    const newPages = paginateContent(fullHtml, p1, p2)
     setProposalPages(newPages)
     setTimeout(() => {
       window.print()
@@ -718,7 +801,8 @@ export default function LetterheadEditorPage() {
     setActiveTab('proposal')
     setDocumentTitle(t.title)
     setDocumentSub(t.sub)
-    const paginated = paginateContent(t.body, 620, 800)
+    const { p1, p2 } = getLimits()
+    const paginated = paginateContent(t.body, p1, p2)
     setProposalPages(paginated)
     handleContentChange()
   }
@@ -728,7 +812,8 @@ export default function LetterheadEditorPage() {
       if (activeTab === 'proposal') {
         setDocumentTitle('PROPOSAL')
         setDocumentSub('PREPARED FOR — CLIENT NAME')
-        const paginated = paginateContent(defaultBody, 620, 800)
+        const { p1, p2 } = getLimits()
+        const paginated = paginateContent(defaultBody, p1, p2)
         setProposalPages(paginated)
       } else {
         setInvoiceData({
@@ -984,9 +1069,12 @@ export default function LetterheadEditorPage() {
                     </>
                   )}
                 </div>
-                <div className="px-12 py-8 flex-1 overflow-hidden">
+                <div 
+                  className="px-12 py-8 flex-1 overflow-hidden"
+                  onScroll={(e) => { e.currentTarget.scrollTop = 0 }}
+                >
                   {idx === 0 && (
-                    <div className="mb-4">
+                    <div className="mb-4 mr-title-block">
                       <input type="text" value={documentSub} onChange={(e) => { setDocumentSub(e.target.value); handleContentChange() }} className="w-full bg-transparent border-none outline-none font-semibold text-[11px] tracking-widest uppercase mb-3 focus:bg-white/[0.02] p-1 rounded transition-all text-left" style={{ color: subC, letterSpacing: '0.14em' }} placeholder="DOCUMENT SUBTITLE / BRIEF" />
                       <input type="text" value={documentTitle} onChange={(e) => { setDocumentTitle(e.target.value); handleContentChange() }} className="w-full bg-transparent border-none outline-none font-bold text-2xl tracking-tight mb-5 focus:bg-white/[0.02] p-1 rounded transition-all font-sans text-left" style={{ color: nameC, letterSpacing: '-0.02em' }} placeholder="Proposal / Invoice / Letter" />
                     </div>
@@ -1084,7 +1172,7 @@ const paginateContent = (html: string, page1MaxHeight: number, page2MaxHeight: n
   const sheetWrapper = document.createElement('div')
   sheetWrapper.className = 'print-sheet'
   sheetWrapper.style.width = '680px'
-  tempContainer.appendChild(sheetWrapper)
+  document.body.appendChild(sheetWrapper)
 
   const measureContainer = document.createElement('div')
   measureContainer.style.width = '584px'
@@ -1118,7 +1206,10 @@ const paginateContent = (html: string, page1MaxHeight: number, page2MaxHeight: n
       }
       if (tagName === 'table') {
         const thead = el.querySelector('thead')
-        const rows = Array.from(el.querySelectorAll('tbody tr'))
+        const rows = Array.from(el.querySelectorAll('tr')).filter(tr => {
+          const parentTagName = tr.parentElement?.tagName.toLowerCase()
+          return parentTagName !== 'thead'
+        })
         let newTable = document.createElement('table')
         if (thead) newTable.appendChild(thead.cloneNode(true))
         let newTbody = document.createElement('tbody')
@@ -1146,8 +1237,9 @@ const paginateContent = (html: string, page1MaxHeight: number, page2MaxHeight: n
     measureContainer.innerHTML = ''
     measureContainer.appendChild(cloned)
   }
-  Array.from(tempContainer.childNodes).forEach(child => { if (child !== measureContainer) appendAndMeasure(child) })
+  Array.from(tempContainer.childNodes).forEach(child => { appendAndMeasure(child) })
   if (measureContainer.innerHTML.trim() !== '') pages.push(measureContainer.innerHTML)
   document.body.removeChild(tempContainer)
+  document.body.removeChild(sheetWrapper)
   return pages.length > 0 ? pages : [html || '<p><br></p>']
 }
