@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Don't advertise the framework; tiny security/perf win.
+  poweredByHeader: false,
   images: {
+    // Serve modern formats (smaller payloads) where the browser supports them.
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -13,7 +17,8 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    // Tree-shake big component/icon libraries so fewer/smaller JS chunks ship.
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
   },
   async redirects() {
     return [

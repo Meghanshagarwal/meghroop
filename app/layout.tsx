@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
+import { unstable_cache } from 'next/cache'
 import { getSupabase } from '@/lib/supabase'
 import JsonLd from '@/components/common/JsonLd'
 import PWAInstallPrompt from '@/components/common/PWAInstallPrompt'
@@ -136,24 +137,32 @@ export const metadata: Metadata = {
   },
 }
 
-async function getAnalyticsIds() {
-  try {
-    const db = getSupabase()
-    const { data } = await db.from('settings').select('key, value')
-    const map = Object.fromEntries((data ?? []).map((s: { key: string; value: string }) => [s.key, s.value]))
-    return {
-      gaId: map['ga_id'] || process.env.NEXT_PUBLIC_GA_ID || '',
-      pixelId: map['meta_pixel_id'] || process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
-      clarityId: map['clarity_id'] || process.env.NEXT_PUBLIC_CLARITY_ID || '',
+// Analytics IDs live in the `settings` table but change very rarely. This used
+// to run an uncached Supabase query on EVERY request (in the root layout), which
+// added a DB round-trip to every page's TTFB (~1s response time). Cache the
+// result for an hour across all requests instead.
+const getAnalyticsIds = unstable_cache(
+  async () => {
+    try {
+      const db = getSupabase()
+      const { data } = await db.from('settings').select('key, value')
+      const map = Object.fromEntries((data ?? []).map((s: { key: string; value: string }) => [s.key, s.value]))
+      return {
+        gaId: map['ga_id'] || process.env.NEXT_PUBLIC_GA_ID || '',
+        pixelId: map['meta_pixel_id'] || process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
+        clarityId: map['clarity_id'] || process.env.NEXT_PUBLIC_CLARITY_ID || '',
+      }
+    } catch {
+      return {
+        gaId: process.env.NEXT_PUBLIC_GA_ID || '',
+        pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
+        clarityId: process.env.NEXT_PUBLIC_CLARITY_ID || '',
+      }
     }
-  } catch {
-    return {
-      gaId: process.env.NEXT_PUBLIC_GA_ID || '',
-      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
-      clarityId: process.env.NEXT_PUBLIC_CLARITY_ID || '',
-    }
-  }
-}
+  },
+  ['analytics-ids'],
+  { revalidate: 3600, tags: ['settings'] }
+)
 
 export default async function RootLayout({
   children,

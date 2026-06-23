@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,5 +23,7 @@ export async function PUT(req: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   revalidatePath('/')
+  // Bust the cached analytics IDs (gtag / pixel / clarity) used in the layout.
+  revalidateTag('settings')
   return NextResponse.json({ ok: true })
 }
