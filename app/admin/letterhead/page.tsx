@@ -430,6 +430,10 @@ export default function LetterheadEditorPage() {
     const editor = editorRefs.current[idx]
     if (!editor) return
 
+    if (editor.parentElement) {
+      editor.parentElement.scrollTop = 0
+    }
+
     const limit = idx === 0 ? 620 : 800
     const isOverflow = editor.scrollHeight > limit
     const hasMorePages = proposalPages.length > idx + 1
@@ -1076,11 +1080,16 @@ const paginateContent = (html: string, page1MaxHeight: number, page2MaxHeight: n
   document.body.appendChild(tempContainer)
   tempContainer.innerHTML = html || '<p><br></p>'
   const pages: string[] = []
+
+  const sheetWrapper = document.createElement('div')
+  sheetWrapper.className = 'print-sheet'
+  sheetWrapper.style.width = '680px'
+  tempContainer.appendChild(sheetWrapper)
+
   const measureContainer = document.createElement('div')
   measureContainer.style.width = '584px'
-  measureContainer.style.fontFamily = "'Space Grotesk', sans-serif"
-  measureContainer.className = 'prose text-sm'
-  tempContainer.appendChild(measureContainer)
+  measureContainer.className = 'prose max-w-none text-sm leading-relaxed'
+  sheetWrapper.appendChild(measureContainer)
   const getLimit = () => pages.length === 0 ? page1MaxHeight : page2MaxHeight
   const appendAndMeasure = (node: Node) => {
     const cloned = node.cloneNode(true)
