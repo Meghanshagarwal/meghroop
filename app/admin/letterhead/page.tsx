@@ -152,16 +152,112 @@ interface EditablePageProps {
   initialContent: string
   onChange: (html: string) => void
   onBlur: () => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void
   className: string
   style: React.CSSProperties
   refIndex: number
   editorRefs: React.MutableRefObject<HTMLDivElement[]>
 }
 
+const arraysEqual = (a: string[], b: string[]) => {
+  if (a.length !== b.length) return false
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false
+  }
+  return true
+}
+
+function getCaretOffset(element: HTMLElement): number {
+  const sel = window.getSelection()
+  if (!sel || sel.rangeCount === 0) return 0
+  const range = sel.getRangeAt(0)
+  
+  let offset = 0
+  let found = false
+
+  function traverse(node: Node) {
+    if (found) return
+    if (node === range.startContainer) {
+      offset += range.startOffset
+      found = true
+      return
+    }
+    if (node.nodeType === Node.TEXT_NODE) {
+      offset += node.nodeValue?.length || 0
+    } else {
+      for (let i = 0; i < node.childNodes.length; i++) {
+        traverse(node.childNodes[i])
+        if (found) return
+      }
+    }
+  }
+
+  traverse(element)
+  return offset
+}
+
+function setCaretOffset(element: HTMLElement, offset: number) {
+  const range = document.createRange()
+  const sel = window.getSelection()
+  
+  let currentOffset = 0
+  let found = false
+
+  function traverse(node: Node) {
+    if (found) return
+    if (node.nodeType === Node.TEXT_NODE) {
+      const length = node.nodeValue?.length || 0
+      if (currentOffset + length >= offset) {
+        range.setStart(node, offset - currentOffset)
+        range.collapse(true)
+        found = true
+        return
+      }
+      currentOffset += length
+    } else {
+      for (let i = 0; i < node.childNodes.length; i++) {
+        traverse(node.childNodes[i])
+        if (found) return
+      }
+    }
+  }
+
+  traverse(element)
+  if (!found) {
+    range.selectNodeContents(element)
+    range.collapse(false)
+  }
+  sel?.removeAllRanges()
+  sel?.addRange(range)
+}
+
+function getTextLengthOfNode(node: Node): number {
+  let length = 0
+  if (node.nodeType === Node.TEXT_NODE) {
+    length += node.nodeValue?.length || 0
+  } else {
+    for (let i = 0; i < node.childNodes.length; i++) {
+      length += getTextLengthOfNode(node.childNodes[i])
+    }
+  }
+  return length
+}
+
+function getTextLength(elementOrHtml: HTMLElement | string): number {
+  if (typeof elementOrHtml === 'string') {
+    if (typeof document === 'undefined') return 0
+    const temp = document.createElement('div')
+    temp.innerHTML = elementOrHtml
+    return getTextLengthOfNode(temp)
+  }
+  return getTextLengthOfNode(elementOrHtml)
+}
+
 const EditablePage = ({ 
   initialContent, 
   onChange, 
   onBlur, 
+  onKeyDown,
   className, 
   style, 
   refIndex, 
@@ -189,6 +285,7 @@ const EditablePage = ({
         onBlur()
       }}
       onInput={(e) => onChange(e.currentTarget.innerHTML)}
+      onKeyDown={onKeyDown}
       className={className}
       style={style}
     />
@@ -319,6 +416,195 @@ export default function LetterheadEditorPage() {
     const fullHtml = proposalPages.join('')
     const newPages = paginateContent(fullHtml, 620, 800)
     setProposalPages(newPages)
+  }
+
+  const handlePageInput = (idx: number, html: string) => {
+    setIsSaved(false)
+
+    setProposalPages(prev => {
+      const copy = [...prev]
+      copy[idx] = html
+      return copy
+    })
+
+    const editor = editorRefs.current[idx]
+    if (!editor) return
+
+    const limit = idx === 0 ? 620 : 800
+    const isOverflow = editor.scrollHeight > limit
+    const hasMorePages = proposalPages.length > idx + 1
+    const isUnderflow = editor.scrollHeight < limit && hasMorePages
+
+    if (isOverflow || isUnderflow) {
+      const relativeOffset = getCaretOffset(editor)
+      let absoluteOffset = 0
+      for (let i = 0; i < idx; i++) {
+        const prevEditor = editorRefs.current[i]
+        absoluteOffset += prevEditor ? getTextLength(prevEditor) : getTextLength(proposalPages[i] || '')
+      }
+      absoluteOffset += relativeOffset
+
+      const currentHtmls = proposalPages.map((page, i) => {
+        const ed = editorRefs.current[i]
+        return ed ? ed.innerHTML : page
+      })
+      currentHtmls[idx] = html
+
+      const fullHtml = currentHtmls.join('')
+      const newPages = paginateContent(fullHtml, 620, 800)
+
+      if (!arraysEqual(newPages, currentHtmls)) {
+        setProposalPages(newPages)
+
+        let remainingOffset = absoluteOffset
+        let targetPageIdx = 0
+        let targetRelativeOffset = 0
+
+        for (let i = 0; i < newPages.length; i++) {
+          const pageTextLength = getTextLength(newPages[i])
+          if (remainingOffset < pageTextLength || (remainingOffset === pageTextLength && i === newPages.length - 1)) {
+            targetPageIdx = i
+            targetRelativeOffset = remainingOffset
+            break
+          }
+          remainingOffset -= pageTextLength
+        }
+
+        newPages.forEach((pageHtml, i) => {
+          const ed = editorRefs.current[i]
+          if (ed) {
+            ed.innerHTML = pageHtml
+          }
+        })
+
+        setTimeout(() => {
+          const targetEditor = editorRefs.current[targetPageIdx]
+          if (targetEditor) {
+            targetEditor.focus()
+            setCaretOffset(targetEditor, targetRelativeOffset)
+          }
+        }, 0)
+      }
+    }
+  }
+
+  const handlePageKeyDown = (idx: number, e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Backspace' && idx > 0) {
+      const editor = editorRefs.current[idx]
+      if (editor) {
+        const caretOffset = getCaretOffset(editor)
+        if (caretOffset === 0) {
+          e.preventDefault()
+
+          let absoluteOffset = 0
+          for (let i = 0; i < idx; i++) {
+            const prevEditor = editorRefs.current[i]
+            absoluteOffset += prevEditor ? getTextLength(prevEditor) : getTextLength(proposalPages[i] || '')
+          }
+
+          const currentHtmls = proposalPages.map((page, i) => {
+            const ed = editorRefs.current[i]
+            return ed ? ed.innerHTML : page
+          })
+
+          currentHtmls[idx - 1] = currentHtmls[idx - 1] + currentHtmls[idx]
+          currentHtmls.splice(idx, 1)
+
+          const fullHtml = currentHtmls.join('')
+          const newPages = paginateContent(fullHtml, 620, 800)
+
+          setProposalPages(newPages)
+
+          let remainingOffset = absoluteOffset
+          let targetPageIdx = 0
+          let targetRelativeOffset = 0
+
+          for (let i = 0; i < newPages.length; i++) {
+            const pageTextLength = getTextLength(newPages[i])
+            if (remainingOffset < pageTextLength || (remainingOffset === pageTextLength && i === newPages.length - 1)) {
+              targetPageIdx = i
+              targetRelativeOffset = remainingOffset
+              break
+            }
+            remainingOffset -= pageTextLength
+          }
+
+          newPages.forEach((pageHtml, i) => {
+            const ed = editorRefs.current[i]
+            if (ed) {
+              ed.innerHTML = pageHtml
+            }
+          })
+
+          setTimeout(() => {
+            const targetEditor = editorRefs.current[targetPageIdx]
+            if (targetEditor) {
+              targetEditor.focus()
+              setCaretOffset(targetEditor, targetRelativeOffset)
+            }
+          }, 0)
+        }
+      }
+    }
+
+    if (e.key === 'Delete' && idx < proposalPages.length - 1) {
+      const editor = editorRefs.current[idx]
+      if (editor) {
+        const caretOffset = getCaretOffset(editor)
+        if (caretOffset === getTextLength(editor)) {
+          e.preventDefault()
+
+          let absoluteOffset = 0
+          for (let i = 0; i < idx; i++) {
+            const prevEditor = editorRefs.current[i]
+            absoluteOffset += prevEditor ? getTextLength(prevEditor) : getTextLength(proposalPages[i] || '')
+          }
+          absoluteOffset += caretOffset
+
+          const currentHtmls = proposalPages.map((page, i) => {
+            const ed = editorRefs.current[i]
+            return ed ? ed.innerHTML : page
+          })
+
+          currentHtmls[idx] = currentHtmls[idx] + currentHtmls[idx + 1]
+          currentHtmls.splice(idx + 1, 1)
+
+          const fullHtml = currentHtmls.join('')
+          const newPages = paginateContent(fullHtml, 620, 800)
+
+          setProposalPages(newPages)
+
+          let remainingOffset = absoluteOffset
+          let targetPageIdx = 0
+          let targetRelativeOffset = 0
+
+          for (let i = 0; i < newPages.length; i++) {
+            const pageTextLength = getTextLength(newPages[i])
+            if (remainingOffset < pageTextLength || (remainingOffset === pageTextLength && i === newPages.length - 1)) {
+              targetPageIdx = i
+              targetRelativeOffset = remainingOffset
+              break
+            }
+            remainingOffset -= pageTextLength
+          }
+
+          newPages.forEach((pageHtml, i) => {
+            const ed = editorRefs.current[i]
+            if (ed) {
+              ed.innerHTML = pageHtml
+            }
+          })
+
+          setTimeout(() => {
+            const targetEditor = editorRefs.current[targetPageIdx]
+            if (targetEditor) {
+              targetEditor.focus()
+              setCaretOffset(targetEditor, targetRelativeOffset)
+            }
+          }, 0)
+        }
+      }
+    }
   }
 
   useEffect(() => {
@@ -503,7 +789,27 @@ export default function LetterheadEditorPage() {
         @media print {
           @page { size: A4 portrait; margin: 0 !important; }
           aside, header, nav, [aria-label="Mobile navigation"], .no-print, .invoice-form-pane, .admin-sidebar { display: none !important; }
-          main, body, html, .min-h-screen, .flex-1, .max-w-7xl, .main-content-wrapper { margin: 0 !important; padding: 0 !important; background: transparent !important; box-shadow: none !important; border: none !important; display: block !important; position: static !important; width: 100% !important; height: auto !important; min-height: 0 !important; }
+          
+          /* Full layout reset to block layout for clean printing without offsets or flex shifts */
+          html, body, main,
+          body *:has(.print-sheet),
+          .min-h-screen, .flex-1, .max-w-7xl, .main-content-wrapper {
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            max-width: none !important;
+            min-width: 0 !important;
+            box-shadow: none !important;
+            border: none !important;
+            position: static !important;
+            height: auto !important;
+            min-height: 0 !important;
+            transform: none !important;
+            float: none !important;
+            gap: 0 !important;
+          }
+
           html, body { background: ${bg} !important; }
           .print-sheet { width: 210mm !important; max-width: none !important; margin: 0 auto !important; padding: 0 !important; border: none !important; box-shadow: none !important; border-radius: 0 !important; box-sizing: border-box !important; background: ${bg} !important; color: ${nameC} !important; font-family: 'Space Grotesk', sans-serif !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; overflow: visible !important; page-break-after: always !important; break-after: page !important; }
           .print-sheet:last-child { page-break-after: avoid !important; break-after: avoid !important; }
@@ -647,6 +953,17 @@ export default function LetterheadEditorPage() {
                                 <p className="m-0 text-xl font-bold tracking-tight" style={{ color: nameC, letterSpacing: '-0.02em' }}>MeghRoop</p>
                                 <p className="m-0 text-[10px] font-semibold tracking-widest uppercase" style={{ color: subC, letterSpacing: '0.14em' }}>Growth · AI · Software Agency</p>
                               </td>
+                              <td valign="middle" className="text-right">
+                                <p className="m-0 text-[11px] leading-[1.8] font-medium" style={{ color: bodyC }}>
+                                  <a href="https://meghroop.tech" target="_blank" rel="noopener noreferrer" style={{ color: '#c084fc', textDecoration: 'none' }}>
+                                    meghroop.tech
+                                  </a>
+                                  <br />
+                                  hello@meghroop.tech
+                                  <br />
+                                  Rajasthan, India
+                                </p>
+                              </td>
                             </tr>
                           </tbody>
                         </table>
@@ -662,7 +979,16 @@ export default function LetterheadEditorPage() {
                       <input type="text" value={documentTitle} onChange={(e) => { setDocumentTitle(e.target.value); handleContentChange() }} className="w-full bg-transparent border-none outline-none font-bold text-2xl tracking-tight mb-5 focus:bg-white/[0.02] p-1 rounded transition-all font-sans text-left" style={{ color: nameC, letterSpacing: '-0.02em' }} placeholder="Proposal / Invoice / Letter" />
                     </div>
                   )}
-                  <EditablePage initialContent={pageContent} onChange={(html) => { setProposalPages(prev => { const copy = [...prev]; copy[idx] = html; return copy }); handleContentChange() }} onBlur={handlePageBlur} className="prose max-w-none text-sm outline-none leading-relaxed" style={{ color: bodyC }} refIndex={idx} editorRefs={editorRefs} />
+                  <EditablePage 
+                    initialContent={pageContent} 
+                    onChange={(html) => handlePageInput(idx, html)} 
+                    onBlur={handlePageBlur} 
+                    onKeyDown={(e) => handlePageKeyDown(idx, e)}
+                    className="prose max-w-none text-sm outline-none leading-relaxed" 
+                    style={{ color: bodyC }} 
+                    refIndex={idx} 
+                    editorRefs={editorRefs} 
+                  />
                 </div>
                 <div style={{ borderTop: `1px solid ${footerBorder}`, padding: '8px 48px 12px', background: bg }} className="w-full">
                   <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
@@ -688,6 +1014,17 @@ export default function LetterheadEditorPage() {
                       <td valign="middle">
                         <p className="m-0 text-xl font-bold tracking-tight" style={{ color: nameC, letterSpacing: '-0.02em' }}>MeghRoop</p>
                         <p className="m-0 text-[10px] font-semibold tracking-widest uppercase" style={{ color: subC, letterSpacing: '0.14em' }}>Growth · AI · Software Agency</p>
+                      </td>
+                      <td valign="middle" className="text-right">
+                        <p className="m-0 text-[11px] leading-[1.8] font-medium" style={{ color: bodyC }}>
+                          <a href="https://meghroop.tech" target="_blank" rel="noopener noreferrer" style={{ color: '#c084fc', textDecoration: 'none' }}>
+                            meghroop.tech
+                          </a>
+                          <br />
+                          hello@meghroop.tech
+                          <br />
+                          Rajasthan, India
+                        </p>
                       </td>
                     </tr>
                   </tbody>
