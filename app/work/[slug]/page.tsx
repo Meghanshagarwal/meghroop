@@ -7,6 +7,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import CaseStudyGallery from '@/components/sections/CaseStudyGallery'
+import { BreadcrumbJsonLd } from '@/components/common/JsonLd'
 import { getSupabase, getProjectBySlug, projectSlug, type Project } from '@/lib/supabase'
 import { defaultProjects } from '@/data/projects'
 
@@ -71,6 +72,13 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Work', path: '/work' },
+          { name: project.title, path: `/work/${projectSlug(project)}` },
+        ]}
+      />
       <Navbar />
       <main id="main-content" className="pt-28 sm:pt-32">
         {/* ── Hero ─────────────────────────────────────────── */}

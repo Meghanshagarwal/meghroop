@@ -13,6 +13,7 @@ import TechStack from '@/components/sections/TechStack'
 import Testimonials from '@/components/sections/Testimonials'
 import FAQ from '@/components/sections/FAQ'
 import FinalCTA from '@/components/sections/FinalCTA'
+import { FaqJsonLd } from '@/components/common/JsonLd'
 
 
 export const revalidate = 86400
@@ -32,6 +33,8 @@ export default async function Home() {
 
   return (
     <>
+      {/* FAQPage schema — only here, where the <FAQ /> section is visible */}
+      <FaqJsonLd />
       <Navbar />
       <main id="main-content">
         {/* 1. Hero — Growth. AI. Software. */}

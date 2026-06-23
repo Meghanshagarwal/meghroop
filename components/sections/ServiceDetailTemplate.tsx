@@ -432,9 +432,9 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
               <span className="text-white/10">•</span>
               <Link href="/ai-agents/agentic-automation" className="hover:text-white transition-colors">Agentic Automation</Link>
               <span className="text-white/10">•</span>
-              <Link href="/mcp-infrastructure" className="hover:text-white transition-colors">MCP Infrastructure</Link>
+              <Link href="/ai-agents/ai-voice-agents" className="hover:text-white transition-colors">AI Voice Agents</Link>
               <span className="text-white/10">•</span>
-              <Link href="/n8n-workflows" className="hover:text-white transition-colors">n8n Workflows</Link>
+              <Link href="/ai-agents/sales-ai" className="hover:text-white transition-colors">Sales AI</Link>
             </motion.div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />

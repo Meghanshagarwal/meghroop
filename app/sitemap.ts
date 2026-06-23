@@ -1,10 +1,23 @@
 import type { MetadataRoute } from 'next'
 import { getAllArticles } from '@/lib/journal'
+import { getSupabase, projectSlug, type Project } from '@/lib/supabase'
+import { defaultProjects } from '@/data/projects'
+import { aiAgentLinks } from '@/data/aiAgents'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
+async function getProjects(): Promise<Project[]> {
+  try {
+    const db = getSupabase()
+    const { data } = await db.from('projects').select('*').order('display_order', { ascending: true })
+    return data && data.length ? data : defaultProjects
+  } catch {
+    return defaultProjects
+  }
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articles = await getAllArticles()
+  const [articles, projects] = await Promise.all([getAllArticles(), getProjects()])
   // Core static routes
   const staticRoutes = [
     '',
@@ -17,7 +30,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/shopify-development',
     '/wordpress-development',
     '/branding-creative',
-    '/ai-search-optimization',
+    // AI Agents sub-pages (live — powering the dedicated nav section)
+    ...aiAgentLinks.map((a) => a.href),
     // Core pages
     '/work',
     '/about',
@@ -52,7 +66,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       route === '/shopify-development' ||
       route === '/wordpress-development' ||
       route === '/branding-creative' ||
-      route === '/ai-search-optimization' ||
       route === '/work'
     ) {
       priority = 0.9
@@ -68,12 +81,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   // Dynamic journal articles sitemap
-  const dynamicSitemap = articles.map((article) => ({
+  const articleSitemap = articles.map((article) => ({
     url: `${SITE_URL}/journal/${article.slug}`,
     lastModified: new Date(article.lastUpdated || article.date).toISOString(),
     changeFrequency: 'weekly' as const,
     priority: 0.85,
   }))
 
-  return [...staticSitemap, ...dynamicSitemap]
+  // Dynamic work / case-study pages
+  const workSitemap = projects.map((project) => ({
+    url: `${SITE_URL}/work/${projectSlug(project)}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
+
+  return [...staticSitemap, ...articleSitemap, ...workSitemap]
 }

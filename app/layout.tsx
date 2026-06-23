@@ -161,7 +161,11 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Resource hints */}
+        {/* Resource hints — speed up third-party analytics/pixel connections */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
+        <link rel="preconnect" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
         {/* Service Worker registration */}
         <Script id="sw-register" strategy="afterInteractive">

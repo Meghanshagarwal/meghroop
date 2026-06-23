@@ -83,11 +83,11 @@ export default function AgenticAIPageCTA() {
           <span className="text-white/10">•</span>
           <Link href="/ai-agents/ai-voice-agents" className="hover:text-cyan-400 transition-colors">AI Voice Agents</Link>
           <span className="text-white/10">•</span>
-          <Link href="/mcp-infrastructure" className="hover:text-cyan-400 transition-colors">MCP Infrastructure</Link>
+          <Link href="/ai-agents/sales-ai" className="hover:text-cyan-400 transition-colors">Sales AI</Link>
           <span className="text-white/10">•</span>
-          <Link href="/n8n-workflows" className="hover:text-cyan-400 transition-colors">n8n Workflows</Link>
+          <Link href="/ai-agents/knowledge-intelligence" className="hover:text-cyan-400 transition-colors">Knowledge Intelligence</Link>
           <span className="text-white/10">•</span>
-          <Link href="/ai-search-optimization" className="hover:text-cyan-400 transition-colors">AI Search (GEO)</Link>
+          <Link href="/ai-agents/ai-integration" className="hover:text-cyan-400 transition-colors">AI Integration</Link>
         </motion.div>
       </div>
 

@@ -173,80 +173,9 @@ const organizationSchema = {
     'https://x.com/meghroop_tech',
     'https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ',
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5',
-    bestRating: '5',
-    worstRating: '1',
-    ratingCount: '4',
-    reviewCount: '4',
-  },
-  review: [
-    {
-      '@type': 'Review',
-
-      reviewBody:
-        'MeghRoop completely transformed our online presence. The attention to detail, clean animations, and overall quality of work far exceeded our expectations. Highly recommend.',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Rajesh Kumar',
-        jobTitle: 'CEO',
-      },
-    },
-    {
-      '@type': 'Review',
-
-      reviewBody:
-        'Working with MeghRoop was a fantastic experience. They understood our brand vision instantly and delivered a stunning website that our customers love.',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Priya Sharma',
-        jobTitle: 'Founder',
-      },
-    },
-    {
-      '@type': 'Review',
-
-      reviewBody:
-        'They built our entire sports court booking platform from scratch. Professional, timely, and the quality of code is exceptional. Will definitely work with them again.',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Amit Patel',
-        jobTitle: 'CTO',
-      },
-    },
-    {
-      '@type': 'Review',
-
-      reviewBody:
-        'Our coffee shop website has received so many compliments from customers. The design is beautiful, the site is fast, and it perfectly represents our brand.',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Neha Gupta',
-        jobTitle: 'Owner',
-      },
-    },
-  ],
+  // NOTE: self-serving aggregateRating / review on the Organization is against
+  // Google's review-snippet policy (can trigger a manual action), so it is
+  // intentionally omitted here. Surface reviews via third-party platforms.
 }
 
 const localBusinessSchema = {
@@ -415,10 +344,39 @@ export default function JsonLd() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
     </>
+  )
+}
+
+// BreadcrumbList — render on nested pages (case studies, articles) so search
+// engines can show breadcrumb trails in the SERP. Pass the trail in order.
+export function BreadcrumbJsonLd({ items }: { items: { name: string; path: string }[] }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
+// FAQPage schema is only valid on a page where the FAQ content is actually
+// visible. Render this on the homepage (which has the matching <FAQ /> section)
+// — NOT globally — to stay within Google's structured-data guidelines.
+export function FaqJsonLd() {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+    />
   )
 }
