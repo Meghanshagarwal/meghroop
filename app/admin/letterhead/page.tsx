@@ -517,7 +517,14 @@ export default function LetterheadEditorPage() {
           .print-sheet .sheet-body { display: table-row-group !important; }
           .print-sheet .print-header { display: table-header-group !important; }
           .print-sheet .print-footer { display: table-footer-group !important; }
-          .print-sheet .print-header > div { background: ${bg} !important; }
+          .print-sheet .print-header > div {
+            background: ${bg} !important;
+            height: 14mm !important;
+            min-height: 14mm !important;
+            line-height: 0 !important;
+            font-size: 0 !important;
+            overflow: hidden !important;
+          }
 
           /* Keep sections together so a heading never sits alone at a page bottom,
              and lists / tables don't split across pages */
@@ -989,7 +996,9 @@ export default function LetterheadEditorPage() {
           >
             {/* Print-only top spacer — repeats on every page (table-header-group) for a consistent top margin */}
             <div className="print-header" style={{ display: 'none' }} aria-hidden="true">
-              <div style={{ height: '14mm' }} />
+              <div style={{ height: '14mm', minHeight: '14mm', background: bg, lineHeight: 0, fontSize: 0, overflow: 'hidden' }}>
+                &nbsp;
+              </div>
             </div>
 
             {/* Top Sheet Group wrapper to separate top content from the bottom footer for perfect alignment */}
