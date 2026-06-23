@@ -1179,6 +1179,78 @@ const paginateContent = (html: string, page1MaxHeight: number, page2MaxHeight: n
   measureContainer.className = 'prose max-w-none text-sm leading-relaxed'
   sheetWrapper.appendChild(measureContainer)
   const getLimit = () => pages.length === 0 ? page1MaxHeight : page2MaxHeight
+
+  // Split a single block (e.g. a long <p>) across pages at word boundaries,
+  // preserving inline formatting — this is what makes continuous typing flow
+  // onto the next page instead of disappearing behind the footer.
+  const splitByWords = (node: Node) => {
+    const isText = node.nodeType === Node.TEXT_NODE
+    const el = node as HTMLElement
+    const tag = isText ? '' : el.tagName.toLowerCase()
+
+    const makeShell = (): HTMLElement | null => {
+      if (isText) return null
+      const shell = document.createElement(tag)
+      for (const attr of Array.from(el.attributes)) shell.setAttribute(attr.name, attr.value)
+      return shell
+    }
+
+    let shell = makeShell()
+    if (shell) measureContainer.appendChild(shell)
+    const target = (): HTMLElement => shell ?? measureContainer
+
+    const flush = () => {
+      pages.push(measureContainer.innerHTML)
+      measureContainer.innerHTML = ''
+      shell = makeShell()
+      if (shell) measureContainer.appendChild(shell)
+    }
+
+    const appendInline = (child: Node) => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        // Keep whitespace tokens so total text content is preserved exactly
+        // (the caret-position math downstream relies on this).
+        const tokens = (child.nodeValue || '').split(/(\s+)/)
+        for (const tok of tokens) {
+          if (tok === '') continue
+          const tn = document.createTextNode(tok)
+          target().appendChild(tn)
+          if (measureContainer.offsetHeight > getLimit() && target().childNodes.length > 1) {
+            target().removeChild(tn)
+            flush()
+            target().appendChild(tn)
+          }
+        }
+      } else {
+        const c = child.cloneNode(true)
+        target().appendChild(c)
+        if (measureContainer.offsetHeight > getLimit()) {
+          target().removeChild(c)
+          if (target().childNodes.length === 0) {
+            appendChildNodes(child)
+          } else {
+            flush()
+            target().appendChild(c)
+            if (measureContainer.offsetHeight > getLimit() && target().childNodes.length === 1) {
+              target().removeChild(c)
+              appendChildNodes(child)
+            }
+          }
+        }
+      }
+    }
+
+    const appendChildNodes = (parent: Node) => {
+      for (const child of Array.from(parent.childNodes)) appendInline(child)
+    }
+
+    if (isText) appendInline(node)
+    else appendChildNodes(node)
+
+    // Drop a trailing empty shell so we don't emit a blank page/paragraph.
+    if (shell && shell.childNodes.length === 0) measureContainer.removeChild(shell)
+  }
+
   const appendAndMeasure = (node: Node) => {
     const cloned = node.cloneNode(true)
     measureContainer.appendChild(cloned)
@@ -1233,9 +1305,17 @@ const paginateContent = (html: string, page1MaxHeight: number, page2MaxHeight: n
         return
       }
     }
-    pages.push(measureContainer.innerHTML)
-    measureContainer.innerHTML = ''
+    // General case: this block doesn't fit on the current page. Move it to a
+    // fresh page first; if it STILL overflows on its own, it's a single block
+    // (e.g. a long typed paragraph) that must be split across pages by words.
+    if (measureContainer.innerHTML.trim() !== '') {
+      pages.push(measureContainer.innerHTML)
+      measureContainer.innerHTML = ''
+    }
     measureContainer.appendChild(cloned)
+    if (measureContainer.offsetHeight <= getLimit()) return
+    measureContainer.removeChild(cloned)
+    splitByWords(node)
   }
   Array.from(tempContainer.childNodes).forEach(child => { appendAndMeasure(child) })
   if (measureContainer.innerHTML.trim() !== '') pages.push(measureContainer.innerHTML)
