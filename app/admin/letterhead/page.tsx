@@ -501,17 +501,23 @@ export default function LetterheadEditorPage() {
             color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
 
-            /* Let long proposals flow naturally onto additional pages */
-            display: flex !important;
-            flex-direction: column !important;
+            /* Block (not flex) paginates far more reliably across pages */
+            display: block !important;
             overflow: visible !important;
             position: relative !important;
           }
 
-          /* Keep blocks intact across page breaks; don't orphan headings */
-          .print-sheet h2, .print-sheet h3 { break-after: avoid !important; page-break-after: avoid !important; }
-          .print-sheet li, .print-sheet tr, .print-sheet img { break-inside: avoid !important; page-break-inside: avoid !important; }
-          .print-sheet p { orphans: 2; widows: 2; }
+          /* Keep sections together so a heading never sits alone at a page bottom,
+             and lists / tables don't split across pages */
+          .print-sheet h2, .print-sheet h3 {
+            break-after: avoid !important; page-break-after: avoid !important;
+            break-inside: avoid !important; page-break-inside: avoid !important;
+          }
+          .print-sheet ul, .print-sheet ol, .print-sheet table,
+          .print-sheet li, .print-sheet tr, .print-sheet p, .print-sheet img {
+            break-inside: avoid !important; page-break-inside: avoid !important;
+          }
+          .print-sheet p { orphans: 3; widows: 3; }
 
           .print-sheet input, 
           .print-sheet textarea {
