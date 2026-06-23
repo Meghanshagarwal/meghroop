@@ -57,12 +57,12 @@ export default function Navbar() {
 
             <div
               role="menu"
-              className={`fixed left-1/2 top-16 -translate-x-1/2 pt-3 w-[min(92vw,920px)] transition-all duration-200 ${
+              className={`fixed left-1/2 top-16 -translate-x-1/2 pt-3 w-[min(92vw,820px)] transition-all duration-200 ${
                 servicesOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1 pointer-events-none'
               }`}
             >
               <div className="rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/95 backdrop-blur-xl p-3 shadow-2xl shadow-black/60">
-                <div className="grid grid-cols-2 lg:grid-cols-5 gap-1">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-1">
                   {serviceNav.map((group) => (
                     <div key={group.label} className="p-3">
                       <Link

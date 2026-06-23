@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Mail } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 import { serviceLinks } from '@/data/services'
+import { aiAgentLinks } from '@/data/aiAgents'
 
 type IconProps = { size?: number }
 
@@ -127,7 +128,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-[#080808]" role="contentinfo">
       <div className="max-w-7xl mx-auto px-6 py-16 sm:py-20">
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 sm:gap-12 mb-14">
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-10 sm:gap-12 mb-14">
           {/* Column 1 — Brand */}
           <div className="col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
@@ -160,10 +161,13 @@ export default function Footer() {
           {/* Column 2 — Services */}
           <FooterCol title="Services" links={serviceLinks} />
 
-          {/* Column 3 — Company */}
+          {/* Column 3 — AI Agents */}
+          <FooterCol title="AI Agents" links={aiAgentLinks.map(({ label, href }) => ({ label, href }))} />
+
+          {/* Column 4 — Company */}
           <FooterCol title="Company" links={companyLinks} />
 
-          {/* Column 4 — Resources */}
+          {/* Column 5 — Resources */}
           <FooterCol title="Resources" links={resourceLinks} />
         </div>
 
