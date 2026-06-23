@@ -156,6 +156,8 @@ export default function LetterheadEditorPage() {
   // Proposal State
   const [documentTitle, setDocumentTitle] = useState('PROPOSAL')
   const [documentSub, setDocumentSub] = useState('PREPARED FOR — CLIENT NAME')
+  const [proposalBody, setProposalBody] = useState('')
+  const [paginatedPages, setPaginatedPages] = useState<string[]>([])
   const editorRef = useRef<HTMLDivElement>(null)
 
   // Invoice State
@@ -203,10 +205,10 @@ export default function LetterheadEditorPage() {
       if (savedTitle) setDocumentTitle(savedTitle)
       if (savedSub) setDocumentSub(savedSub)
       
-      if (editorRef.current && (savedTab === 'proposal' || !savedTab)) {
-        editorRef.current.innerHTML = savedBody || defaultBody
-      } else if (editorRef.current && !savedBody) {
-        editorRef.current.innerHTML = defaultBody
+      const initialBody = savedBody || defaultBody
+      setProposalBody(initialBody)
+      if (editorRef.current) {
+        editorRef.current.innerHTML = initialBody
       }
 
       let parsedInvoice: Partial<InvoiceData> = {}
@@ -269,10 +271,17 @@ export default function LetterheadEditorPage() {
   // Secondary effect to fill editor when switching back to proposal if empty
   useEffect(() => {
     if (activeTab === 'proposal' && editorRef.current && !editorRef.current.innerHTML) {
-      const savedBody = localStorage.getItem('mr_lh_body')
-      editorRef.current.innerHTML = savedBody || defaultBody
+      const savedBody = localStorage.getItem('mr_lh_body') || defaultBody
+      editorRef.current.innerHTML = savedBody
+      setProposalBody(savedBody)
     }
   }, [activeTab])
+
+  // Re-run pagination whenever content or titles change
+  useEffect(() => {
+    const pages = paginateContent(proposalBody, 620, 800)
+    setPaginatedPages(pages)
+  }, [proposalBody, documentTitle, documentSub])
 
   // Debounced auto-save triggers
   const handleContentChange = () => {
@@ -304,6 +313,9 @@ export default function LetterheadEditorPage() {
   // Formatting Command Wrapper
   const executeCommand = (command: string, value: string = '') => {
     document.execCommand(command, false, value)
+    if (editorRef.current) {
+      setProposalBody(editorRef.current.innerHTML)
+    }
     handleContentChange()
     if (editorRef.current) editorRef.current.focus()
   }
@@ -368,7 +380,10 @@ export default function LetterheadEditorPage() {
     setActiveTab('proposal')
     setDocumentTitle(t.title)
     setDocumentSub(t.sub)
-    if (editorRef.current) editorRef.current.innerHTML = t.body
+    if (editorRef.current) {
+      editorRef.current.innerHTML = t.body
+    }
+    setProposalBody(t.body)
     handleContentChange()
   }
 
@@ -380,6 +395,7 @@ export default function LetterheadEditorPage() {
         if (editorRef.current) {
           editorRef.current.innerHTML = defaultBody
         }
+        setProposalBody(defaultBody)
       } else {
         setInvoiceData({
           invoiceNumber: 'MR-2026-001',
@@ -447,32 +463,17 @@ export default function LetterheadEditorPage() {
         .print-sheet .prose strong { font-weight: 700; }
 
         @media print {
-          /* A4 page with proper margins — 10mm top/bottom on EVERY page,
-             full-bleed left/right so dark background goes edge-to-edge */
           @page {
             size: A4 portrait;
-            margin: 10mm 0;
+            margin: 0 !important;
           }
 
-          /* Hide sidebar, dashboards, control panels, forms, navigation elements, and background frames */
-          aside,
-          header,
-          nav,
-          [aria-label="Mobile navigation"],
-          .no-print,
-          .invoice-form-pane,
-          .admin-sidebar {
+          aside, header, nav, [aria-label="Mobile navigation"],
+          .no-print, .invoice-form-pane, .admin-sidebar {
             display: none !important;
           }
 
-          /* Reset all parent container layouts to be transparent static block elements */
-          main, 
-          body, 
-          html,
-          .min-h-screen,
-          .flex-1,
-          .max-w-7xl,
-          .main-content-wrapper {
+          main, body, html, .min-h-screen, .flex-1, .max-w-7xl, .main-content-wrapper {
             margin: 0 !important;
             padding: 0 !important;
             background: transparent !important;
@@ -485,18 +486,11 @@ export default function LetterheadEditorPage() {
             min-height: 0 !important;
           }
 
-          /* Paint every printed page with the document's theme colour */
           html, body { background: ${bg} !important; }
 
-          /* WYSIWYG A4 sheet — display:block so all Tailwind padding (px-12,
-             pt-10, pb-8 etc.) works identically in print as on screen.
-             Previous display:table approach killed child padding. */
           .print-sheet {
             width: 210mm !important;
             max-width: none !important;
-            min-height: 0 !important;
-            height: auto !important;
-            max-height: none !important;
             margin: 0 auto !important;
             padding: 0 !important;
             border: none !important;
@@ -506,23 +500,29 @@ export default function LetterheadEditorPage() {
             background: ${bg} !important;
             color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
-            display: block !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
             overflow: visible !important;
-            position: static !important;
+            page-break-after: always !important;
+            break-after: page !important;
           }
 
-          /* Print-only footer — fixed positioning repeats it on every page */
-          .print-footer {
-            display: block !important;
-            position: fixed !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            background: ${bg} !important;
+          .print-sheet:last-child {
+            page-break-after: avoid !important;
+            break-after: avoid !important;
           }
 
-          /* Keep sections together so a heading never sits alone at a page bottom,
-             and lists / tables don't split across pages */
+          .proposal-page {
+            height: 297mm !important;
+          }
+
+          .invoice-page {
+            min-height: 297mm !important;
+            height: auto !important;
+          }
+
+          /* Keep sections together */
           .print-sheet h2, .print-sheet h3 {
             break-after: avoid !important; page-break-after: avoid !important;
             break-inside: avoid !important; page-break-inside: avoid !important;
@@ -533,22 +533,9 @@ export default function LetterheadEditorPage() {
           }
           .print-sheet p { orphans: 3; widows: 3; }
 
-          .print-sheet input, 
-          .print-sheet textarea {
-            background: transparent !important;
-            color: ${nameC} !important;
-            border: none !important;
-          }
-
-          /* Force exact backgrounds and text colors in PDF printer */
           * {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
-          }
-
-          /* Explicit print top-margin class — safety net to guarantee top spacing */
-          .print-top-margin {
-            padding-top: 40px !important;
           }
         }
       `}</style>
@@ -750,10 +737,67 @@ export default function LetterheadEditorPage() {
         </div>
       )}
 
-      {/* Main Workspace Body Layout (Adapts to dual-pane on invoice mode) */}
-      <div className={`flex-1 flex flex-col lg:flex-row gap-6 p-6 max-w-7xl mx-auto w-full transition-all duration-300 ${activeTab === 'invoice' ? 'lg:items-start' : 'justify-center'}`}>
+      {/* Main Workspace Body Layout (Adapts to dual-pane on both modes) */}
+      <div className="flex-1 flex flex-col lg:flex-row gap-6 p-6 max-w-7xl mx-auto w-full transition-all duration-300 lg:items-start justify-center">
         
-        {/* INVOICE INPUT FORM PANEL (Left 40% pane - Hide in Print) */}
+        {/* PROPOSAL INPUT EDITOR PANEL (Left 45% pane - Hide in Print) */}
+        {activeTab === 'proposal' && (
+          <div className="no-print w-full lg:w-[45%] bg-[#0c0c0c] border border-white/[0.06] rounded-2xl p-6 space-y-6">
+            <div className="border-b border-white/[0.06] pb-4">
+              <h2 className="text-sm font-bold text-white tracking-wide uppercase">Proposal Editor</h2>
+              <p className="text-xs text-gray-500 mt-1">Edit document content. The live preview on the right shows how pages will look.</p>
+            </div>
+
+            {/* Document Title & Subtitle */}
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Document Title</label>
+                <input
+                  type="text"
+                  value={documentTitle}
+                  onChange={(e) => {
+                    setDocumentTitle(e.target.value)
+                    handleContentChange()
+                  }}
+                  className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all font-semibold animate-none"
+                  placeholder="PROPOSAL"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Document Subtitle / Brief</label>
+                <input
+                  type="text"
+                  value={documentSub}
+                  onChange={(e) => {
+                    setDocumentSub(e.target.value)
+                    handleContentChange()
+                  }}
+                  className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.05] transition-all animate-none"
+                  placeholder="PREPARED FOR — CLIENT NAME"
+                />
+              </div>
+            </div>
+
+            {/* Continuous Editor Body */}
+            <div>
+              <label className="text-xs text-gray-400 font-semibold mb-1.5 block">Body Content</label>
+              <div
+                ref={editorRef}
+                contentEditable
+                onInput={(e) => {
+                  setProposalBody(e.currentTarget.innerHTML)
+                  handleContentChange()
+                }}
+                className="prose max-w-none text-sm outline-none leading-relaxed p-4 rounded-xl border border-white/[0.08] bg-white/[0.02] focus:bg-white/[0.04] focus:border-purple-500/50 transition-all min-h-[400px] max-h-[600px] overflow-y-auto"
+                style={{ 
+                  color: bodyC,
+                }}
+              ></div>
+            </div>
+          </div>
+        )}
+
+        {/* INVOICE INPUT FORM PANEL (Left 45% pane - Hide in Print) */}
         {activeTab === 'invoice' && (
           <div className="no-print w-full lg:w-[45%] bg-[#0c0c0c] border border-white/[0.06] rounded-2xl p-6 space-y-6">
             <div className="border-b border-white/[0.06] pb-4">
@@ -921,7 +965,7 @@ export default function LetterheadEditorPage() {
                 <button
                   type="button"
                   onClick={addInvoiceItem}
-                  className="flex items-center gap-1 text-[10px] text-purple-400 hover:text-purple-300 font-bold uppercase tracking-wider transition-all"
+                  className="flex items-center gap-1 text-[10px] text-purple-400 hover:text-purple-300 font-bold uppercase tracking-wider transition-all animate-none"
                 >
                   <Plus size={11} /> Add Item
                 </button>
@@ -983,24 +1027,155 @@ export default function LetterheadEditorPage() {
           </div>
         )}
 
-        {/* HIGH-FIDELITY A4 PREVIEW CANVAS PANEL (Right pane / Center pane) */}
-        <div className={`flex-1 flex justify-center ${activeTab === 'invoice' ? 'lg:w-[55%]' : 'w-full'}`}>
-          <div 
-            className="print-sheet w-full max-w-[680px] rounded-2xl shadow-2xl transition-all duration-300 border text-left flex flex-col justify-between"
-            style={{ 
-              fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-              background: bg,
-              border: border,
-              minHeight: '870px'
-            }}
-          >
-            {/* Content body — padding on inner divs (px-12, pt-10 etc.)
-                provides margins in both screen and print (WYSIWYG) */}
+        {/* HIGH-FIDELITY A4 PREVIEW CANVAS PANEL (Right pane) */}
+        <div className="w-full lg:w-[55%] flex flex-col items-center space-y-6">
+          {activeTab === 'proposal' ? (
+            paginatedPages.map((pageContent, idx) => (
+              <div 
+                key={idx}
+                className="print-sheet proposal-page relative w-full max-w-[680px] rounded-2xl shadow-2xl transition-all duration-300 border text-left flex flex-col justify-between"
+                style={{ 
+                  fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                  background: bg,
+                  border: border,
+                  width: '680px',
+                  height: '962px',
+                  boxSizing: 'border-box'
+                }}
+              >
+                {/* 1. Header Segment (Brand kit standards matching logo-kit.html) */}
+                <div className="w-full">
+                  <div style={{ height: '12mm' }} />
+                  
+                  {idx === 0 && (
+                    <>
+                      <div className="px-12 pt-10 pb-0">
+                        <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
+                          <tbody>
+                            <tr>
+                              <td valign="middle" className="w-[44px]">
+                                <img 
+                                  src="/icon-96.png" 
+                                  width="44" 
+                                  height="44" 
+                                  alt="MeghRoop Monogram" 
+                                  className="block rounded-[10px] bg-[#0d0d0d] w-11 h-11"
+                                />
+                              </td>
+                              <td valign="middle" className="px-3.5 w-1">
+                                <div 
+                                  className="w-[2px] h-[38px] rounded-[1px]"
+                                  style={{ background: gradL }}
+                                ></div>
+                              </td>
+                              <td valign="middle">
+                                <p 
+                                  className="m-0 text-xl font-bold tracking-tight"
+                                  style={{ color: nameC, letterSpacing: '-0.02em' }}
+                                >
+                                  MeghRoop
+                                </p>
+                                <p 
+                                  className="m-0 text-[10px] font-semibold tracking-widest uppercase"
+                                  style={{ color: subC, letterSpacing: '0.14em' }}
+                                >
+                                  Growth · AI · Software Agency
+                                </p>
+                              </td>
+                              <td valign="middle" className="text-right">
+                                <p 
+                                  className="m-0 text-[11px] leading-[1.8] font-medium animate-none"
+                                  style={{ color: bodyC }}
+                                >
+                                  <a href="https://meghroop.tech" target="_blank" rel="noopener noreferrer" style={{ color: gradL, textDecoration: 'none' }}>
+                                    meghroop.tech
+                                  </a>
+                                  <br />
+                                  hello@meghroop.tech
+                                  <br />
+                                  Rajasthan, India
+                                </p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
 
-            <div className="w-full">
-              
-              {/* 1. Header Segment (Brand kit standards matching logo-kit.html) */}
-              <div className="px-12 pt-10 pb-0 print-top-margin">
+                      {/* 2. Brand Gradient Divider */}
+                      <div className="px-12 pt-4 pb-0">
+                        <div 
+                          className="h-[2px] rounded-[2px]"
+                          style={{ background: `linear-gradient(90deg, ${gradL}, ${gradR}, transparent)` }}
+                        ></div>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* 3. Proposal Content Area */}
+                <div className="px-12 py-8 flex-1 overflow-hidden">
+                  {idx === 0 && (
+                    <div className="mb-4">
+                      {/* Document Subtitle */}
+                      <div 
+                        className="font-semibold text-[11px] tracking-widest uppercase mb-3"
+                        style={{ color: subC, letterSpacing: '0.14em' }}
+                      >
+                        {documentSub || 'DOCUMENT SUBTITLE / BRIEF'}
+                      </div>
+
+                      {/* Document Title */}
+                      <div 
+                        className="font-bold text-2xl tracking-tight mb-5"
+                        style={{ color: nameC, letterSpacing: '-0.02em' }}
+                      >
+                        {documentTitle || 'Proposal / Invoice / Letter'}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Free-form Body Content */}
+                  <div
+                    className="prose max-w-none text-sm outline-none leading-relaxed"
+                    style={{ color: bodyC }}
+                    dangerouslySetInnerHTML={{ __html: pageContent }}
+                  ></div>
+                </div>
+
+                {/* 4. Footer Segment */}
+                <div style={{ borderTop: `1px solid ${footerBorder}`, padding: '8px 48px 12px', background: bg }} className="w-full">
+                  <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
+                    <tbody>
+                      <tr>
+                        <td className="text-[10px] font-medium" style={{ color: footC, border: 'none' }}>
+                          MeghRoop &middot; Growth, AI &amp; Software Agency
+                        </td>
+                        <td className="text-right text-[10px] font-medium" style={{ color: footC, border: 'none' }}>
+                          meghroop.tech &middot; Rajasthan, India
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ))
+          ) : (
+            /* Invoice Mode Preview Sheet */
+            <div 
+              className="print-sheet invoice-page relative w-full max-w-[680px] rounded-2xl shadow-2xl transition-all duration-300 border text-left flex flex-col justify-between"
+              style={{ 
+                fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                background: bg,
+                border: border,
+                minHeight: '962px',
+                boxSizing: 'border-box'
+              }}
+            >
+              {/* Header spacer */}
+              <div style={{ height: '12mm' }} />
+
+              {/* Branding Header segment */}
+              <div className="px-12 pt-10 pb-0">
                 <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
                   <tbody>
                     <tr>
@@ -1052,7 +1227,7 @@ export default function LetterheadEditorPage() {
                 </table>
               </div>
 
-              {/* 2. Brand Gradient Divider */}
+              {/* Brand Gradient Divider */}
               <div className="px-12 pt-4 pb-0">
                 <div 
                   className="h-[2px] rounded-[2px]"
@@ -1060,217 +1235,138 @@ export default function LetterheadEditorPage() {
                 ></div>
               </div>
 
-              {/* 3A. DOCUMENT PREVIEW: PROPOSAL / LETTER MODE */}
-              {activeTab === 'proposal' && (
-                <div className="px-12 py-8">
-                  {/* Editable Subtitle */}
-                  <input
-                    type="text"
-                    value={documentSub}
-                    onChange={(e) => {
-                      setDocumentSub(e.target.value)
-                      handleContentChange()
-                    }}
-                    className="w-full bg-transparent border-none outline-none font-semibold text-[11px] tracking-widest uppercase mb-3 focus:bg-white/[0.02] p-1 rounded transition-all"
-                    style={{ color: subC, letterSpacing: '0.14em' }}
-                    placeholder="DOCUMENT SUBTITLE / BRIEF"
-                  />
-
-                  {/* Editable Title */}
-                  <input
-                    type="text"
-                    value={documentTitle}
-                    onChange={(e) => {
-                      setDocumentTitle(e.target.value)
-                      handleContentChange()
-                    }}
-                    className="w-full bg-transparent border-none outline-none font-bold text-2xl tracking-tight mb-5 focus:bg-white/[0.02] p-1 rounded transition-all"
-                    style={{ color: nameC, letterSpacing: '-0.02em' }}
-                    placeholder="Proposal / Invoice / Letter"
-                  />
-
-                  {/* Free-form Body Content */}
-                  <div
-                    ref={editorRef}
-                    contentEditable
-                    onInput={handleContentChange}
-                    className="prose max-w-none text-sm outline-none leading-relaxed p-1 rounded focus:bg-white/[0.01] transition-all min-h-[340px]"
-                    style={{ 
-                      color: bodyC,
-                    }}
-                  ></div>
+              {/* Invoice Body */}
+              <div className="px-12 py-8 space-y-6 flex-1">
+                {/* Invoice Title Block */}
+                <div>
+                  <h2 className="font-bold text-2xl tracking-tight m-0" style={{ color: nameC, letterSpacing: '-0.02em' }}>
+                    INVOICE
+                  </h2>
+                  <p className="text-[10px] font-semibold tracking-widest uppercase m-0 mt-1" style={{ color: subC, letterSpacing: '0.14em' }}>
+                    Official Billing Statement
+                  </p>
                 </div>
-              )}
 
-              {/* 3B. DOCUMENT PREVIEW: DYNAMIC INVOICE MODE */}
-              {activeTab === 'invoice' && (
-                <div className="px-12 py-8 space-y-6">
-                  
-                  {/* Invoice Title Block */}
-                  <div>
-                    <h2 className="font-bold text-2xl tracking-tight m-0" style={{ color: nameC, letterSpacing: '-0.02em' }}>
-                      INVOICE
-                    </h2>
-                    <p className="text-[10px] font-semibold tracking-widest uppercase m-0 mt-1" style={{ color: subC, letterSpacing: '0.14em' }}>
-                      Official Billing Statement
+                {/* Invoice Metadata Grid */}
+                <div className="grid grid-cols-3 gap-6 text-[10px] border-y py-4" style={{ borderColor: tableBorder }}>
+                  <div className="space-y-1">
+                    <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                      BILLED TO:
+                    </span>
+                    <p className="font-bold m-0 text-[11px] leading-tight" style={{ color: nameC }}>{invoiceData.clientName || 'Client Name'}</p>
+                    <p className="whitespace-pre-line m-0 leading-relaxed text-[10px] mt-1" style={{ color: bodyC }}>
+                      {invoiceData.clientAddress || 'Client Address'}
+                    </p>
+                    {invoiceData.clientGst && (
+                      <p className="m-0 mt-1" style={{ color: bodyC }}>
+                        <strong>GST:</strong> <span className="font-mono text-[9px]">{invoiceData.clientGst.toUpperCase()}</span>
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1">
+                    <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                      BANK DETAILS:
+                    </span>
+                    <p className="font-bold m-0 text-[11px] leading-tight" style={{ color: nameC }}>{invoiceData.bankName || 'Bank Name'}</p>
+                    <div className="space-y-0.5 leading-normal text-[10px] mt-1" style={{ color: bodyC }}>
+                      <p className="m-0">A/C: <span className="font-semibold text-white">{invoiceData.bankHolder || 'Holder Name'}</span></p>
+                      <p className="m-0">No: <span className="font-mono text-white">{invoiceData.bankAccount || 'Account Number'}</span></p>
+                      <p className="m-0">IFSC: <span className="font-mono text-white uppercase">{invoiceData.bankIfsc || 'IFSC Code'}</span></p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 text-right">
+                    <div>
+                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                        INVOICE NUMBER:
+                      </span>
+                      <span className="font-mono font-bold text-[11px]" style={{ color: nameC }}>{invoiceData.invoiceNumber}</span>
+                    </div>
+                    {invoiceData.gstNumber && (
+                      <div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                          GSTIN (STUDIO):
+                        </span>
+                        <span className="font-mono font-bold text-[10px]" style={{ color: nameC }}>{invoiceData.gstNumber.toUpperCase()}</span>
+                      </div>
+                    )}
+                    <div>
+                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                        DATE OF ISSUE:
+                      </span>
+                      <span className="font-mono font-medium text-[10px]" style={{ color: bodyC }}>{invoiceData.invoiceDate}</span>
+                    </div>
+                    <div>
+                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                        DUE DATE:
+                      </span>
+                      <span className="font-mono font-bold text-[10px]" style={{ color: nameC }}>{invoiceData.dueDate}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Items Table */}
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs text-left border-collapse">
+                    <thead>
+                      <tr className="border-b" style={{ borderColor: tableBorder }}>
+                        <th className="py-2.5 font-bold tracking-wider" style={{ color: labelC }}>DESCRIPTION</th>
+                        <th className="py-2.5 text-right font-bold tracking-wider w-32" style={{ color: labelC }}>AMOUNT</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {invoiceData.items.map((item) => (
+                        <tr key={item.id} className="border-b" style={{ borderColor: tableBorder }}>
+                          <td className="py-3 pr-4 font-medium" style={{ color: nameC }}>{item.description}</td>
+                          <td className="py-3 text-right font-mono font-bold" style={{ color: nameC }}>
+                            {invoiceData.currency}{item.rate.toLocaleString()}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Summary calculation blocks */}
+                <div className="flex flex-col sm:flex-row justify-between gap-6 pt-4 text-xs">
+                  <div className="flex-1 space-y-1.5">
+                    <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
+                      PAYMENT INSTRUCTIONS &amp; NOTES:
+                    </span>
+                    <p className="m-0 leading-relaxed text-[11px] whitespace-pre-line" style={{ color: bodyC }}>
+                      {invoiceData.paymentNotes || 'No notes added.'}
                     </p>
                   </div>
 
-                  {/* Invoice Metadata Grid - Premium 3-column Layout */}
-                  <div className="grid grid-cols-3 gap-6 text-[10px] border-y py-4" style={{ borderColor: tableBorder }}>
-                    {/* Billed To client information */}
-                    <div className="space-y-1">
-                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                        BILLED TO:
-                      </span>
-                      <p className="font-bold m-0 text-[11px] leading-tight" style={{ color: nameC }}>{invoiceData.clientName || 'Client Name'}</p>
-                      <p className="whitespace-pre-line m-0 leading-relaxed text-[10px] mt-1" style={{ color: bodyC }}>
-                        {invoiceData.clientAddress || 'Client Address'}
-                      </p>
-                      {invoiceData.clientGst && (
-                        <p className="m-0 mt-1" style={{ color: bodyC }}>
-                          <strong>GST:</strong> <span className="font-mono text-[9px]">{invoiceData.clientGst.toUpperCase()}</span>
-                        </p>
-                      )}
+                  <div className="w-full sm:w-56 space-y-2 text-right">
+                    <div className="flex justify-between">
+                      <span style={{ color: labelC }}>Subtotal:</span>
+                      <span className="font-mono font-semibold" style={{ color: bodyC }}>{invoiceData.currency}{subtotal.toLocaleString()}</span>
                     </div>
-
-                    {/* Bank Details Column */}
-                    <div className="space-y-1">
-                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                        BANK DETAILS:
-                      </span>
-                      <p className="font-bold m-0 text-[11px] leading-tight" style={{ color: nameC }}>{invoiceData.bankName || 'Bank Name'}</p>
-                      <div className="space-y-0.5 leading-normal text-[10px] mt-1" style={{ color: bodyC }}>
-                        <p className="m-0">A/C: <span className="font-semibold text-white">{invoiceData.bankHolder || 'Holder Name'}</span></p>
-                        <p className="m-0">No: <span className="font-mono text-white">{invoiceData.bankAccount || 'Account Number'}</span></p>
-                        <p className="m-0">IFSC: <span className="font-mono text-white uppercase">{invoiceData.bankIfsc || 'IFSC Code'}</span></p>
-                      </div>
+                    <div className="flex justify-between">
+                      <span style={{ color: labelC }}>Tax ({invoiceData.taxPercent}%):</span>
+                      <span className="font-mono font-semibold" style={{ color: bodyC }}>+{invoiceData.currency}{taxAmount.toLocaleString()}</span>
                     </div>
-
-                    {/* Billing Metadata details */}
-                    <div className="space-y-2 text-right">
-                      <div>
-                        <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                          INVOICE NUMBER:
-                        </span>
-                        <span className="font-mono font-bold text-[11px]" style={{ color: nameC }}>{invoiceData.invoiceNumber}</span>
-                      </div>
-                      {invoiceData.gstNumber && (
-                        <div>
-                          <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                            GSTIN (STUDIO):
-                          </span>
-                          <span className="font-mono font-bold text-[10px]" style={{ color: nameC }}>{invoiceData.gstNumber.toUpperCase()}</span>
-                        </div>
-                      )}
-                      <div>
-                        <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                          DATE OF ISSUE:
-                        </span>
-                        <span className="font-mono font-medium text-[10px]" style={{ color: bodyC }}>{invoiceData.invoiceDate}</span>
-                      </div>
-                      <div>
-                        <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                          DUE DATE:
-                        </span>
-                        <span className="font-mono font-bold text-[10px]" style={{ color: nameC }}>{invoiceData.dueDate}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Premium Invoicing Table (Removed QTY/RATE columns for super clean styling) */}
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs text-left border-collapse">
-                      <thead>
-                        <tr className="border-b" style={{ borderColor: tableBorder }}>
-                          <th className="py-2.5 font-bold tracking-wider" style={{ color: labelC }}>DESCRIPTION</th>
-                          <th className="py-2.5 text-right font-bold tracking-wider w-32" style={{ color: labelC }}>AMOUNT</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {invoiceData.items.map((item) => (
-                          <tr key={item.id} className="border-b" style={{ borderColor: tableBorder }}>
-                            <td className="py-3 pr-4 font-medium" style={{ color: nameC }}>{item.description}</td>
-                            <td className="py-3 text-right font-mono font-bold" style={{ color: nameC }}>
-                              {invoiceData.currency}{item.rate.toLocaleString()}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Summary calculation blocks */}
-                  <div className="flex flex-col sm:flex-row justify-between gap-6 pt-4 text-xs">
-                    {/* Bank Details / Custom Payment parameters */}
-                    <div className="flex-1 space-y-1.5">
-                      <span className="text-[9px] font-bold uppercase tracking-wider block" style={{ color: labelC }}>
-                        PAYMENT INSTRUCTIONS &amp; NOTES:
-                      </span>
-                      <textarea
-                        rows={4}
-                        value={invoiceData.paymentNotes}
-                        onChange={(e) => handleInvoiceChange('paymentNotes', e.target.value)}
-                        className="w-full bg-transparent border-none outline-none resize-none leading-relaxed p-0 text-[11px]"
-                        style={{ color: bodyC }}
-                        placeholder="Add payment methods or terms..."
-                      />
-                    </div>
-
-                    {/* Calculations Subtotal Stack */}
-                    <div className="w-full sm:w-56 space-y-2 text-right">
+                    {invoiceData.discountAmount > 0 && (
                       <div className="flex justify-between">
-                        <span style={{ color: labelC }}>Subtotal:</span>
-                        <span className="font-mono font-semibold" style={{ color: bodyC }}>{invoiceData.currency}{subtotal.toLocaleString()}</span>
+                        <span style={{ color: labelC }}>Discount:</span>
+                        <span className="font-mono font-semibold text-emerald-500">-{invoiceData.currency}{invoiceData.discountAmount.toLocaleString()}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span style={{ color: labelC }}>Tax ({invoiceData.taxPercent}%):</span>
-                        <span className="font-mono font-semibold" style={{ color: bodyC }}>+{invoiceData.currency}{taxAmount.toLocaleString()}</span>
-                      </div>
-                      {invoiceData.discountAmount > 0 && (
-                        <div className="flex justify-between">
-                          <span style={{ color: labelC }}>Discount:</span>
-                          <span className="font-mono font-semibold text-emerald-500">-{invoiceData.currency}{invoiceData.discountAmount.toLocaleString()}</span>
-                        </div>
-                      )}
-                      
-                      {/* Premium Total Due highlighted container */}
-                      <div className="flex justify-between border-t pt-2.5" style={{ borderColor: tableBorder }}>
-                        <span className="font-bold" style={{ color: nameC }}>Total Due:</span>
-                        <span className="font-mono font-bold text-sm bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
-                          {invoiceData.currency}{grandTotal.toLocaleString()}
-                        </span>
-                      </div>
+                    )}
+                    
+                    <div className="flex justify-between border-t pt-2.5" style={{ borderColor: tableBorder }}>
+                      <span className="font-bold" style={{ color: nameC }}>Total Due:</span>
+                      <span className="font-mono font-bold text-sm bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                        {invoiceData.currency}{grandTotal.toLocaleString()}
+                      </span>
                     </div>
                   </div>
-
                 </div>
-              )}
-            </div>
+              </div>
 
-            {/* 4. Footer Segment — visible on both screen and print */}
-            <div className="px-12 pb-8 pt-0 mt-auto w-full">
-              <div 
-                className="h-[1px] mb-4"
-                style={{ background: footerBorder }}
-              ></div>
-              <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
-                <tbody>
-                  <tr>
-                    <td className="text-[10px] font-medium" style={{ color: footC }}>
-                      MeghRoop &middot; Growth, AI &amp; Software Agency
-                    </td>
-                    <td className="text-right text-[10px] font-medium" style={{ color: footC }}>
-                      meghroop.tech &middot; Rajasthan, India
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* Print-only repeating footer — position:fixed prints on every page */}
-            <div className="print-footer" style={{ display: 'none' }}>
-              <div style={{ borderTop: `1px solid ${footerBorder}`, padding: '6px 48px 12px', background: bg }}>
+              {/* Invoice Footer */}
+              <div style={{ borderTop: `1px solid ${footerBorder}`, padding: '8px 48px 12px', background: bg }} className="w-full">
                 <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
                   <tbody>
                     <tr>
@@ -1285,12 +1381,133 @@ export default function LetterheadEditorPage() {
                 </table>
               </div>
             </div>
-
-          </div>
+          )}
         </div>
 
       </div>
 
     </div>
   )
+}
+
+// Helper function to paginate content based on element height measurement
+const paginateContent = (
+  html: string,
+  page1MaxHeight: number,
+  page2MaxHeight: number
+): string[] => {
+  if (typeof document === 'undefined') return [html || '<p><br></p>']
+
+  const tempContainer = document.createElement('div')
+  tempContainer.style.width = '584px' // 680px - padding px-12 (48px * 2) = 584px
+  tempContainer.style.position = 'absolute'
+  tempContainer.style.visibility = 'hidden'
+  tempContainer.style.fontFamily = "'Space Grotesk', sans-serif"
+  tempContainer.style.fontSize = '14px'
+  tempContainer.style.lineHeight = '1.625'
+  tempContainer.className = 'prose text-sm'
+  document.body.appendChild(tempContainer)
+  tempContainer.innerHTML = html || '<p><br></p>'
+
+  const pages: string[] = []
+  const measureContainer = document.createElement('div')
+  measureContainer.style.width = '584px'
+  measureContainer.style.fontFamily = "'Space Grotesk', sans-serif"
+  measureContainer.style.fontSize = '14px'
+  measureContainer.style.lineHeight = '1.625'
+  measureContainer.className = 'prose text-sm'
+  tempContainer.appendChild(measureContainer)
+
+  const getLimit = () => {
+    return pages.length === 0 ? page1MaxHeight : page2MaxHeight
+  }
+
+  const appendAndMeasure = (node: Node) => {
+    const limit = getLimit()
+    const cloned = node.cloneNode(true)
+    measureContainer.appendChild(cloned)
+    const height = measureContainer.offsetHeight
+
+    if (height <= limit) {
+      return // Fits!
+    }
+
+    // Doesn't fit. Let's see if we should split it.
+    measureContainer.removeChild(cloned)
+
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as HTMLElement
+      const tagName = el.tagName.toLowerCase()
+      
+      // If it's a list (ul or ol), split its items (li)
+      if (tagName === 'ul' || tagName === 'ol') {
+        const listItems = Array.from(el.childNodes)
+        let newList = document.createElement(tagName)
+        measureContainer.appendChild(newList)
+        
+        for (const item of listItems) {
+          const itemCloned = item.cloneNode(true)
+          newList.appendChild(itemCloned)
+          if (measureContainer.offsetHeight > getLimit()) {
+            newList.removeChild(itemCloned)
+            pages.push(measureContainer.innerHTML)
+            
+            measureContainer.innerHTML = ''
+            newList = document.createElement(tagName)
+            measureContainer.appendChild(newList)
+            newList.appendChild(itemCloned)
+          }
+        }
+        return
+      }
+
+      // If it's a table, split its tbody tr elements
+      if (tagName === 'table') {
+        const thead = el.querySelector('thead')
+        const rows = Array.from(el.querySelectorAll('tbody tr'))
+        
+        let newTable = document.createElement('table')
+        if (thead) newTable.appendChild(thead.cloneNode(true))
+        let newTbody = document.createElement('tbody')
+        newTable.appendChild(newTbody)
+        measureContainer.appendChild(newTable)
+
+        for (const row of rows) {
+          const rowCloned = row.cloneNode(true)
+          newTbody.appendChild(rowCloned)
+          if (measureContainer.offsetHeight > getLimit()) {
+            newTbody.removeChild(rowCloned)
+            pages.push(measureContainer.innerHTML)
+            
+            measureContainer.innerHTML = ''
+            newTable = document.createElement('table')
+            if (thead) newTable.appendChild(thead.cloneNode(true))
+            newTbody = document.createElement('tbody')
+            newTable.appendChild(newTbody)
+            measureContainer.appendChild(newTable)
+            newTbody.appendChild(rowCloned)
+          }
+        }
+        return
+      }
+    }
+
+    // For other block elements, push current page and start next page with it
+    pages.push(measureContainer.innerHTML)
+    measureContainer.innerHTML = ''
+    measureContainer.appendChild(cloned)
+  }
+
+  const rootChildren = Array.from(tempContainer.childNodes)
+  for (const child of rootChildren) {
+    if (child === measureContainer) continue
+    appendAndMeasure(child)
+  }
+
+  if (measureContainer.innerHTML.trim() !== '') {
+    pages.push(measureContainer.innerHTML)
+  }
+
+  document.body.removeChild(tempContainer)
+  return pages.length > 0 ? pages : [html || '<p><br></p>']
 }
