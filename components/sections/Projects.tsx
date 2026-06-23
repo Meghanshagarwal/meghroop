@@ -116,9 +116,10 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
           </div>
         </motion.div>
 
-        {/* Carousel wrapper — overflow hidden clips the sliding cards */}
+        {/* Carousel wrapper — fixed height keeps every slide the same size so
+            cards don't jump up/down while sliding */}
         <div
-          className="relative overflow-hidden rounded-2xl"
+          className="relative overflow-hidden rounded-2xl h-[560px] sm:h-[520px] md:h-[440px]"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -136,10 +137,10 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
               dragDirectionLock
               onDragStart={() => { setDragging(true); setPaused(true) }}
               onDragEnd={handleDragEnd}
-              className={`grid grid-cols-1 md:grid-cols-5 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none touch-pan-y ${dragging ? 'cursor-grabbing' : 'cursor-grab md:cursor-grab'}`}
+              className={`absolute inset-0 grid grid-cols-1 grid-rows-[14rem_1fr] sm:grid-rows-[18rem_1fr] md:grid-cols-5 md:grid-rows-1 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none touch-pan-y ${dragging ? 'cursor-grabbing' : 'cursor-grab md:cursor-grab'}`}
             >
               {/* Visual panel */}
-              <div className="md:col-span-3 relative h-56 sm:h-72 md:h-auto overflow-hidden min-h-[260px]">
+              <div className="md:col-span-3 relative h-full overflow-hidden">
                 {/* Base photo */}
                 <Image
                   src={project.image}
@@ -170,12 +171,12 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
               </div>
 
               {/* Info panel */}
-              <div className="md:col-span-2 p-5 sm:p-7 md:p-8 flex flex-col justify-between gap-5 sm:gap-6">
+              <div className="md:col-span-2 p-5 sm:p-7 md:p-8 flex flex-col justify-between gap-5 sm:gap-6 overflow-hidden">
                 <div>
                   <h3 className="font-heading font-bold text-lg sm:text-xl text-white mb-2 sm:mb-3 leading-snug">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm text-gray-400 leading-relaxed line-clamp-3 md:line-clamp-4">
                     {project.description}
                   </p>
                 </div>
