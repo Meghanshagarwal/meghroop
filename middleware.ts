@@ -1,41 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-
-function b64urlDecode(str: string): Uint8Array {
-  const base64 = str.replace(/-/g, '+').replace(/_/g, '/')
-  const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4)
-  const binary = atob(padded)
-  return Uint8Array.from(binary, (c) => c.charCodeAt(0))
-}
-
-async function verifyToken(token: string, secret: string): Promise<boolean> {
-  try {
-    const parts = token.split('.')
-    if (parts.length !== 3) return false
-    const [header, payload, signature] = parts
-
-    const key = await crypto.subtle.importKey(
-      'raw',
-      new TextEncoder().encode(secret),
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['verify']
-    )
-    const valid = await crypto.subtle.verify(
-      'HMAC',
-      key,
-      b64urlDecode(signature).buffer as ArrayBuffer,
-      new TextEncoder().encode(`${header}.${payload}`)
-    )
-    if (!valid) return false
-
-    const pl = JSON.parse(new TextDecoder().decode(b64urlDecode(payload)))
-    if (pl.exp && pl.exp < Math.floor(Date.now() / 1000)) return false
-    return true
-  } catch {
-    return false
-  }
-}
+import { verifyAdminToken } from '@/lib/admin-auth'
 
 export async function middleware(request: NextRequest) {
   const host = request.headers.get('host') || ''
@@ -60,10 +25,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/admin', request.url))
   }
 
-  const secret = process.env.ADMIN_JWT_SECRET ?? ''
-  const valid = await verifyToken(token, secret)
+  // Reuse the same jose-based verification the API routes use, so there is a
+  // single HS256 implementation (exp is enforced by jwtVerify).
+  const payload = await verifyAdminToken(token)
 
-  if (!valid) {
+  if (!payload) {
     if (pathname.startsWith('/api/admin')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }

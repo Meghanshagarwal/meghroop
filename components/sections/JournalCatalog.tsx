@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Calendar, Clock, ArrowUpRight, Search, BookOpen, ArrowRight } from 'lucide-react'
 import { Article } from '@/lib/journal'
 import CodeBuiltVisual from '@/components/common/CodeBuiltVisual'

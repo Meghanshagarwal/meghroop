@@ -1,52 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
-import { getSupabase } from '@/lib/supabase'
+import { insertLead } from '@/lib/leads'
+import { escapeHtml, clientIp } from '@/lib/utils'
+import { rateLimit } from '@/lib/rate-limit'
 
 export const runtime = 'nodejs'
 
+const MAX_NAME = 120
+const MAX_EMAIL = 200
+const MAX_TYPE = 120
+const MAX_MESSAGE = 5000
+
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, projectType, message } = await req.json()
+    // Rate limit: max 5 submissions per IP per 10 minutes.
+    const limit = rateLimit(`contact:${clientIp(req)}`, 5, 10 * 60 * 1000)
+    if (!limit.ok) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429, headers: { 'Retry-After': String(limit.retryAfter) } }
+      )
+    }
+
+    const body = await req.json()
+    const { name, email, projectType, message } = body
+
+    // Honeypot: bots fill hidden fields; real users leave them empty.
+    if (body.website || body.company_url) {
+      return NextResponse.json({ success: true }) // silently drop
+    }
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // 0. Save lead to Supabase database
+    if (
+      typeof name !== 'string' || typeof email !== 'string' || typeof message !== 'string' ||
+      name.length > MAX_NAME || email.length > MAX_EMAIL || message.length > MAX_MESSAGE ||
+      (projectType && (typeof projectType !== 'string' || projectType.length > MAX_TYPE))
+    ) {
+      return NextResponse.json({ error: 'Invalid input' }, { status: 400 })
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: 'A valid email is required' }, { status: 400 })
+    }
+
+    // 0. Save lead — single row INSERT (no read-modify-write race).
     try {
-      const db = getSupabase()
-      const { data: dbData } = await db
-        .from('settings')
-        .select('value')
-        .eq('key', 'client_leads_data')
-        .single()
-      
-      let leads = []
-      if (dbData && dbData.value) {
-        leads = JSON.parse(dbData.value)
-      }
-      if (!Array.isArray(leads)) {
-        leads = []
-      }
-
-      const newLead = {
-        id: 'lead_' + Math.random().toString(36).substring(2, 9),
-        name,
-        email,
-        projectType: projectType || 'Not specified',
-        message,
-        status: 'new',
-        notes: '',
-        createdAt: new Date().toISOString(),
-      }
-
-      leads = [newLead, ...leads]
-
-      await db
-        .from('settings')
-        .upsert({ key: 'client_leads_data', value: JSON.stringify(leads) }, { onConflict: 'key' })
+      await insertLead({ name, email, projectType, message })
     } catch (err) {
-      console.error('[Contact] Supabase lead save error:', err)
+      console.error('[Contact] Lead save error:', err)
     }
 
     // 1. Send to Google Sheets via Apps Script
@@ -85,6 +90,15 @@ export async function POST(req: NextRequest) {
           day: 'numeric', month: 'long', year: 'numeric',
         })
 
+        // HTML-escaped versions for safe interpolation into email markup.
+        const safeName = escapeHtml(name)
+        const safeEmail = escapeHtml(email)
+        const safeType = escapeHtml(projectType || 'Not specified')
+        const safeMessage = escapeHtml(message).replace(/\n/g, '<br>')
+        const safeMessageShort = escapeHtml(
+          message.length > 150 ? message.substring(0, 150) : message
+        ).replace(/\n/g, message.length > 150 ? ' ' : '<br>') + (message.length > 150 ? '...' : '')
+
         // ── Notification email to MeghRoop ──────────────────────────────
         await transporter.sendMail({
           from: `"MeghRoop Contact" <${emailUser}>`,
@@ -95,7 +109,7 @@ export async function POST(req: NextRequest) {
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Inquiry from ${name} — MeghRoop</title>
+  <title>New Inquiry from ${safeName} — MeghRoop</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" type="text/css" />
   <style type="text/css">
     body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
@@ -180,7 +194,7 @@ export async function POST(req: NextRequest) {
                             <tr>
                               <td valign="top" width="110" style="width: 110px; padding-bottom: 14px; font-size: 13px; color: #71717a; font-weight: 500;">Client Name</td>
                               <td valign="top" style="padding-bottom: 14px; font-size: 13px; color: #ffffff; font-weight: 600;">
-                                ${name}
+                                ${safeName}
                               </td>
                             </tr>
                             
@@ -188,7 +202,7 @@ export async function POST(req: NextRequest) {
                             <tr>
                               <td valign="top" width="110" style="width: 110px; padding-bottom: 14px; font-size: 13px; color: #71717a; font-weight: 500;">Email Address</td>
                               <td valign="top" style="padding-bottom: 14px; font-size: 13px; font-weight: 500;">
-                                <a href="mailto:${email}" style="color: #60a5fa; text-decoration: none;">${email}</a>
+                                <a href="mailto:${safeEmail}" style="color: #60a5fa; text-decoration: none;">${safeEmail}</a>
                               </td>
                             </tr>
 
@@ -197,7 +211,7 @@ export async function POST(req: NextRequest) {
                               <td valign="top" width="110" style="width: 110px; padding-bottom: 14px; font-size: 13px; color: #71717a; font-weight: 500;">Project Type</td>
                               <td valign="top" style="padding-bottom: 14px;">
                                 <span style="display: inline-block; background-color: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 20px; padding: 2px 10px; color: #c084fc; font-size: 12px; font-weight: 600;">
-                                  ${projectType || 'Not specified'}
+                                  ${safeType}
                                 </span>
                               </td>
                             </tr>
@@ -207,7 +221,7 @@ export async function POST(req: NextRequest) {
                               <td valign="top" width="110" style="width: 110px; font-size: 13px; color: #71717a; font-weight: 500; padding-top: 4px;">Message Body</td>
                               <td valign="top" style="padding-top: 4px;">
                                 <div style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #e4e4e7; line-height: 1.6; font-weight: 400; min-height: 40px; word-break: break-word;">
-                                  ${message.replace(/\n/g, '<br>')}
+                                  ${safeMessage}
                                 </div>
                               </td>
                             </tr>
@@ -220,7 +234,7 @@ export async function POST(req: NextRequest) {
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                       <tr>
                         <td align="center" style="padding-top: 10px;">
-                          <a href="mailto:${email}" style="display: inline-block; background: linear-gradient(135deg, #7c3aed, #2563eb); color: #ffffff; font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 10px; letter-spacing: 0.02em;">Reply to ${name}</a>
+                          <a href="mailto:${safeEmail}" style="display: inline-block; background: linear-gradient(135deg, #7c3aed, #2563eb); color: #ffffff; font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 10px; letter-spacing: 0.02em;">Reply to ${safeName}</a>
                         </td>
                       </tr>
                     </table>
@@ -328,7 +342,7 @@ export async function POST(req: NextRequest) {
                       &#10003;&#65038;
                     </div>
                     <h1 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #ffffff; letter-spacing: -0.03em;">Message received!</h1>
-                    <p style="margin: 0; color: #a1a1aa; font-size: 14px; font-weight: 400;">Thanks for reaching out, ${name}.</p>
+                    <p style="margin: 0; color: #a1a1aa; font-size: 14px; font-weight: 400;">Thanks for reaching out, ${safeName}.</p>
                   </td>
                 </tr>
 
@@ -349,14 +363,14 @@ export async function POST(req: NextRequest) {
                               <td valign="top" width="110" style="width: 110px; padding-bottom: 12px; font-size: 13px; color: #71717a; font-weight: 500;">Project Type</td>
                               <td valign="top" style="padding-bottom: 12px;">
                                 <span style="display: inline-block; background-color: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 20px; padding: 2px 10px; color: #c084fc; font-size: 12px; font-weight: 600;">
-                                  ${projectType || 'Not specified'}
+                                  ${safeType}
                                 </span>
                               </td>
                             </tr>
                             <tr>
                               <td valign="top" style="font-size: 13px; color: #71717a; font-weight: 500;">Message</td>
                               <td valign="top" style="font-size: 13px; color: #e4e4e7; line-height: 1.6; font-weight: 400;">
-                                ${message.length > 150 ? message.substring(0, 150).replace(/\n/g, ' ') + '...' : message.replace(/\n/g, '<br>')}
+                                ${safeMessageShort}
                               </td>
                             </tr>
                           </table>

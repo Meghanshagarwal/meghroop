@@ -1,41 +1,60 @@
 import { NextResponse } from 'next/server'
-import { getSupabase } from '@/lib/supabase'
+import { listLeads, updateLead, deleteLead, type LeadStatus } from '@/lib/leads'
 
 export const dynamic = 'force-dynamic'
 
+const VALID_STATUSES: LeadStatus[] = [
+  'new',
+  'contacted',
+  'qualifying',
+  'won',
+  'lost',
+  'archived',
+]
+
 export async function GET() {
   try {
-    const db = getSupabase()
-    const { data, error } = await db
-      .from('settings')
-      .select('value')
-      .eq('key', 'client_leads_data')
-      .single()
-
-    if (error || !data) {
-      return NextResponse.json([])
-    }
-
-    const leads = JSON.parse(data.value)
-    return NextResponse.json(Array.isArray(leads) ? leads : [])
+    const leads = await listLeads()
+    return NextResponse.json(leads)
   } catch {
     return NextResponse.json([])
   }
 }
 
-export async function PUT(req: Request) {
+// Update a single lead's status / notes (no whole-array rewrite).
+export async function PATCH(req: Request) {
   try {
-    const body = await req.json()
-    const db = getSupabase()
-
-    const { error } = await db
-      .from('settings')
-      .upsert({ key: 'client_leads_data', value: JSON.stringify(body) }, { onConflict: 'key' })
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
+    const { id, status, notes } = await req.json()
+    if (!id || typeof id !== 'string') {
+      return NextResponse.json({ error: 'id is required' }, { status: 400 })
     }
+    if (status !== undefined && !VALID_STATUSES.includes(status)) {
+      return NextResponse.json({ error: 'Invalid status' }, { status: 400 })
+    }
+    await updateLead(id, {
+      status: status as LeadStatus | undefined,
+      notes: typeof notes === 'string' ? notes.trim() : undefined,
+    })
+    return NextResponse.json({ ok: true })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Invalid request'
+    return NextResponse.json({ error: message }, { status: 400 })
+  }
+}
 
+// Delete a single lead by id (?id=... or JSON body).
+export async function DELETE(req: Request) {
+  try {
+    const url = new URL(req.url)
+    let id = url.searchParams.get('id') || ''
+    if (!id) {
+      const body = await req.json().catch(() => ({}))
+      id = body?.id || ''
+    }
+    if (!id) {
+      return NextResponse.json({ error: 'id is required' }, { status: 400 })
+    }
+    await deleteLead(id)
     return NextResponse.json({ ok: true })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Invalid request'

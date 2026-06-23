@@ -66,17 +66,23 @@ export default function LeadsCRMPage() {
     loadLeals()
   }, [loadLeals])
 
-  const saveLeadsToDb = async (updatedList: Lead[]) => {
+  // Patch a single lead (status / notes) on the server, then update local state.
+  const patchLead = async (
+    leadId: string,
+    patch: { status?: Lead['status']; notes?: string }
+  ) => {
     setSaving(true)
     try {
       await fetch('/api/admin/leads', {
-        method: 'PUT',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedList)
+        body: JSON.stringify({ id: leadId, ...patch })
       })
-      setLeads(updatedList)
+      setLeads(prev =>
+        prev.map(l => (l.id === leadId ? { ...l, ...patch } : l))
+      )
     } catch (err) {
-      console.error('Failed to save leads:', err)
+      console.error('Failed to save lead:', err)
     } finally {
       setSaving(false)
     }
@@ -94,38 +100,27 @@ export default function LeadsCRMPage() {
     e.preventDefault()
     if (!activeLead) return
 
-    const updatedList = leads.map(l => {
-      if (l.id === activeLead.id) {
-        return {
-          ...l,
-          status,
-          notes: notes.trim()
-        }
-      }
-      return l
-    })
-
-    await saveLeadsToDb(updatedList)
+    await patchLead(activeLead.id, { status, notes: notes.trim() })
     setDetailModalOpen(false)
   }
 
   const handleInlineStatusChange = async (leadId: string, newStatus: Lead['status']) => {
-    const updatedList = leads.map(l => {
-      if (l.id === leadId) {
-        return {
-          ...l,
-          status: newStatus
-        }
-      }
-      return l
-    })
-    await saveLeadsToDb(updatedList)
+    await patchLead(leadId, { status: newStatus })
   }
 
   const handleDeleteLead = async (leadId: string) => {
     if (!confirm('Are you sure you want to delete this lead? This will permanently remove it from the system.')) return
-    const updatedList = leads.filter(l => l.id !== leadId)
-    await saveLeadsToDb(updatedList)
+    setSaving(true)
+    try {
+      await fetch(`/api/admin/leads?id=${encodeURIComponent(leadId)}`, {
+        method: 'DELETE'
+      })
+      setLeads(prev => prev.filter(l => l.id !== leadId))
+    } catch (err) {
+      console.error('Failed to delete lead:', err)
+    } finally {
+      setSaving(false)
+    }
   }
 
   // Analytics Math
