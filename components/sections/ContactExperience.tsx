@@ -133,19 +133,34 @@ export default function ContactExperience() {
                       className={`${inputClass} cursor-pointer appearance-none`}
                       aria-label="Select scope of discussion"
                     >
-                      <option value="" className="bg-black">Select what you are building...</option>
-                      <optgroup label="── AI Services" className="bg-black text-gray-500">
-                        {['Agentic AI Development', 'AI Agent Development', 'AI Workflow Automation', 'n8n Automation', 'MCP Server Development'].map((type) => (
+                      <option value="" className="bg-black">Select what you need help with...</option>
+                      <optgroup label="── Growth & Marketing" className="bg-black text-gray-500">
+                        {['Meta & Google Ads', 'SEO', 'Social Media Management', 'Content Creation', 'Performance Marketing'].map((type) => (
                           <option key={type} value={type} className="bg-black">{type}</option>
                         ))}
                       </optgroup>
-                      <optgroup label="── Custom Frontends & Commerce" className="bg-black text-gray-500">
-                        {['Shopify Custom Storefront', 'Headless Storefront', 'Shopify + AI Automation', 'React / Next.js Canvas Web'].map((type) => (
+                      <optgroup label="── AI Agents & Automation" className="bg-black text-gray-500">
+                        {['Custom AI Agents', 'Agentic Automation', 'AI Voice Agents', 'Sales AI', 'Workflow Automation (n8n)', 'AI Integration'].map((type) => (
                           <option key={type} value={type} className="bg-black">{type}</option>
                         ))}
                       </optgroup>
-                      <optgroup label="── Decoupled CMS & Operations" className="bg-black text-gray-500">
-                        {['Headless WordPress Build', 'API Layer Integration', 'Website Speed Audit', 'Other Systems'].map((type) => (
+                      <optgroup label="── Software Development" className="bg-black text-gray-500">
+                        {['Custom Software', 'Web App', 'Mobile App', 'SaaS Product'].map((type) => (
+                          <option key={type} value={type} className="bg-black">{type}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="── Shopify & WordPress" className="bg-black text-gray-500">
+                        {['Shopify Development', 'WordPress Development'].map((type) => (
+                          <option key={type} value={type} className="bg-black">{type}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="── Branding & Creative" className="bg-black text-gray-500">
+                        {['Brand Identity', 'Video Editing', 'Motion Graphics'].map((type) => (
+                          <option key={type} value={type} className="bg-black">{type}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="── Other" className="bg-black text-gray-500">
+                        {['Not sure / Multiple services', 'Something else'].map((type) => (
                           <option key={type} value={type} className="bg-black">{type}</option>
                         ))}
                       </optgroup>
