@@ -41,16 +41,83 @@ const CURRENCIES = [
 
 // Default rich-text body template for Proposal Mode
 const defaultBody = `
-  <p>Dear Client,</p>
-  <p>We are pleased to present this official document from the MeghRoop Creative Engineering & AI Studio. Our mission is to build elite AI agents, autonomous workflows, custom Model Context Protocol (MCP) integrations, and next-generation, high-performance web engineering experiences.</p>
-  <p><strong>Key deliverables outlined in this brief:</strong></p>
+  <p>To,<br><strong>Navkar Buildcon</strong><br>Jaipur, Rajasthan</p>
+  <p><strong>Re: End-to-End Design &amp; Advertising Partnership — Premium Serviced Apartment Project, Jaipur</strong></p>
+  <p>Dear Team,</p>
+  <p>Thank you for inviting MeghRoop to respond to your RFP. We are a Growth, AI and Software agency that runs branding, performance marketing, web, and content under one roof — which means a single, accountable team carries your project from naming and identity all the way through 16 months of sustained, multi-channel campaigns, with one consistent brand voice across print, outdoor, digital, and on-site.</p>
+  <p>This proposal covers the full scope, an all-inclusive professional fee, and a milestone-based payment structure for the 16-month engagement.</p>
+
+  <h3>1. Our Understanding</h3>
+  <p>You are launching a premium high-rise serviced apartment project (Basement + Stilt + 12 Floors + Terrace Clubhouse) in a prime Jaipur location. The objective is a distinct project identity, strong buyer/investor confidence, and continuous visibility from launch planning through long-running on-ground and digital campaigns. Our engagement is structured in two parts: a one-time <strong>Brand Identity &amp; Launch Creative Kit</strong>, followed by an <strong>ongoing monthly creative &amp; marketing retainer</strong>.</p>
+
+  <h3>2. Phase 1 — Brand Identity &amp; Launch Creative Kit (One-Time)</h3>
   <ul>
-    <li><strong>Autonomous Outbound Agent System</strong>: Deeply integrated voice/chat agents with standard vector memory.</li>
-    <li><strong>MCP Financial Infrastructure Server</strong>: High-scale data connector with robust security endpoints.</li>
-    <li><strong>Headless Next.js Commerce Storefront</strong>: Ultra-fast storefront targeting &lt;400ms Core Web Vitals.</li>
+    <li><strong>Project Identity</strong> — name ideation, logo, tagline, and full visual language (fonts, palette, tone).</li>
+    <li><strong>Brochures</strong> — narrative concept + print-ready Main Brochure and compact Mini Brochure/Handout.</li>
+    <li><strong>Sales Collateral</strong> — sales dockets/folders, price sheets/inserts, presentation structures.</li>
+    <li><strong>Project Stationery</strong> — letterheads, envelopes, visiting cards, corporate collaterals.</li>
+    <li><strong>Event &amp; Launch Branding</strong> — stage backdrops, digital &amp; print invites, experiential branding.</li>
+    <li><strong>Site Branding &amp; Beautification</strong> — site-office interior branding, barricading graphics, entry-gate visuals.</li>
+    <li><strong>Website UI/UX</strong> — design layouts and wireframes for the official project website.</li>
+    <li><strong>AV &amp; Scriptwriting</strong> — radio/jingle scripts and narrative/voiceover flow for the 3D walkthrough.</li>
   </ul>
-  <p>We look forward to collaborating with your team to engineer these intelligent systems.</p>
-  <p>Sincerely,<br><strong>Meghansh Agarwal</strong><br>Founder, MeghRoop</p>
+
+  <h3>3. Phase 2 — Ongoing Creative &amp; Marketing Retainer (Months 1–16)</h3>
+  <ul>
+    <li><strong>Print Communication</strong> — A4 leaflets, mailers, newspaper inserts, campaign print ads.</li>
+    <li><strong>Outdoor Media</strong> — city &amp; site hoardings, gantries, unipoles, directional signage, wall wraps.</li>
+    <li><strong>Digital &amp; Performance Assets</strong> — e-mailers, landing pages, paid social ad creatives, WhatsApp marketing graphics.</li>
+    <li><strong>Monthly Videos</strong> — two (2) marketing videos per month, each delivered in two aspect ratios for multi-platform use.</li>
+    <li><strong>Festive Creatives</strong> — project-branded graphics for major festivals throughout the campaign.</li>
+  </ul>
+
+  <h3>4. Commercial Proposal <span style="font-weight:400;font-size:12px;color:#9ca3af;">(indicative — to be finalised)</span></h3>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 4px;">
+    <thead>
+      <tr style="background:#f3f4f6;">
+        <th style="text-align:left;padding:8px 10px;border:1px solid #e5e7eb;">Component</th>
+        <th style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;">Professional Fee (INR)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:8px 10px;border:1px solid #e5e7eb;">Phase 1 — Brand Identity &amp; Launch Creative Kit (one-time)</td>
+        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;">₹4,50,000</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border:1px solid #e5e7eb;">Phase 2 — Creative &amp; Marketing Retainer (₹90,000 × 16 months)</td>
+        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;">₹14,40,000</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border:1px solid #e5e7eb;"><strong>Subtotal — Professional Fees</strong></td>
+        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;"><strong>₹18,90,000</strong></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border:1px solid #e5e7eb;">GST @ 18%</td>
+        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;">₹3,40,200</td>
+      </tr>
+      <tr style="background:#faf5ff;">
+        <td style="padding:8px 10px;border:1px solid #e5e7eb;"><strong>Total Payable (incl. GST)</strong></td>
+        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;"><strong>₹22,30,200</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>5. Payment Milestones</h3>
+  <ul>
+    <li><strong>On signing</strong> — 30% of Phase 1 fee as mobilization advance.</li>
+    <li><strong>On Phase 1 approval</strong> — balance Phase 1 fee on sign-off of identity + launch kit.</li>
+    <li><strong>Retainer</strong> — billed <strong>quarterly in advance</strong> across four quarters (₹3,60,000 + GST per quarter).</li>
+  </ul>
+
+  <h3>6. Inclusions &amp; Pass-Through Costs</h3>
+  <p>The fee above covers <strong>creative strategy, design, scripting, and execution-ready files</strong> (high-resolution, vendor-ready, print-optimised). The following are billed <strong>at actuals, separately</strong>: media buying / ad spend (Meta, Google, newspaper, hoarding rentals), printing &amp; fabrication, and full 3D-walkthrough video production/rendering. You retain full ownership of all delivered assets.</p>
+
+  <h3>7. Why MeghRoop</h3>
+  <p>One team, no handoffs — the people who build your brand are the people who run your campaigns. Direct founder access, fast turnarounds, and a unified identity across every physical, digital, and print medium.</p>
+
+  <p>We would be glad to walk you through our approach and relevant work. Looking forward to a creative partnership.</p>
+  <p>Sincerely,<br><strong>Meghansh Agarwal</strong><br>Founder, MeghRoop<br>hello@meghroop.tech · +91 89495 08264</p>
 `.trim()
 
 export default function LetterheadEditorPage() {
@@ -58,8 +125,8 @@ export default function LetterheadEditorPage() {
   const [lhMode, setLhMode] = useState<'light' | 'dark'>('light')
   
   // Proposal State
-  const [documentTitle, setDocumentTitle] = useState('PROPOSAL / INVOICE / LETTER')
-  const [documentSub, setDocumentSub] = useState('OFFICIAL PROJECT BRIEF')
+  const [documentTitle, setDocumentTitle] = useState('COMMERCIAL PROPOSAL')
+  const [documentSub, setDocumentSub] = useState('NAVKAR BUILDCON · PREMIUM SERVICED APARTMENTS, JAIPUR')
   const editorRef = useRef<HTMLDivElement>(null)
 
   // Invoice State
@@ -268,8 +335,8 @@ export default function LetterheadEditorPage() {
   const handleReset = () => {
     if (confirm('Are you sure you want to reset this template to the default values? Your edits will be lost.')) {
       if (activeTab === 'proposal') {
-        setDocumentTitle('PROPOSAL / INVOICE / LETTER')
-        setDocumentSub('OFFICIAL PROJECT BRIEF')
+        setDocumentTitle('COMMERCIAL PROPOSAL')
+        setDocumentSub('NAVKAR BUILDCON · PREMIUM SERVICED APARTMENTS, JAIPUR')
         if (editorRef.current) {
           editorRef.current.innerHTML = defaultBody
         }
