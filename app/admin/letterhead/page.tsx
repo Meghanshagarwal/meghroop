@@ -450,7 +450,9 @@ export default function LetterheadEditorPage() {
           /* Remove browser margin/headers/footers completely */
           @page {
             size: A4 portrait;
-            margin: 0 !important;
+            /* Light: real per-page margins on every page (white-on-white = invisible).
+               Dark: full-bleed so there are no white bands around the dark sheet. */
+            margin: ${isDark ? '0' : '14mm 12mm'} !important;
           }
 
           /* Hide sidebar, dashboards, control panels, forms, navigation elements, and background frames */
@@ -484,15 +486,19 @@ export default function LetterheadEditorPage() {
             min-height: 0 !important;
           }
 
+          /* Paint every printed page (incl. continuation + the last half-empty
+             page) with the document's theme colour — kills dark-mode white areas */
+          html, body { background: ${bg} !important; }
+
           /* Perfect A4 frame overlay - Uses dynamic background from active theme */
           .print-sheet {
-            width: 210mm !important;
+            width: ${isDark ? '210mm' : 'auto'} !important;
             max-width: none !important;
-            min-height: 297mm !important;
+            min-height: ${isDark ? '297mm' : 'auto'} !important;
             height: auto !important;
             max-height: none !important;
             margin: 0 auto !important;
-            padding: 18mm 20mm !important;
+            padding: ${isDark ? '14mm 12mm' : '0'} !important;
             border: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
