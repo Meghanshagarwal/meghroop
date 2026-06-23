@@ -12,6 +12,10 @@ const Chatbot = dynamic(() => import('@/components/common/Chatbot'), {
   ssr: false,
 })
 
+const ExitIntentPopup = dynamic(() => import('@/components/common/ExitIntentPopup'), {
+  ssr: false,
+})
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -247,6 +251,7 @@ export default async function RootLayout({
         {children}
         <MobileNav />
         <PWAInstallPrompt />
+        <ExitIntentPopup />
         <Chatbot />
       </body>
     </html>

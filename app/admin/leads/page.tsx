@@ -162,7 +162,7 @@ export default function LeadsCRMPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="font-heading font-bold text-2xl text-white">Leads CRM</h1>
-          <p className="text-sm text-gray-500 mt-1">Review, follow up, and track inquiries from website contact forms and chatbot</p>
+          <p className="text-sm text-gray-500 mt-1">Review, follow up, and track inquiries from contact forms, chatbot, and the exit-intent popup</p>
         </div>
       </div>
 
