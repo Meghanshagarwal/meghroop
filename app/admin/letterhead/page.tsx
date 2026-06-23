@@ -450,8 +450,6 @@ export default function LetterheadEditorPage() {
           /* Remove browser margin/headers/footers completely */
           @page {
             size: A4 portrait;
-            /* Zero margin removes the browser's auto date/title header & page footer,
-               and gives full-bleed background. Our own margins come from the sheet. */
             margin: 0 !important;
           }
 
@@ -490,7 +488,10 @@ export default function LetterheadEditorPage() {
              page) with the document's theme colour — kills dark-mode white areas */
           html, body { background: ${bg} !important; }
 
-          /* Perfect A4 frame overlay - Uses dynamic background from active theme */
+          /* A4 sheet — direct padding-top gives reliable top margin on every page.
+             The table + table-header-group spacer trick is unreliable in Chromium
+             print engines (empty divs inside table-header-group collapse to 0).
+             Instead we use padding-top on the sheet itself. */
           .print-sheet {
             width: 210mm !important;
             max-width: none !important;
@@ -498,7 +499,7 @@ export default function LetterheadEditorPage() {
             height: auto !important;
             max-height: none !important;
             margin: 0 auto !important;
-            padding: 0 !important;
+            padding: 14mm 0 0 0 !important;
             border: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
@@ -507,8 +508,6 @@ export default function LetterheadEditorPage() {
             color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
 
-            /* table layout makes the header/footer GROUPS repeat on every printed
-               page (top margin + footer on each page) without browser chrome */
             display: table !important;
             overflow: visible !important;
             position: static !important;
