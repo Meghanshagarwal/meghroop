@@ -23,7 +23,7 @@ export default function AboutWho() {
               We started MeghRoop because we got tired of generic agency loops. You talk to a sales rep, who handsoff to an account manager, who handsoff to a junior builder, and by the time code gets shipped, all context is lost.
             </p>
             <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-              We design and code everything ourselves. We sit at the intersection of modern frontends and complex backends. By merging high-performance design with useful AI systems, we eliminate middlemen and build software that works quietly in the background.
+              We do everything ourselves — strategy, growth, design, and code. By running marketing, AI automation, software, commerce, and brand under one roof, we eliminate middlemen and keep every project cohesive from awareness to automation.
             </p>
           </div>
 

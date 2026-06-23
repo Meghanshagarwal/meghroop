@@ -6,27 +6,27 @@ import { HardDrive, Play, GitPullRequest, PocketKnife } from 'lucide-react'
 const processSteps = [
   {
     icon: HardDrive,
-    name: '01 // Context Mapping',
-    title: 'Visualizing structural data loops',
-    desc: 'Before touching design or opening VS Code, we outline the exact topology of your systems. We map API boundaries, DB rows, and user friction bottlenecks, deciding what to optimize.',
+    name: '01 // Discover',
+    title: 'Understand the real goal',
+    desc: 'Before any design, ad, or line of code, we map what actually matters — your funnel, your tools, your numbers, and the friction in between — and decide where we can make the biggest impact.',
   },
   {
     icon: Play,
-    name: '02 // Atmospheric Prototyping',
-    title: 'Balancing performance with emotion',
-    desc: 'We sketch clean, customized layouts. Every visual transition and interactive frame is coded dynamically in interactive sandboxes to guarantee hardware acceleration and beautiful visual rhythm.',
+    name: '02 // Plan',
+    title: 'A clear, honest blueprint',
+    desc: 'We propose a concrete plan with scope, timeline, and the exact approach — whether that is a growth campaign, an AI agent, a custom build, or a brand. No fluff, no pre-packaged retainers.',
   },
   {
     icon: GitPullRequest,
-    name: '03 // Pure Implementation',
-    title: 'Coded with absolute intention',
-    desc: 'We write dry, modular React code, lightweight GraphQL schemas, and custom Next.js endpoints. No templates. No redundant plugins. We construct websites that generate static edge layers instantly.',
+    name: '03 // Build & Launch',
+    title: 'Ship in focused sprints',
+    desc: 'We run in rapid, focused sprints — campaigns go live, agents get wired in, software ships to production. No templates, no bloat, no redundant plugins. You see results early, not at the very end.',
   },
   {
     icon: PocketKnife,
-    name: '04 // Secure Automation Failovers',
-    title: 'Scaling operations quietly',
-    desc: 'Once the code compiles, we orchestrate backends. We integrate resilient webhook pipelines (n8n), safe database actions, and contextual LLM loops with zero downtime and automatic recovery systems.',
+    name: '04 // Measure & Scale',
+    title: 'Optimize what works',
+    desc: 'Once it is live, we watch the numbers, tune what works, and automate the repetitive parts — so growth, systems, and operations keep compounding quietly in the background.',
   },
 ]
 

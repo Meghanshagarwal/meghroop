@@ -20,31 +20,28 @@ import AboutCTA from '@/components/sections/AboutCTA'
 
 
 export const metadata: Metadata = {
-  title: 'About MeghRoop — Elite AI & Web Studio',
+  title: 'About MeghRoop — Growth, AI & Software Agency',
   description:
-    'Two engineers building modern internet systems. Meet the team, explore our design philosophy, and learn how we ship custom AI & web engineering solutions.',
+    'Two founders running a Growth, AI and Software agency. Meet Meghansh & Roop and see how we help businesses grow through performance marketing, AI automation, software, commerce, and branding.',
   keywords: [
-    'AI Engineering Studio',
-    'Web Engineering Studio',
-    'Creative Technology Studio',
-    'AI Systems',
-    'Automation Studio',
-    'Modern Web Development',
-    'AI Infrastructure',
-    'Cinematic Websites',
-    'Digital Systems',
-    'Shopify Development',
-    'WordPress Development',
-    'Workflow Automation',
-    'Modern Internet Studio',
+    'Growth marketing agency',
+    'AI automation agency',
+    'AI agents development',
+    'custom software development',
+    'Shopify development',
+    'WordPress development',
+    'branding agency',
+    'performance marketing',
+    'founder-led agency',
+    'AI agency India',
     'MeghRoop About',
     'Meghansh',
     'Roop',
   ],
   openGraph: {
-    title: 'About MeghRoop | Modern Internet & AI Systems Studio',
+    title: 'About MeghRoop — Growth, AI & Software Agency',
     description:
-      'Explore the design philosophy, automation processes, and technical convictions of Meghansh and Roop. We build custom-engineered storefronts and secure AI systems.',
+      'Meet the founders, Meghansh & Roop. We run growth, AI automation, custom software, Shopify & WordPress, and branding under one roof — from awareness to automation.',
     url: 'https://meghroop.tech/about',
     siteName: 'MeghRoop',
     images: [
@@ -52,16 +49,16 @@ export const metadata: Metadata = {
         url: 'https://meghroop.tech/og-image-about.jpg',
         width: 1200,
         height: 630,
-        alt: 'About MeghRoop - AI Engineering & Creative Technology Studio',
+        alt: 'About MeghRoop — Growth, AI & Software Agency',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About MeghRoop | AI & Custom Web Engineering Studio',
+    title: 'About MeghRoop — Growth, AI & Software Agency',
     description:
-      'We design interfaces that feel inevitable, workflows that govern operational logic, and high-performance custom digital systems built to scale.',
+      'A founder-led agency running growth, AI automation, software, commerce, and branding under one roof. From awareness to automation, from code to customers.',
     images: ['https://meghroop.tech/og-image-about.jpg'],
   },
   alternates: {
@@ -77,7 +74,7 @@ export default function AboutPage() {
     'mainEntity': {
       '@type': 'ProfessionalService',
       'name': 'MeghRoop',
-      'description': 'A premium AI engineering and creative technology studio building high-performance websites and automated workflows.',
+      'description': 'A Growth, AI and Software agency — performance marketing, AI agents & automation, custom software, Shopify, WordPress, and branding.',
       'url': 'https://meghroop.tech',
       'founder': [
         {
@@ -91,11 +88,11 @@ export default function AboutPage() {
       ],
       'areaServed': 'Worldwide',
       'knowsAbout': [
-        'AI Engineering',
-        'Web Engineering',
-        'Headless Commerce',
-        'Workflow Automation',
-        'Custom Software Architectures'
+        'Performance Marketing',
+        'AI Agents & Automation',
+        'Custom Software Development',
+        'Shopify & WordPress Development',
+        'Branding & Creative'
       ]
     }
   }

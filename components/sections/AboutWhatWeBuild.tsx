@@ -1,33 +1,33 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Layers, Workflow, Smartphone } from 'lucide-react'
+import { Layers, Workflow, TrendingUp } from 'lucide-react'
 
 const capabilities = [
   {
-    icon: Workflow,
-    title: 'AI Systems & Resilient Automations',
-    spec: 'INTELLIGENT PIPELINES // n8n // VECTOR DBs',
-    desc: 'We construct secure, server-side data automation structures. From automated CRM updates to custom Model Context Protocol (MCP) integrations, we replace manual data Entry loops with bulletproof background systems.',
-    points: ['Model integration & context grounding', 'Automatic failovers & recovery pipelines', 'Secured token sandboxing & security gate'],
+    icon: TrendingUp,
+    title: 'Growth & Marketing',
+    spec: 'META & GOOGLE ADS // SEO // CONTENT',
+    desc: 'We run growth as a system — paid acquisition, SEO, social media, and content — wired to clean tracking so every rupee of spend maps to qualified leads and real revenue, not vanity metrics.',
+    points: ['Meta & Google Ads that convert', 'SEO & content that compounds', 'Funnels & tracking, end to end'],
     glow: 'rgba(167, 139, 250, 0.08)',
     borderColor: 'group-hover:border-purple-500/30',
   },
   {
-    icon: Smartphone,
-    title: 'Cinematic Frontends & Storefronts',
-    spec: 'NEXT.JS // FRAMER MOTION // SHOPIFY CUSTOM',
-    desc: 'We engineer tailor-made e-commerce storefronts that perform beautifully. By connecting static edge engines directly to Shopify GraphQL endpoints, we deliver sub-100ms first input delays and premium brand visuals.',
-    points: ['Lighthouse performance target of 99/100', 'Fluid hardware-accelerated transitions', 'Pre-rendered static collection routing'],
+    icon: Workflow,
+    title: 'AI Agents & Automation',
+    spec: 'AI AGENTS // n8n // WHATSAPP & CRM',
+    desc: 'Custom AI agents and automations that reason, plan, and run repetitive work 24/7 — connected to your real tools and data. Autonomous systems, not chatbot wrappers.',
+    points: ['Grounded custom AI agents', 'n8n & workflow automation', 'WhatsApp, CRM & voice integrations'],
     glow: 'rgba(6, 182, 212, 0.08)',
     borderColor: 'group-hover:border-cyan-500/30',
   },
   {
     icon: Layers,
-    title: 'Bespoke Enterprise Web Infrastructure',
-    spec: 'HEADLESS WORDPRESS // CUSTOM API LAYER',
-    desc: 'We rebuild standard CMS templates into state-of-the-art headless servers. We decouple Content Management from the frontend layout, providing deep security, unlimited layout freedom, and immediate static rendering.',
-    points: ['Decoupled frontend static distribution', 'Secure custom REST & GraphQL endpoints', 'Zero WordPress template loading bloat'],
+    title: 'Software, Commerce & Brand',
+    spec: 'NEXT.JS // SHOPIFY // WORDPRESS // DESIGN',
+    desc: 'Custom software, web and mobile apps, and SaaS — plus Shopify and WordPress storefronts and the branding and creative that makes them land. Built properly, owned by you.',
+    points: ['Web & mobile apps, SaaS', 'Shopify & WordPress builds', 'Brand identity, video & motion'],
     glow: 'rgba(16, 185, 129, 0.08)',
     borderColor: 'group-hover:border-emerald-500/30',
   },
@@ -49,7 +49,7 @@ export default function AboutWhatWeBuild() {
             <span className="gradient-text">the future internet.</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
-            We don&apos;t just install plugins. We write clean, customized web systems designed to quiet down your operations and elevate your digital design authority.
+            From growth campaigns to AI automation, custom software, commerce, and brand — built properly, owned by you, and wired to move real numbers.
           </p>
         </div>
 
