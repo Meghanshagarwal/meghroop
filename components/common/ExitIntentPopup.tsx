@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
+import { trackEvent } from '@/lib/analytics'
 
 const SESSION_KEY = 'mr_popup_shown'      // once per browser session
 const CAPTURED_KEY = 'mr_lead_captured'   // never again after they submit
@@ -24,6 +25,8 @@ export default function ExitIntentPopup() {
     if (sessionStorage.getItem(SESSION_KEY)) return
     sessionStorage.setItem(SESSION_KEY, '1')
     setOpen(true)
+    // GA4 + Clarity (no Meta standard event for a view)
+    trackEvent('exit_popup_view', undefined, { location: 'exit_intent' })
   }, [])
 
   useEffect(() => {
@@ -51,6 +54,14 @@ export default function ExitIntentPopup() {
     }
   }, [pathname, trigger])
 
+  // Close on Escape
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open])
+
   if (pathname?.startsWith('/admin')) return null
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,6 +81,7 @@ export default function ExitIntentPopup() {
       })
       if (!res.ok) throw new Error('failed')
       localStorage.setItem(CAPTURED_KEY, '1')
+      trackEvent('exit_popup_submit', 'Lead', { brand: brand.trim() || 'unknown', location: 'exit_intent' })
       setDone(true)
       setTimeout(() => setOpen(false), 2600)
     } catch {
@@ -106,9 +118,10 @@ export default function ExitIntentPopup() {
 
             {/* Close */}
             <button
+              type="button"
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="absolute top-4 right-4 z-10 w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] flex items-center justify-center text-gray-400 hover:text-white transition-all"
+              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] flex items-center justify-center text-gray-400 hover:text-white transition-all cursor-pointer"
             >
               <X size={15} />
             </button>

@@ -5,8 +5,9 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageSquare, X, Send, Loader2, Sparkles } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
-import { 
-  CHATBOT_BRAND, 
+import { trackEvent } from '@/lib/analytics'
+import {
+  CHATBOT_BRAND,
   QUICK_ACTIONS, 
   SERVICES_PROFILES, 
   KNOWLEDGE_BASE, 
@@ -145,6 +146,7 @@ export default function Chatbot() {
       
       // WhatsApp Redirection
       if (option === 'WhatsApp Us' || option === 'WhatsApp' || option === 'WhatsApp Us 💬') {
+        trackEvent('whatsapp_click', 'Contact', { location: 'chatbot' })
         window.open(CHATBOT_BRAND.whatsappUrl, '_blank')
         addMessage('assistant', 'Redirected you to our official WhatsApp channel! Feel free to ask anything.', ['Main Menu'])
         return
@@ -269,6 +271,7 @@ export default function Chatbot() {
 
         setIsTyping(false)
         if (res.ok) {
+          trackEvent('chatbot_lead_submit', 'Lead', { service: leadData.service || 'general', location: 'chatbot' })
           addMessage(
             'assistant',
             `🎉 Thank you, ${leadData.name}! We have captured your requirements successfully.\n\nExpected response time is within 24 hours. A receipt email has also been sent to ${leadData.email}.`,
@@ -423,7 +426,10 @@ export default function Chatbot() {
 
       {/* FLOAT GLOWING OPEN CHAT BUTTON */}
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          if (!isOpen) trackEvent('chatbot_open', undefined, { location: 'floating_button' })
+          setIsOpen(!isOpen)
+        }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="w-14 h-14 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white cursor-pointer relative"

@@ -41,6 +41,7 @@ export default function ContactExperience() {
       }
     } catch {
       setStatus('error')
+      trackEvent('contact_form_error', undefined)
     }
   }
 
