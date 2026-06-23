@@ -48,7 +48,7 @@ export default function ContactInternetNative() {
               <span className="gradient-text">borderless internet.</span>
             </h2>
             <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-              We operate as a modern, internet-native engineering studio. No offices, no geographical boundaries, and zero bureaucratic bloat.
+              We operate as a modern, internet-native Growth, AI &amp; software studio. No offices, no geographical boundaries, and zero bureaucratic bloat.
             </p>
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
               We coordinate across timezones, ship directly to production, and maintain absolute transparency over GitHub. We make systems that work perfectly, regardless of where your team is sitting.

@@ -19,26 +19,25 @@ import ContactCTA from '@/components/sections/ContactCTA'
 
 
 export const metadata: Metadata = {
-  title: 'Initiate Project — Start a Partnership',
+  title: 'Contact MeghRoop — Start a Growth, AI or Software Project',
   description:
-    'Start a conversation about your next system. Inquire about custom AI automation, headless Shopify frontends, and high-performance digital architectures.',
+    'Tell us what you want to build or grow — performance marketing, AI agents & automation, custom software, Shopify, WordPress, or branding. We reply within 24 hours.',
   keywords: [
-    'Contact AI Engineering Studio',
-    'Web Development Agency Contact',
-    'AI Automation Studio',
-    'Shopify Development Contact',
-    'WordPress Development Contact',
-    'n8n Automation Services',
-    'AI Systems Development',
-    'Web Engineering Studio',
-    'Creative Technology Studio',
-    'Digital Systems Agency',
+    'Growth marketing agency contact',
+    'AI automation agency',
+    'AI agents development',
+    'custom software development',
+    'Shopify development',
+    'WordPress development',
+    'branding agency',
+    'performance marketing',
+    'AI agency India',
     'MeghRoop Contact',
   ],
   openGraph: {
-    title: 'Contact MeghRoop | Modern AI & Digital Systems Studio',
+    title: 'Contact MeghRoop — Growth, AI & Software Agency',
     description:
-      'Inquire about custom AI agents, automated workflow systems, static Next.js commerce architectures, and borderless design collaborations.',
+      'Start a conversation about performance marketing, AI agents & automation, custom software, Shopify, WordPress, or branding. We reply within 24 hours.',
     url: 'https://meghroop.tech/contact',
     siteName: 'MeghRoop',
     images: [
@@ -46,16 +45,16 @@ export const metadata: Metadata = {
         url: 'https://meghroop.tech/og-image-contact.jpg',
         width: 1200,
         height: 630,
-        alt: 'Contact MeghRoop - AI Engineering & Creative Technology Studio',
+        alt: 'Contact MeghRoop — Growth, AI & Software Agency',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact MeghRoop | Intelligent AI & Web Operations',
+    title: 'Contact MeghRoop — Growth, AI & Software Agency',
     description:
-      'Connect directly with our engineering duo to blueprint custom web frontends and automated operations.',
+      'Talk directly to the founders about growth, AI, software, commerce, and branding. We reply within 24 hours.',
     images: ['https://meghroop.tech/og-image-contact.jpg'],
   },
   alternates: {
@@ -71,7 +70,7 @@ export default function ContactPage() {
     'mainEntity': {
       '@type': 'ProfessionalService',
       'name': 'MeghRoop',
-      'description': 'A premium AI engineering and creative technology studio building high-performance websites and automated workflows.',
+      'description': 'A Growth, AI and Software agency — performance marketing, AI agents & automation, custom software, Shopify, WordPress, and branding.',
       'url': 'https://meghroop.tech',
       'email': 'hello@meghroop.tech',
       'address': {

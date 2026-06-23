@@ -6,28 +6,28 @@ import { Plus, Minus } from 'lucide-react'
 
 const faqs = [
   {
-    q: 'How fast can we kick off a project?',
-    a: 'Usually within one to two weeks. Once we align on your technical specifications and approve the architectural blueprint, we initialize repository connections and begin shipping live changes to production immediately.',
+    q: 'What services do you actually offer?',
+    a: 'Five things, under one roof: (1) Growth & marketing — Meta Ads, Google Ads, SEO, social, and content; (2) AI agents & automation — custom agents, n8n, WhatsApp and CRM automation, voice agents; (3) Software development — custom software, web and mobile apps, and SaaS; (4) Shopify and WordPress development; and (5) branding & creative.',
   },
   {
-    q: 'What does the discovery phase look like?',
-    a: 'Frictionless and zero-fluff. You send us your message or brief. We audit your existing tech stack, API boundaries, and database layouts. We return a concrete engineering approach proposal. No introductory meetings just to schedule another meeting.',
+    q: 'How fast can we get started?',
+    a: 'Usually within one to two weeks. Growth campaigns can go live within days. For builds, once we align on scope and approve a plan, we start shipping immediately — you see results in production early, not at the end.',
   },
   {
-    q: 'How do you handle project pricing?',
-    a: 'We work with clear, value-based fixed pricing tied directly to the engineering complexity of the system. You get a transparent flat-fee blueprint detailing exactly what will be built. Zero hidden fees, zero hourly creep, and full operational clarity.',
+    q: 'How does pricing work?',
+    a: 'Growth and marketing run on monthly retainers. Software, AI agents, Shopify/WordPress, and branding are fixed-fee per project — clear scope, no hidden fees, no hourly creep. You work directly with the founders, so there is no agency markup.',
   },
   {
-    q: 'Do you build both frontends and backend automations?',
-    a: 'Yes. We specialize in cohesive digital ecosystems. We handle the entire spectrum: from custom high-fidelity Next.js frontends and headless Shopify commerce architectures to complex n8n automation pipelines, secure database syncs, and custom MCP integrations.',
+    q: 'Do you only build, or do you run growth too?',
+    a: 'Both — and that is the point. We run growth, AI automation, software, and branding under one roof, so your ads, your site, your automation, and your brand reinforce each other instead of being stitched together by three vendors.',
   },
   {
-    q: 'How do we communicate during development?',
-    a: 'We are completely internet-native. We set up direct communication channels inside your Slack, Discord, or WhatsApp. We deliver weekly commit summaries, async Loom screencasts, and secure deployment previews. You talk directly with the engineers coding your system.',
+    q: 'How do we communicate during the project?',
+    a: 'Directly with the founders, Meghansh & Roop — no account managers, no handoffs. We plug into your Slack, WhatsApp, or email, send regular updates, and keep everything async-friendly so you stay updated without endless calls.',
   },
   {
-    q: 'Can you optimize or audit our existing architectures?',
-    a: 'Yes. We run complete speed audits, map out bottlenecks in manual team workflows, evaluate discoverability for Generative Engine Optimization (GEO), and refactor legacy WordPress or Shopify layers into lightweight static setups.',
+    q: 'Do you work with our existing tools — and outside India?',
+    a: 'Yes to both. We extend the tools you already run (Salesforce, HubSpot, Zoho, Shopify, WordPress, your CRM) instead of forcing a migration, and you own all the code and IP. We are based in India and work with clients worldwide across the US, UK, Europe, and Asia.',
   },
 ]
 

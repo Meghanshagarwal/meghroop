@@ -1,74 +1,63 @@
 'use client'
 
 import { motion, type Variants } from 'framer-motion'
-import { Brain, ShoppingBag, Zap, Layout, Server, Layers } from 'lucide-react'
+import { TrendingUp, Bot, Code2, ShoppingBag, Palette } from 'lucide-react'
 
 const cards = [
   {
-    icon: Brain,
-    title: 'AI Systems & Infrastructure',
-    description: 'Cognitive agents that plan, reason, and act. Customized model training, custom MCP servers to expose backend systems, and memory layers. Designed for absolute operational autonomy.',
+    icon: TrendingUp,
+    title: 'Growth & Marketing',
+    description: 'Meta & Google Ads, SEO, social media, and content — run as one system and wired to clean tracking, so every rupee of spend maps to qualified leads and revenue.',
     gradient: 'from-purple-600/30 to-violet-600/30',
     iconColor: 'text-purple-400',
     borderHover: 'hover:border-purple-500/40',
     glowColor: 'rgba(139, 92, 246, 0.15)',
     span: 'md:col-span-2',
-    tag: 'AI-Native',
+    tag: 'Growth',
   },
   {
-    icon: ShoppingBag,
-    title: 'Shopify Engineering',
-    description: 'High-conversion headless storefronts built on Next.js, customized checkout pipelines, and complex backend inventory logic. sub-400ms loading speeds.',
+    icon: Bot,
+    title: 'AI Agents & Automation',
+    description: 'Custom AI agents, n8n workflows, WhatsApp & CRM automation, and voice agents that run repetitive work 24/7 — without a human in the loop.',
     gradient: 'from-emerald-600/30 to-teal-600/30',
     iconColor: 'text-emerald-400',
     borderHover: 'hover:border-emerald-500/40',
     glowColor: 'rgba(16, 185, 129, 0.15)',
     span: 'md:col-span-1',
-    tag: 'Commerce',
+    tag: 'AI-Native',
   },
   {
-    icon: Zap,
-    title: 'Automation Workflows',
-    description: 'Seamless n8n automation pipelines, secure data synchronizations, and API routing hubs. Moving information across tools in background loops that never fail.',
+    icon: Code2,
+    title: 'Software Development',
+    description: 'Custom software, web & mobile apps, dashboards, APIs, and full SaaS products — built end to end with React, Next.js, and TypeScript. You own the code.',
+    gradient: 'from-blue-600/30 to-cyan-600/30',
+    iconColor: 'text-blue-400',
+    borderHover: 'hover:border-blue-500/40',
+    glowColor: 'rgba(59, 130, 246, 0.15)',
+    span: 'md:col-span-1',
+    tag: 'Engineering',
+  },
+  {
+    icon: ShoppingBag,
+    title: 'Shopify & WordPress',
+    description: 'Custom and headless Shopify storefronts, Shopify apps, and fast custom WordPress — engineered to convert, with SEO baked in and no page-builder bloat.',
     gradient: 'from-amber-600/30 to-orange-600/30',
     iconColor: 'text-amber-400',
     borderHover: 'hover:border-amber-500/40',
     glowColor: 'rgba(245, 158, 11, 0.15)',
     span: 'md:col-span-1',
-    tag: 'Pipelines',
+    tag: 'Commerce',
   },
   {
-    icon: Layout,
-    title: 'Web Engineering & Frontends',
-    description: 'Bespoke web applications, high-performance static builds, responsive layouts, and interactive experiences. Deep attention to typography, spacing rhythm, and fluid animations.',
-    gradient: 'from-blue-600/30 to-cyan-600/30',
-    iconColor: 'text-blue-400',
-    borderHover: 'hover:border-blue-500/40',
-    glowColor: 'rgba(59, 130, 246, 0.15)',
-    span: 'md:col-span-2',
-    tag: 'Frontend',
-  },
-  {
-    icon: Server,
-    title: 'Decoupled WordPress Systems',
-    description: 'Re-engineering legacy architectures. Speeding up WordPress using decoupled headless frameworks, static generation, secure REST/GraphQL API schemas, and premium custom panels.',
-    gradient: 'from-indigo-600/30 to-violet-600/30',
-    iconColor: 'text-indigo-400',
-    borderHover: 'hover:border-indigo-500/40',
-    glowColor: 'rgba(99, 102, 241, 0.15)',
-    span: 'md:col-span-1',
-    tag: 'Headless',
-  },
-  {
-    icon: Layers,
-    title: 'Modern Digital Systems',
-    description: 'Comprehensive digital ecosystems, databases, search architectures, and Generative Engine Optimization (GEO) models to ensure discoverability inside AI environments.',
+    icon: Palette,
+    title: 'Branding & Creative',
+    description: 'Brand identity, social and ad creative, video editing, and motion graphics — scroll-stopping work that makes your growth and product actually land.',
     gradient: 'from-rose-600/30 to-pink-600/30',
     iconColor: 'text-rose-400',
     borderHover: 'hover:border-rose-500/40',
     glowColor: 'rgba(244, 63, 94, 0.15)',
-    span: 'md:col-span-2',
-    tag: 'Ecosystems',
+    span: 'md:col-span-1',
+    tag: 'Creative',
   },
 ]
 
@@ -105,7 +94,7 @@ export default function ContactWhatFor() {
             Common points <span className="gradient-text">of contact.</span>
           </h2>
           <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            We build cohesive tech infrastructure. Whether it is a single high-impact Next.js canvas or a complex cognitive AI workflow, we design with engineering intention.
+            From performance marketing to AI automation, custom software, commerce, and brand — tell us where you want to grow and we&apos;ll map the fit.
           </p>
         </motion.div>
 
@@ -115,7 +104,7 @@ export default function ContactWhatFor() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6"
         >
           {cards.map((card) => {
             const Icon = card.icon
@@ -167,7 +156,7 @@ export default function ContactWhatFor() {
 
         {/* SEO Metadata Crawl Helpers */}
         <p className="sr-only">
-          Inquire about our AI Engineering Studio, Custom n8n workflow automations, headless Shopify custom commerce platforms, headless WordPress architectures, and high-performance Next.js web application designs. Custom MCP servers connect standard large language models safely to existing operational systems and private customer data.
+          Talk to MeghRoop about growth and performance marketing (Meta Ads, Google Ads, SEO, social, content), AI agents and automation (n8n, WhatsApp, CRM, voice agents), custom software and SaaS development, Shopify and WordPress development, and branding and creative. Founder-led, fixed-fee builds and monthly growth retainers, delivered in weeks.
         </p>
       </div>
     </section>

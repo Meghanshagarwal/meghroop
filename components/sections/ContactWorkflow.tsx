@@ -15,14 +15,14 @@ const steps = [
     icon: Compass,
     name: '02 // Systems Thinking',
     title: 'Context mapping and project fit.',
-    desc: 'We do not sell pre-packaged services. We evaluate if there is a genuine technical alignment. We inspect your API limits, database structures, and performance goals to verify if we can make a significant impact.',
+    desc: 'We do not sell pre-packaged retainers. We look at your funnel, your tools, and your goals — whether that is growth, automation, software, or brand — and verify there is a genuine fit before we propose anything.',
     accent: 'bg-purple-500/5 text-purple-400 border-purple-500/10',
   },
   {
     icon: UserCheck,
     name: '03 // Direct Communication',
-    title: 'Engineers, not sales reps.',
-    desc: 'You speak directly to the developers writing your code and architecting your workflows. No account managers. No communication handoffs. We discuss feasibility, timelines, and exact tech selections in plain English.',
+    title: 'Founders, not sales reps.',
+    desc: 'You speak directly to the founders running your growth and building your systems. No account managers, no handoffs. We discuss feasibility, timelines, and the exact approach in plain English.',
     accent: 'bg-emerald-500/5 text-emerald-400 border-emerald-500/10',
   },
   {
@@ -56,7 +56,7 @@ export default function ContactWorkflow() {
               <span className="gradient-text-purple">Human, fast, and structured.</span>
             </h2>
             <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xl">
-              We avoid traditional corporate layers. Our engineering methodology is transparent, conversational, and hyper-focused on code performance.
+              We avoid traditional corporate layers. Our approach is transparent, conversational, and hyper-focused on real outcomes — leads, revenue, and systems that ship.
             </p>
           </div>
           <div className="lg:col-span-5 flex flex-col justify-end">

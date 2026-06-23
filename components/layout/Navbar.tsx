@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { ChevronDown, ArrowRight, Bot } from 'lucide-react'
 import Link from 'next/link'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
@@ -19,10 +19,26 @@ export default function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [agentsOpen, setAgentsOpen] = useState(false)
 
+  // Small grace delay on close so moving the cursor across the gap between the
+  // trigger and the (viewport-centered) dropdown doesn't snap the menu shut.
+  const servicesTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const agentsTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const openServices = () => { if (servicesTimer.current) clearTimeout(servicesTimer.current); setServicesOpen(true) }
+  const closeServices = () => { servicesTimer.current = setTimeout(() => setServicesOpen(false), 160) }
+  const openAgents = () => { if (agentsTimer.current) clearTimeout(agentsTimer.current); setAgentsOpen(true) }
+  const closeAgents = () => { agentsTimer.current = setTimeout(() => setAgentsOpen(false), 160) }
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Clear any pending close timers on unmount
+  useEffect(() => () => {
+    if (servicesTimer.current) clearTimeout(servicesTimer.current)
+    if (agentsTimer.current) clearTimeout(agentsTimer.current)
   }, [])
 
   return (
@@ -43,8 +59,8 @@ export default function Navbar() {
           {/* Services mega menu */}
           <li
             className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
+            onMouseEnter={openServices}
+            onMouseLeave={closeServices}
           >
             <button
               aria-haspopup="menu"
@@ -103,8 +119,8 @@ export default function Navbar() {
           {/* AI Agents dropdown */}
           <li
             className="relative"
-            onMouseEnter={() => setAgentsOpen(true)}
-            onMouseLeave={() => setAgentsOpen(false)}
+            onMouseEnter={openAgents}
+            onMouseLeave={closeAgents}
           >
             <Link
               href="/agentic-ai"
