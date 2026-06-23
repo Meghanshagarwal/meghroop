@@ -12,8 +12,13 @@ import {
   Bold, Italic, Underline as UnderlineIcon, List, ListOrdered,
   AlignLeft, AlignCenter, AlignRight, Heading2, Heading3, Table as TableIcon,
   Printer, Sun, Moon, Sparkles, CheckCircle2, RefreshCw, Undo, Redo,
-  Plus, Trash2, FileText, Receipt, Quote, Minus
+  Plus, Trash2, FileText, Receipt, Quote, Minus, Pencil, Layers
 } from 'lucide-react'
+
+// Usable content height (px) per A4 page at the 680px sheet scale.
+// Page 1 is shorter because it also carries the brand header + title block.
+const PAGE1_LIMIT = 600
+const PAGE2_LIMIT = 815
 
 interface InvoiceItem {
   id: string
@@ -215,6 +220,8 @@ const DEFAULT_INVOICE: InvoiceData = {
 
 export default function LetterheadEditorPage() {
   const [activeTab, setActiveTab] = useState<'proposal' | 'invoice'>('proposal')
+  const [pageView, setPageView] = useState(false)
+  const [pages, setPages] = useState<string[]>([])
   const [lhMode, setLhMode] = useState<'light' | 'dark'>('light')
   const [documentTitle, setDocumentTitle] = useState('PROPOSAL')
   const [documentSub, setDocumentSub] = useState('PREPARED FOR — CLIENT NAME')
@@ -306,6 +313,17 @@ export default function LetterheadEditorPage() {
     return () => clearTimeout(timer)
   }, [hydrated, isSaved, activeTab, lhMode, documentTitle, documentSub, invoiceData, editor])
 
+  // Recompute the paginated (A4) preview whenever Page view is on and the
+  // content / title changes. Display-only — editing stays in the single sheet,
+  // so there's no caret tracking and none of the old pagination bugs.
+  useEffect(() => {
+    if (!editor || activeTab !== 'proposal' || !pageView) return
+    const recompute = () => setPages(paginateForDisplay(editor.getHTML(), PAGE1_LIMIT, PAGE2_LIMIT))
+    recompute()
+    editor.on('update', recompute)
+    return () => { editor.off('update', recompute) }
+  }, [editor, activeTab, pageView, documentTitle, documentSub])
+
   const touch = useCallback(() => setIsSaved(false), [])
 
   const handleInvoiceChange = (field: keyof InvoiceData, value: string | number) => {
@@ -355,7 +373,16 @@ export default function LetterheadEditorPage() {
     touch()
   }
 
-  const handlePrint = () => window.print()
+  // Proposals always print from the paginated view so the PDF matches the
+  // on-screen pages exactly (one card = one A4 page, no auto-break artefacts).
+  const handlePrint = () => {
+    if (activeTab === 'proposal' && !pageView) {
+      setPageView(true)
+      setTimeout(() => window.print(), 250)
+    } else {
+      window.print()
+    }
+  }
 
   const isDark = lhMode === 'dark'
   const bg = isDark ? '#080808' : '#ffffff'
@@ -410,7 +437,7 @@ export default function LetterheadEditorPage() {
   )
 
   return (
-    <div className="min-h-screen bg-neutral-900/40 text-gray-100 flex flex-col relative pb-20">
+    <div className="print-page-root min-h-screen bg-neutral-900/40 text-gray-100 flex flex-col relative pb-20">
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
@@ -435,21 +462,37 @@ export default function LetterheadEditorPage() {
         }
 
         @media print {
-          @page { size: A4 portrait; margin: 16mm 0; }
+          /* Zero page margin — the colored sheet bleeds to the paper edge so
+             there is no white border. Breathing room comes from the sheet's
+             own padding, not the @page margin. */
+          @page { size: A4 portrait; margin: 0; }
           aside, header, nav, .no-print, .invoice-form-pane, .admin-sidebar { display: none !important; }
-          html, body, main, body > div, .ml-56 {
+
+          /* Flatten every layout wrapper so the sheet isn't boxed in by the
+             max-w / padding / flex centering (that left/right white border). */
+          html, body, main, .ml-56, .print-page-root, .print-root, .print-col {
             display: block !important; margin: 0 !important; padding: 0 !important;
-            width: 100% !important; max-width: none !important; box-shadow: none !important;
-            border: none !important; position: static !important; height: auto !important;
-            min-height: 0 !important; transform: none !important; background: ${bg} !important;
+            width: 100% !important; max-width: none !important; min-width: 0 !important;
+            box-shadow: none !important; border: none !important; position: static !important;
+            height: auto !important; min-height: 0 !important; transform: none !important;
+            gap: 0 !important; float: none !important; background: ${bg} !important;
           }
+
           .print-sheet {
-            width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important;
+            width: 210mm !important; max-width: none !important; margin: 0 !important;
             border: none !important; box-shadow: none !important; border-radius: 0 !important;
             background: ${bg} !important; color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
+            display: flex !important; flex-direction: column !important;
           }
-          .mr-doc-footer { display: none !important; }
+          /* One paginated card == exactly one physical A4 page. */
+          .proposal-page {
+            height: 297mm !important; overflow: hidden !important;
+            page-break-after: always !important; break-after: page !important;
+          }
+          .proposal-page:last-of-type { page-break-after: avoid !important; break-after: avoid !important; }
+          .invoice-page { min-height: 297mm !important; }
+
           .mr-prose h2, .mr-prose h3 { break-after: avoid; page-break-after: avoid; }
           .mr-prose ul, .mr-prose ol, .mr-prose table, .mr-prose li, .mr-prose tr, .mr-prose blockquote, .mr-prose img { break-inside: avoid; page-break-inside: avoid; }
           .mr-prose p { orphans: 3; widows: 3; }
@@ -476,14 +519,19 @@ export default function LetterheadEditorPage() {
           <div className="flex items-center gap-1.5 text-xs text-gray-400 px-3 py-1.5 bg-white/[0.02] rounded-full border border-white/[0.04]">
             {isSaved ? <><CheckCircle2 size={13} className="text-emerald-500" /> <span>Saved locally</span></> : <><RefreshCw size={13} className="text-amber-500 animate-spin" /> <span>Saving draft…</span></>}
           </div>
+          {activeTab === 'proposal' && (
+            <button onClick={() => setPageView((p) => !p)} title={pageView ? 'Switch to editing' : 'Preview as A4 pages'} className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${pageView ? 'bg-purple-600/20 text-purple-300 border-purple-500/30' : 'text-gray-400 hover:text-white bg-white/[0.02] hover:bg-white/[0.06] border-white/[0.06]'}`}>
+              {pageView ? <><Pencil size={14} /> Edit</> : <><Layers size={14} /> Pages</>}
+            </button>
+          )}
           <button onClick={() => { setLhMode((p) => (p === 'light' ? 'dark' : 'light')); touch() }} className="p-2 rounded-xl text-gray-400 hover:text-white bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] transition-all">{isDark ? <Sun size={16} /> : <Moon size={16} />}</button>
           <button onClick={handleReset} className="px-4 py-2 rounded-xl text-xs font-semibold text-gray-400 hover:text-white bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] transition-all">Reset</button>
           <button onClick={handlePrint} className="flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-lg shadow-purple-500/20 active:scale-95 transition-all"><Printer size={15} /> Download PDF</button>
         </div>
       </header>
 
-      {/* Formatting toolbar (proposal only) */}
-      {activeTab === 'proposal' && (
+      {/* Formatting toolbar (proposal editing only) */}
+      {activeTab === 'proposal' && !pageView && (
         <div className="no-print bg-[#090909] border-b border-white/[0.04] px-6 py-2 flex flex-wrap items-center gap-1.5 z-10 sticky top-[73px]">
           <Toolbar editor={editor} />
           <div className="ml-auto flex items-center gap-2">
@@ -496,7 +544,7 @@ export default function LetterheadEditorPage() {
         </div>
       )}
 
-      <div className={`flex-1 flex flex-col lg:flex-row gap-6 p-6 max-w-7xl mx-auto w-full ${activeTab === 'invoice' ? 'lg:items-start' : 'justify-center'}`}>
+      <div className={`print-root flex-1 flex flex-col lg:flex-row gap-6 p-6 max-w-7xl mx-auto w-full ${activeTab === 'invoice' ? 'lg:items-start' : 'justify-center'}`}>
         {/* Invoice form pane */}
         {activeTab === 'invoice' && (
           <div className="invoice-form-pane no-print w-full lg:w-[45%] bg-[#0c0c0c] border border-white/[0.06] rounded-2xl p-6 space-y-6">
@@ -556,8 +604,30 @@ export default function LetterheadEditorPage() {
         )}
 
         {/* Document sheet */}
-        <div className={`flex-1 flex flex-col items-center ${activeTab === 'invoice' ? 'lg:w-[55%]' : 'w-full'}`}>
+        <div className={`print-col flex-1 flex flex-col items-center gap-6 ${activeTab === 'invoice' ? 'lg:w-[55%]' : 'w-full'}`}>
           {activeTab === 'proposal' ? (
+            pageView ? (
+              /* Paginated A4 preview — what the PDF will look like, page by page. */
+              pages.map((html, idx) => (
+                <div key={idx} className="print-sheet proposal-page relative w-full max-w-[680px] rounded-2xl shadow-2xl border text-left flex flex-col" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, width: '680px', height: '962px', boxSizing: 'border-box', overflow: 'hidden' }}>
+                  <div style={{ height: '12mm' }} />
+                  {idx === 0 && (
+                    <>
+                      <BrandHeader />
+                      <div className="px-12 pt-8 pb-0">
+                        <p className="m-0 font-semibold text-[11px] tracking-widest uppercase mb-3" style={{ color: subC, letterSpacing: '0.14em' }}>{documentSub}</p>
+                        <p className="m-0 font-bold text-2xl tracking-tight mb-2" style={{ color: nameC, letterSpacing: '-0.02em' }}>{documentTitle}</p>
+                      </div>
+                    </>
+                  )}
+                  <div className="px-12 py-8 flex-1 overflow-hidden">
+                    <div className="mr-prose" style={{ color: bodyC }} dangerouslySetInnerHTML={{ __html: html }} />
+                  </div>
+                  <BrandFooter />
+                  <div className="no-print absolute -bottom-5 right-0 text-[10px] text-gray-500">Page {idx + 1} of {pages.length}</div>
+                </div>
+              ))
+            ) : (
             <div className="print-sheet relative w-full max-w-[680px] rounded-2xl shadow-2xl border text-left" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, width: '680px', minHeight: '962px', boxSizing: 'border-box' }}>
               <div style={{ height: '12mm' }} />
               <BrandHeader />
@@ -570,8 +640,9 @@ export default function LetterheadEditorPage() {
               </div>
               <BrandFooter />
             </div>
+            )
           ) : (
-            <div className="print-sheet relative w-full max-w-[680px] rounded-2xl shadow-2xl border text-left flex flex-col justify-between" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, minHeight: '962px', boxSizing: 'border-box' }}>
+            <div className="print-sheet invoice-page relative w-full max-w-[680px] rounded-2xl shadow-2xl border text-left flex flex-col justify-between" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif", background: bg, border, minHeight: '962px', boxSizing: 'border-box' }}>
               <div style={{ height: '12mm' }} />
               <BrandHeader />
               <div className="px-12 py-8 space-y-6 flex-1">
@@ -599,4 +670,127 @@ export default function LetterheadEditorPage() {
       </div>
     </div>
   )
+}
+
+/* ------------------------- Display-only pagination -------------------------
+   Splits the proposal HTML into A4-sized page chunks for the read-only Page
+   view + print. No caret/selection handling (editing happens in the single
+   sheet), so none of the old paginate bugs apply. */
+function paginateForDisplay(html: string, page1Max: number, page2Max: number): string[] {
+  if (typeof document === 'undefined') return [html || '<p><br></p>']
+
+  const source = document.createElement('div')
+  source.innerHTML = html || '<p><br></p>'
+
+  const pages: string[] = []
+  const measure = document.createElement('div')
+  measure.className = 'mr-prose'
+  measure.style.cssText = 'width:584px;position:absolute;visibility:hidden;left:-9999px;top:0;'
+  document.body.appendChild(measure)
+
+  const limit = () => (pages.length === 0 ? page1Max : page2Max)
+
+  // Word-level split for a single block that's taller than a whole page.
+  const splitByWords = (node: Node) => {
+    const isText = node.nodeType === Node.TEXT_NODE
+    const el = node as HTMLElement
+    const tag = isText ? '' : el.tagName.toLowerCase()
+    const makeShell = (): HTMLElement | null => {
+      if (isText) return null
+      const shell = document.createElement(tag)
+      for (const a of Array.from(el.attributes)) shell.setAttribute(a.name, a.value)
+      return shell
+    }
+    let shell = makeShell()
+    if (shell) measure.appendChild(shell)
+    const target = () => shell ?? measure
+    const flush = () => {
+      pages.push(measure.innerHTML)
+      measure.innerHTML = ''
+      shell = makeShell()
+      if (shell) measure.appendChild(shell)
+    }
+    const appendInline = (child: Node) => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        for (const tok of (child.nodeValue || '').split(/(\s+)/)) {
+          if (tok === '') continue
+          const tn = document.createTextNode(tok)
+          target().appendChild(tn)
+          if (measure.offsetHeight > limit() && target().childNodes.length > 1) {
+            target().removeChild(tn); flush(); target().appendChild(tn)
+          }
+        }
+      } else {
+        const c = child.cloneNode(true)
+        target().appendChild(c)
+        if (measure.offsetHeight > limit()) {
+          target().removeChild(c)
+          if (target().childNodes.length === 0) { appendChildNodes(child) }
+          else { flush(); target().appendChild(c) }
+        }
+      }
+    }
+    const appendChildNodes = (parent: Node) => { for (const c of Array.from(parent.childNodes)) appendInline(c) }
+    if (isText) appendInline(node); else appendChildNodes(node)
+    if (shell && shell.childNodes.length === 0) measure.removeChild(shell)
+  }
+
+  const place = (node: Node) => {
+    const cloned = node.cloneNode(true)
+    measure.appendChild(cloned)
+    if (measure.offsetHeight <= limit()) return
+    measure.removeChild(cloned)
+
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as HTMLElement
+      const tag = el.tagName.toLowerCase()
+      if (tag === 'ul' || tag === 'ol') {
+        let list = document.createElement(tag)
+        for (const a of Array.from(el.attributes)) list.setAttribute(a.name, a.value)
+        measure.appendChild(list)
+        for (const li of Array.from(el.childNodes)) {
+          const c = li.cloneNode(true)
+          list.appendChild(c)
+          if (measure.offsetHeight > limit() && list.childNodes.length > 1) {
+            list.removeChild(c); pages.push(measure.innerHTML); measure.innerHTML = ''
+            list = document.createElement(tag)
+            for (const a of Array.from(el.attributes)) list.setAttribute(a.name, a.value)
+            measure.appendChild(list); list.appendChild(c)
+          }
+        }
+        return
+      }
+      if (tag === 'table') {
+        const thead = el.querySelector('thead')
+        const rows = Array.from(el.querySelectorAll('tr')).filter((tr) => tr.parentElement?.tagName.toLowerCase() !== 'thead')
+        const newTable = () => {
+          const t = document.createElement('table')
+          if (thead) t.appendChild(thead.cloneNode(true))
+          const tb = document.createElement('tbody'); t.appendChild(tb)
+          measure.appendChild(t); return tb
+        }
+        let tbody = newTable()
+        for (const row of rows) {
+          const c = row.cloneNode(true)
+          tbody.appendChild(c)
+          if (measure.offsetHeight > limit() && tbody.childNodes.length > 1) {
+            tbody.removeChild(c); pages.push(measure.innerHTML); measure.innerHTML = ''
+            tbody = newTable(); tbody.appendChild(c)
+          }
+        }
+        return
+      }
+    }
+    // Generic block: move to a fresh page; if it still overflows alone, split it.
+    if (measure.innerHTML.trim() !== '') { pages.push(measure.innerHTML); measure.innerHTML = '' }
+    measure.appendChild(cloned)
+    if (measure.offsetHeight <= limit()) return
+    measure.removeChild(cloned)
+    splitByWords(node)
+  }
+
+  Array.from(source.childNodes).forEach(place)
+  if (measure.innerHTML.trim() !== '') pages.push(measure.innerHTML)
+  document.body.removeChild(measure)
+  return pages.length > 0 ? pages : [html || '<p><br></p>']
 }
