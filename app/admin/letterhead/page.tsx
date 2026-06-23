@@ -544,6 +544,11 @@ export default function LetterheadEditorPage() {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
+
+          /* Explicit print top-margin class — safety net to guarantee top spacing */
+          .print-top-margin {
+            padding-top: 40px !important;
+          }
         }
       `}</style>
 
@@ -994,7 +999,7 @@ export default function LetterheadEditorPage() {
             <div className="w-full">
               
               {/* 1. Header Segment (Brand kit standards matching logo-kit.html) */}
-              <div className="px-12 pt-10 pb-0">
+              <div className="px-12 pt-10 pb-0 print-top-margin">
                 <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
                   <tbody>
                     <tr>
