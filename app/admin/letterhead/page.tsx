@@ -95,33 +95,33 @@ const navkarBody = `
   </ul>
 
   <h3>4. Commercial Proposal <span style="font-weight:400;font-size:12px;color:#9ca3af;">(indicative — to be finalised)</span></h3>
-  <table style="width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 4px;">
+  <table>
     <thead>
-      <tr style="background:#f3f4f6;">
-        <th style="text-align:left;padding:8px 10px;border:1px solid #e5e7eb;">Component</th>
-        <th style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;">Professional Fee (INR)</th>
+      <tr>
+        <th>Component</th>
+        <th>Professional Fee (INR)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td style="padding:8px 10px;border:1px solid #e5e7eb;">Phase 1 — Brand Identity &amp; Launch Creative Kit (one-time)</td>
-        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;">₹4,50,000</td>
+        <td>Phase 1 — Brand Identity &amp; Launch Creative Kit (one-time)</td>
+        <td>₹4,50,000</td>
       </tr>
       <tr>
-        <td style="padding:8px 10px;border:1px solid #e5e7eb;">Phase 2 — Creative &amp; Marketing Retainer (₹90,000 × 16 months)</td>
-        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;">₹14,40,000</td>
+        <td>Phase 2 — Creative &amp; Marketing Retainer (₹90,000 × 16 months)</td>
+        <td>₹14,40,000</td>
       </tr>
       <tr>
-        <td style="padding:8px 10px;border:1px solid #e5e7eb;"><strong>Subtotal — Professional Fees</strong></td>
-        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;"><strong>₹18,90,000</strong></td>
+        <td><strong>Subtotal — Professional Fees</strong></td>
+        <td><strong>₹18,90,000</strong></td>
       </tr>
       <tr>
-        <td style="padding:8px 10px;border:1px solid #e5e7eb;">GST @ 18%</td>
-        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;">₹3,40,200</td>
+        <td>GST @ 18%</td>
+        <td>₹3,40,200</td>
       </tr>
-      <tr style="background:#faf5ff;">
-        <td style="padding:8px 10px;border:1px solid #e5e7eb;"><strong>Total Payable (incl. GST)</strong></td>
-        <td style="text-align:right;padding:8px 10px;border:1px solid #e5e7eb;"><strong>₹22,30,200</strong></td>
+      <tr>
+        <td><strong>Total Payable (incl. GST)</strong></td>
+        <td><strong>₹22,30,200</strong></td>
       </tr>
     </tbody>
   </table>
@@ -440,8 +440,10 @@ export default function LetterheadEditorPage() {
         .print-sheet .prose ul { list-style: disc; }
         .print-sheet .prose ol { list-style: decimal; }
         .print-sheet .prose li { margin: 0 0 5px; line-height: 1.55; }
-        .print-sheet .prose table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; }
-        .print-sheet .prose th, .print-sheet .prose td { padding: 7px 9px; text-align: left; vertical-align: top; }
+        .print-sheet .prose table { width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 12.5px; }
+        .print-sheet .prose th, .print-sheet .prose td { border: 1px solid #9ca3af; padding: 7px 10px; text-align: left; vertical-align: top; }
+        .print-sheet .prose thead th { background: rgba(127,127,127,0.14); font-weight: 700; }
+        .print-sheet .prose td:last-child, .print-sheet .prose th:last-child { text-align: right; white-space: nowrap; }
         .print-sheet .prose strong { font-weight: 700; }
 
         @media print {
