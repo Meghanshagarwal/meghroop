@@ -450,9 +450,9 @@ export default function LetterheadEditorPage() {
           /* Remove browser margin/headers/footers completely */
           @page {
             size: A4 portrait;
-            /* Real margins on EVERY page — top breathing room + bottom room for the
-               repeating footer. Applies to continuation pages too. */
-            margin: 16mm 14mm 18mm 14mm !important;
+            /* Zero margin removes the browser's auto date/title header & page footer,
+               and gives full-bleed background. Our own margins come from the sheet. */
+            margin: 0 !important;
           }
 
           /* Hide sidebar, dashboards, control panels, forms, navigation elements, and background frames */
@@ -492,39 +492,32 @@ export default function LetterheadEditorPage() {
 
           /* Perfect A4 frame overlay - Uses dynamic background from active theme */
           .print-sheet {
-            width: auto !important;
+            width: 210mm !important;
             max-width: none !important;
-            min-height: auto !important;
+            min-height: 0 !important;
             height: auto !important;
             max-height: none !important;
-            margin: 0 !important;
+            margin: 0 auto !important;
             padding: 0 !important;
             border: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
             box-sizing: border-box !important;
-            background: transparent !important;
+            background: ${bg} !important;
             color: ${nameC} !important;
             font-family: 'Space Grotesk', sans-serif !important;
 
-            /* Block (not flex) paginates far more reliably across pages */
-            display: block !important;
+            /* table layout makes the header/footer GROUPS repeat on every printed
+               page (top margin + footer on each page) without browser chrome */
+            display: table !important;
             overflow: visible !important;
             position: static !important;
           }
 
-          /* Repeating footer — prints in the bottom margin of EVERY page */
-          .print-footer {
-            display: block !important;
-            position: fixed !important;
-            bottom: 7mm !important;
-            left: 14mm !important;
-            right: 14mm !important;
-            padding-top: 5px !important;
-            border-top: 1px solid ${footerBorder} !important;
-            color: ${footC} !important;
-            font-family: 'Space Grotesk', sans-serif !important;
-          }
+          .print-sheet .sheet-body { display: table-row-group !important; }
+          .print-sheet .print-header { display: table-header-group !important; }
+          .print-sheet .print-footer { display: table-footer-group !important; }
+          .print-sheet .print-header > div { background: ${bg} !important; }
 
           /* Keep sections together so a heading never sits alone at a page bottom,
              and lists / tables don't split across pages */
@@ -994,9 +987,13 @@ export default function LetterheadEditorPage() {
               minHeight: '870px'
             }}
           >
-            
+            {/* Print-only top spacer — repeats on every page (table-header-group) for a consistent top margin */}
+            <div className="print-header" style={{ display: 'none' }} aria-hidden="true">
+              <div style={{ height: '14mm' }} />
+            </div>
+
             {/* Top Sheet Group wrapper to separate top content from the bottom footer for perfect alignment */}
-            <div className="w-full">
+            <div className="w-full sheet-body">
               
               {/* 1. Header Segment (Brand kit standards matching logo-kit.html) */}
               <div className="px-12 pt-10 pb-0">
@@ -1267,25 +1264,27 @@ export default function LetterheadEditorPage() {
               </table>
             </div>
 
+            {/* Print-only repeating footer — table-footer-group prints on every page */}
+            <div className="print-footer" style={{ display: 'none' }}>
+              <div style={{ borderTop: `1px solid ${footerBorder}`, padding: '6px 48px 0' }}>
+                <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
+                  <tbody>
+                    <tr>
+                      <td className="text-[10px] font-medium" style={{ color: footC }}>
+                        MeghRoop · Growth, AI &amp; Software Agency
+                      </td>
+                      <td className="text-right text-[10px] font-medium" style={{ color: footC }}>
+                        meghroop.tech · Rajasthan, India
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
         </div>
 
-      </div>
-
-      {/* Repeating footer — hidden on screen, printed in the bottom margin of every page */}
-      <div className="print-footer" style={{ display: 'none' }}>
-        <table cellPadding="0" cellSpacing="0" border={0} className="w-full">
-          <tbody>
-            <tr>
-              <td className="text-[10px] font-medium" style={{ color: footC }}>
-                MeghRoop · Growth, AI &amp; Software Agency
-              </td>
-              <td className="text-right text-[10px] font-medium" style={{ color: footC }}>
-                meghroop.tech · Rajasthan, India
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
     </div>
