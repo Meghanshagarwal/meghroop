@@ -72,7 +72,7 @@ export default function AgenticAIPageProcess() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-4"
+          className="grid md:grid-cols-2 gap-5 sm:gap-6"
         >
           {steps.map((step) => (
             <motion.div

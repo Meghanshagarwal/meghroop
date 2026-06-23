@@ -38,7 +38,7 @@ export default function AgenticAIPageAudience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="space-y-3"
+          className="space-y-4"
         >
           {audiences.map((a) => (
             <div

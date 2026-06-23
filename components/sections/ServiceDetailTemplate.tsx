@@ -213,26 +213,26 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
           <section className="section-padding">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
               <SectionHeader accent={a} eyebrow="What's inside" heading={content.features.heading} subtitle={content.features.subtitle} />
-              <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                 {content.features.items.map((f) => (
                   <motion.div key={f.title} variants={item} whileHover={{ scale: 1.01, transition: { duration: 0.2 } }} className="group relative rounded-2xl border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300">
                     <div className="absolute inset-0 bg-[#0a0a0a]" />
                     <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ boxShadow: `inset 0 0 60px ${a.bg}` }} />
-                    <div className="relative z-10 p-6 sm:p-7">
-                      <div className="flex items-start justify-between mb-3">
-                        <div className={`w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center`}>
+                    <div className="relative z-10 p-7 sm:p-8">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`w-12 h-12 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center`}>
                           <Sparkles size={18} className={a.icon} />
                         </div>
                         {f.tag && <span className="text-xs px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.08] text-gray-400">{f.tag}</span>}
                       </div>
-                      <h3 className="font-heading font-bold text-lg text-white mb-2">{f.title}</h3>
+                      <h3 className="font-heading font-bold text-lg sm:text-xl text-white mb-2.5">{f.title}</h3>
                       <p className="text-sm text-gray-400 leading-relaxed">{f.description}</p>
                     </div>
                   </motion.div>
                 ))}
               </motion.div>
               {content.features.note && (
-                <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 sm:p-8">
+                <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mt-8 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 sm:p-8">
                   <h3 className="font-heading font-bold text-lg text-white mb-4">{content.features.note.title}</h3>
                   <ul className="grid sm:grid-cols-2 gap-3 text-gray-400">
                     {content.features.note.items.map((it) => (
@@ -250,7 +250,7 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
           <section className="section-padding">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
               <SectionHeader accent={a} eyebrow="How it works" heading={content.process.heading} subtitle={content.process.subtitle} />
-              <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-4">
+              <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-5">
                 {content.process.steps.map((step, i) => (
                   <motion.div key={step.title} variants={item} whileHover={{ x: 8, transition: { duration: 0.2 } }} className="group relative rounded-2xl border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 p-6 sm:p-8">
                     <div className="relative z-10 flex items-start gap-5">
@@ -274,9 +274,9 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
           <section className="section-padding">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
               <SectionHeader accent={a} eyebrow="Why MeghRoop" heading={content.why.heading} subtitle={content.why.subtitle} />
-              <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                 {content.why.items.map((d) => (
-                  <motion.div key={d.title} variants={item} whileHover={{ y: -4, transition: { duration: 0.2 } }} className="relative rounded-2xl border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 p-6 sm:p-7">
+                  <motion.div key={d.title} variants={item} whileHover={{ y: -4, transition: { duration: 0.2 } }} className="relative rounded-2xl border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 p-7 sm:p-8">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent" />
                     <div className="relative z-10">
                       <h3 className="font-heading font-bold text-lg text-white mb-2">{d.title}</h3>
@@ -324,7 +324,7 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
           <section className="section-padding">
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
               <SectionHeader accent={a} eyebrow="What you get" heading={content.outcomes.heading} subtitle={content.outcomes.subtitle} />
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-2 gap-4">
                 {content.outcomes.items.map((it) => (
                   <motion.div key={it} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }} className="flex items-start gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5">
                     <Check size={18} className={`${a.icon} flex-shrink-0 mt-0.5`} />
@@ -341,7 +341,7 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
           <section className="section-padding">
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
               <SectionHeader accent={a} eyebrow="Who it's for" heading={content.audience.heading} subtitle={content.audience.subtitle} />
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {content.audience.items.map((it) => (
                   <div key={it} className="flex items-start gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5">
                     <span className={`mt-2 w-1.5 h-1.5 rounded-full ${a.dot} flex-shrink-0`} />
@@ -358,9 +358,9 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
           <section className="section-padding">
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
               <SectionHeader accent={a} eyebrow="Pricing" heading={content.pricing.heading} subtitle={content.pricing.subtitle} />
-              <div className="grid md:grid-cols-3 gap-4">
+              <div className="grid md:grid-cols-3 gap-5 sm:gap-6">
                 {content.pricing.tiers.map((t) => (
-                  <motion.div key={t.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 sm:p-7">
+                  <motion.div key={t.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 sm:p-8">
                     <p className={`text-xs uppercase tracking-wider font-semibold ${a.icon} mb-3`}>{t.title}</p>
                     <p className="font-heading font-bold text-3xl text-white mb-2">{t.price}</p>
                     <p className="text-sm text-gray-400 leading-relaxed">{t.scope}</p>
@@ -375,7 +375,7 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
         <section className="section-padding">
           <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <SectionHeader accent={a} eyebrow="Questions people ask" heading={<>Things worth <span className="gradient-text">actually answering.</span></>} />
-            <div className="space-y-3">
+            <div className="space-y-4">
               {content.faqs.map((faq, i) => {
                 const isOpen = open === i
                 return (

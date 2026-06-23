@@ -74,7 +74,7 @@ export default function AgenticAIPageWhy() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
         >
           {differentiators.map((d) => {
             const Icon = d.icon
@@ -83,7 +83,7 @@ export default function AgenticAIPageWhy() {
                 key={d.title}
                 variants={item}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group relative rounded-2xl border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 p-6 sm:p-7"
+                className="group relative rounded-2xl border border-white/[0.08] hover:border-white/20 overflow-hidden transition-all duration-300 p-7 sm:p-8"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent" />
                 <div className="relative z-10">

@@ -17,7 +17,7 @@ const services = [
     iconColor: 'text-purple-400',
     borderHover: 'hover:border-purple-500/40',
     glowColor: 'rgba(139, 92, 246, 0.15)',
-    span: 'md:col-span-2',
+    span: 'md:col-span-2 lg:col-span-3',
     tag: 'Start here',
   },
   {
@@ -88,7 +88,7 @@ const services = [
     iconColor: 'text-amber-400',
     borderHover: 'hover:border-amber-500/40',
     glowColor: 'rgba(245, 158, 11, 0.15)',
-    span: 'md:col-span-2',
+    span: 'md:col-span-1',
     tag: 'Private cloud',
   },
   {
@@ -103,7 +103,7 @@ const services = [
     iconColor: 'text-indigo-400',
     borderHover: 'hover:border-indigo-500/40',
     glowColor: 'rgba(99, 102, 241, 0.15)',
-    span: 'md:col-span-3',
+    span: 'md:col-span-1',
     tag: 'Performance pilot',
   },
 ]
@@ -150,7 +150,7 @@ export default function AgenticAIPageGrid() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6"
         >
           {services.map((service) => {
             const Icon = service.icon
@@ -172,9 +172,9 @@ export default function AgenticAIPageGrid() {
                   style={{ boxShadow: `inset 0 0 60px ${service.glowColor}` }}
                 />
 
-                <div className="relative z-10 p-6 sm:p-7 h-full flex flex-col">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-11 h-11 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center group-hover:bg-white/[0.1] transition-colors duration-300">
+                <div className="relative z-10 p-7 sm:p-8 h-full flex flex-col">
+                  <div className="flex items-start justify-between mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center group-hover:bg-white/[0.1] transition-colors duration-300">
                       <Icon size={22} className={service.iconColor} />
                     </div>
                     {service.tag && (
@@ -183,8 +183,8 @@ export default function AgenticAIPageGrid() {
                       </span>
                     )}
                   </div>
-                  <h3 className="font-heading font-bold text-lg text-white mb-2">{service.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-5 flex-1">{service.description}</p>
+                  <h3 className="font-heading font-bold text-lg sm:text-xl text-white mb-2.5">{service.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed mb-6 flex-1 max-w-xl">{service.description}</p>
                   <Link
                     href={service.href}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-purple-300 hover:text-purple-200 transition-colors"
