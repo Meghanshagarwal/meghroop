@@ -447,10 +447,11 @@ export default function LetterheadEditorPage() {
         .print-sheet .prose strong { font-weight: 700; }
 
         @media print {
-          /* Remove browser margin/headers/footers completely */
+          /* A4 page with proper margins — 10mm top/bottom on EVERY page,
+             full-bleed left/right so dark background goes edge-to-edge */
           @page {
             size: A4 portrait;
-            margin: 0 !important;
+            margin: 10mm 0;
           }
 
           /* Hide sidebar, dashboards, control panels, forms, navigation elements, and background frames */
