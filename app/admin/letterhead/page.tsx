@@ -792,8 +792,11 @@ export default function LetterheadEditorPage() {
           
           /* Full layout reset to block layout for clean printing without offsets or flex shifts */
           html, body, main,
-          body *:has(.print-sheet),
-          .min-h-screen, .flex-1, .max-w-7xl, .main-content-wrapper {
+          body > div,
+          body > div > main,
+          body > div > main > div,
+          body > div > main > div > div,
+          body > div > main > div > div > div {
             display: block !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -808,6 +811,11 @@ export default function LetterheadEditorPage() {
             transform: none !important;
             float: none !important;
             gap: 0 !important;
+          }
+
+          /* Force exact zero margins for any sidebar wrappers in print */
+          main, .ml-56 {
+            margin-left: 0 !important;
           }
 
           html, body { background: ${bg} !important; }
