@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: '%s | MeghRoop',
   },
   description:
-    'MeghRoop is a premium Software + AI + Growth agency. We help businesses scale through performance marketing, AI automation, custom software, branding, and content.',
+    'MeghRoop is a Software, AI & Growth agency. We scale businesses with performance marketing, AI automation, custom software, branding and content.',
   keywords: [
     'AI Engineering Studio',
     'AI Agents',
