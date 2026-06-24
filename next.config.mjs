@@ -20,6 +20,23 @@ const nextConfig = {
     // Tree-shake big component/icon libraries so fewer/smaller JS chunks ship.
     optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
   },
+  // Reduce the number of JS requests each page makes. Next's default
+  // splitChunks fans node_modules out into ~10 small vendor files, so the page
+  // fires a long list of JS requests (flagged by the SEO "Page Objects" audit).
+  // Rather than collapse everything into one chunk — which would force
+  // page-specific libraries (e.g. the admin-only TipTap editor) onto every page
+  // and bloat the payload — we keep Next's smart, page-scoped splitting but
+  // raise the minimum chunk size and cap how many parallel requests a page may
+  // start. Webpack then merges the small fragments into fewer files without
+  // pulling in code a given page doesn't use.
+  webpack: (config, { isServer }) => {
+    if (!isServer && config.optimization.splitChunks) {
+      config.optimization.splitChunks.minSize = 100_000
+      config.optimization.splitChunks.maxInitialRequests = 4
+      config.optimization.splitChunks.maxAsyncRequests = 6
+    }
+    return config
+  },
   async redirects() {
     return [
       {
