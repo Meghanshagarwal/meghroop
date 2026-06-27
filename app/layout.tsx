@@ -34,7 +34,8 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'MeghRoop — Software, AI & Growth Agency',
+    // 57 chars — within the recommended 50–60 range and keyword-rich.
+    default: 'MeghRoop — Software, AI Automation & Growth Marketing Agency',
     template: '%s | MeghRoop',
   },
   description:
@@ -94,6 +95,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: './',
+    languages: {
+      'en': './',
+      'x-default': './',
+    },
   },
   robots: {
     index: true,

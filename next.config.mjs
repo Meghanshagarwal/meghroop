@@ -37,6 +37,22 @@ const nextConfig = {
     }
     return config
   },
+  // Send HSTS with `preload` so browsers upgrade http→https on their own and
+  // skip the network redirect hop the PageSpeed audit flagged ("avoid multiple
+  // page redirects"). Submit the domain at hstspreload.org to make it permanent.
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       {

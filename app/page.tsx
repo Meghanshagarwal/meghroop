@@ -7,6 +7,7 @@ import { getSupabase, type Project } from '@/lib/supabase'
 // Static imports for 100% server-side HTML pre-rendering (SEO & H2 headings)
 import Services from '@/components/sections/Services'
 import WhyMeghRoop from '@/components/sections/WhyMeghRoop'
+import AgencyOverview from '@/components/sections/AgencyOverview'
 import Projects from '@/components/sections/Projects'
 import Process from '@/components/sections/Process'
 import TechStack from '@/components/sections/TechStack'
@@ -43,6 +44,8 @@ export default async function Home() {
         <Services />
         {/* 3. Why MeghRoop */}
         <WhyMeghRoop />
+        {/* 3b. Agency overview — crawlable, keyword-rich server-rendered copy */}
+        <AgencyOverview />
         {/* 4. Case Studies */}
         <Projects projects={projects} />
         {/* 5. Process — Discover → Scale */}

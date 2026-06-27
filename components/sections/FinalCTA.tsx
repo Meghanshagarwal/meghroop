@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/analytics'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 export default function FinalCTA() {
   return (
@@ -39,9 +40,7 @@ export default function FinalCTA() {
             </Link>
             <p className="mt-8 text-sm text-[#52525b]">
               Or email{' '}
-              <a href="mailto:hello@meghroop.tech" className="text-[#c084fc] hover:text-[#d8b4fe] transition-colors">
-                hello@meghroop.tech
-              </a>
+              <ObfuscatedEmail className="text-[#c084fc] hover:text-[#d8b4fe] transition-colors" />
             </p>
           </div>
         </motion.div>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Mail } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 import MeghRoopLogo from '@/components/common/MeghRoopLogo'
 import { serviceLinks } from '@/data/services'
 import { aiAgentLinks } from '@/data/aiAgents'
@@ -42,7 +42,7 @@ const socialLinks = [
     href: 'mailto:hello@meghroop.tech',
     label: 'Email',
     hoverColor: 'hover:text-purple-400',
-    glowColor: 'rgba(139,92,246,0.25)',
+    glowClass: 'group-hover:shadow-[0_0_16px_rgba(139,92,246,0.25),0_0_4px_rgba(139,92,246,0.25)]',
     borderHover: 'hover:border-purple-500/40',
     bgHover: 'hover:bg-purple-500/[0.08]',
   },
@@ -51,7 +51,7 @@ const socialLinks = [
     href: 'https://linkedin.com/company/meghroop',
     label: 'LinkedIn',
     hoverColor: 'hover:text-blue-400',
-    glowColor: 'rgba(59,130,246,0.25)',
+    glowClass: 'group-hover:shadow-[0_0_16px_rgba(59,130,246,0.25),0_0_4px_rgba(59,130,246,0.25)]',
     borderHover: 'hover:border-blue-500/40',
     bgHover: 'hover:bg-blue-500/[0.08]',
   },
@@ -60,7 +60,7 @@ const socialLinks = [
     href: 'https://x.com/meghroop_tech',
     label: 'Twitter',
     hoverColor: 'hover:text-sky-400',
-    glowColor: 'rgba(56,189,248,0.25)',
+    glowClass: 'group-hover:shadow-[0_0_16px_rgba(56,189,248,0.25),0_0_4px_rgba(56,189,248,0.25)]',
     borderHover: 'hover:border-sky-500/40',
     bgHover: 'hover:bg-sky-500/[0.08]',
   },
@@ -69,7 +69,7 @@ const socialLinks = [
     href: 'https://www.youtube.com/channel/UCcmaDrZZMKlKu-ZJCxpPVjQ',
     label: 'YouTube',
     hoverColor: 'hover:text-red-500',
-    glowColor: 'rgba(239,68,68,0.25)',
+    glowClass: 'group-hover:shadow-[0_0_16px_rgba(239,68,68,0.25),0_0_4px_rgba(239,68,68,0.25)]',
     borderHover: 'hover:border-red-500/40',
     bgHover: 'hover:bg-red-500/[0.08]',
   },
@@ -78,7 +78,7 @@ const socialLinks = [
     href: 'https://www.instagram.com/meghroop.tech',
     label: 'Instagram',
     hoverColor: 'hover:text-pink-400',
-    glowColor: 'rgba(236,72,153,0.25)',
+    glowClass: 'group-hover:shadow-[0_0_16px_rgba(236,72,153,0.25),0_0_4px_rgba(236,72,153,0.25)]',
     borderHover: 'hover:border-pink-500/40',
     bgHover: 'hover:bg-pink-500/[0.08]',
   },
@@ -87,7 +87,7 @@ const socialLinks = [
     href: 'https://www.facebook.com/meghroop.tech',
     label: 'Facebook',
     hoverColor: 'hover:text-blue-500',
-    glowColor: 'rgba(59,130,246,0.25)',
+    glowClass: 'group-hover:shadow-[0_0_16px_rgba(59,130,246,0.25),0_0_4px_rgba(59,130,246,0.25)]',
     borderHover: 'hover:border-blue-500/40',
     bgHover: 'hover:bg-blue-500/[0.08]',
   },
@@ -138,20 +138,35 @@ export default function Footer() {
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs mb-6">
               Software, AI, branding and growth systems for modern businesses. Made in India. Built for everywhere.
             </p>
+            {/* Business address & phone — visible NAP for Local SEO */}
+            <address className="not-italic mb-6 space-y-2.5">
+              <a
+                href="https://maps.google.com/?q=MeghRoop,+Jaipur,+Rajasthan,+India"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2.5 text-sm text-gray-400 hover:text-white transition-colors duration-200"
+              >
+                <MapPin size={15} className="mt-0.5 shrink-0 text-gray-500" />
+                <span>Jaipur Road, Jaipur, Rajasthan 302001, India</span>
+              </a>
+              <a
+                href="tel:+918949508264"
+                className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors duration-200"
+              >
+                <Phone size={15} className="shrink-0 text-gray-500" />
+                <span>+91 89495 08264</span>
+              </a>
+            </address>
             <div className="flex items-center gap-2.5">
-              {socialLinks.map(({ icon: Icon, href, label, hoverColor, glowColor, borderHover, bgHover }) => (
+              {socialLinks.map(({ icon: Icon, href, label, hoverColor, glowClass, borderHover, bgHover }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className={`relative w-9 h-9 rounded-xl border border-white/[0.08] flex items-center justify-center text-gray-400 transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95 ${hoverColor} ${borderHover} ${bgHover} group`}
+                  className={`relative w-9 h-9 rounded-xl border border-white/[0.08] flex items-center justify-center text-gray-400 transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95 ${hoverColor} ${borderHover} ${bgHover} ${glowClass} group`}
                 >
-                  <span
-                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{ boxShadow: `0 0 16px ${glowColor}, 0 0 4px ${glowColor}` }}
-                  />
                   <Icon size={15} />
                 </a>
               ))}
@@ -177,7 +192,7 @@ export default function Footer() {
           performance marketing (Meta Ads, Google Ads, SEO, social media, content), AI agents and
           automation (n8n, WhatsApp, CRM), custom software and SaaS development, Shopify and WordPress
           development, and branding and creative. From awareness to automation. From code to customers.
-          Contact: hello@meghroop.tech.
+          Based in Jaipur, Rajasthan, India. Serving clients worldwide.
         </p>
 
         <div className="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row justify-between items-center gap-3">

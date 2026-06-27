@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 const faqs = [
   {
@@ -142,12 +143,7 @@ export default function FAQ() {
           <p className="text-white font-semibold mb-1">Sometimes a quick message is faster than reading everything.</p>
           <p className="text-sm text-gray-400">
             Email{' '}
-            <a
-              href="mailto:hello@meghroop.tech"
-              className="text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-2"
-            >
-              hello@meghroop.tech
-            </a>{' '}
+            <ObfuscatedEmail className="text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-2" />{' '}
             — we actually read those.
           </p>
         </motion.div>
