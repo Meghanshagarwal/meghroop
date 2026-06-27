@@ -71,7 +71,7 @@ export default function SeoAuditsPage() {
 
   // ── API key / model settings ──
   const [apiKey, setApiKey] = useState('')
-  const [model, setModel] = useState('gemini-2.0-flash')
+  const [model, setModel] = useState('gemini-2.5-flash')
   const [savingKey, setSavingKey] = useState(false)
   const [keySaved, setKeySaved] = useState(false)
 
@@ -138,7 +138,7 @@ export default function SeoAuditsPage() {
             type="text"
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            placeholder="gemini-2.0-flash"
+            placeholder="gemini-2.5-flash"
             className="rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5 text-sm text-white placeholder:text-gray-600 focus:border-purple-500/50 focus:outline-none"
           />
           <button

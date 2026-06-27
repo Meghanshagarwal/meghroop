@@ -3,7 +3,9 @@ import type { SeoSignals, SeoReport } from './types'
 
 export const GEMINI_KEY_SETTING = 'gemini_api_key'
 export const GEMINI_MODEL_SETTING = 'gemini_model'
-const DEFAULT_MODEL = 'gemini-2.0-flash'
+// gemini-2.0-flash has 0 free-tier quota on most keys; 2.5-flash has a working
+// free tier. Override per-key from Admin → SEO Audits if you have other quota.
+const DEFAULT_MODEL = 'gemini-2.5-flash'
 
 /** Prefer the admin-managed key in the `settings` table, fall back to env. */
 export async function getGeminiConfig(): Promise<{ key: string; model: string }> {
