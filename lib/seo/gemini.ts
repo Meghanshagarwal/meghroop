@@ -80,7 +80,10 @@ Provide 4-8 strengths, 5-12 issues, 5-8 quick wins, and 10-14 checklist items. T
 }
 
 interface GeminiResponse {
-  candidates?: { content?: { parts?: { text?: string }[] } }[]
+  candidates?: {
+    content?: { parts?: { text?: string }[] }
+    finishReason?: string
+  }[]
   error?: { message?: string }
 }
 
@@ -91,6 +94,40 @@ function extractJson(text: string): string {
   const last = text.lastIndexOf('}')
   if (first !== -1 && last !== -1) return text.slice(first, last + 1)
   return text
+}
+
+/**
+ * Best-effort repair of a JSON object that was cut off mid-stream: close any
+ * dangling string, then balance the remaining brackets/braces so JSON.parse can
+ * recover the portion that did arrive.
+ */
+function repairTruncatedJson(raw: string): string {
+  let s = raw.trim()
+  const start = s.indexOf('{')
+  if (start > 0) s = s.slice(start)
+
+  // Drop a trailing partial token after the last complete value.
+  const lastComplete = Math.max(s.lastIndexOf('}'), s.lastIndexOf(']'), s.lastIndexOf('"'))
+  if (lastComplete > 0) s = s.slice(0, lastComplete + 1)
+
+  // Count unbalanced brackets while ignoring those inside strings.
+  const stack: string[] = []
+  let inStr = false
+  let esc = false
+  for (const ch of s) {
+    if (esc) { esc = false; continue }
+    if (ch === '\\') { esc = true; continue }
+    if (ch === '"') { inStr = !inStr; continue }
+    if (inStr) continue
+    if (ch === '{' || ch === '[') stack.push(ch)
+    else if (ch === '}' || ch === ']') stack.pop()
+  }
+  s = s.replace(/,\s*$/, '')
+  while (stack.length) {
+    const open = stack.pop()
+    s += open === '{' ? '}' : ']'
+  }
+  return s
 }
 
 /** Call Gemini and return a parsed, validated SEO report. */
@@ -108,8 +145,11 @@ export async function generateReport(signals: SeoSignals): Promise<SeoReport> {
       contents: [{ role: 'user', parts: [{ text: buildPrompt(signals) }] }],
       generationConfig: {
         temperature: 0.4,
-        maxOutputTokens: 8192,
+        maxOutputTokens: 16384,
         responseMimeType: 'application/json',
+        // Gemini 2.5+ "thinking" silently consumes the output-token budget and
+        // truncates the JSON. Disable it so the full report is returned.
+        thinkingConfig: { thinkingBudget: 0 },
       },
     }),
   })
@@ -119,14 +159,34 @@ export async function generateReport(signals: SeoSignals): Promise<SeoReport> {
     throw new Error(data.error?.message || `Gemini request failed (${res.status})`)
   }
 
-  const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text).join('') || ''
-  if (!text) throw new Error('Empty response from the report engine.')
+  const candidate = data.candidates?.[0]
+  const text = candidate?.content?.parts?.map((p) => p.text).join('') || ''
+  if (!text) {
+    const reason = candidate?.finishReason
+    throw new Error(
+      reason === 'SAFETY' || reason === 'PROHIBITED_CONTENT'
+        ? 'The report engine blocked this site. Please try a different URL.'
+        : 'Empty response from the report engine. Please retry.'
+    )
+  }
 
   let report: SeoReport
+  const cleaned = extractJson(text)
   try {
-    report = JSON.parse(extractJson(text)) as SeoReport
+    report = JSON.parse(cleaned) as SeoReport
   } catch {
-    throw new Error('Could not parse the generated report. Please retry.')
+    // Likely truncated (e.g. finishReason MAX_TOKENS) — try to repair & reparse.
+    try {
+      report = JSON.parse(repairTruncatedJson(cleaned)) as SeoReport
+    } catch {
+      console.error(
+        '[seo-audit] JSON parse failed. finishReason=%s len=%d head=%s',
+        candidate?.finishReason,
+        text.length,
+        text.slice(0, 300)
+      )
+      throw new Error('Could not parse the generated report. Please retry.')
+    }
   }
 
   // Backfill identity fields from real data so the PDF/header is always correct.
