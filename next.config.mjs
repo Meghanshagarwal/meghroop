@@ -19,6 +19,12 @@ const nextConfig = {
   experimental: {
     // Tree-shake big component/icon libraries so fewer/smaller JS chunks ship.
     optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
+    // The SEO-audit PDF embeds the Space Grotesk brand fonts by reading them
+    // from /public/fonts at render time. Public assets are NOT bundled into a
+    // serverless function by default, so trace them into the route explicitly.
+    outputFileTracingIncludes: {
+      '/api/seo-audit': ['./public/fonts/**'],
+    },
   },
   // Reduce the number of JS requests each page makes. Next's default
   // splitChunks fans node_modules out into ~10 small vendor files, so the page
