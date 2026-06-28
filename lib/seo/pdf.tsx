@@ -83,8 +83,10 @@ const s = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 44,
   },
-  brandBarLeft: { flexDirection: 'row', alignItems: 'center' },
-  brandBarDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: PURPLE, marginRight: 7 },
+  // Wordmark first, then the accent dot to the RIGHT — sitting up near
+  // cap-height (matches the website logo: "MeghRoop" + top-right dot).
+  brandBarLeft: { flexDirection: 'row', alignItems: 'flex-start' },
+  brandBarDot: { width: 3.5, height: 3.5, borderRadius: 1.5, backgroundColor: PURPLE, marginLeft: 3, marginTop: 1 },
   brandBarText: { color: WHITE, fontSize: 11, fontWeight: 700, letterSpacing: 0.3 },
   brandBarSub: { color: '#a1a1aa', fontSize: 8.5, fontWeight: 500, letterSpacing: 0.4 },
   // Thin gradient-ish accent strip under the dark bar
@@ -108,8 +110,10 @@ const s = StyleSheet.create({
   // ── Cover (dark, on-brand) ──
   coverPage: { backgroundColor: BG_DARK, padding: 0, fontFamily: FONT, color: WHITE },
   coverInner: { flex: 1, paddingHorizontal: 48, paddingVertical: 64, justifyContent: 'center' },
-  coverTopDot: { width: 9, height: 9, borderRadius: 5, backgroundColor: PURPLE, marginBottom: 18 },
+  coverBrandRow: { flexDirection: 'row', alignItems: 'flex-start' },
   coverBrand: { fontSize: 36, fontWeight: 700, color: WHITE, lineHeight: 1, letterSpacing: -0.5 },
+  // Accent dot to the RIGHT of the wordmark, raised toward cap-height.
+  coverBrandDot: { width: 6, height: 6, borderRadius: 2, backgroundColor: PURPLE, marginLeft: 6, marginTop: 5 },
   coverTagline: { fontSize: 9.5, color: PURPLE, marginTop: 12, fontWeight: 500, letterSpacing: 0.5 },
   coverDivider: { height: 1, backgroundColor: '#27272a', marginTop: 30, marginBottom: 30 },
   coverLabel: { fontSize: 10, color: BLUE, fontWeight: 600, letterSpacing: 2 },
@@ -197,8 +201,8 @@ function BrandBar() {
     <>
       <View style={s.brandBar} fixed>
         <View style={s.brandBarLeft}>
-          <View style={s.brandBarDot} />
           <Text style={s.brandBarText}>MeghRoop</Text>
+          <View style={s.brandBarDot} />
         </View>
         <Text style={s.brandBarSub}>Enterprise SEO Audit</Text>
       </View>
@@ -227,8 +231,10 @@ function SeoDocument({ report }: { report: SeoReport }) {
       {/* ── Cover ── */}
       <Page size="A4" style={s.coverPage}>
         <View style={s.coverInner}>
-          <View style={s.coverTopDot} />
-          <Text style={s.coverBrand}>MeghRoop</Text>
+          <View style={s.coverBrandRow}>
+            <Text style={s.coverBrand}>MeghRoop</Text>
+            <View style={s.coverBrandDot} />
+          </View>
           <Text style={s.coverTagline}>
             Enterprise SEO · GEO · AI Search Optimization · Technical Growth Consulting
           </Text>
