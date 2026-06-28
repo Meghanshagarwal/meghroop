@@ -7,7 +7,9 @@ const organizationSchema = {
   name: 'MeghRoop',
   alternateName: 'MeghRoop Studio',
   url: SITE_URL,
-  logo: `${SITE_URL}/favicon.ico`,
+  // Google's logo guidelines want a real raster image (PNG/JPG, min 112x112),
+  // not an .ico. favicon-512.png is a square 512x512 PNG.
+  logo: `${SITE_URL}/favicon-512.png`,
   email: 'hello@meghroop.tech',
   telephone: '+91 89495 08264',
   foundingDate: '2022',
