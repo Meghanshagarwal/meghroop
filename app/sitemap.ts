@@ -32,6 +32,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/branding-creative',
     // AI Agents sub-pages (live — powering the dedicated nav section)
     ...aiAgentLinks.map((a) => a.href),
+    // Free tools (lead-gen / high search intent)
+    '/seo-checker',
     // Core pages
     '/work',
     '/about',
@@ -52,6 +54,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } else if (route === '/journal') {
       priority = 0.95
       changeFrequency = 'daily'
+    } else if (route === '/seo-checker') {
+      // High-intent, lead-generating tool page — push it hard.
+      priority = 0.95
+      changeFrequency = 'weekly'
     } else if (route === '/contact' || route === '/about') {
       priority = 0.5
       changeFrequency = 'monthly'
