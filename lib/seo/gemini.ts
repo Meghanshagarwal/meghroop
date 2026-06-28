@@ -1,5 +1,6 @@
 import { getSupabase } from '@/lib/supabase'
 import type { SeoSignals, SeoReport } from './types'
+import { computeScores, type ComputedScores } from './score'
 
 export const GEMINI_KEY_SETTING = 'gemini_api_key'
 export const GEMINI_MODEL_SETTING = 'gemini_model'
@@ -35,7 +36,7 @@ const BRAND = {
   PREPARED_BY: 'MeghRoop — Growth, AI & Software Agency',
 }
 
-function buildPrompt(signals: SeoSignals): string {
+function buildPrompt(signals: SeoSignals, scores: ComputedScores): string {
   return `You are a Senior Technical SEO Auditor, Semantic SEO Specialist, GEO Optimization Consultant, AI Search Optimization Expert, and Enterprise SEO Consultant working for ${BRAND.COMPANY_NAME} (${BRAND.COMPANY_WEBSITE}).
 
 You are auditing this website: ${signals.finalUrl}
@@ -43,10 +44,14 @@ You are auditing this website: ${signals.finalUrl}
 CRITICAL RULES:
 - Base EVERY finding strictly on the REAL crawl data provided below. Do NOT invent issues or evidence.
 - Never mention "AI", "Gemini", "language model", or any audit-engine name. Always brand as ${BRAND.COMPANY_NAME}.
-- Cover these audit areas in the scorecard: Platform & Architecture, Technical SEO, Core Web Vitals, On-Page SEO, Semantic SEO, GEO Optimization, AI Search Optimization, Schema Markup, Internal Linking, EEAT.
+- The OVERALL SCORE and the SCORECARD are PRE-COMPUTED and authoritative. Copy them EXACTLY into your response — do NOT recalculate, round, or change any number or status. Your narrative MUST be consistent with these scores (e.g. do not call an area excellent if its score is low).
 - "strengths" = things the site already does well (the GOOD findings).
-- "issues" = problems (the BAD findings). For each issue fill EVERY field.
+- "issues" = problems (the BAD findings), aligned with the lower-scoring areas. For each issue fill EVERY field.
 - Be specific, consultant-grade, and business-aware.
+
+PRE-COMPUTED OVERALL SCORE (use exactly): ${scores.overallScore}
+PRE-COMPUTED SCORECARD (use exactly, same order):
+${JSON.stringify(scores.scorecard, null, 2)}
 
 REAL CRAWL DATA (JSON):
 ${JSON.stringify(signals, null, 2)}
@@ -137,14 +142,19 @@ export async function generateReport(signals: SeoSignals): Promise<SeoReport> {
     throw new Error('GEMINI_API_KEY is not configured. Add it in Admin → SEO Audits.')
   }
 
+  // Scores are computed deterministically from the crawl, NOT by the model, so
+  // the same site always gets the same number.
+  const scores = computeScores(signals)
+
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`
   const res = await fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      contents: [{ role: 'user', parts: [{ text: buildPrompt(signals) }] }],
+      contents: [{ role: 'user', parts: [{ text: buildPrompt(signals, scores) }] }],
       generationConfig: {
-        temperature: 0.4,
+        // Deterministic: keep the narrative stable run-to-run as well.
+        temperature: 0,
         maxOutputTokens: 16384,
         responseMimeType: 'application/json',
         // Gemini 2.5+ "thinking" silently consumes the output-token budget and
@@ -195,8 +205,9 @@ export async function generateReport(signals: SeoSignals): Promise<SeoReport> {
   report.auditDate =
     report.auditDate ||
     new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
-  report.overallScore = Math.max(0, Math.min(100, Math.round(report.overallScore || 0)))
-  report.scorecard ||= []
+  // Enforce the deterministic scores regardless of what the model returned.
+  report.overallScore = scores.overallScore
+  report.scorecard = scores.scorecard
   report.strengths ||= []
   report.issues ||= []
   report.quickWins ||= []
