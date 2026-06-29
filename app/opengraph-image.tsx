@@ -81,15 +81,16 @@ export default async function Image() {
               justifyContent: 'center',
             }}
           >
-            <div
-              style={{
-                width: '16px',
-                height: '16px',
-                borderRadius: '50%',
-                background: '#a78bfa',
-                boxShadow: '0 0 12px #a78bfa',
-              }}
-            />
+            {/* Real MeghRoop "M" monogram — matches favicon.svg / MeghRoopLogo */}
+            <svg width="26" height="21" viewBox="0 0 20 16" fill="none">
+              <path
+                d="M1 15V1L10 9.5L19 1V15"
+                stroke="#ffffff"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
           <span
             style={{
