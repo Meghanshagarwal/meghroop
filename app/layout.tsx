@@ -69,9 +69,9 @@ export const metadata: Metadata = {
   publisher: 'MeghRoop',
   category: 'Technology',
   openGraph: {
-    title: 'MeghRoop — AI Engineering Studio, Shopify Development & n8n Workflows',
+    title: 'MeghRoop — Software, AI & Growth Agency',
     description:
-      'We engineer custom autonomous AI agents, complex n8n workflows, Shopify storefronts, MCP infrastructure, and AI search optimized systems. Built properly.',
+      'MeghRoop is a Software, AI & Growth agency. We scale businesses with performance marketing, AI automation, custom software, branding and content.',
     url: SITE_URL,
     siteName: 'MeghRoop',
     locale: 'en_US',
@@ -82,15 +82,15 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: 'image/png',
-        alt: 'MeghRoop — AI Engineering & Web Development Studio',
+        alt: 'MeghRoop — Software, AI & Growth Agency',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MeghRoop — AI Engineering Studio, Shopify Development & n8n Workflows',
+    title: 'MeghRoop — Software, AI & Growth Agency',
     description:
-      'We engineer custom autonomous AI agents, complex n8n workflows, Shopify storefronts, MCP infrastructure, and AI search optimized systems. Built properly.',
+      'MeghRoop is a Software, AI & Growth agency. We scale businesses with performance marketing, AI automation, custom software, branding and content.',
     images: ['/opengraph-image'],
   },
   alternates: {

@@ -52,7 +52,7 @@ function mapRowToArticle(r: any): Article {
     lastUpdated: r.last_updated ?? r.date,
     readTime: r.read_time ?? '5 min read',
     category: r.category ?? 'AI Infrastructure',
-    author: r.author ?? { name: 'MeghRoop', role: 'AI Engineering Studio', avatar: '/favicon.svg' },
+    author: r.author ?? { name: 'MeghRoop', role: 'Software, AI & Growth Agency', avatar: '/favicon.svg' },
     // Fall back to the branded site OG image so every shared link has a preview
     heroImage: r.hero_image || `${process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'}/og-image.jpg`,
     blocks: Array.isArray(r.blocks) ? r.blocks : [],

@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Custom AI Agent Development | MeghRoop — AI Engineering & Web Studio",
+  title: "Custom AI Agent Development | MeghRoop — Software, AI & Growth Agency",
   description: "We build production-grade AI agents that reason, plan, and execute — wired into your tools, your data, and your real workflows. Not a chatbot wrapper. Not a prompt template.",
   keywords: ["custom AI agents","AI agent development","LangChain","LangGraph","multi-agent systems","MCP servers","production AI","MeghRoop"],
   openGraph: {
-    title: "Custom AI Agent Development | MeghRoop — AI Engineering & Web Studio",
+    title: "Custom AI Agent Development | MeghRoop — Software, AI & Growth Agency",
     description: "We build production-grade AI agents that reason, plan, and execute — wired into your tools, your data, and your real workflows. Not a chatbot wrapper. Not a prompt template.",
     url: "https://meghroop.tech/ai-agents/custom-ai-agents",
     siteName: "MeghRoop",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Custom AI Agent Development | MeghRoop — AI Engineering & Web Studio",
+    title: "Custom AI Agent Development | MeghRoop — Software, AI & Growth Agency",
     description: "We build production-grade AI agents that reason, plan, and execute — wired into your tools, your data, and your real workflows. Not a chatbot wrapper. Not a prompt template.",
   },
   alternates: {

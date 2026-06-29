@@ -77,7 +77,7 @@ export async function POST(req: Request) {
     last_updated: today,
     read_time: readTime,
     category: (body.category || 'AI Infrastructure').toString(),
-    author: body.author || { name: 'MeghRoop', role: 'AI Engineering Studio', avatar: '/favicon.svg' },
+    author: body.author || { name: 'MeghRoop', role: 'Software, AI & Growth Agency', avatar: '/favicon.svg' },
     hero_image: (body.heroImage || body.hero_image || '').toString(),
     blocks,
     seo: body.seo || { title, description: description || title, keywords: tags },
