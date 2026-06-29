@@ -186,11 +186,13 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
         {/* Facebook app association — clears the "Missing fb:app_id" warning in
-            the Sharing Debugger and enables Facebook Domain Insights. Only emits
-            when NEXT_PUBLIC_FB_APP_ID is set in the environment (Vercel). */}
-        {process.env.NEXT_PUBLIC_FB_APP_ID && (
-          <meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FB_APP_ID} />
-        )}
+            the Sharing Debugger and enables Facebook Domain Insights. The App ID
+            is a public value (same id as the Meta Pixel), so it's safe as a
+            default; override via NEXT_PUBLIC_FB_APP_ID if the app ever changes. */}
+        <meta
+          property="fb:app_id"
+          content={process.env.NEXT_PUBLIC_FB_APP_ID || '1659268018634904'}
+        />
 
         {/* Service Worker registration */}
         <Script id="sw-register" strategy="afterInteractive">
