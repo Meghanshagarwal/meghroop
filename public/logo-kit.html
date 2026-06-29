@@ -1298,7 +1298,7 @@
         </tr>
         <tr>
           <td class="type-mono">body</td>
-          <td><span class="type-preview" style="font-size:14px;font-weight:400;letter-spacing:0.01em;color:#71717a;">We build things.</span></td>
+          <td><span class="type-preview" style="font-size:14px;font-weight:400;letter-spacing:0.01em;color:#71717a;">We build it.</span></td>
           <td class="type-mono">14px</td>
           <td class="type-mono">400</td>
           <td class="type-mono">+0.01em</td>
@@ -1306,7 +1306,7 @@
         </tr>
         <tr>
           <td class="type-mono">label</td>
-          <td><span class="type-preview" style="font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#52525b;">CREATIVE ENGINEERING</span></td>
+          <td><span class="type-preview" style="font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#52525b;">SOFTWARE · AI · GROWTH</span></td>
           <td class="type-mono">11px</td>
           <td class="type-mono">500</td>
           <td class="type-mono">+0.18em</td>
@@ -1345,12 +1345,12 @@
         <span class="ls-use">Page &amp; section titles</span>
       </div>
       <div class="ls-item">
-        <span class="ls-text" style="font-size:14px;font-weight:400;letter-spacing:0.01em;color:#71717a;">We build things. Useful things. Alive things.</span>
+        <span class="ls-text" style="font-size:14px;font-weight:400;letter-spacing:0.01em;color:#71717a;">We build it. We grow it.</span>
         <span class="ls-badge">+0.01em</span>
         <span class="ls-use">Body / tagline text</span>
       </div>
       <div class="ls-item">
-        <span class="ls-text" style="font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#52525b;">CREATIVE ENGINEERING &amp; AI STUDIO</span>
+        <span class="ls-text" style="font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#52525b;">SOFTWARE · AI · GROWTH AGENCY</span>
         <span class="ls-badge">+0.18em</span>
         <span class="ls-use">Uppercase labels / badges</span>
       </div>
@@ -2029,7 +2029,7 @@ function drawWordmark(ctx, x, y, fs) {
   return mW + rW + gap + ds;
 }
 
-/* Draw small MONO label (e.g. "CREATIVE ENGINEERING & AI STUDIO") */
+/* Draw small MONO label (e.g. "SOFTWARE · AI · GROWTH AGENCY") */
 function drawLabel(ctx, x, y, text, size, color) {
   x = Math.round(x);
   y = Math.round(y);
@@ -2119,9 +2119,9 @@ function drawLinkedInBanner(canvas) {
 
   /* Content – padded left */
   var px = 92;
-  drawLabel(ctx, px, cy - 62, 'CREATIVE ENGINEERING & AI STUDIO', Math.round(h * 0.028), C.zinc600);
+  drawLabel(ctx, px, cy - 62, 'SOFTWARE · AI · GROWTH AGENCY', Math.round(h * 0.028), C.zinc600);
   drawWordmark(ctx, px, cy + 14, Math.round(h * 0.138));
-  drawTagline(ctx, px, cy + 62, 'We build things. Useful things. Alive things.', Math.round(h * 0.038), C.zinc500);
+  drawTagline(ctx, px, cy + 62, 'We build it. We grow it.', Math.round(h * 0.038), C.zinc500);
 
   drawVignetteEdges(ctx, w, h, 0.35);
 }
@@ -2163,7 +2163,7 @@ function drawTwitterBanner(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.16em';
   ctx.fillStyle = C.zinc600;
   ctx.textBaseline = 'middle';
-  var lbl = 'CREATIVE ENGINEERING & AI STUDIO';
+  var lbl = 'SOFTWARE · AI · GROWTH AGENCY';
   var lw  = Math.round(ctx.measureText(lbl).width);
   ctx.fillText(lbl, (w - lw) / 2, h * 0.34);
   ctx.restore();
@@ -2174,7 +2174,7 @@ function drawTwitterBanner(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
   ctx.fillStyle = C.zinc500;
   ctx.textBaseline = 'middle';
-  var tg = 'We build things. Useful things. Alive things.';
+  var tg = 'We build it. We grow it.';
   var tw2 = Math.round(ctx.measureText(tg).width);
   ctx.fillText(tg, (w - tw2) / 2, h * 0.70);
   ctx.restore();
@@ -2219,7 +2219,7 @@ function drawGitHubBanner(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
   ctx.fillStyle = C.zinc600;
   ctx.textBaseline = 'middle';
-  var lbl = 'CREATIVE ENGINEERING & AI STUDIO';
+  var lbl = 'SOFTWARE · AI · GROWTH AGENCY';
   var lbW = ctx.measureText(lbl).width;
   ctx.fillText(lbl, (w - lbW) / 2, cy - fs * 0.60);
   ctx.restore();
@@ -2289,7 +2289,7 @@ function drawInstagramPost(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
   ctx.fillStyle = C.zinc500;
   ctx.textBaseline = 'middle';
-  var tg  = 'Creative Engineering & AI Studio';
+  var tg  = 'Software · AI · Growth Agency';
   var tgW = ctx.measureText(tg).width;
   ctx.fillText(tg, (w - tgW) / 2, cy + Math.round(w * 0.13));
   ctx.restore();
@@ -2300,7 +2300,7 @@ function drawInstagramPost(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.08em';
   ctx.fillStyle = C.zinc600;
   ctx.textBaseline = 'middle';
-  var url  = 'meghroop.studio';
+  var url  = 'meghroop.tech';
   var urlW = ctx.measureText(url).width;
   ctx.fillText(url, (w - urlW) / 2, h - Math.round(w * 0.06));
   ctx.restore();
@@ -2354,7 +2354,7 @@ function drawYouTubeChannelArt(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
   ctx.fillStyle = C.zinc600;
   ctx.textBaseline = 'middle';
-  var lbl = 'CREATIVE ENGINEERING & AI STUDIO';
+  var lbl = 'SOFTWARE · AI · GROWTH AGENCY';
   var lbW = ctx.measureText(lbl).width;
   ctx.fillText(lbl, (w - lbW) / 2, contentCy - szH * 0.24);
   ctx.restore();
@@ -2380,7 +2380,7 @@ function drawYouTubeChannelArt(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
   ctx.fillStyle = C.zinc500;
   ctx.textBaseline = 'middle';
-  var tg  = 'We build things. Useful things. Alive things.';
+  var tg  = 'We build it. We grow it.';
   var tgW = ctx.measureText(tg).width;
   ctx.fillText(tg, (w - tgW) / 2, contentCy + szH * 0.35);
   ctx.restore();
@@ -2429,7 +2429,7 @@ function drawFacebookCover(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
   ctx.fillStyle = C.zinc600;
   ctx.textBaseline = 'middle';
-  var lbl = 'CREATIVE ENGINEERING & AI STUDIO';
+  var lbl = 'SOFTWARE · AI · GROWTH AGENCY';
   var lbW = Math.round(ctx.measureText(lbl).width);
   ctx.fillText(lbl, (w - lbW) / 2, cy - fs * 0.62);
   ctx.restore();
@@ -2443,7 +2443,7 @@ function drawFacebookCover(canvas) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
   ctx.fillStyle = C.zinc500;
   ctx.textBaseline = 'middle';
-  var tg  = 'We build things. Useful things. Alive things.';
+  var tg  = 'We build it. We grow it.';
   var tgW = Math.round(ctx.measureText(tg).width);
   ctx.fillText(tg, (w - tgW) / 2, cy + fs * 0.90);
   ctx.restore();
@@ -2474,9 +2474,9 @@ function drawZoomBg(canvas) {
   ctx.save();
   ctx.font = '500 ' + labelFs + 'px "Space Grotesk",sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
-  var lw = ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width;
+  var lw = ctx.measureText('SOFTWARE · AI · GROWTH AGENCY').width;
   ctx.restore();
-  drawLabel(ctx, (w - lw) / 2, h * 0.575, 'CREATIVE ENGINEERING & AI STUDIO', labelFs, C.zinc600);
+  drawLabel(ctx, (w - lw) / 2, h * 0.575, 'SOFTWARE · AI · GROWTH AGENCY', labelFs, C.zinc600);
   /* Wordmark */
   var wmarkFs = Math.round(h * 0.075);
   ctx.save(); ctx.globalAlpha = 0;
@@ -2488,7 +2488,7 @@ function drawZoomBg(canvas) {
   ctx.font = '400 ' + Math.round(h * 0.026) + 'px "Space Grotesk",sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
   ctx.fillStyle = C.zinc500; ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
-  ctx.fillText('We build things. Useful things. Alive things.', w / 2, h * 0.718);
+  ctx.fillText('We build it. We grow it.', w / 2, h * 0.718);
   ctx.restore();
   /* URL bottom-right */
   ctx.save();
@@ -2520,14 +2520,14 @@ function drawWallpaper(canvas) {
   /* Content — left aligned */
   var px = Math.round(w * 0.09);
   var labelFs = Math.round(h * 0.022);
-  drawLabel(ctx, px, h * 0.42, 'CREATIVE ENGINEERING & AI STUDIO', labelFs, C.zinc600);
+  drawLabel(ctx, px, h * 0.42, 'SOFTWARE · AI · GROWTH AGENCY', labelFs, C.zinc600);
   var wmarkFs = Math.round(h * 0.095);
   drawWordmark(ctx, px, h * 0.535, wmarkFs);
   ctx.save();
   ctx.font = '400 ' + Math.round(h * 0.028) + 'px "Space Grotesk",sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.01em';
   ctx.fillStyle = C.zinc500; ctx.textBaseline = 'middle';
-  ctx.fillText('We build things. Useful things. Alive things.', px, h * 0.625);
+  ctx.fillText('We build it. We grow it.', px, h * 0.625);
   ctx.restore();
   /* URL */
   ctx.save();
@@ -2567,7 +2567,7 @@ function buildLetterheadHTML(mode) {
     '        </td>',
     '        <td valign="middle">',
     '          <p style="margin:0;font-size:20px;font-weight:700;letter-spacing:-0.02em;color:' + nameC + ';">MeghRoop</p>',
-    '          <p style="margin:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:' + subC + ';">Creative Engineering &amp; AI Studio</p>',
+    '          <p style="margin:0;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:' + subC + ';">Software · AI · Growth Agency</p>',
     '        </td>',
     '        <td valign="middle" style="text-align:right;">',
     '          <p style="margin:0;font-size:11px;color:' + bodyC + ';line-height:1.8;"><a href="https://meghroop.tech" style="color:#c084fc;text-decoration:none;">meghroop.tech</a><br>hello@meghroop.tech<br>Rajasthan, India</p>',
@@ -2588,7 +2588,7 @@ function buildLetterheadHTML(mode) {
     '    <tr><td style="padding:0 48px 32px;">',
     '      <div style="height:1px;background:' + divClr + ';margin-bottom:16px;"></div>',
     '      <table cellpadding="0" cellspacing="0" border="0" width="100%"><tbody><tr>',
-    '        <td style="font-size:10px;color:' + footC + ';">MeghRoop · Creative Engineering &amp; AI Studio</td>',
+    '        <td style="font-size:10px;color:' + footC + ';">MeghRoop · Software · AI · Growth Agency</td>',
     '        <td style="text-align:right;font-size:10px;color:' + footC + ';">meghroop.tech · Rajasthan, India</td>',
     '      </tr></tbody></table>',
     '    </td></tr>',
@@ -2870,7 +2870,7 @@ function drawWhatsAppStatus(canvas) {
 
   /* Label — measure with correct font before centering */
   var labelFs  = Math.round(w * 0.027);
-  var labelTxt = 'CREATIVE ENGINEERING & AI STUDIO';
+  var labelTxt = 'SOFTWARE · AI · GROWTH AGENCY';
   ctx.save();
   ctx.font = '500 ' + labelFs + 'px "Space Grotesk", sans-serif';
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.16em';
@@ -2893,7 +2893,7 @@ function drawWhatsAppStatus(canvas) {
   ctx.fillStyle   = C.zinc500;
   ctx.textBaseline = 'middle';
   ctx.textAlign    = 'center';
-  ctx.fillText('We build things. Useful things. Alive things.', w/2, h * 0.695);
+  ctx.fillText('We build it. We grow it.', w/2, h * 0.695);
   ctx.restore();
 
   /* URL bottom */
@@ -3100,8 +3100,8 @@ function drawBizBack(canvas, mode) {
   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.18em';
   ctx.fillStyle    = isDark ? C.zinc600 : '#aaaaaa';
   ctx.textBaseline = 'middle';
-  var lw = ctx.measureText('CREATIVE ENGINEERING & AI STUDIO').width;
-  ctx.fillText('CREATIVE ENGINEERING & AI STUDIO', (w - lw) / 2, h * 0.73);
+  var lw = ctx.measureText('SOFTWARE · AI · GROWTH AGENCY').width;
+  ctx.fillText('SOFTWARE · AI · GROWTH AGENCY', (w - lw) / 2, h * 0.73);
   ctx.restore();
 
   ctx.save();

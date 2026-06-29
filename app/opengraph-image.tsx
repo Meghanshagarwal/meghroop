@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'MeghRoop — AI Engineering & Web Studio'
+export const alt = 'MeghRoop — Software, AI & Growth Agency'
 export const size = {
   width: 1200,
   height: 630,
@@ -121,7 +121,7 @@ export default async function Image() {
               color: '#a78bfa',
             }}
           >
-            Creative Engineering &amp; AI Studio
+            Software · AI · Growth Agency
           </div>
           <h1
             style={{
@@ -135,7 +135,7 @@ export default async function Image() {
               color: 'transparent',
             }}
           >
-            We build things. Useful things. Alive things.
+            We build it. We grow it.
           </h1>
           <p
             style={{
@@ -146,7 +146,7 @@ export default async function Image() {
               margin: 0,
             }}
           >
-            Custom AI Agents • Model Context Protocol Networks • Ultra-fast Storefronts
+            Performance Marketing • AI Automation • Custom Software
           </p>
         </div>
 
