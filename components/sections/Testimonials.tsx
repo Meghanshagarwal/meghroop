@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { motion } from 'framer-motion'
 import { Quote, ChevronLeft, ChevronRight } from 'lucide-react'
+import Reveal from '@/components/common/Reveal'
 
 const testimonials = [
   {
@@ -75,13 +75,7 @@ export default function Testimonials() {
     <section id="testimonials" className="section-padding" aria-label="Client testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-14"
-        >
+        <Reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-14">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-white/50 mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -113,7 +107,7 @@ export default function Testimonials() {
               <ChevronRight size={18} />
             </button>
           </div>
-        </motion.div>
+        </Reveal>
 
         {/* Carousel viewport */}
         <div

@@ -173,6 +173,60 @@ body {
   }
 
 
+  /* Scroll-reveal — CSS replacement for framer-motion's whileInView. A tiny
+     IntersectionObserver (components/common/Reveal.tsx) toggles `.is-visible`
+     when the element enters the viewport. This removes framer-motion (and the
+     ~40 inline transform/opacity styles it SSR-injected) from the homepage,
+     cutting unused JavaScript and Total Blocking Time on mobile. */
+  .reveal {
+    opacity: 0.01;
+    transform: translateY(24px);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-scale {
+    transform: scale(0.92);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  /* Stagger steps — applied by className so no per-item inline style is emitted */
+  .reveal-d1.is-visible { transition-delay: 60ms; }
+  .reveal-d2.is-visible { transition-delay: 120ms; }
+  .reveal-d3.is-visible { transition-delay: 180ms; }
+  .reveal-d4.is-visible { transition-delay: 240ms; }
+  .reveal-d5.is-visible { transition-delay: 300ms; }
+  .reveal-d6.is-visible { transition-delay: 360ms; }
+  .reveal-d7.is-visible { transition-delay: 420ms; }
+  .reveal-d8.is-visible { transition-delay: 480ms; }
+  .reveal-d9.is-visible { transition-delay: 540ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Accordion open/close via the grid-rows 0fr→1fr trick — replaces
+     framer-motion's animated height:auto with pure CSS. */
+  .collapsible {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .collapsible.open {
+    grid-template-rows: 1fr;
+  }
+  .collapsible > .collapsible-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
   /* GPU layered acceleration for layout/glow floaters */
   .animate-float,
   .animate-float-delay,

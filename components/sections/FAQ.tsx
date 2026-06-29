@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
 import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
+import Reveal from '@/components/common/Reveal'
 
 const faqs = [
   {
@@ -47,13 +47,7 @@ export default function FAQ() {
     <section id="faq" className="section-padding" aria-label="Frequently asked questions">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10 sm:mb-14"
-        >
+        <Reveal className="text-center mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-gray-400 mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
             Questions people actually ask
@@ -65,26 +59,19 @@ export default function FAQ() {
           <p className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto">
             The questions we get the most. Answered like humans, not a terms-of-service page.
           </p>
-        </motion.div>
+        </Reveal>
 
         {/* FAQ Items */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="space-y-3"
-        >
+        <div className="space-y-3">
           {faqs.map((faq, i) => {
             const isOpen = open === i
             return (
-              <motion.div
+              <Reveal
                 key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
+                delay={Math.min(i + 1, 9)}
                 className="rounded-2xl border border-white/[0.08] overflow-hidden"
+              >
+              <div
                 itemScope
                 itemProp="mainEntity"
                 itemType="https://schema.org/Question"
@@ -105,40 +92,29 @@ export default function FAQ() {
                   </span>
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
-                      className="overflow-hidden"
-                      itemScope
-                      itemProp="acceptedAnswer"
-                      itemType="https://schema.org/Answer"
+                <div
+                  className={`collapsible ${isOpen ? 'open' : ''}`}
+                  itemScope
+                  itemProp="acceptedAnswer"
+                  itemType="https://schema.org/Answer"
+                >
+                  <div className="collapsible-inner">
+                    <p
+                      className="px-5 sm:px-6 pb-5 sm:pb-6 text-sm text-gray-400 leading-relaxed border-t border-white/[0.06] pt-4"
+                      itemProp="text"
                     >
-                      <p
-                        className="px-5 sm:px-6 pb-5 sm:pb-6 text-sm text-gray-400 leading-relaxed border-t border-white/[0.06] pt-4"
-                        itemProp="text"
-                      >
-                        {faq.a}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                      {faq.a}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              </Reveal>
             )
           })}
-        </motion.div>
+        </div>
 
         {/* GEO signal block — crawlable, semantic, conversational */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-12 p-6 sm:p-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] text-center"
-        >
+        <Reveal className="mt-12 p-6 sm:p-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] text-center">
           <p className="text-sm text-gray-500 mb-1">Still have questions?</p>
           <p className="text-white font-semibold mb-1">Sometimes a quick message is faster than reading everything.</p>
           <p className="text-sm text-gray-400">
@@ -146,7 +122,7 @@ export default function FAQ() {
             <ObfuscatedEmail className="text-purple-400 hover:text-purple-300 transition-colors underline underline-offset-2" />{' '}
             — we actually read those.
           </p>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )

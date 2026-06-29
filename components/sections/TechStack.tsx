@@ -1,12 +1,10 @@
-'use client'
-
-import { motion, type Variants } from 'framer-motion'
 import type { IconType } from 'react-icons'
 import {
   SiReact, SiNodedotjs, SiTypescript, SiMongodb,
   SiShopify, SiWordpress, SiMeta, SiGoogleads, SiOpenai,
 } from 'react-icons/si'
 import { Zap } from 'lucide-react'
+import Reveal from '@/components/common/Reveal'
 
 type Tech = { name: string; SiIcon?: IconType; LucideIcon?: React.ElementType; color: string }
 
@@ -23,9 +21,6 @@ const stack: Tech[] = [
   { name: 'Google Ads', SiIcon: SiGoogleads, color: 'text-amber-400' },
 ]
 
-const container: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } }
-const item: Variants = { hidden: { opacity: 0, scale: 0.92 }, show: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: 'easeOut' } } }
-
 function Icon({ tech }: { tech: Tech }) {
   if (tech.SiIcon) { const I = tech.SiIcon; return <I size={22} className={tech.color} /> }
   if (tech.LucideIcon) { const I = tech.LucideIcon; return <I size={22} className={tech.color} /> }
@@ -36,13 +31,7 @@ export default function TechStack() {
   return (
     <section id="tech" className="section-padding" aria-label="Technology and platforms we use">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14 sm:mb-16 max-w-2xl mx-auto"
-        >
+        <Reveal className="text-center mb-14 sm:mb-16 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-white/50 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
             Tech & platforms
@@ -51,19 +40,14 @@ export default function TechStack() {
             The stack behind{' '}
             <span className="gradient-text">the results.</span>
           </h2>
-        </motion.div>
+        </Reveal>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"
-        >
-          {stack.map((tech) => (
-            <motion.div
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {stack.map((tech, i) => (
+            <Reveal
               key={tech.name}
-              variants={item}
+              scale
+              delay={Math.min((i % 5) + 1, 9)}
               className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2.5 sm:gap-3 rounded-2xl border border-white/[0.06] bg-[#0d0d0d] px-3 py-5 sm:px-5 group hover:border-white/[0.14] transition-colors duration-300"
             >
               <span className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center flex-shrink-0">
@@ -72,9 +56,9 @@ export default function TechStack() {
               <span className="text-[13px] sm:text-sm font-medium text-white/70 group-hover:text-white transition-colors leading-tight">
                 {tech.name}
               </span>
-            </motion.div>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

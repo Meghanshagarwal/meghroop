@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { TrendingUp, Bot, Code2, ShoppingBag, Palette, Plus } from 'lucide-react'
+import Reveal from '@/components/common/Reveal'
 
 const categories = [
   {
@@ -65,13 +65,7 @@ export default function Services() {
   return (
     <section id="services" className="section-padding" aria-label="What MeghRoop offers">
       <div className="max-w-5xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-14 sm:mb-20"
-        >
+        <Reveal className="mb-14 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-white/50 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[#c084fc]" />
             What we do
@@ -80,7 +74,7 @@ export default function Services() {
             Five ways we move{' '}
             <span className="gradient-text">the number that matters.</span>
           </h2>
-        </motion.div>
+        </Reveal>
 
         <div className="border-t border-white/[0.06]">
           {categories.map((cat, i) => {
@@ -110,33 +104,25 @@ export default function Services() {
                   />
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pl-8 sm:pl-[5.25rem] pr-2 sm:pr-8 pb-8 -mt-1">
-                        <p className="text-base sm:text-lg text-white/[0.7] max-w-xl mb-5 sm:mb-6 leading-relaxed">
-                          {cat.outcome}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {cat.items.map((item) => (
-                            <span
-                              key={item}
-                              className="text-[13px] px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-white/55"
-                            >
-                              {item}
-                            </span>
-                          ))}
-                        </div>
+                <div className={`collapsible ${isOpen ? 'open' : ''}`}>
+                  <div className="collapsible-inner">
+                    <div className="pl-8 sm:pl-[5.25rem] pr-2 sm:pr-8 pb-8 -mt-1">
+                      <p className="text-base sm:text-lg text-white/[0.7] max-w-xl mb-5 sm:mb-6 leading-relaxed">
+                        {cat.outcome}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {cat.items.map((item) => (
+                          <span
+                            key={item}
+                            className="text-[13px] px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-white/55"
+                          >
+                            {item}
+                          </span>
+                        ))}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
               </div>
             )
           })}
