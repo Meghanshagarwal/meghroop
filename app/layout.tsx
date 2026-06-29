@@ -185,6 +185,13 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://www.clarity.ms" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
+        {/* Facebook app association — clears the "Missing fb:app_id" warning in
+            the Sharing Debugger and enables Facebook Domain Insights. Only emits
+            when NEXT_PUBLIC_FB_APP_ID is set in the environment (Vercel). */}
+        {process.env.NEXT_PUBLIC_FB_APP_ID && (
+          <meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FB_APP_ID} />
+        )}
+
         {/* Service Worker registration */}
         <Script id="sw-register" strategy="afterInteractive">
           {`
