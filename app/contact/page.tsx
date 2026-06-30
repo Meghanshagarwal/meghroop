@@ -75,8 +75,11 @@ export default function ContactPage() {
       'email': 'hello@meghroop.tech',
       'address': {
         '@type': 'PostalAddress',
-        'addressCountry': 'IN',
-        'addressLocality': 'India'
+        'streetAddress': 'Jhotwara',
+        'addressLocality': 'Jaipur',
+        'addressRegion': 'Rajasthan',
+        'postalCode': '302012',
+        'addressCountry': 'IN'
       },
       'contactPoint': {
         '@type': 'ContactPoint',

@@ -37,10 +37,10 @@ const organizationSchema = {
   ],
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Jaipur Road',
+    streetAddress: 'Jhotwara',
     addressLocality: 'Jaipur',
     addressRegion: 'Rajasthan',
-    postalCode: '302001',
+    postalCode: '302012',
     addressCountry: 'IN',
   },
   areaServed: 'Worldwide',
@@ -191,10 +191,10 @@ const localBusinessSchema = {
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Jaipur Road',
+    streetAddress: 'Jhotwara',
     addressLocality: 'Jaipur',
     addressRegion: 'Rajasthan',
-    postalCode: '302001',
+    postalCode: '302012',
     addressCountry: 'IN',
   },
   geo: {

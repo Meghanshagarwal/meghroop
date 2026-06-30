@@ -148,7 +148,7 @@ export default function Footer() {
                 className="flex items-start gap-2.5 text-sm text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <MapPin size={15} className="mt-0.5 shrink-0 text-gray-500" />
-                <span>Jaipur Road, Jaipur, Rajasthan 302001, India</span>
+                <span>Jhotwara, Jaipur, Rajasthan 302012, India</span>
               </a>
               <a
                 href="tel:+918949508264"
