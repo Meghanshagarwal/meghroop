@@ -137,7 +137,12 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
               dragDirectionLock
               onDragStart={() => { setDragging(true); setPaused(true) }}
               onDragEnd={handleDragEnd}
-              className={`absolute inset-0 grid grid-cols-1 grid-rows-[11rem_1fr] sm:grid-rows-[14rem_1fr] md:grid-cols-5 md:grid-rows-1 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none touch-pan-y ${dragging ? 'cursor-grabbing' : 'cursor-grab md:cursor-grab'}`}
+              className={`absolute inset-0 grid grid-cols-1 grid-rows-[11rem_1fr] sm:grid-rows-[14rem_1fr] md:grid-cols-5 md:grid-rows-1 rounded-2xl border border-white/[0.08] overflow-hidden bg-[#0a0a0a] select-none touch-pan-y ${dragging ? 'cursor-grabbing' : 'cursor-pointer'}`}
+              onClick={() => {
+                if (!dragging) {
+                  window.location.href = `/work/${projectSlug(project)}`
+                }
+              }}
             >
               {/* Visual panel */}
               <div className="md:col-span-3 relative h-full overflow-hidden">
@@ -197,7 +202,10 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
                     <Link
                       href={`/work/${projectSlug(project)}`}
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-black text-xs font-semibold hover:bg-gray-100 transition-colors"
-                      onClick={(e) => dragging && e.preventDefault()}
+                      onClick={(e) => {
+                        if (dragging) e.preventDefault()
+                        e.stopPropagation()
+                      }}
                     >
                       View Case Study
                       <ArrowRight size={13} />
@@ -208,7 +216,10 @@ export default function Projects({ projects: propProjects }: { projects?: Projec
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/[0.12] text-white text-xs font-semibold hover:bg-white/[0.06] transition-colors"
-                        onClick={(e) => dragging && e.preventDefault()}
+                        onClick={(e) => {
+                          if (dragging) e.preventDefault()
+                          e.stopPropagation()
+                        }}
                       >
                         <ExternalLink size={13} />
                         Visit Site
