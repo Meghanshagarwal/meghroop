@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { signAdminToken } from '@/lib/admin-auth'
 import { clientIp } from '@/lib/utils'
 import { rateLimit } from '@/lib/rate-limit'
+import { safeEqual } from '@/lib/crypto'
 
 export async function POST(req: Request) {
   // Throttle brute-force attempts: max 10 tries per IP per 15 minutes.
@@ -22,7 +23,7 @@ export async function POST(req: Request) {
     )
   }
 
-  if (!password || password !== process.env.ADMIN_PASSWORD) {
+  if (!password || typeof password !== 'string' || !safeEqual(password, process.env.ADMIN_PASSWORD)) {
     return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
   }
 

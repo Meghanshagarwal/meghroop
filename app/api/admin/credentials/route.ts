@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
 import { randomUUID } from 'crypto'
+import { encryptSecret, decryptSecret } from '@/lib/crypto'
 
 export const dynamic = 'force-dynamic'
 
@@ -27,12 +28,17 @@ async function getAll(): Promise<Credential[]> {
   const db = getSupabase()
   const { data } = await db.from('settings').select('value').eq('key', SETTINGS_KEY).single()
   if (!data) return []
-  try { return JSON.parse(data.value) } catch { return [] }
+  // Stored value is AES-256-GCM encrypted; decryptSecret() transparently passes
+  // through any legacy plaintext rows written before encryption was added.
+  try { return JSON.parse(decryptSecret(data.value)) } catch { return [] }
 }
 
 async function saveAll(creds: Credential[]) {
   const db = getSupabase()
-  await db.from('settings').upsert({ key: SETTINGS_KEY, value: JSON.stringify(creds) }, { onConflict: 'key' })
+  // Encrypt the whole vault at rest so a Supabase dump never leaks stored
+  // passwords / client secrets in plain text.
+  const value = encryptSecret(JSON.stringify(creds))
+  await db.from('settings').upsert({ key: SETTINGS_KEY, value }, { onConflict: 'key' })
 }
 
 export async function GET() {

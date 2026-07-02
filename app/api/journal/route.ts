@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
 import { revalidatePath } from 'next/cache'
 import { markdownToBlocks, slugifyTitle, type ArticleBlock } from '@/lib/journal'
+import { safeEqual } from '@/lib/crypto'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,7 +12,7 @@ export async function POST(req: Request) {
   // Bearer-token auth (n8n sends Authorization: Bearer <JOURNAL_API_KEY>)
   const token = (req.headers.get('authorization') || '').replace(/^Bearer\s+/i, '')
   const expected = process.env.JOURNAL_API_KEY
-  if (!expected || token !== expected) {
+  if (!expected || !safeEqual(token, expected)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
