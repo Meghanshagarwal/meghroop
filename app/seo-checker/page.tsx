@@ -71,7 +71,7 @@ const faqs = [
   },
   {
     q: 'Who builds this tool?',
-    a: 'MeghRoop — a Growth, AI and Software agency. We help businesses grow with performance marketing, AI automation, custom software, SEO and GEO. If you want help fixing what the audit finds, just reach out at hello@meghroop.tech.',
+    a: 'MeghRoop — a Growth, AI and Software agency. We help businesses grow with performance marketing, AI automation, custom software, SEO and GEO. If you want help fixing what the audit finds, just reach out through our contact page.',
   },
 ]
 

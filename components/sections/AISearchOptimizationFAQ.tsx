@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 const faqs = [
   {
@@ -154,7 +155,7 @@ export default function AISearchOptimizationFAQ() {
               Still have questions? Let&apos;s talk about how AI search optimization can help your site.
             </p>
             <p className="text-sm text-gray-500">
-              Email us at <a href="mailto:hello@meghroop.tech" className="text-cyan-400 hover:text-cyan-300 transition-colors">hello@meghroop.tech</a> or reach out using the contact form.
+              Email us at <ObfuscatedEmail className="text-cyan-400 hover:text-cyan-300 transition-colors" /> or reach out using the contact form.
             </p>
           </div>
         </motion.div>

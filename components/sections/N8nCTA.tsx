@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/analytics'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -62,13 +63,12 @@ export default function N8nCTA() {
             Schedule Consultation
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
-          <Link
-            href="mailto:hello@meghroop.tech"
+          <ObfuscatedEmail
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'email_us', location: 'final_cta' })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-white/[0.12] text-white font-semibold text-base hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
           >
             Email Us Details
-          </Link>
+          </ObfuscatedEmail>
         </motion.div>
 
         {/* Tagline */}

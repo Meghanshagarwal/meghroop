@@ -39,7 +39,7 @@ const FacebookIcon = ({ size = 16 }: IconProps) => (
 const socialLinks = [
   {
     icon: Mail,
-    href: 'mailto:hello@meghroop.tech',
+    href: '/contact',
     label: 'Email',
     hoverColor: 'hover:text-purple-400',
     glowClass: 'group-hover:shadow-[0_0_16px_rgba(139,92,246,0.25),0_0_4px_rgba(139,92,246,0.25)]',

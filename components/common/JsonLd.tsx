@@ -317,7 +317,7 @@ const faqSchema = {
       name: 'How do I get started with MeghRoop?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Just reach out. Email us at hello@meghroop.tech or use the contact form on our website. Tell us what you are building, what is broken, or what you are thinking about. We reply within 24 hours — usually much sooner. No sales calls, no discovery questionnaires. Just a real conversation.',
+        text: 'Just reach out through the contact form on our website. Tell us what you are building, what is broken, or what you are thinking about. We reply within 24 hours — usually much sooner. No sales calls, no discovery questionnaires. Just a real conversation.',
       },
     },
     {

@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     q: 'How do we get started?',
-    a: 'Book a discovery call or email hello@meghroop.tech. Tell us where you want to grow and what\'s in the way. We reply within 24 hours and come back with a clear plan across software, AI, and marketing.',
+    a: 'Book a discovery call or reach us through the contact form. Tell us where you want to grow and what\'s in the way. We reply within 24 hours and come back with a clear plan across software, AI, and marketing.',
   },
 ]
 

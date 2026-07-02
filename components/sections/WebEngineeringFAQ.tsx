@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 const faqs = [
   {
@@ -150,7 +151,7 @@ export default function WebEngineeringFAQ() {
               Still have questions? Let&apos;s talk about what you&apos;re building.
             </p>
             <p className="text-sm text-gray-500">
-              Email us at <a href="mailto:hello@meghroop.tech" className="text-cyan-400 hover:text-cyan-300 transition-colors">hello@meghroop.tech</a> or use the contact form below.
+              Email us at <ObfuscatedEmail className="text-cyan-400 hover:text-cyan-300 transition-colors" /> or use the contact form below.
             </p>
           </div>
         </motion.div>

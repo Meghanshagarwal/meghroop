@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Send, Mail, MessageSquare, CheckCircle2, Loader2 } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 
 
@@ -104,15 +105,16 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 flex flex-col gap-5"
           >
+            <ObfuscatedEmail className="flex items-center gap-4 p-5 rounded-2xl border bg-purple-500/10 border-purple-500/20 hover:opacity-80 transition-opacity duration-200">
+              <div className="w-10 h-10 rounded-xl bg-white/[0.06] flex items-center justify-center">
+                <Mail size={18} className="text-purple-400" />
+              </div>
+              <div>
+                <div className="text-xs text-gray-500 mb-0.5">Email Us</div>
+                <div className="text-sm text-white font-medium">Tap to send us an email</div>
+              </div>
+            </ObfuscatedEmail>
             {[
-              {
-                icon: Mail,
-                label: 'Email Us',
-                value: 'hello@meghroop.tech',
-                href: 'mailto:hello@meghroop.tech',
-                color: 'text-purple-400',
-                bg: 'bg-purple-500/10 border-purple-500/20',
-              },
               {
                 icon: MessageSquare,
                 label: 'WhatsApp',
@@ -150,7 +152,7 @@ export default function Contact() {
               <address className="not-italic mt-3 text-xs text-gray-600 leading-relaxed">
                 MeghRoop Studio<br />
                 Jaipur, Rajasthan, India · Working worldwide<br />
-                Email: <a href="mailto:hello@meghroop.tech" className="hover:text-gray-400 transition-colors">hello@meghroop.tech</a><br />
+                Email: <ObfuscatedEmail className="hover:text-gray-400 transition-colors" /><br />
                 Phone: <a href={`tel:+${whatsappNumber}`} className="hover:text-gray-400 transition-colors">{formattedPhone}</a>
               </address>
             </div>

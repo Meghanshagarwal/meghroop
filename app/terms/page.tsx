@@ -13,7 +13,7 @@ const sections = [
   { h: 'Our services', p: 'Specific engagements are governed by a separate written agreement or proposal between you and MeghRoop, which takes precedence over anything on this site.' },
   { h: 'Intellectual property', p: 'All branding, copy, and design on this website belong to MeghRoop unless stated otherwise. Work delivered to clients is owned per the terms of each engagement.' },
   { h: 'Limitation of liability', p: 'The website is provided "as is". To the extent permitted by law, MeghRoop is not liable for any indirect or consequential loss arising from its use.' },
-  { h: 'Contact', p: 'Questions about these terms? Email hello@meghroop.tech.' },
+  { h: 'Contact', p: 'Questions about these terms? Reach us through our contact page.' },
 ]
 
 export default function TermsPage() {

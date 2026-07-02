@@ -85,7 +85,7 @@ export default function ExitIntentPopup() {
       setDone(true)
       setTimeout(() => setOpen(false), 2600)
     } catch {
-      setError('Something went wrong. Please try again or email hello@meghroop.tech.')
+      setError('Something went wrong. Please try again or use our contact form.')
     } finally {
       setSubmitting(false)
     }

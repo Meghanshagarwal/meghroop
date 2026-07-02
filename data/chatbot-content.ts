@@ -139,7 +139,7 @@ export const KNOWLEDGE_BASE: Record<string, FAQResponse> = {
   getting_started: {
     keywords: ['start', 'get started', 'begin', 'next step', 'how do i', 'onboard'],
     answer:
-      'Just reach out — email hello@meghroop.tech, use the contact form, or tap "Book a Call" here. Tell us what you are building, what is broken, or what you are thinking about. We reply within 24 hours, usually much sooner. No sales calls, no questionnaires — just a real conversation.',
+      'Just reach out — use the contact form, or tap "Book a Call" here. Tell us what you are building, what is broken, or what you are thinking about. We reply within 24 hours, usually much sooner. No sales calls, no questionnaires — just a real conversation.',
     options: ['Book a Call', 'Main Menu'],
   },
   support: {

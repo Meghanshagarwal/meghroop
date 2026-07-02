@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/analytics'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -34,14 +35,14 @@ export default function ShopifyEngineeringCTA() {
           </motion.p>
 
           <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link
-              href="mailto:hello@meghroop.tech?subject=Shopify Engineering Inquiry"
+            <ObfuscatedEmail
+              subject="Shopify Engineering Inquiry"
               onClick={() => trackEvent('cta_click', 'Contact', { label: 'shopify_engineering_cta' })}
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-black font-semibold hover:bg-gray-100 transition-all duration-200 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
             >
               Start Your Project
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
-            </Link>
+            </ObfuscatedEmail>
             <Link
               href="https://wa.me/918076901234?text=Hi%20MeghRoop%2C%20I%27m%20interested%20in%20Shopify%20engineering%20services."
               target="_blank"

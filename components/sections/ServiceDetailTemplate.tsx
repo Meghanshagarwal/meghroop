@@ -8,6 +8,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { trackEvent } from '@/lib/analytics'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 import type { Accent, ServiceContent } from '@/data/services/types'
 
 const ACCENTS: Record<
@@ -421,9 +422,7 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
                 {content.cta.primary.label}
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
-              <a href="mailto:hello@meghroop.tech" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200">
-                hello@meghroop.tech
-              </a>
+              <ObfuscatedEmail className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200" />
             </motion.div>
             <motion.div {...fadeUp(0.4)} className="mt-12 flex flex-wrap justify-center items-center gap-x-5 gap-y-3 border-t border-white/[0.06] pt-8 text-xs text-gray-500 max-w-2xl mx-auto">
               <Link href="/agentic-ai" className={`hover:${a.icon.replace('text-', 'text-')} transition-colors`}>All AI Services</Link>

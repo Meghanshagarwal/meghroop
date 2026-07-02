@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Mail } from 'lucide-react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/analytics'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -44,15 +45,14 @@ export default function AIAgentsAutomationCTA() {
 
         {/* CTA Buttons */}
         <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10">
-          <a
-            href="mailto:hello@meghroop.tech"
+          <ObfuscatedEmail
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'email_inquiry', location: 'final_cta' })}
             className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-gray-100 transition-all duration-200 shadow-[0_0_40px_rgba(255,255,255,0.1)]"
           >
             <Mail size={16} className="flex-shrink-0" />
             Email us
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
-          </a>
+          </ObfuscatedEmail>
           <Link
             href="/"
             onClick={() => trackEvent('cta_click', 'ViewContent', { label: 'back_home', location: 'final_cta' })}
@@ -66,7 +66,7 @@ export default function AIAgentsAutomationCTA() {
         <motion.div {...fadeUp(0.4)} className="space-y-2 text-center mb-16">
           <p className="text-sm text-gray-500">Or just message us</p>
           <p className="text-base text-gray-400">
-            <span className="font-semibold text-white">hello@meghroop.tech</span>
+            <ObfuscatedEmail className="font-semibold text-white" />
           </p>
         </motion.div>
 

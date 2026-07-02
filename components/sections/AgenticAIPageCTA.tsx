@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { trackEvent } from '@/lib/analytics'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -55,13 +56,11 @@ export default function AgenticAIPageCTA() {
             Get my 90-day AI roadmap
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
-          <a
-            href="mailto:hello@meghroop.tech?subject=AI%20Services%20Enquiry"
+          <ObfuscatedEmail
+            subject="AI Services Enquiry"
             onClick={() => trackEvent('cta_click', 'Contact', { label: 'email_hello', location: 'services_cta' })}
             className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/[0.12] text-white font-semibold text-sm hover:bg-white/[0.06] hover:border-white/20 transition-all duration-200"
-          >
-            hello@meghroop.tech
-          </a>
+          />
         </motion.div>
 
         <motion.p {...fadeUp(0.45)} className="mt-10 sm:mt-14 text-xs text-gray-500 max-w-lg mx-auto mb-12">

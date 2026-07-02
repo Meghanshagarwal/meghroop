@@ -13,8 +13,8 @@ const sections = [
   { h: 'How we use it', p: 'We use your information to respond to enquiries, deliver our services, improve the website, and — only with your consent — send relevant updates. We do not sell your personal data.' },
   { h: 'Cookies & analytics', p: 'We use cookies and similar technologies for analytics and marketing measurement. You can control cookies through your browser settings.' },
   { h: 'Data sharing', p: 'We share data only with trusted processors that help us operate (e.g. analytics, email, hosting), and only as needed. We may disclose information where required by law.' },
-  { h: 'Your rights', p: 'You can request access to, correction of, or deletion of your personal data at any time by emailing hello@meghroop.tech.' },
-  { h: 'Contact', p: 'Questions about this policy? Email hello@meghroop.tech.' },
+  { h: 'Your rights', p: 'You can request access to, correction of, or deletion of your personal data at any time by contacting us through our contact page.' },
+  { h: 'Contact', p: 'Questions about this policy? Reach us through our contact page.' },
 ]
 
 export default function PrivacyPage() {

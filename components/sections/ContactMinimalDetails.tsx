@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, Copy, Flame } from 'lucide-react'
+import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
 
 // Custom inline SVG icons for social connections to guarantee compatibility and look extremely premium
 const LinkedinIcon = ({ size = 14 }: { size?: number }) => (
@@ -33,7 +34,7 @@ export default function ContactMinimalDetails() {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('hello@meghroop.tech')
+    navigator.clipboard.writeText(['hello', 'meghroop.tech'].join('@'))
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -64,12 +65,7 @@ export default function ContactMinimalDetails() {
             </div>
             
             <div className="flex items-center justify-between gap-3 bg-white/[0.02] border border-white/[0.06] rounded-xl px-4 py-2.5 mt-4">
-              <a
-                href="mailto:hello@meghroop.tech"
-                className="text-xs font-mono text-white hover:text-cyan-400 transition-colors truncate"
-              >
-                hello@meghroop.tech
-              </a>
+              <ObfuscatedEmail className="text-xs font-mono text-white hover:text-cyan-400 transition-colors truncate" />
               <button
                 onClick={handleCopy}
                 className="p-1.5 rounded-lg hover:bg-white/[0.04] text-gray-500 hover:text-white transition-colors relative flex items-center justify-center"
