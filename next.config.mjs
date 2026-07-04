@@ -79,6 +79,9 @@ const nextConfig = {
       { source: '/wordpress-engineering', destination: '/wordpress-development', permanent: true },
       { source: '/ai-search-optimization', destination: '/growth-marketing', permanent: true },
       { source: '/systems', destination: '/work', permanent: true },
+      // ── Legacy /blog/* URLs → /journal/* (the journal was never at /blog) ──
+      { source: '/blog/:slug', destination: '/journal/:slug', permanent: true },
+      { source: '/blog', destination: '/journal', permanent: true },
     ]
   },
 };
