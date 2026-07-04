@@ -58,7 +58,7 @@ export default function MCPCTA() {
             {/* Studio tagline */}
             <div className="mt-12 pt-8 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-mono">
               <div>MEGHROOP COGNITIVE SYSTEMS CO.</div>
-              <div>EST. 2022 // INDIA TO THE WORLD</div>
+              <div>EST. 2026 // INDIA TO THE WORLD</div>
             </div>
           </div>
         </motion.div>

@@ -12,10 +12,10 @@ const organizationSchema = {
   logo: `${SITE_URL}/favicon-512.png`,
   email: 'hello@meghroop.tech',
   telephone: '+91 89495 08264',
-  foundingDate: '2022',
+  foundingDate: '2026',
   slogan: 'From awareness to automation. From code to customers.',
   description:
-    'MeghRoop is a Growth, AI and Software agency. We help businesses grow through performance marketing (Meta Ads, Google Ads, SEO, social media, content), AI agents and automation (n8n, WhatsApp, CRM), custom software and SaaS development, Shopify and WordPress development, and branding and creative. Founded in 2022, based in India, serving clients worldwide.',
+    'MeghRoop is a Growth, AI and Software agency. We help businesses grow through performance marketing (Meta Ads, Google Ads, SEO, social media, content), AI agents and automation (n8n, WhatsApp, CRM), custom software and SaaS development, Shopify and WordPress development, and branding and creative. Founded in 2026, based in India, serving clients worldwide.',
   numberOfEmployees: { '@type': 'QuantitativeValue', value: 2 },
   founder: [
     {

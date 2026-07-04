@@ -54,12 +54,12 @@ export default function About() {
           {/* Stat — Years */}
           <StatCard
             icon={Clock}
-            value="2+"
-            label="Years in"
-            sub="Started in 2022. Not slowing down."
+            value="New"
+            label="Just getting started"
+            sub="Started in 2026. Full conviction."
             gradient="from-purple-500/20 to-blue-500/20"
             iconColor="text-purple-400"
-            bullets={['2022 — One laptop, zero clients, full conviction', '2023 — 15 projects shipped, 0 refunds', '2024 — 30+ and genuinely enjoying it']}
+            bullets={['2026 — One laptop, zero clients, full conviction', 'Building brands that need a presence', 'Building products that need a brain']}
           />
 
           {/* Stat — Projects */}

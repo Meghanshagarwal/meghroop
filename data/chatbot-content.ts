@@ -127,7 +127,7 @@ export const KNOWLEDGE_BASE: Record<string, FAQResponse> = {
   about: {
     keywords: ['about', 'who are you', 'founders', 'team', 'meghansh', 'roop', 'different', 'why'],
     answer:
-      'MeghRoop is a founder-led Growth, AI and Software agency founded in 2022, based in India and serving clients worldwide. You work directly with the people building it — Meghansh & Roop — no account managers, no handoffs, no outsourcing. Growth, AI, software, and branding under one roof, so everything reinforces each other.',
+      'MeghRoop is a founder-led Growth, AI and Software agency founded in 2026, based in India and serving clients worldwide. You work directly with the people building it — Meghansh & Roop — no account managers, no handoffs, no outsourcing. Growth, AI, software, and branding under one roof, so everything reinforces each other.',
     options: ['Book a Call', 'Main Menu'],
   },
   location: {

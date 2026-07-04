@@ -173,7 +173,7 @@ export default async function Image() {
               textTransform: 'uppercase',
             }}
           >
-            <span>Est. 2022</span>
+            <span>Est. 2026</span>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>•</span>
             <span>Based in India</span>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>•</span>
