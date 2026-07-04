@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${project.title} — Case Study`,
     description: project.client_intro || project.description,
+    alternates: { canonical: `/work/${params.slug}` },
     openGraph: {
       title: `${project.title} — MeghRoop Case Study`,
       description: project.client_intro || project.description,

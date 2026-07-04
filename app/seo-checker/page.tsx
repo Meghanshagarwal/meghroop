@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     'AI search optimization checker',
     'SEO score checker',
   ],
-  alternates: { canonical: '/seo-checker' },
+  alternates: { canonical: `${SITE_URL}/seo-checker` },
   openGraph: {
     title: 'Free SEO Checker — Instant Website SEO Audit Report',
     description:
