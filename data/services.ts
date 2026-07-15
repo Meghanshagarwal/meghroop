@@ -40,6 +40,7 @@ export const serviceNav: NavGroup[] = [
     links: [
       { label: 'Shopify Development', href: '/shopify-development' },
       { label: 'WordPress Development', href: '/wordpress-development' },
+      { label: 'Managed WordPress Hosting', href: '/wordpress-hosting' },
     ],
   },
   {
@@ -61,6 +62,7 @@ export const serviceLinks = [
   { label: 'Software Development', href: '/software-development' },
   { label: 'Shopify Development', href: '/shopify-development' },
   { label: 'WordPress Development', href: '/wordpress-development' },
+  { label: 'Managed Hosting', href: '/wordpress-hosting' },
   { label: 'Branding & Creative', href: '/branding-creative' },
 ]
 

@@ -29,6 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/software-development',
     '/shopify-development',
     '/wordpress-development',
+    '/wordpress-hosting',
     '/branding-creative',
     // AI Agents sub-pages (live — powering the dedicated nav section)
     ...aiAgentLinks.map((a) => a.href),
@@ -71,6 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       route === '/software-development' ||
       route === '/shopify-development' ||
       route === '/wordpress-development' ||
+      route === '/wordpress-hosting' ||
       route === '/branding-creative' ||
       route === '/work'
     ) {
