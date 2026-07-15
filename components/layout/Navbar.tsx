@@ -168,7 +168,13 @@ export default function Navbar() {
         </ul>
 
         {/* CTA */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center gap-2">
+          <Link
+            href="/free-website-audit"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-purple-200 border border-purple-400/30 bg-purple-500/[0.08] hover:bg-purple-500/[0.15] rounded-lg transition-all duration-200"
+          >
+            Free Audit
+          </Link>
           <Link
             href="/contact"
             className="inline-flex items-center gap-1.5 px-5 py-2 text-sm font-semibold text-black bg-white hover:bg-white/90 rounded-lg transition-all duration-200 shadow-[0_0_30px_rgba(192,132,252,0.15)]"
