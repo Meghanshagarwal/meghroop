@@ -1,11 +1,11 @@
-import { hostingMeta, hostingPlans, hostingFaqs } from '@/data/hosting'
+import { hostingMeta, hostingPlans, hostingFaqs, yearlyMonthly } from '@/data/hosting'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
 /**
  * Emits Product + Offer + FAQPage + BreadcrumbList JSON-LD for the
- * Managed WordPress Hosting page. The two price offers and the 30-day
- * return policy are declared so Google can show pricing rich results.
+ * hosting page. One monthly + one yearly Offer per plan, plus the
+ * 30-day return policy, so Google can show pricing rich results.
  */
 export default function HostingJsonLd() {
   const pageUrl = `${SITE_URL}/${hostingMeta.slug}`
@@ -19,11 +19,48 @@ export default function HostingJsonLd() {
     returnFees: 'https://schema.org/FreeReturn',
   }
 
+  const offers = hostingPlans.flatMap((p) => [
+    {
+      '@type': 'Offer',
+      name: `${p.name} plan — monthly`,
+      price: p.monthly,
+      priceCurrency: hostingMeta.currency,
+      url: pageUrl,
+      availability: 'https://schema.org/InStock',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: p.monthly,
+        priceCurrency: hostingMeta.currency,
+        unitCode: 'MON',
+      },
+      hasMerchantReturnPolicy: returnPolicy,
+      seller: { '@id': `${SITE_URL}/#organization` },
+    },
+    {
+      '@type': 'Offer',
+      name: `${p.name} plan — yearly (20% off)`,
+      price: yearlyMonthly(p.monthly),
+      priceCurrency: hostingMeta.currency,
+      url: pageUrl,
+      availability: 'https://schema.org/InStock',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: yearlyMonthly(p.monthly),
+        priceCurrency: hostingMeta.currency,
+        unitCode: 'MON',
+      },
+      hasMerchantReturnPolicy: returnPolicy,
+      seller: { '@id': `${SITE_URL}/#organization` },
+    },
+  ])
+
+  const allPrices = offers.map((o) => o.price)
+
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     '@id': `${pageUrl}#product`,
-    name: 'Managed WordPress Hosting',
+    name: 'Web & WordPress Hosting',
     description: hostingMeta.seoDescription,
     brand: { '@type': 'Brand', name: 'MeghRoop' },
     category: 'Web Hosting',
@@ -31,27 +68,10 @@ export default function HostingJsonLd() {
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: hostingMeta.currency,
-      lowPrice: Math.min(...hostingPlans.map((p) => p.price)),
-      highPrice: Math.max(...hostingPlans.map((p) => p.price)),
-      offerCount: hostingPlans.length,
-      offers: hostingPlans.map((p) => ({
-        '@type': 'Offer',
-        name: `${p.name} plan`,
-        price: p.price,
-        priceCurrency: hostingMeta.currency,
-        url: pageUrl,
-        availability: 'https://schema.org/InStock',
-        priceSpecification: {
-          '@type': 'UnitPriceSpecification',
-          price: p.price,
-          priceCurrency: hostingMeta.currency,
-          billingDuration: 1,
-          billingIncrement: 1,
-          unitCode: p.period === 'year' ? 'ANN' : 'MON',
-        },
-        hasMerchantReturnPolicy: returnPolicy,
-        seller: { '@id': `${SITE_URL}/#organization` },
-      })),
+      lowPrice: Math.min(...allPrices),
+      highPrice: Math.max(...allPrices),
+      offerCount: offers.length,
+      offers,
     },
   }
 

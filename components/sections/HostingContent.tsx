@@ -8,10 +8,13 @@ import { trackEvent } from '@/lib/analytics'
 import {
   hostingMeta,
   hostingPlans,
-  hostingFeatures,
+  hostingIncludes,
   hostingSteps,
   hostingStack,
   hostingFaqs,
+  yearlyDiscount,
+  yearlyMonthly,
+  yearlyTotal,
 } from '@/data/hosting'
 
 const related = [
@@ -23,6 +26,9 @@ const related = [
 
 export default function HostingContent() {
   const [open, setOpen] = useState<number | null>(0)
+  const [yearly, setYearly] = useState(true)
+  const sym = hostingMeta.currencySymbol
+  const off = Math.round(yearlyDiscount * 100)
 
   return (
     <main id="main-content" className="pt-28 sm:pt-32">
@@ -41,8 +47,9 @@ export default function HostingContent() {
             Hosting you never <span className="gradient-text">have to think about.</span>
           </h1>
           <p className="text-lg sm:text-xl text-white/[0.62] max-w-2xl mx-auto leading-relaxed mb-8">
-            Fully managed VPS WordPress hosting — SSL, security, malware protection, daily backups, and
-            free migration all included. From <span className="text-white font-semibold">₹249/mo</span>, with a{' '}
+            Fully managed web, WordPress &amp; VPS-grade hosting — SSL, security, malware protection, daily
+            backups, and free migration all included. From <span className="text-white font-semibold">₹49/mo</span>,{' '}
+            <span className="text-white font-semibold">20% off yearly</span>, with a{' '}
             <span className="text-white font-semibold">30-day money-back guarantee</span>.
           </p>
           {/* Guarantee ribbon */}
@@ -56,7 +63,7 @@ export default function HostingContent() {
               onClick={() => trackEvent('cta_click', 'Contact', { label: 'view_pricing', location: 'hosting_hero' })}
               className="group inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-white text-black font-semibold text-[15px] hover:bg-white/90 transition-all duration-200 shadow-[0_0_50px_rgba(96,165,250,0.18)]"
             >
-              See Pricing
+              See Plans
               <ArrowRight size={17} className="group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
             <Link
@@ -78,96 +85,138 @@ export default function HostingContent() {
           </h2>
           <p className="text-lg sm:text-xl text-white/[0.62] leading-relaxed max-w-3xl">
             Slow load times, surprise downtime, security holes, and a control panel you never wanted to
-            learn. We take the whole server off your plate — a hardened, tuned VPS with SSL, malware
-            protection, backups, and updates all handled — so your site stays fast, safe, and online while
-            you get on with your business.
+            learn. We take the whole server off your plate — hardened, tuned, and fully managed on fast NVMe
+            SSD — so your site stays fast, safe, and online while you get on with your business.
           </p>
         </div>
       </section>
 
       {/* ── Pricing ── */}
       <section id="pricing" className="border-t border-white/[0.06] scroll-mt-24">
-        <div className="max-w-5xl mx-auto px-6 py-20 sm:py-28">
-          <div className="text-xs uppercase tracking-[0.2em] text-[#52525b] mb-3">Simple pricing</div>
+        <div className="max-w-7xl mx-auto px-6 py-20 sm:py-28">
+          <div className="text-xs uppercase tracking-[0.2em] text-[#52525b] mb-3">Plans &amp; pricing</div>
           <h2 className="font-heading font-bold text-3xl sm:text-5xl text-white tracking-tight mb-4">
-            One plan. <span className="gradient-text">Everything included.</span>
+            Simple plans. <span className="gradient-text">Everything managed.</span>
           </h2>
-          <p className="text-white/[0.55] max-w-2xl mb-12">
-            No tiers, no upsells, no features locked behind a bigger plan. Pick monthly or yearly — you get
-            the exact same fully managed hosting either way.
+          <p className="text-white/[0.55] max-w-2xl mb-8">
+            Every plan is fully managed and includes free SSL, free migration, malware protection, and 24/7
+            support. Pick your size — upgrade anytime.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {hostingPlans.map((p) => (
-              <div
-                key={p.id}
-                className={`relative rounded-2xl border p-8 sm:p-10 ${
-                  p.featured
-                    ? 'border-[#60a5fa]/40 bg-[#60a5fa]/[0.05]'
-                    : 'border-white/[0.08] bg-white/[0.02]'
-                }`}
-              >
-                {p.featured && (
-                  <span className="absolute top-5 right-5 text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#60a5fa]/15 text-[#93c5fd]">
-                    Best value
-                  </span>
-                )}
-                <div className="text-sm text-white/60 mb-4">{p.name}</div>
-                <div className="flex items-end gap-1 mb-3">
-                  <span className="font-heading font-bold text-5xl sm:text-6xl text-white leading-none">
-                    {hostingMeta.currencySymbol}
-                    {p.price.toLocaleString('en-IN')}
-                  </span>
-                  <span className="text-white/50 text-lg mb-1">{p.cadence}</span>
-                </div>
-                {p.note && <div className="text-sm text-emerald-300 mb-3">{p.note}</div>}
-                <p className="text-[15px] text-white/[0.55] leading-relaxed mb-7">{p.tagline}</p>
-                <Link
-                  href="/contact"
-                  onClick={() => trackEvent('cta_click', 'Purchase', { label: `hosting_${p.id}`, location: 'hosting_pricing' })}
-                  className={`group inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-[15px] transition-all duration-200 ${
-                    p.featured
-                      ? 'bg-white text-black hover:bg-white/90 shadow-[0_0_50px_rgba(96,165,250,0.2)]'
-                      : 'border border-white/[0.12] text-white hover:bg-white/[0.05]'
+
+          {/* Billing toggle */}
+          <div className="inline-flex items-center gap-1 p-1 rounded-full border border-white/[0.1] bg-white/[0.03] mb-12">
+            <button
+              onClick={() => setYearly(false)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors ${
+                !yearly ? 'bg-white text-black' : 'text-white/60 hover:text-white'
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setYearly(true)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors flex items-center gap-2 ${
+                yearly ? 'bg-white text-black' : 'text-white/60 hover:text-white'
+              }`}
+            >
+              Yearly
+              <span className={`text-[11px] px-2 py-0.5 rounded-full ${yearly ? 'bg-emerald-500/15 text-emerald-600' : 'bg-emerald-400/15 text-emerald-300'}`}>
+                −{off}%
+              </span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {hostingPlans.map((p) => {
+              const price = yearly ? yearlyMonthly(p.monthly) : p.monthly
+              return (
+                <div
+                  key={p.id}
+                  className={`relative flex flex-col rounded-2xl border p-6 sm:p-7 ${
+                    p.featured ? 'border-[#60a5fa]/40 bg-[#60a5fa]/[0.05]' : 'border-white/[0.08] bg-white/[0.02]'
                   }`}
                 >
-                  Get Started
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
-                </Link>
-              </div>
-            ))}
+                  {p.badge && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-[#60a5fa] text-black whitespace-nowrap">
+                      {p.badge}
+                    </span>
+                  )}
+                  <div className="text-sm font-semibold text-white mb-1">{p.name}</div>
+                  <p className="text-[13px] text-white/[0.5] leading-snug mb-5 min-h-[2.5rem]">{p.tagline}</p>
+
+                  <div className="flex items-end gap-1">
+                    <span className="font-heading font-bold text-4xl sm:text-5xl text-white leading-none">
+                      {sym}{price.toLocaleString('en-IN')}
+                    </span>
+                    <span className="text-white/50 text-sm mb-1">/mo</span>
+                  </div>
+                  <div className="mt-2 mb-5 text-[12px] h-5">
+                    {yearly ? (
+                      <span className="text-emerald-300">
+                        {sym}{yearlyTotal(p.monthly).toLocaleString('en-IN')}/yr billed yearly · save {off}%
+                      </span>
+                    ) : (
+                      <span className="text-white/40">Billed monthly · cancel anytime</span>
+                    )}
+                  </div>
+
+                  <Link
+                    href="/contact"
+                    onClick={() => trackEvent('cta_click', 'Purchase', { label: `hosting_${p.id}_${yearly ? 'yearly' : 'monthly'}`, location: 'hosting_pricing' })}
+                    className={`group inline-flex w-full items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-[15px] transition-all duration-200 mb-6 ${
+                      p.featured ? 'bg-white text-black hover:bg-white/90 shadow-[0_0_40px_rgba(96,165,250,0.2)]' : 'border border-white/[0.12] text-white hover:bg-white/[0.05]'
+                    }`}
+                  >
+                    Choose {p.name}
+                    <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
+                  </Link>
+
+                  <ul className="space-y-2.5 mb-5">
+                    {p.specs.map((s) => (
+                      <li key={s.label} className="flex items-center justify-between gap-2 text-[13px]">
+                        <span className="text-white/45">{s.label}</span>
+                        <span className="text-white/80 font-medium text-right">{s.value}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <ul className="space-y-2 pt-4 border-t border-white/[0.06] mt-auto">
+                    {p.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-2 text-[13px] text-white/[0.6]">
+                        <Check size={15} className={`${hostingMeta.accent} flex-shrink-0 mt-0.5`} />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })}
           </div>
-          <p className="mt-6 flex items-center justify-center gap-2 text-sm text-white/45">
+
+          <p className="mt-8 flex items-center justify-center gap-2 text-sm text-white/45">
             <ShieldCheck size={15} className="text-emerald-400" />
             Every plan is covered by our 30-day money-back guarantee.
           </p>
         </div>
       </section>
 
-      {/* ── Everything included ── */}
-      <section className="border-t border-white/[0.06]">
-        <div className="max-w-7xl mx-auto px-6 py-20 sm:py-28">
-          <div className="text-xs uppercase tracking-[0.2em] text-[#52525b] mb-10">Everything included</div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.06]">
-            {hostingFeatures.map((f) => (
-              <motion.div
-                key={f.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-[#0d0d0d] p-8 hover:bg-[#101010] transition-colors duration-300"
-              >
-                <Check size={18} className={`${hostingMeta.accent} mb-5`} />
-                <h3 className="font-heading font-bold text-xl text-white mb-3">{f.title}</h3>
-                <p className="text-[15px] text-white/[0.55] leading-relaxed">{f.desc}</p>
-              </motion.div>
+      {/* ── Included on every plan ── */}
+      <section className="border-t border-white/[0.06] bg-[#0a0a0a]">
+        <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20">
+          <div className="text-xs uppercase tracking-[0.2em] text-[#52525b] mb-8">Included on every plan</div>
+          <div className="flex flex-wrap gap-3">
+            {hostingIncludes.map((f) => (
+              <span key={f} className="inline-flex items-center gap-2 text-sm px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.02] text-white/70">
+                <Check size={15} className={hostingMeta.accent} />
+                {f}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Money-back guarantee callout ── */}
-      <section className="border-t border-white/[0.06] bg-[#0a0a0a]">
+      <section className="border-t border-white/[0.06]">
         <div className="max-w-5xl mx-auto px-6 py-20 sm:py-24">
           <div className="relative rounded-[2rem] border border-emerald-400/20 bg-emerald-400/[0.04] overflow-hidden px-8 py-14 sm:px-14 sm:py-16">
             <div className="flex flex-col sm:flex-row items-start gap-6">
@@ -176,7 +225,7 @@ export default function HostingContent() {
               </div>
               <div>
                 <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white tracking-tight mb-4">
-                  Try it risk-free for 30 days.
+                  Try any plan risk-free for 30 days.
                 </h2>
                 <p className="text-white/[0.62] text-lg leading-relaxed max-w-2xl">
                   If the hosting is not right for you within the first 30 days, just tell us — we refund you{' '}
@@ -285,8 +334,8 @@ export default function HostingContent() {
             Ready for hosting <span className="gradient-text">that just works?</span>
           </h2>
           <p className="relative text-white/[0.6] max-w-lg mx-auto mb-9">
-            Free migration, everything managed, and a 30-day money-back guarantee. Let&apos;s get your site
-            on a faster, safer home today.
+            Free migration, everything managed, 20% off yearly, and a 30-day money-back guarantee. Let&apos;s
+            get your site on a faster, safer home today.
           </p>
           <Link
             href="/contact"

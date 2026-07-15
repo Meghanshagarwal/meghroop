@@ -53,10 +53,10 @@ export default function ServicesIndex() {
                 sub: 'Custom AI agents, automation, and intelligent systems wired into your tools and data.',
               },
               {
-                label: 'Managed WordPress Hosting',
+                label: 'Web & WordPress Hosting',
                 href: '/wordpress-hosting',
                 dot: 'bg-[#60a5fa]',
-                sub: 'Fully managed VPS hosting from ₹249/mo — SSL, security, backups, and free migration, with a 30-day money-back guarantee.',
+                sub: 'Fully managed web, WordPress & VPS hosting from ₹49/mo — 4 plans, 20% off yearly, free SSL & migration, with a 30-day money-back guarantee.',
               },
             ].map((s) => {
               const page = servicePages[s.href.replace('/', '')]
