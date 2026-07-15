@@ -34,6 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // AI Agents sub-pages (live — powering the dedicated nav section)
     ...aiAgentLinks.map((a) => a.href),
     // Free tools (lead-gen / high search intent)
+    '/free-website-audit',
     '/seo-checker',
     // Core pages
     '/work',
@@ -55,8 +56,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } else if (route === '/journal') {
       priority = 0.95
       changeFrequency = 'daily'
-    } else if (route === '/seo-checker') {
-      // High-intent, lead-generating tool page — push it hard.
+    } else if (route === '/seo-checker' || route === '/free-website-audit') {
+      // High-intent, lead-generating tool pages — push them hard.
       priority = 0.95
       changeFrequency = 'weekly'
     } else if (route === '/contact' || route === '/about') {

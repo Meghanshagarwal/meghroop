@@ -101,6 +101,7 @@ const companyLinks = [
 ]
 
 const resourceLinks = [
+  { label: 'Free Website Audit', href: '/free-website-audit' },
   { label: 'Free SEO Checker', href: '/seo-checker' },
   { label: 'Case Studies', href: '/work' },
   { label: 'FAQs', href: '/#faq' },
