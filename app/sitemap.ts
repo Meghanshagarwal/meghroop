@@ -3,6 +3,7 @@ import { getAllArticles } from '@/lib/journal'
 import { getSupabase, projectSlug, type Project } from '@/lib/supabase'
 import { defaultProjects } from '@/data/projects'
 import { aiAgentLinks } from '@/data/aiAgents'
+import { getAllLocalSeoSlugs } from '@/data/localSeo'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
@@ -110,5 +111,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  return [...staticSitemap, ...articleSitemap, ...workSitemap]
+  // Programmatic local-SEO pages ({service} x {city/India})
+  const localSeoSitemap = getAllLocalSeoSlugs().map((slug) => ({
+    url: `${SITE_URL}/${slug}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }))
+
+  return [...staticSitemap, ...articleSitemap, ...workSitemap, ...localSeoSitemap]
 }
