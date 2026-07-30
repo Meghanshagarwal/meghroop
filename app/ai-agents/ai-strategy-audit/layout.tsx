@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "AI Strategy & Readiness Audit — MeghRoop",
+  title: "AI Strategy & Readiness Audit",
   description: "A 3-week deep-dive into your business, data, and workflows. We map where AI actually fits — and where it doesn't. No slides. No frameworks. Just clarity.",
   keywords: ["AI audit","AI readiness","AI strategy","ROI mapping","90-day roadmap","AI consulting","MeghRoop"],
   openGraph: {

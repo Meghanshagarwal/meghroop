@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Agentic Process Automation — MeghRoop",
+  title: "Agentic Process Automation",
   description: "AI agents that reason through exceptions, read unstructured data, and handle the messy stuff your team shouldn't be doing manually. Not RPA — real intelligence.",
   keywords: ["agentic process automation","AI agents","n8n workflows","back-office AI","workflow intelligence","process automation","MeghRoop"],
   openGraph: {

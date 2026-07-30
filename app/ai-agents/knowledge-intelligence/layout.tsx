@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Knowledge Intelligence & Enterprise RAG — MeghRoop",
+  title: "Knowledge Intelligence & Enterprise RAG",
   description: "We build private, citation-backed AI assistants over your documents. Ask questions in plain language and get accurate answers with exact sources. Deployed in your cloud.",
   keywords: ["Enterprise RAG","Knowledge Intelligence","Document AI","vector search","citation-backed AI","private RAG","document search","MeghRoop"],
   openGraph: {

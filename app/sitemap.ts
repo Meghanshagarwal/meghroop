@@ -6,6 +6,11 @@ import { aiAgentLinks } from '@/data/aiAgents'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
+// Regenerate the sitemap at most once a day. Without this, sitemap.ts computes
+// `new Date()` on every crawler hit, so static pages that never change still
+// report a fresh lastmod every time — a false freshness signal to search engines.
+export const revalidate = 86400
+
 async function getProjects(): Promise<Project[]> {
   try {
     const db = getSupabase()
@@ -100,7 +105,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic work / case-study pages
   const workSitemap = projects.map((project) => ({
     url: `${SITE_URL}/work/${projectSlug(project)}`,
-    lastModified: new Date().toISOString(),
+    lastModified: new Date(project.created_at || Date.now()).toISOString(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))

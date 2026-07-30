@@ -99,8 +99,9 @@ export default function SeoCheckerForm() {
       />
 
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-gray-300">Website URL</label>
+        <label htmlFor="seo-url" className="mb-1.5 block text-sm font-medium text-gray-300">Website URL</label>
         <input
+          id="seo-url"
           type="text"
           inputMode="url"
           required
@@ -113,8 +114,9 @@ export default function SeoCheckerForm() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-gray-300">Your name</label>
+          <label htmlFor="seo-name" className="mb-1.5 block text-sm font-medium text-gray-300">Your name</label>
           <input
+            id="seo-name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -123,8 +125,9 @@ export default function SeoCheckerForm() {
           />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-gray-300">Email *</label>
+          <label htmlFor="seo-email" className="mb-1.5 block text-sm font-medium text-gray-300">Email *</label>
           <input
+            id="seo-email"
             type="email"
             required
             value={email}

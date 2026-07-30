@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "AI Integration Services — MeghRoop | Plug AI Into Your Existing Tools",
+  title: "AI Integration Services | Plug AI Into Your Existing Tools",
   description: "MeghRoop integrates AI into your existing CRM, ERP, helpdesk, and collaboration tools. Salesforce, HubSpot, SAP, Slack — no rip-and-replace, just smarter workflows.",
   keywords: ["AI integration","CRM AI","ERP AI","MCP servers","Salesforce AI","HubSpot AI","SAP integration","API integration","MeghRoop"],
   openGraph: {

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Sales AI & Outreach Automation — MeghRoop",
+  title: "Sales AI & Outreach Automation",
   description: "Signal-triggered, AI-researched cold outreach that fills your pipeline with qualified meetings. No spray-and-pray. Built by MeghRoop.",
   keywords: ["sales AI","outbound automation","cold outreach","signal-based selling","lead generation","LinkedIn automation","B2B sales","MeghRoop"],
   openGraph: {

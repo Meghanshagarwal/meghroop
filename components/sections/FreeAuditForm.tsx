@@ -75,8 +75,9 @@ export default function FreeAuditForm() {
       />
 
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-gray-300">Website URL <span className="text-purple-400">*</span></label>
+        <label htmlFor="audit-url" className="mb-1.5 block text-sm font-medium text-gray-300">Website URL <span className="text-purple-400">*</span></label>
         <input
+          id="audit-url"
           type="text"
           inputMode="url"
           required
@@ -89,8 +90,9 @@ export default function FreeAuditForm() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-gray-300">Your name <span className="text-purple-400">*</span></label>
+          <label htmlFor="audit-name" className="mb-1.5 block text-sm font-medium text-gray-300">Your name <span className="text-purple-400">*</span></label>
           <input
+            id="audit-name"
             type="text"
             required
             value={name}
@@ -100,8 +102,9 @@ export default function FreeAuditForm() {
           />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-gray-300">Email <span className="text-purple-400">*</span></label>
+          <label htmlFor="audit-email" className="mb-1.5 block text-sm font-medium text-gray-300">Email <span className="text-purple-400">*</span></label>
           <input
+            id="audit-email"
             type="email"
             required
             value={email}
@@ -113,10 +116,11 @@ export default function FreeAuditForm() {
       </div>
 
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-gray-300">
+        <label htmlFor="audit-phone" className="mb-1.5 block text-sm font-medium text-gray-300">
           WhatsApp / Phone <span className="text-gray-600">(optional — for a faster reply)</span>
         </label>
         <input
+          id="audit-phone"
           type="tel"
           inputMode="tel"
           value={phone}
@@ -127,10 +131,11 @@ export default function FreeAuditForm() {
       </div>
 
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-gray-300">
+        <label htmlFor="audit-goal" className="mb-1.5 block text-sm font-medium text-gray-300">
           Biggest challenge with your site? <span className="text-gray-600">(optional)</span>
         </label>
         <textarea
+          id="audit-goal"
           rows={3}
           value={goal}
           onChange={(e) => setGoal(e.target.value)}

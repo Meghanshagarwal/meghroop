@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "AI Voice Agents — MeghRoop | Human-Sounding AI Callers, 24/7",
+  title: "AI Voice Agents | Human-Sounding AI Callers, 24/7",
   description: "AI voice agents that sound human. 24/7 multilingual callers for inbound support, outbound qualification, appointment booking, and collections. Hindi, English, and regional languages. Sub-second response times.",
   keywords: ["AI voice agents","voice bots","AI callers","multilingual voice AI","conversational AI","call automation","MeghRoop"],
   openGraph: {
