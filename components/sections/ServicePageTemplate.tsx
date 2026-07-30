@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Plus, Minus, Check } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 import { serviceLinks, type ServicePage } from '@/data/services'
+import { seoServiceLinks, seoLocations } from '@/data/localSeo'
 
 export default function ServicePageTemplate({ data }: { data: ServicePage }) {
   const [open, setOpen] = useState<number | null>(0)
@@ -18,6 +19,11 @@ export default function ServicePageTemplate({ data }: { data: ServicePage }) {
           .filter((s) => s.href !== `/${data.slug}`)
           .slice(0, 4)
           .map((s) => ({ ...s, note: '' }))
+
+  // Contextual internal links to this service's local-SEO landing pages
+  // (data/localSeo.ts) — keeps those pages from being orphaned (sitemap-only,
+  // no on-site link pointing to them) and gives users a real path to them.
+  const localSeoService = seoServiceLinks.find((s) => s.serviceSlug === data.slug)
 
   return (
     <main id="main-content" className="pt-28 sm:pt-32">
@@ -200,6 +206,26 @@ export default function ServicePageTemplate({ data }: { data: ServicePage }) {
           </div>
         </div>
       </section>
+
+      {/* ── Local service areas ── */}
+      {localSeoService && (
+        <section className="border-t border-white/[0.06]">
+          <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20">
+            <div className="text-xs uppercase tracking-[0.2em] text-[#52525b] mb-6">Where we work</div>
+            <div className="flex flex-wrap gap-3">
+              {seoLocations.map((loc) => (
+                <Link
+                  key={loc.slug}
+                  href={`/${localSeoService.urlPrefix}-${loc.slug}`}
+                  className="px-4 py-2 rounded-full border border-white/[0.08] text-sm text-white/70 hover:text-white hover:border-white/[0.2] transition-colors"
+                >
+                  {localSeoService.keyword} {loc.isCountry ? 'across' : 'in'} {loc.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── CTA ── */}
       <section className="max-w-6xl mx-auto px-6 py-20 sm:py-24">
