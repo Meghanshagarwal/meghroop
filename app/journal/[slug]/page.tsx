@@ -8,6 +8,7 @@ import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { articles, getAllArticles, getArticleBySlug } from '@/lib/journal'
 import CodeBuiltVisual from '@/components/common/CodeBuiltVisual'
 import AuthorAvatar from '@/components/common/AuthorAvatar'
+import InlineMarkdown from '@/components/common/InlineMarkdown'
 
 interface ArticlePageProps {
   params: { slug: string }
@@ -323,34 +324,28 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
                     case 'paragraph':
                       return (
                         <p key={index} className="text-gray-300 text-base sm:text-lg leading-relaxed font-light mb-6">
-                          {block.content}
+                          <InlineMarkdown text={block.content as string} />
                         </p>
                       )
 
                     case 'list':
                       return (
                         <ul key={index} className="space-y-4 mb-6 pl-5 list-none">
-                          {(block.content as string[]).map((item, itemIdx) => {
-                            // Support basic inline bolding e.g. **text** -> <strong>text</strong>
-                            const parts = item.split('**')
-                            return (
-                              <li key={itemIdx} className="text-gray-300 text-base sm:text-lg leading-relaxed font-light flex items-start gap-3">
-                                <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2.5 flex-shrink-0" />
-                                <span>
-                                  {parts.map((part, partIdx) => 
-                                    partIdx % 2 === 1 ? <strong key={partIdx} className="font-semibold text-white">{part}</strong> : part
-                                  )}
-                                </span>
-                              </li>
-                            )
-                          })}
+                          {(block.content as string[]).map((item, itemIdx) => (
+                            <li key={itemIdx} className="text-gray-300 text-base sm:text-lg leading-relaxed font-light flex items-start gap-3">
+                              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2.5 flex-shrink-0" />
+                              <span>
+                                <InlineMarkdown text={item} />
+                              </span>
+                            </li>
+                          ))}
                         </ul>
                       )
 
                     case 'quote':
                       return (
                         <blockquote key={index} className="relative border-l-2 border-purple-500 pl-6 my-10 text-gray-400 text-lg sm:text-xl font-light italic leading-relaxed">
-                          {block.content}
+                          <InlineMarkdown text={block.content as string} />
                         </blockquote>
                       )
 
@@ -387,7 +382,7 @@ export default async function ArticleDetail({ params }: ArticlePageProps) {
                           {item.question}
                         </h3>
                         <p className="text-gray-400 text-sm sm:text-base leading-relaxed font-light pl-8">
-                          {item.answer}
+                          <InlineMarkdown text={item.answer} />
                         </p>
                       </div>
                     ))}
