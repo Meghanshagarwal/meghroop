@@ -31,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/services',
     '/growth-marketing',
     '/ai-automation',
+    '/ai-automation-agency-jaipur',
     '/agentic-ai',
     '/software-development',
     '/shopify-development',
@@ -75,6 +76,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } else if (
       route === '/growth-marketing' ||
       route === '/ai-automation' ||
+      route === '/ai-automation-agency-jaipur' ||
       route === '/agentic-ai' ||
       route === '/software-development' ||
       route === '/shopify-development' ||

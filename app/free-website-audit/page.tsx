@@ -8,9 +8,9 @@ import { Gauge, Search, Smartphone, MousePointerClick, ShieldCheck, Palette } fr
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
 export const metadata: Metadata = {
-  title: 'Free Website Audit — Get a Personalised Report in 24 Hours',
+  title: 'Free Website Audit — Personalised Report',
   description:
-    'Get a free, expert website audit from MeghRoop. We personally review your site’s speed, SEO, design, mobile experience, and conversion — then send a prioritised report of exactly what to fix. 100% free, no obligation.',
+    'Get a free, expert website audit. We review your speed, SEO, design, mobile experience, and conversion, then send a prioritised report of what to fix.',
   keywords: [
     'free website audit',
     'website audit',

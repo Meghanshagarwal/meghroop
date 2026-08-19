@@ -26,7 +26,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!parsed) return {}
   const { service, location } = parsed
   const title = `${service.keyword} in ${location.name} | MeghRoop`
-  const description = `${service.intro} MeghRoop works with businesses ${location.isCountry ? 'across' : 'in'} ${location.name}${location.isCountry ? '' : `, ${location.region}`}.`
+  // Keep the meta description under ~155 characters: lead with the intro and
+  // only append the location tag if there's room, rather than always
+  // appending a fixed "MeghRoop works with businesses in X, Y." suffix that
+  // regularly pushed combined descriptions past Google's snippet limit.
+  const locationTag = location.isCountry ? `Serving all of ${location.name}.` : `Serving ${location.name}, ${location.region}.`
+  const description =
+    service.intro.length + locationTag.length + 1 <= 155
+      ? `${service.intro} ${locationTag}`
+      : service.intro
 
   return {
     title,

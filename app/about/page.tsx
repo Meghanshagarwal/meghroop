@@ -22,7 +22,7 @@ import AboutCTA from '@/components/sections/AboutCTA'
 export const metadata: Metadata = {
   title: 'About MeghRoop — Growth, AI & Software Agency',
   description:
-    'Two founders running a Growth, AI and Software agency. Meet Meghansh & Roop and see how we help businesses grow through performance marketing, AI automation, software, commerce, and branding.',
+    'Meet Meghansh & Roop, the founders of MeghRoop, and see how we help businesses grow through performance marketing, AI automation, software, and branding.',
   keywords: [
     'Growth marketing agency',
     'AI automation agency',

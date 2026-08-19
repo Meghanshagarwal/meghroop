@@ -19,9 +19,9 @@ import ContactCTA from '@/components/sections/ContactCTA'
 
 
 export const metadata: Metadata = {
-  title: 'Contact MeghRoop — Start a Growth, AI or Software Project',
+  title: 'Contact MeghRoop — Growth, AI & Software Agency',
   description:
-    'Tell us what you want to build or grow — performance marketing, AI agents & automation, custom software, Shopify, WordPress, or branding. We reply within 24 hours.',
+    'Tell us what you want to build or grow — marketing, AI automation, software, Shopify, or WordPress. We reply within 24 hours.',
   keywords: [
     'Growth marketing agency contact',
     'AI automation agency',

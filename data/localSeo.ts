@@ -106,17 +106,30 @@ export const seoServiceLinks: SeoServiceLink[] = [
   },
 ]
 
+// 'ai-automation-agency-jaipur' is excluded here on purpose: Jaipur is our
+// home base, so that exact keyword gets a real, dedicated pillar page
+// (app/ai-automation-agency-jaipur/page.tsx) instead of the generic
+// programmatic template every other {service}x{location} combo uses. Keeping
+// it out of the generated slug list stops the dynamic app/[slug]/page.tsx
+// route from also claiming that URL (duplicate/conflicting content at the
+// same path) — all other combos, including ai-automation for other cities
+// and every other service for Jaipur, are unaffected.
+const excludedCombos = new Set<string>(['ai-automation-agency-jaipur'])
+
 export function getAllLocalSeoSlugs(): string[] {
   const slugs: string[] = []
   for (const s of seoServiceLinks) {
     for (const l of seoLocations) {
-      slugs.push(`${s.urlPrefix}-${l.slug}`)
+      const slug = `${s.urlPrefix}-${l.slug}`
+      if (excludedCombos.has(slug)) continue
+      slugs.push(slug)
     }
   }
   return slugs
 }
 
 export function parseLocalSeoSlug(slug: string): { service: SeoServiceLink; location: SeoLocation } | null {
+  if (excludedCombos.has(slug)) return null
   for (const s of seoServiceLinks) {
     for (const l of seoLocations) {
       if (`${s.urlPrefix}-${l.slug}` === slug) return { service: s, location: l }

@@ -43,11 +43,21 @@ export const articles: Article[] = []
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function mapRowToArticle(r: any): Article {
   const faq = Array.isArray(r.faq) ? r.faq : (Array.isArray(r.faqs) ? r.faqs : [])
+  // Defensive fallbacks: DB rows are admin-entered and older rows predate
+  // validation added to the create endpoints, so title/description/seo
+  // fields can theoretically be missing or empty. Rather than ship a blank
+  // <title>/<h1> or an empty meta description (both flagged by SEO audits),
+  // fall back to something render-safe.
+  const title = (typeof r.title === 'string' && r.title.trim()) || 'MeghRoop Journal'
+  const description = (typeof r.description === 'string' && r.description.trim()) || ''
+  const seoInput = r.seo && typeof r.seo === 'object' ? r.seo : {}
+  const seoTitle = (typeof seoInput.title === 'string' && seoInput.title.trim()) || title
+  const seoDescription = (typeof seoInput.description === 'string' && seoInput.description.trim()) || description || `${title} — insights from the MeghRoop team.`
   return {
     slug: r.slug,
-    title: r.title,
+    title,
     subtitle: r.subtitle ?? '',
-    description: r.description ?? '',
+    description,
     date: r.date,
     lastUpdated: r.last_updated ?? r.date,
     readTime: r.read_time ?? '5 min read',
@@ -56,7 +66,7 @@ function mapRowToArticle(r: any): Article {
     // Fall back to the branded site OG image so every shared link has a preview
     heroImage: r.hero_image || `${process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'}/og-image.jpg`,
     blocks: Array.isArray(r.blocks) ? r.blocks : [],
-    seo: r.seo ?? { title: r.title, description: r.description ?? '', keywords: [] },
+    seo: { title: seoTitle, description: seoDescription, keywords: Array.isArray(seoInput.keywords) ? seoInput.keywords : [] },
     faqs: faq,
     faq: faq,
   }
@@ -204,5 +214,10 @@ export function slugifyTitle(s: string): string {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
-    .slice(0, 80)
+    // Capped at 70 (not 80): full URL is https://meghroop.tech/journal/<slug>,
+    // plus a possible -XXXX dedup suffix on collision. 70 + suffix keeps the
+    // whole URL comfortably under the 115-char SEO-audit threshold, where an
+    // 80-char slug + suffix could tip over it.
+    .slice(0, 70)
+    .replace(/-$/, '')
 }

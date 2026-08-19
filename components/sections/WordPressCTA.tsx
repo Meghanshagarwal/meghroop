@@ -85,19 +85,19 @@ export default function WordPressCTA() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-12 flex flex-wrap justify-center items-center gap-x-5 gap-y-3.5 border-t border-white/[0.06] pt-8 text-xs text-gray-500 max-w-2xl mx-auto font-sans"
         >
-          <Link href="/ai-agents-automation" className="hover:text-cyan-400 transition-colors">AI Agents & Automation</Link>
+          <Link href="/agentic-ai" className="hover:text-cyan-400 transition-colors">AI Agents & Automation</Link>
           <span className="text-white/10">•</span>
-          <Link href="/mcp-infrastructure" className="hover:text-cyan-400 transition-colors">MCP Infrastructure</Link>
+          <Link href="/agentic-ai" className="hover:text-cyan-400 transition-colors">MCP Infrastructure</Link>
           <span className="text-white/10">•</span>
-          <Link href="/n8n-workflows" className="hover:text-cyan-400 transition-colors">n8n Workflows</Link>
+          <Link href="/agentic-ai" className="hover:text-cyan-400 transition-colors">n8n Workflows</Link>
           <span className="text-white/10">•</span>
-          <Link href="/ai-search-optimization" className="hover:text-cyan-400 transition-colors">AI Search (GEO)</Link>
+          <Link href="/growth-marketing" className="hover:text-cyan-400 transition-colors">AI Search (GEO)</Link>
           <span className="text-white/10">•</span>
-          <Link href="/shopify-engineering" className="hover:text-cyan-400 transition-colors">Shopify Development</Link>
+          <Link href="/shopify-development" className="hover:text-cyan-400 transition-colors">Shopify Development</Link>
           <span className="text-white/10">•</span>
-          <Link href="/web-engineering" className="hover:text-cyan-400 transition-colors">Next.js Web Engineering</Link>
+          <Link href="/software-development" className="hover:text-cyan-400 transition-colors">Next.js Web Engineering</Link>
           <span className="text-white/10">•</span>
-          <Link href="/wordpress-engineering" className="hover:text-cyan-400 transition-colors">WordPress Engineering</Link>
+          <Link href="/wordpress-development" className="hover:text-cyan-400 transition-colors">WordPress Engineering</Link>
         </motion.div>
       </div>
 

@@ -17,6 +17,9 @@ export default function LogoExport({ searchParams }: { searchParams: { v?: strin
         justifyContent: 'center',
       }}
     >
+      <h1 style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0,0,0,0)' }}>
+        MeghRoop Logo Export
+      </h1>
       <MeghRoopLogo variant={variant} />
     </div>
   )

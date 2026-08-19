@@ -160,7 +160,7 @@ const organizationSchema = {
         itemOffered: {
           '@type': 'Service',
           name: 'GEO & AI Search Optimization',
-          url: `${SITE_URL}/ai-search-optimization`,
+          url: `${SITE_URL}/growth-marketing`,
           serviceType: 'Generative Engine Optimization',
           description:
             'Generative Engine Optimization to help brands appear inside AI-generated answers from ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews.',

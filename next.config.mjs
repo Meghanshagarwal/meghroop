@@ -71,6 +71,27 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          {
+            // Reasonably strict starting policy. 'unsafe-inline' on script-src
+            // is required because analytics (GA4/Meta Pixel/Clarity/SW
+            // registration) run as inline <Script> tags in app/layout.tsx with
+            // no nonce wiring yet; 'unsafe-inline' on style-src is required by
+            // Tailwind/Next's runtime-injected styles. No 'unsafe-eval' — the
+            // App Router doesn't need it in production.
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: blob: https://images.pexels.com https://images.unsplash.com https://www.facebook.com https://www.google-analytics.com https://*.clarity.ms",
+              "font-src 'self' data:",
+              "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://connect.facebook.net https://*.supabase.co",
+              "frame-ancestors 'self'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "object-src 'none'",
+            ].join('; '),
+          },
         ],
       },
     ]

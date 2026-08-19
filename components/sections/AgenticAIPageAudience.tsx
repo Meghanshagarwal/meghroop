@@ -61,7 +61,7 @@ export default function AgenticAIPageAudience() {
           className="mt-8 text-center"
         >
           <Link
-            href="/ai-agents-automation"
+            href="/ai-agents/agentic-automation"
             className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
           >
             See our approach to AI agents &amp; automation

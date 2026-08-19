@@ -86,7 +86,7 @@ function getRelatedServices(category: string) {
   }
   if (c.includes('search') || c.includes('geo')) {
     return [
-      { name: 'AI Search Optimization', href: '/ai-search-optimization', description: 'Generative Engine Optimization (GEO) engineering' },
+      { name: 'AI Search Optimization', href: '/growth-marketing', description: 'Generative Engine Optimization (GEO) engineering' },
       { name: 'Growth & Marketing', href: '/growth-marketing', description: 'SEO and content that compounds across search and AI answers' },
     ]
   }

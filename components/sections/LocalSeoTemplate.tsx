@@ -153,7 +153,7 @@ export default function LocalSeoTemplate({
       <section className="border-t border-white/[0.06]">
         <div className="max-w-3xl mx-auto px-6 py-20 sm:py-28 text-center">
           <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white mb-6">
-            Ready to {data.ctaAccent.replace(/\?$/, '')}
+            Ready to {data.ctaAccent.replace(/\?$/, '')} in {location.name}?
           </h2>
           <Link
             href="/contact"

@@ -7,9 +7,9 @@ import { Gauge, Search, Bot, FileText } from 'lucide-react'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://meghroop.tech'
 
 export const metadata: Metadata = {
-  title: 'Free SEO Checker — Instant Website SEO Audit Report (PDF)',
+  title: 'Free SEO Checker — Instant Audit Report',
   description:
-    'Free SEO checker by MeghRoop. Enter your website URL and get an instant, in-depth SEO audit report as a downloadable PDF — technical SEO, on-page, Core Web Vitals, schema, GEO and AI search. No sign-up, no install.',
+    'Enter your URL and get an instant, in-depth SEO audit as a downloadable PDF — technical SEO, on-page, Core Web Vitals, schema, and AI search readiness.',
   keywords: [
     'free SEO checker',
     'SEO checker',

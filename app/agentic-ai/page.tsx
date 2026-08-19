@@ -15,7 +15,7 @@ import AgenticAIPageCTA from '@/components/sections/AgenticAIPageCTA'
 const SITE_URL = 'https://meghroop.tech'
 
 export const metadata: Metadata = {
-  title: 'Agentic AI Services: Agents, Automation & Voice | MeghRoop',
+  title: 'Agentic AI Services: Agents, Automation & Voice',
   description:
     'End-to-end AI services: strategy audits, agent development, voice bots, integrations, and knowledge AI. Fixed-fee, shipped in weeks. Book a free call.',
   keywords: [

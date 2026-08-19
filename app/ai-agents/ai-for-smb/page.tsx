@@ -5,7 +5,7 @@ import { content } from '@/data/services/ai-for-smb'
 const SITE_URL = 'https://meghroop.tech'
 
 export const metadata: Metadata = {
-  title: 'AI for Small & Mid-Sized Businesses (SMB) | MeghRoop',
+  title: 'AI for Small & Mid-Sized Businesses (SMB)',
   description:
     'Affordable AI services for SMBs and mid-market — voice agents, custom AI, outbound, and knowledge assistants. Fixed-fee, live in weeks. Book a free call.',
   keywords: [
