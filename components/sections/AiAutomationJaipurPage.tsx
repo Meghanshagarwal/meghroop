@@ -28,6 +28,29 @@ const offerings = [
   },
 ]
 
+const whyChooseUs = [
+  {
+    title: 'Proven expertise',
+    desc: 'Our team works daily with AI agent frameworks, NLP, and reasoning models — not a single stack forced onto every client. That range is what lets us match the right approach to your actual workflow instead of the other way round.',
+  },
+  {
+    title: 'Cost-effective builds',
+    desc: 'You get a fixed project price after we understand your scope, not an open-ended hourly retainer. Being based in Jaipur keeps our overheads lower than a metro agency, and we pass that through in the quote.',
+  },
+  {
+    title: 'Built for reliability',
+    desc: 'Every agent we ship is tested against real scenarios before it goes live, then monitored afterwards. Fast is only worth something if it keeps working the same way six months in.',
+  },
+  {
+    title: 'Quality you can audit',
+    desc: 'We document what each agent does, what it can decide on its own, and where a human sign-off is required — so quality isn’t just a promise, it’s something you can check.',
+  },
+  {
+    title: 'Built to scale',
+    desc: 'We design the first agent to prove the workflow, then extend the same system to the next process rather than starting over. What works for one team scales to the rest of the business without a rebuild.',
+  },
+]
+
 const process = [
   { title: 'Map the workflow', desc: 'We sit with your team — in person if you’re in Jaipur, on a call if you’re not — and map exactly where time is going and where an agent could take over.' },
   { title: 'Design the agent', desc: 'We decide what the agent should read, what it should decide on its own, and what needs a human sign-off before anything happens.' },
@@ -188,6 +211,27 @@ export default function AiAutomationJaipurPage() {
                   <h3 className="font-heading font-semibold text-white text-lg">{o.title}</h3>
                 </div>
                 <p className="text-white/[0.55] text-sm leading-relaxed pl-7">{o.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why choose us ── */}
+      <section className="border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20">
+          <h2 className="font-heading font-bold text-2xl sm:text-4xl text-white leading-[1.1] tracking-tight mb-4">
+            Why choose MeghRoop for AI agent development in Jaipur
+          </h2>
+          <p className="text-white/[0.55] max-w-2xl mb-10">
+            Plenty of teams can wire up a chatbot. Here&apos;s what we think actually matters when you&apos;re
+            trusting an agent with real customer data and real decisions.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whyChooseUs.map((w) => (
+              <div key={w.title} className="p-6 rounded-2xl border border-white/[0.06]">
+                <h3 className="font-heading font-semibold text-white text-lg mb-2">{w.title}</h3>
+                <p className="text-white/[0.55] text-sm leading-relaxed">{w.desc}</p>
               </div>
             ))}
           </div>
