@@ -95,6 +95,14 @@ const industries = [
     title: 'D2C & E-commerce Brands',
     desc: 'Order support, abandoned-cart follow-up, and customer queries at a volume no small team can keep up with manually.',
   },
+  {
+    title: 'Logistics',
+    desc: 'Shipment tracking, vendor and driver coordination, and exception handling generate a steady stream of repetitive updates — exactly the kind of work an agent can take over end to end.',
+  },
+  {
+    title: 'Finance',
+    desc: 'Reconciliation, invoice matching, and routine client communication eat up hours every week. Agents handle the repeatable parts and flag only what genuinely needs a human decision.',
+  },
 ]
 
 const faqs = [
@@ -137,6 +145,10 @@ const faqs = [
   {
     q: 'Will an AI agent make mistakes with my customer data or money?',
     a: 'We build in guardrails on anything irreversible — payments, data deletion, customer-facing commitments — so the agent either acts within safe limits or asks for human approval first. Reasoning happens in the agent; risky actions stay reviewable.',
+  },
+  {
+    q: 'Do you offer post-launch maintenance and support for AI agents?',
+    a: 'Yes. Every build ships with a support window covering fixes and tuning, and we offer extended retainers for ongoing monitoring and feature additions as your workflows evolve.',
   },
 ]
 
@@ -197,6 +209,29 @@ export default function AiAutomationJaipurPage() {
                 <p className="text-white/[0.55] text-sm leading-relaxed">{e.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── What is an AI agent ── */}
+      <section className="border-t border-white/[0.06]">
+        <div className="max-w-4xl mx-auto px-6 py-16 sm:py-20">
+          <h2 className="font-heading font-bold text-2xl sm:text-4xl text-white leading-[1.1] tracking-tight mb-6">
+            What is an AI agent, exactly?
+          </h2>
+          <div className="text-lg text-white/[0.62] leading-relaxed max-w-3xl space-y-4">
+            <p>
+              An AI agent is software that pursues a goal on a user&apos;s behalf rather than just answering a
+              question. It reasons through what it&apos;s looking at, plans the steps needed, holds context in
+              memory across a task, and acts with a degree of autonomy — deciding what to do next instead of
+              waiting for the next instruction.
+            </p>
+            <p>
+              That&apos;s the line between an agent and a script. A script does exactly what it was told, every
+              time, and breaks the moment reality doesn&apos;t match its assumptions. An agent adapts — it can read
+              an unfamiliar invoice format, handle an edge case in a support ticket, or reprioritise when a plan
+              changes, because it&apos;s reasoning through the task rather than following a fixed path.
+            </p>
           </div>
         </div>
       </section>
