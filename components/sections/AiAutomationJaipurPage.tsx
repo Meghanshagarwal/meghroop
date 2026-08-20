@@ -1,6 +1,21 @@
 import Link from 'next/link'
 import { ArrowRight, Check, MapPin } from 'lucide-react'
 
+const expertise = [
+  {
+    title: 'Chatbots & Conversational AI Agents',
+    desc: 'AI-driven virtual assistants that hold a real conversation, not a scripted one — deployed on WhatsApp, your website, or wherever your customers already are, with an NLP layer that understands intent instead of matching keywords.',
+  },
+  {
+    title: 'Smart Process Automation Agents',
+    desc: 'Agents that take over repetitive, rule-based work — reading data, executing actions, updating records — with minimal human input, so your team&apos;s time goes to decisions that actually need a person.',
+  },
+  {
+    title: 'Decision-Making Agents',
+    desc: 'Agents that work through larger volumes of data than a person reasonably can, flag what&apos;s off, and hand your team a clear, data-backed recommendation instead of a raw dashboard to interpret.',
+  },
+]
+
 const offerings = [
   {
     title: 'AI Agents',
@@ -161,6 +176,27 @@ export default function AiAutomationJaipurPage() {
             >
               See our full AI Automation service
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Expertise ── */}
+      <section className="border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20">
+          <h2 className="font-heading font-bold text-2xl sm:text-4xl text-white leading-[1.1] tracking-tight mb-4">
+            AI agent development expertise we bring to Jaipur
+          </h2>
+          <p className="text-white/[0.55] max-w-2xl mb-10">
+            Three kinds of agents cover most of what businesses in Jaipur actually need — here&apos;s how each one
+            works.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {expertise.map((e) => (
+              <div key={e.title} className="p-6 rounded-2xl border border-white/[0.06]">
+                <h3 className="font-heading font-semibold text-white text-lg mb-2">{e.title}</h3>
+                <p className="text-white/[0.55] text-sm leading-relaxed">{e.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
