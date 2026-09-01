@@ -30,6 +30,8 @@ export type Project = {
   created_at: string
   // Case-study detail fields (single portfolio page)
   slug?: string | null
+  // Site allows being embedded in an iframe (no X-Frame-Options/CSP block) — show a live preview instead of a screenshot
+  live_embed?: boolean
   client_intro?: string
   services?: string[]
   project_types?: string[]

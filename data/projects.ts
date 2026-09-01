@@ -16,6 +16,7 @@ export const defaultProjects: Project[] = [
     image: '/work/nextgenerationgold-mockup.png',
     tags: ['Shopify', 'Brand Identity', 'E-commerce', 'SEO'],
     live_url: 'https://www.nextgenerationgold.com/',
+    live_embed: true,
     github_url: '#',
     description:
       'A ground-up brand identity and e-commerce build for a fine-jewellery label — designed, developed and taken live end to end.',

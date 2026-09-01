@@ -86,6 +86,8 @@ const nextConfig = {
               "img-src 'self' data: blob: https://images.pexels.com https://images.unsplash.com https://www.facebook.com https://www.google-analytics.com https://*.clarity.ms",
               "font-src 'self' data:",
               "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://connect.facebook.net https://*.supabase.co",
+              // Live case-study previews embed real client sites in an iframe (see DeviceMockup) — only add hosts here that don't block framing themselves.
+              "frame-src 'self' https://www.nextgenerationgold.com",
               "frame-ancestors 'self'",
               "base-uri 'self'",
               "form-action 'self'",

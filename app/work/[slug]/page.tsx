@@ -188,6 +188,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
                 mobileImage={gallery[2]}
                 url={liveUrl ?? undefined}
                 title={project.title}
+                liveEmbed={project.live_embed}
               />
             </div>
           </section>
