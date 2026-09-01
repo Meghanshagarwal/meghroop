@@ -3,9 +3,23 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
-function LiveFrame({ url, baseWidth, baseHeight }: { url: string; baseWidth: number; baseHeight: number }) {
+function LiveFrame({
+  url,
+  baseWidth,
+  baseHeight,
+  fallbackImage,
+  alt,
+}: {
+  url: string
+  baseWidth: number
+  baseHeight: number
+  fallbackImage: string
+  alt: string
+}) {
   const ref = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(0)
+  const [inView, setInView] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const el = ref.current
@@ -17,19 +31,50 @@ function LiveFrame({ url, baseWidth, baseHeight }: { url: string; baseWidth: num
     return () => ro.disconnect()
   }, [baseWidth])
 
+  // Only start loading the external site once this frame is about to scroll
+  // into view — keeps the initial page load fast (screenshot shows instantly).
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '400px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <div ref={ref} className="relative w-full h-full overflow-hidden bg-white">
-      {scale > 0 && (
+      {/* Screenshot shows immediately; swapped out once the live site finishes loading */}
+      <Image
+        src={fallbackImage}
+        alt={alt}
+        fill
+        className={`object-cover object-top transition-opacity duration-500 ${loaded ? 'opacity-0' : 'opacity-100'}`}
+        sizes={`${baseWidth}px`}
+      />
+      {inView && scale > 0 && (
         <iframe
           src={url}
           title="Live preview"
-          loading="lazy"
+          onLoad={() => setLoaded(true)}
           style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
             width: baseWidth,
             height: baseHeight,
             transform: `scale(${scale})`,
             transformOrigin: 'top left',
             border: 0,
+            opacity: loaded ? 1 : 0,
+            transition: 'opacity 500ms',
           }}
         />
       )}
@@ -78,7 +123,7 @@ export default function DeviceMockup({
         </div>
         <div className="relative w-full aspect-[16/10]">
           {canEmbed ? (
-            <LiveFrame url={url!} baseWidth={1440} baseHeight={900} />
+            <LiveFrame url={url!} baseWidth={1440} baseHeight={900} fallbackImage={desktopImage} alt={`${title} — desktop view`} />
           ) : (
             <Image
               src={desktopImage}
@@ -96,7 +141,7 @@ export default function DeviceMockup({
         <div className="relative w-full aspect-[9/19.5] rounded-[1.6rem] overflow-hidden bg-white">
           <span className="absolute top-2.5 left-1/2 -translate-x-1/2 w-14 h-4 rounded-full bg-[#111] z-10" />
           {canEmbed ? (
-            <LiveFrame url={url!} baseWidth={390} baseHeight={844} />
+            <LiveFrame url={url!} baseWidth={390} baseHeight={844} fallbackImage={mobileImage} alt={`${title} — mobile view`} />
           ) : (
             <Image
               src={mobileImage}
