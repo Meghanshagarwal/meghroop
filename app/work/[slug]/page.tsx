@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
-import CaseStudyGallery from '@/components/sections/CaseStudyGallery'
+import DeviceMockup from '@/components/sections/DeviceMockup'
 import { BreadcrumbJsonLd } from '@/components/common/JsonLd'
 import { getSupabase, getProjectBySlug, projectSlug, type Project } from '@/lib/supabase'
 import { defaultProjects } from '@/data/projects'
@@ -173,17 +173,22 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
           </aside>
         </section>
 
-        {/* ── Gallery ──────────────────────────────────────── */}
-        {gallery.length > 0 && (
+        {/* ── Live mockup ──────────────────────────────────── */}
+        {gallery.length >= 2 && (
           <section className="border-t border-white/[0.06]">
             <div className="max-w-6xl mx-auto px-6 py-20 sm:py-28">
-              <div className="flex items-end justify-between mb-10">
+              <div className="mb-10 text-center">
                 <h2 className="font-heading font-bold text-3xl sm:text-5xl text-white tracking-tight">
                   The <span className="gradient-text">work</span>
                 </h2>
-                <span className="text-sm text-white/40 hidden sm:block">Click any image to expand</span>
+                <p className="text-sm text-white/40 mt-3">Desktop &amp; mobile, side by side</p>
               </div>
-              <CaseStudyGallery images={gallery} title={project.title} />
+              <DeviceMockup
+                desktopImage={gallery[1]}
+                mobileImage={gallery[2]}
+                url={liveUrl ?? undefined}
+                title={project.title}
+              />
             </div>
           </section>
         )}
