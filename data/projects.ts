@@ -64,4 +64,42 @@ export const defaultProjects: Project[] = [
     ],
     gallery: ['/work/humsafartrails-mockup.png', '/work/humsafartrails-desktop.png', '/work/humsafartrails-mobile.png'],
   },
+  {
+    id: 'intergenerational-cafe',
+    slug: 'intergenerational-cafe-event-design-print',
+    created_at: '',
+    display_order: 2,
+    title: 'The Intergenerational Café — Event Design & Print for Ford Foundation',
+    category: 'Event Design & Print',
+    year: '2025',
+    timeline: '2 Months',
+    gradient: 'from-pink-600 via-rose-600 to-blue-600',
+    image: '/work/intergenerational-cafe/asset-01.jpg',
+    tags: ['Event Design', 'Print', 'Illustration', 'Live Documentation'],
+    live_url: '#',
+    github_url: '#',
+    description:
+      'A full concept, event design and communication system for an evening bringing three generations of feminist leaders together — cards, live visual note-taking and a published report.',
+    client_intro:
+      'The Intergenerational Café is an initiative by the Ford Foundation, in partnership with Start Up!, built to create honest, agenda-free conversations between senior feminist mentors, current leaders and the next generation.\n\nWe were brought in to design the entire experience — not just a look, but how the room felt, how strangers three generations apart actually opened up to each other.',
+    services: ['Event Design', 'Print', 'Illustration', 'Live Visual Note-Taking', 'Editorial Design'],
+    project_types: ['Event Design', 'Branding'],
+    outcome:
+      'We designed the full experience end to end — the identity and spatial language for the evening, a bespoke deck of conversation cards used to break the ice across generations, and live visual note-taking that captured the room in real time.\n\nThose live notes were then developed into a fully designed, published report — turning one evening of conversation into a lasting document that carried the discussion well beyond the room.',
+    deliverables: ['Event Concept & Identity', 'Conversation Card Deck', 'Spatial / Signage Design', 'Live Graphic Recording', 'Published Report Design'],
+    results: [
+      { label: 'Generations in the Room', before: '1 at a time', after: '3, together' },
+      { label: 'Conversations Documented', before: '0', after: '40+ live notes' },
+      { label: 'Reach', before: 'One evening', after: 'A published report' },
+    ],
+    gallery: [
+      '/work/intergenerational-cafe/asset-01.jpg',
+      '/work/intergenerational-cafe/asset-03.jpg',
+      '/work/intergenerational-cafe/asset-05.jpg',
+      '/work/intergenerational-cafe/asset-09.jpg',
+      '/work/intergenerational-cafe/asset-13.jpg',
+      '/work/intergenerational-cafe/asset-02.jpg',
+    ],
+    gallery_mode: 'grid',
+  },
 ]

@@ -32,6 +32,9 @@ export type Project = {
   slug?: string | null
   // Site allows being embedded in an iframe (no X-Frame-Options/CSP block) — show a live preview instead of a screenshot
   live_embed?: boolean
+  // 'device' (default) shows the gallery inside browser/phone mockup frames — for websites.
+  // 'grid' shows a plain image mosaic — for non-website work (print, branding, event design).
+  gallery_mode?: 'device' | 'grid'
   client_intro?: string
   services?: string[]
   project_types?: string[]
