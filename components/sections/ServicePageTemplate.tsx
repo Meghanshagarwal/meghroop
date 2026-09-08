@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ArrowRight, Plus, Minus, Check } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 import { serviceLinks, type ServicePage } from '@/data/services'
@@ -64,6 +64,24 @@ export default function ServicePageTemplate({ data }: { data: ServicePage }) {
         </div>
       </section>
 
+      {/* ── What is X (direct-answer block for AI Overviews / AEO) ── */}
+      {data.whatIs && (
+        <section className="border-t border-white/[0.06]">
+          <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
+            <h2 className="font-heading font-bold text-2xl sm:text-4xl text-white leading-[1.1] tracking-tight mb-6">
+              {data.whatIs.title}
+            </h2>
+            <div className="space-y-4">
+              {data.whatIs.paragraphs.map((p, i) => (
+                <p key={i} className="text-base sm:text-lg text-white/[0.62] leading-relaxed max-w-3xl">
+                  {p}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Problem ── */}
       <section className="border-t border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
@@ -96,6 +114,18 @@ export default function ServicePageTemplate({ data }: { data: ServicePage }) {
           </div>
         </div>
       </section>
+
+      {/* ── Pricing (direct-answer block for "cost of X" AEO queries) ── */}
+      {data.pricing && (
+        <section className="border-t border-white/[0.06] bg-[#0a0a0a]">
+          <div className="max-w-4xl mx-auto px-6 py-20 sm:py-28">
+            <h2 className="font-heading font-bold text-2xl sm:text-4xl text-white leading-[1.1] tracking-tight mb-6">
+              {data.pricing.title}
+            </h2>
+            <p className="text-base sm:text-lg text-white/[0.62] leading-relaxed max-w-3xl">{data.pricing.body}</p>
+          </div>
+        </section>
+      )}
 
       {/* ── Outcomes ── */}
       <section className="border-t border-white/[0.06] bg-[#0a0a0a]">
@@ -158,19 +188,14 @@ export default function ServicePageTemplate({ data }: { data: ServicePage }) {
                       {isOpen ? <Minus size={14} /> : <Plus size={14} />}
                     </span>
                   </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="overflow-hidden"
-                      >
-                        <p className="px-5 sm:px-6 pb-6 text-sm text-white/[0.6] leading-relaxed border-t border-white/[0.06] pt-4">{f.a}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <motion.div
+                    initial={false}
+                    animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="px-5 sm:px-6 pb-6 text-sm text-white/[0.6] leading-relaxed border-t border-white/[0.06] pt-4">{f.a}</p>
+                  </motion.div>
                 </div>
               )
             })}

@@ -75,9 +75,13 @@ export type ServicePage = {
   headline: string
   headlineAccent: string
   sub: string
+  // Optional direct-answer block for AI Overviews / AEO — "What is X?"
+  whatIs?: { title: string; paragraphs: string[] }
   problemTitle: string
   problemBody: string
   offerings: { title: string; desc: string }[]
+  // Optional "How much does X cost?" block — pricing signal for AEO queries
+  pricing?: { title: string; body: string; note?: string }
   outcomes: { value: string; label: string }[]
   process: { title: string; desc: string }[]
   stack: string[]
@@ -90,6 +94,7 @@ export type ServicePage = {
   ctaButton: string
   seoTitle: string
   seoDescription: string
+  seoKeywords?: string
 }
 
 export const servicePages: Record<string, ServicePage> = {
@@ -101,17 +106,28 @@ export const servicePages: Record<string, ServicePage> = {
     headline: 'Performance marketing that',
     headlineAccent: 'pays for itself.',
     sub: 'Meta Ads, Google Ads, SEO, social, and content — engineered around one thing: qualified leads and revenue you can actually trace.',
+    whatIs: {
+      title: 'What is performance marketing?',
+      paragraphs: [
+        'Performance marketing is advertising and content spend that’s measured against a real business outcome — leads, sales, or revenue — instead of impressions, likes, or reach. Every campaign we run is tied to a number you can trace back to your CRM or your bank account.',
+        'That’s the difference between a marketing agency and a performance marketing agency: we don’t report on engagement. We report on cost per lead, cost per acquisition, and return on ad spend.',
+      ],
+    },
     problemTitle: 'Most marketing burns budget on attention nobody asked for.',
     problemBody:
       'Likes don’t pay salaries. We run growth like a system — clean tracking, sharp creative, and funnels built to convert — so every rupee of spend has a job and a number attached to it.',
     offerings: [
-      { title: 'Meta & Google Ads', desc: 'Full-funnel paid campaigns built around clean conversion data and creative that stops the scroll.' },
-      { title: 'SEO', desc: 'Technical + content SEO that compounds — ranking for the searches your buyers actually make.' },
-      { title: 'Social Media Management', desc: 'Consistent, on-brand presence that builds an audience instead of chasing one.' },
-      { title: 'Content Creation', desc: 'Hooks, reels, and copy designed to earn attention and move people to act.' },
-      { title: 'Lead Gen Funnels & Landing Pages', desc: 'Conversion-optimised pages and funnels that turn traffic into booked calls and sales.' },
-      { title: 'Conversion Optimization', desc: 'Continuous testing on the journey that matters — from first click to checkout.' },
+      { title: 'Meta & Google Ads', desc: 'Full-funnel paid campaigns built around clean conversion data and creative that stops the scroll. We set up proper tracking first — GA4, conversion APIs, server-side events — so every rupee of spend is measurable before a single ad goes live. Campaigns run across Meta, Google Search, and Google Performance Max, with weekly optimization based on cost-per-lead and ROAS, not clicks.' },
+      { title: 'SEO', desc: 'Technical and content SEO that compounds — ranking for the searches your buyers actually make, not just traffic for traffic’s sake. We start with a technical audit (site speed, indexing, structure), then build content around real search intent, including how your business shows up in AI answers like Google AI Overviews, ChatGPT, and Perplexity.' },
+      { title: 'Social Media Management', desc: 'Consistent, on-brand presence that builds an audience instead of chasing one. Content calendars, posting, community management, and reporting — designed to support the funnel, not just fill a feed.' },
+      { title: 'Content Creation', desc: 'Hooks, reels, and copy designed to earn attention and move people to act. We write and produce for the platform, not repurpose one asset five times and hope it works everywhere.' },
+      { title: 'Lead Gen Funnels & Landing Pages', desc: 'Conversion-optimised pages and funnels that turn traffic into booked calls and sales — built, tested, and iterated based on real user behavior, not a template.' },
+      { title: 'Conversion Optimization', desc: 'Continuous testing on the journey that matters — from first click to checkout — so the traffic you’re already paying for converts at a higher rate over time.' },
     ],
+    pricing: {
+      title: 'How much does performance marketing cost?',
+      body: 'Retainers typically start around ₹40,000–₹80,000/month for a single-channel engagement (e.g., Meta Ads only), scaling up for multi-channel campaigns (paid + SEO + social) or larger ad budgets. Ad spend itself is separate and set based on your goals. We’ll give you an honest number on a discovery call once we understand your market and current numbers — no generic package pricing that doesn’t fit your business.',
+    },
     outcomes: [
       { value: '6.4×', label: 'Typical ROAS achieved' },
       { value: '9×', label: 'Order growth in 8 months' },
@@ -126,8 +142,11 @@ export const servicePages: Record<string, ServicePage> = {
     stack: ['Meta Ads', 'Google Ads', 'GA4', 'Search Console', 'Ahrefs', 'Landing Pages'],
     faqs: [
       { q: 'What budget do I need to start?', a: 'We work with brands at different stages. What matters more than a big budget is clean tracking and a product people want — we’ll tell you honestly if paid is the right lever yet.' },
-      { q: 'How soon will I see results?', a: 'Paid channels can show signal in weeks; SEO and content compound over months. We set expectations per channel up front and report on real metrics throughout.' },
-      { q: 'Do you handle creative too?', a: 'Yes. Ad creative, copy, and landing pages are part of the engine — great targeting can’t save weak creative.' },
+      { q: 'How soon will I see results?', a: 'Paid campaigns (Meta/Google Ads) typically show early signal within 2–3 weeks as we optimize targeting and creative. SEO is slower and compounding — expect meaningful movement in 3–4 months, with results building from there. We’ll set realistic timelines specific to your market on the discovery call.' },
+      { q: 'Do you handle creative too?', a: 'Yes. Ad creative, landing page copy and design, and content for organic and paid both come from the same team, so your messaging stays consistent across every channel instead of getting diluted between vendors.' },
+      { q: 'Do you require a long-term contract?', a: 'We work month-to-month after an initial trial period, typically 3 months — long enough to get real data, short enough that you’re never locked in if it’s not working.' },
+      { q: 'What size businesses do you work with?', a: 'Mostly growth-stage businesses with an existing product or service and some traction — we’re most useful once there’s a real funnel to optimize, not for pre-launch validation.' },
+      { q: 'Do you report results, or just spend?', a: 'Every engagement includes a reporting cadence (typically weekly or biweekly) tied to the metrics that matter for your business — cost per lead, ROAS, or revenue — not impressions or reach.' },
     ],
     related: [
       { label: 'AI Automation', href: '/ai-automation', note: 'Automate lead capture, qualification, and follow-up so paid traffic never goes cold.' },
@@ -140,7 +159,9 @@ export const servicePages: Record<string, ServicePage> = {
     ctaButton: 'Book a Call',
     seoTitle: 'Performance Marketing & Growth Agency',
     seoDescription:
-      'Meta Ads, Google Ads, SEO, social media, and content marketing engineered for qualified leads and measurable revenue. MeghRoop is a premium growth agency.',
+      'Meta Ads, Google Ads, and SEO run as a system, not a spend line. MeghRoop is a performance marketing agency built for qualified leads and traceable revenue.',
+    seoKeywords:
+      'performance marketing agency, Meta Ads agency, Google Ads management, SEO agency India, social media management agency, lead generation funnels, conversion rate optimization, growth marketing India',
   },
 
   'ai-automation': {
@@ -201,17 +222,28 @@ export const servicePages: Record<string, ServicePage> = {
     headline: 'Software that ships,',
     headlineAccent: 'scales, and holds up.',
     sub: 'Custom software, web and mobile apps, dashboards, and SaaS products — engineered end to end by the team that builds them.',
+    whatIs: {
+      title: 'What is custom software development?',
+      paragraphs: [
+        'Custom software development means building an application around how your business actually operates, instead of bending your operations around an off-the-shelf tool. It covers everything from internal dashboards and SaaS products to mobile apps and API integrations — designed, built, and maintained by one team, end to end.',
+        'The alternative — no-code workarounds, spreadsheets, or generic software that "almost" fits — tends to break the moment a business grows past a certain size. Custom software is the fix when off-the-shelf stops fitting.',
+      ],
+    },
     problemTitle: 'Off-the-shelf tools stop fitting the moment you grow.',
     problemBody:
       'Spreadsheets, duct-taped no-code, and tools that almost work. We build real products around how your business actually operates — fast, maintainable, and ready to scale.',
     offerings: [
-      { title: 'Custom Software', desc: 'Built around your operations — replacing the spreadsheets and workarounds slowing you down.' },
-      { title: 'Web Applications', desc: 'Fast, modern web apps with clean UX and architecture that scales.' },
-      { title: 'Mobile Apps', desc: 'iOS and Android experiences your users actually want to open.' },
-      { title: 'SaaS Products', desc: 'From MVP to production — auth, billing, dashboards, and the infrastructure underneath.' },
-      { title: 'Dashboards', desc: 'Real-time visibility into the numbers that run your business.' },
-      { title: 'APIs & Integrations', desc: 'Robust APIs and third-party integrations that connect everything cleanly.' },
+      { title: 'Custom Software', desc: 'Built around your operations — replacing the spreadsheets and workarounds slowing you down. We start by mapping your actual workflow, not a generic template, so the product fits from day one instead of needing a rebuild in a year.' },
+      { title: 'Web Applications', desc: 'Fast, modern web apps with clean UX and architecture that scales. Built on React and Next.js, with an eye on performance from the first commit — not bolted on after launch.' },
+      { title: 'Mobile Apps', desc: 'iOS and Android experiences your users actually want to open. Native performance where it matters, shared codebase where it saves time and cost without hurting the experience.' },
+      { title: 'SaaS Products', desc: 'From MVP to production — auth, billing, dashboards, and the infrastructure underneath. We scope tightly so you get a real, usable product in market fast, then iterate on what users actually do with it.' },
+      { title: 'Dashboards', desc: 'Real-time visibility into the numbers that run your business — built to surface the metrics you actually check, not a generic admin panel with everything and nothing.' },
+      { title: 'APIs & Integrations', desc: 'Robust APIs and third-party integrations that connect everything cleanly — so your software, your CRM, and your other tools actually talk to each other instead of living in silos.' },
     ],
+    pricing: {
+      title: 'How much does custom software development cost?',
+      body: 'Most engagements start around ₹1.5L–₹4L for a scoped MVP, scaling with complexity, integrations, and platform (web vs. web + mobile). Ongoing maintenance is typically a separate monthly retainer once you’re live. We give an exact number after a discovery call, once we understand the actual scope — not a generic package price that doesn’t reflect what you’re building.',
+    },
     outcomes: [
       { value: '8 hrs', label: 'Ops time, down from 60/wk' },
       { value: '96%', label: 'On-time delivery rate' },
@@ -225,9 +257,12 @@ export const servicePages: Record<string, ServicePage> = {
     ],
     stack: ['React', 'Next.js', 'Node.js', 'TypeScript', 'PostgreSQL', 'MongoDB'],
     faqs: [
-      { q: 'Can you build an MVP fast?', a: 'Yes — we scope tightly to ship a real, usable MVP quickly, then iterate based on what users actually do.' },
-      { q: 'Do you maintain what you build?', a: 'We do. We’re long-term partners, not a build-and-vanish shop. Most clients keep working with us well past launch.' },
-      { q: 'Who owns the code?', a: 'You do. Full ownership, clean handover, documented.' },
+      { q: 'Can you build an MVP fast?', a: 'Yes — we scope tightly to ship a real, usable MVP quickly, then iterate based on what users actually do, instead of trying to build every feature before launch.' },
+      { q: 'Do you maintain what you built?', a: 'Yes. Most clients move to an ongoing maintenance and iteration retainer after launch — bug fixes, updates, and new features as the product grows. We don’t build and disappear.' },
+      { q: 'Who owns the code?', a: 'You do. Full source code and infrastructure access are handed over — there’s no lock-in, and nothing runs on a system you can’t access or move if you choose to.' },
+      { q: 'What’s your tech stack, and why?', a: 'React and Next.js on the frontend, Node.js and TypeScript on the backend, with PostgreSQL or MongoDB depending on the data model. It’s a modern, widely-supported stack — fast to build on, easy for another team to pick up later if needed, and proven at scale.' },
+      { q: 'How long does a typical project take?', a: 'An MVP typically takes 6–10 weeks depending on scope. Larger products with multiple integrations or platforms run longer — we’ll give a realistic timeline after scoping, not a guess.' },
+      { q: 'Do you work with early-stage startups or only established businesses?', a: 'Both. Early-stage teams usually come to us for a scoped MVP to test with real users; established businesses typically need a product rebuilt around how they actually operate now.' },
     ],
     related: [
       { label: 'AI Automation', href: '/ai-automation', note: 'Layer AI agents and automation on top of the software we build.' },
@@ -240,7 +275,9 @@ export const servicePages: Record<string, ServicePage> = {
     ctaButton: 'Book a Call',
     seoTitle: 'Custom Software & SaaS Development',
     seoDescription:
-      'Custom software, web apps, mobile apps, dashboards, APIs, and SaaS products — engineered end to end. MeghRoop builds products that ship, scale, and hold up.',
+      'Custom software, web apps, mobile apps, dashboards, and SaaS products — engineered end to end by the team that maintains them. Book a discovery call.',
+    seoKeywords:
+      'custom software development company, SaaS development agency, web app development India, mobile app development company, MVP development agency, custom dashboard development, API development company',
   },
 
   'shopify-development': {

@@ -11,6 +11,7 @@ const data = servicePages['growth-marketing']
 export const metadata: Metadata = {
   title: data.seoTitle,
   description: data.seoDescription,
+  keywords: data.seoKeywords,
   alternates: { canonical: '/growth-marketing' },
   openGraph: {
     title: `${data.seoTitle} | MeghRoop`,
