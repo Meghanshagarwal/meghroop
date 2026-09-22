@@ -41,6 +41,12 @@ export default function ProductIndex() {
                 dot: 'bg-[#c084fc]',
                 sub: 'Build autonomous, custom AI agents tailored to your business. Enterprise-grade agents that reason, plan, and act across your systems.',
               },
+              {
+                label: 'AI Voice Agent',
+                href: '/product/ai-voice-agent',
+                dot: 'bg-[#38bdf8]',
+                sub: 'Automate inbound and outbound phone calls 24/7. Natural-sounding AI voice agents for reception, support, sales, and appointment booking.',
+              },
             ].map((p) => (
               <Link
                 key={p.href}
