@@ -47,6 +47,12 @@ export default function ProductIndex() {
                 dot: 'bg-[#38bdf8]',
                 sub: 'Automate inbound and outbound phone calls 24/7. Natural-sounding AI voice agents for reception, support, sales, and appointment booking.',
               },
+              {
+                label: 'AI Sales Agent',
+                href: '/product/ai-sales-agent',
+                dot: 'bg-[#22d3ee]',
+                sub: 'Qualify leads, make calls, and book meetings automatically — 24/7, in multiple languages, synced to your CRM.',
+              },
             ].map((p) => (
               <Link
                 key={p.href}
