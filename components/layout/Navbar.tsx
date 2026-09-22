@@ -8,6 +8,7 @@ import { serviceNav } from '@/data/services'
 import { aiAgentLinks } from '@/data/aiAgents'
 
 const navLinks = [
+  { label: 'Products', href: '/product' },
   { label: 'Work', href: '/work' },
   { label: 'Journal', href: '/journal' },
   { label: 'About', href: '/about' },

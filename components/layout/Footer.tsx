@@ -95,6 +95,7 @@ const socialLinks = [
 
 const companyLinks = [
   { label: 'About', href: '/about' },
+  { label: 'Products', href: '/product' },
   { label: 'Work', href: '/work' },
   { label: 'Journal', href: '/journal' },
   { label: 'Contact', href: '/contact' },
