@@ -59,6 +59,12 @@ export default function ProductIndex() {
                 dot: 'bg-[#a78bfa]',
                 sub: 'One unified platform for AI storage, data pipelines, vector search, and agent orchestration — built for GPU-scale workloads.',
               },
+              {
+                label: 'AI Chatbot Software',
+                href: '/product/ai-chatbot-software',
+                dot: 'bg-[#34d399]',
+                sub: 'Automate customer support and sales with AI chatbot software that answers questions 24/7, recovers abandoned carts, and hands off to humans when needed.',
+              },
             ].map((p) => (
               <Link
                 key={p.href}
