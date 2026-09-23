@@ -65,6 +65,12 @@ export default function ProductIndex() {
                 dot: 'bg-[#34d399]',
                 sub: 'Automate customer support and sales with AI chatbot software that answers questions 24/7, recovers abandoned carts, and hands off to humans when needed.',
               },
+              {
+                label: 'Social Media Automation Tool',
+                href: '/product/social-media-automation-tool',
+                dot: 'bg-[#f472b6]',
+                sub: 'Schedule, publish, and analyze social media content across Facebook, Instagram, X, LinkedIn, and YouTube from one dashboard.',
+              },
             ].map((p) => (
               <Link
                 key={p.href}
