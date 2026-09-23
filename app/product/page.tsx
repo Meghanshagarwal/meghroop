@@ -53,6 +53,12 @@ export default function ProductIndex() {
                 dot: 'bg-[#22d3ee]',
                 sub: 'Qualify leads, make calls, and book meetings automatically — 24/7, in multiple languages, synced to your CRM.',
               },
+              {
+                label: 'AI Operating System',
+                href: '/product/ai-operating-system',
+                dot: 'bg-[#a78bfa]',
+                sub: 'One unified platform for AI storage, data pipelines, vector search, and agent orchestration — built for GPU-scale workloads.',
+              },
             ].map((p) => (
               <Link
                 key={p.href}
