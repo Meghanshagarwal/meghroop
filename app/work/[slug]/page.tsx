@@ -64,6 +64,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
   const deliverables = project.deliverables ?? []
   const gallery = (project.gallery ?? []).filter(Boolean)
   const liveUrl = project.live_url && project.live_url !== '#' ? project.live_url : null
+  const adminUrl = project.admin_url && project.admin_url !== '#' ? project.admin_url : null
 
   const meta: { label: string; values: string[] }[] = [
     services.length ? { label: 'Services', values: services } : null,
@@ -110,6 +111,23 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
             <p className="text-lg sm:text-xl text-white/[0.6] max-w-2xl leading-relaxed">
               {project.description}
             </p>
+
+            {(liveUrl || adminUrl) && (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {liveUrl && (
+                  <a href={liveUrl} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors shadow-[0_0_40px_rgba(192,132,252,0.18)]">
+                    View Live Demo <ExternalLink size={15} />
+                  </a>
+                )}
+                {adminUrl && (
+                  <a href={adminUrl} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/[0.14] text-white text-sm font-semibold hover:bg-white/[0.06] transition-colors">
+                    Admin Dashboard <ExternalLink size={15} />
+                  </a>
+                )}
+              </div>
+            )}
 
             {/* Quick results strip */}
             {results.length > 0 && (
