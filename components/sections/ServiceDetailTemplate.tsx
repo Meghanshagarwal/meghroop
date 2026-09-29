@@ -9,6 +9,7 @@ import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/common/WhatsAppButton'
 import { trackEvent } from '@/lib/analytics'
 import ObfuscatedEmail from '@/components/common/ObfuscatedEmail'
+import SalesAIDemo from '@/components/sections/SalesAIDemo'
 import type { Accent, ServiceContent } from '@/data/services/types'
 
 const ACCENTS: Record<
@@ -178,6 +179,8 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
         </section>
+
+        {slug === 'sales-ai' && <SalesAIDemo />}
 
         {/* PROBLEM */}
         {content.problem && (
@@ -444,3 +447,4 @@ export default function ServiceDetailTemplate({ content, slug }: { content: Serv
     </>
   )
 }
+
