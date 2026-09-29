@@ -16,16 +16,19 @@ export const revalidate = 60
 
 async function resolveProject(slug: string): Promise<Project | null> {
   const fromDb = await getProjectBySlug(slug)
-  if (fromDb) return fromDb
-  return defaultProjects.find((p) => projectSlug(p) === slug) ?? null
+  if (fromDb) return fromDb.is_demo ? null : fromDb
+  const fallback = defaultProjects.find((p) => projectSlug(p) === slug) ?? null
+  return fallback && fallback.is_demo ? null : fallback
 }
 
 export async function generateStaticParams() {
-  const slugs = new Set(defaultProjects.map((p) => projectSlug(p)))
+  const slugs = new Set(defaultProjects.filter((p) => !p.is_demo).map((p) => projectSlug(p)))
   try {
     const db = getSupabase()
-    const { data } = await db.from('projects').select('id, slug')
-    ;(data ?? []).forEach((p) => slugs.add(projectSlug(p)))
+    const { data } = await db.from('projects').select('id, slug, is_demo')
+    ;(data ?? []).forEach((p) => {
+      if (!p.is_demo) slugs.add(projectSlug(p))
+    })
   } catch {
     /* DB unavailable at build — showcase slugs still render */
   }
