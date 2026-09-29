@@ -8,10 +8,11 @@ export const defaultProjects: Project[] = [
     slug: 'ai-real-estate-lead-automation-crm',
     created_at: '',
     display_order: -1,
+    is_demo: true,
     title: 'AI-Powered Real Estate Lead Automation — Chatbot, WhatsApp & Voice AI',
     category: 'AI Automation',
     year: '2026',
-    timeline: '6 Weeks',
+    timeline: 'Try it live',
     gradient: 'from-blue-600 via-cyan-600 to-teal-600',
     image: '',
     tags: ['AI Automation', 'Lead Generation', 'WhatsApp', 'Voice AI', 'CRM Dashboard'],
@@ -20,19 +21,14 @@ export const defaultProjects: Project[] = [
     live_embed: false,
     github_url: '#',
     description:
-      'A live AI-powered lead automation system for real estate — a website chatbot, WhatsApp and a voice AI agent capture buyer enquiries, score and qualify them automatically, and track every lead in real time on an internal dashboard, including site-visit scheduling.',
+      'An interactive demo we built in-house — a website chatbot, WhatsApp and a voice AI agent capture buyer enquiries, score and qualify them automatically, and track every lead in real time on an internal dashboard, including site-visit scheduling.',
     client_intro:
-      'Real estate teams lose buyers in the gap between "enquiry" and "follow-up" — a lead comes in through the website, WhatsApp, or a call, and by the time a human replies, the intent has cooled.\n\nWe built an end-to-end lead automation demo that shows exactly how a modern real estate desk should work: every enquiry — website chat, WhatsApp, or voice — is captured instantly, automatically scored and qualified, routed to the right agent, and tracked through site-visit scheduling, follow-up, and referral, all visible on one live dashboard.',
+      'Real estate teams lose buyers in the gap between "enquiry" and "follow-up" — a lead comes in through the website, WhatsApp, or a call, and by the time a human replies, the intent has cooled.\n\nThis is our own build, not a client project — a working demo you can click through right now to see exactly how a modern real estate desk should run: every enquiry — website chat, WhatsApp, or voice — is captured instantly, automatically scored and qualified, routed to the right agent, and tracked through site-visit scheduling, follow-up, and referral, all visible on one live dashboard.',
     services: ['AI Chatbot Development', 'WhatsApp Automation', 'Voice AI Agent', 'Lead Scoring Logic', 'Admin Dashboard', 'SEO'],
     project_types: ['AI Automation', 'Web Application'],
     outcome:
-      'The result is a fully interactive "lead journey" demo — capture, qualify, score, route, site-visit, follow-up, and referral — each stage visible in real time on a CRM-style tracker, backed by a real admin dashboard that logs every lead the same way a live sales desk would.\n\nIt is a working reference implementation teams can plug into their own site, WhatsApp Business number, and voice stack to stop losing leads in the handoff between marketing and sales.',
+      'Click "View Live Demo" above to walk through it yourself — capture, qualify, score, route, site-visit, follow-up, and referral — each stage visible in real time on a CRM-style tracker, backed by a real admin dashboard that logs every lead the same way a live sales desk would.\n\nThis is a working reference build — the same pattern we plug into a client\'s own site, WhatsApp Business number, and voice stack to stop leads getting lost in the handoff between marketing and sales.',
     deliverables: ['Website Chatbot', 'WhatsApp Lead Capture', 'Voice AI Agent', 'Automatic Lead Scoring', 'Site-Visit Scheduling', 'Real-Time Admin Dashboard'],
-    results: [
-      { label: 'Lead Capture', before: 'Manual, delayed', after: 'Instant, 24/7' },
-      { label: 'Qualification', before: 'Manual review', after: 'Auto-scored' },
-      { label: 'Visibility', before: 'Spreadsheets', after: 'Live dashboard' },
-    ],
     gallery: [],
   },
   {
