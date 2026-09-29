@@ -34,13 +34,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const project = await resolveProject(params.slug)
-  if (!project) return { title: 'Case Study Not Found' }
+  if (!project) return { title: 'Not Found' }
+  const label = project.is_demo ? 'Live Demo' : 'Case Study'
   return {
-    title: `${project.title} — Case Study`,
+    title: `${project.title} — ${label}`,
     description: project.client_intro || project.description,
     alternates: { canonical: `/work/${params.slug}` },
     openGraph: {
-      title: `${project.title} — MeghRoop Case Study`,
+      title: `${project.title} — MeghRoop ${label}`,
       description: project.client_intro || project.description,
       images: project.image ? [{ url: project.image }] : undefined,
     },
@@ -93,6 +94,11 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
             </Link>
 
             <div className="flex flex-wrap items-center gap-2.5 mb-7">
+              {project.is_demo && (
+                <span className="text-xs px-3 py-1 rounded-full bg-emerald-400/[0.12] border border-emerald-400/20 text-emerald-300">
+                  In-house demo, not a client project
+                </span>
+              )}
               {project.category && (
                 <span className="text-xs px-3 py-1 rounded-full bg-[#c084fc]/[0.12] border border-[#c084fc]/20 text-[#c084fc]">
                   {project.category}
