@@ -117,6 +117,8 @@ const nextConfig = {
       { source: '/shopify-engineering', destination: '/shopify-development', permanent: true },
       { source: '/wordpress-engineering', destination: '/wordpress-development', permanent: true },
       { source: '/ai-search-optimization', destination: '/growth-marketing', permanent: true },
+      // ── In-house demo builds live under /demo, not /work (which is real client case studies) ──
+      { source: '/work/ai-real-estate-lead-automation-crm', destination: '/demo/ai-real-estate-lead-automation-crm', permanent: true },
       { source: '/systems', destination: '/work', permanent: true },
       // ── Legacy /blog/* URLs → /journal/* (the journal was never at /blog) ──
       { source: '/blog/:slug', destination: '/journal/:slug', permanent: true },
