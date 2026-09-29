@@ -25,6 +25,8 @@ export type Project = {
   live_url: string
   // Optional second live link — e.g. an admin/back-office dashboard shown alongside the main demo
   admin_url?: string
+  // True for in-house demo builds (not real client work) — swaps "Case Study" labeling for "Live Demo"
+  is_demo?: boolean
   github_url: string
   year: string
   category: string
