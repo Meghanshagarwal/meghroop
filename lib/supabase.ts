@@ -23,6 +23,8 @@ export type Project = {
   image: string
   tags: string[]
   live_url: string
+  // Optional second live link — e.g. an admin/back-office dashboard shown alongside the main demo
+  admin_url?: string
   github_url: string
   year: string
   category: string
